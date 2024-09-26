@@ -1,0 +1,15 @@
+{
+  "name": "inox",
+  "version": "1.0.0",
+  "description": "Fisrt 3rd Year Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^3.3.3"
+  }
+}
