@@ -9,7 +9,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit() {
-    console.log("bite");
+    console.log("Before");
   }
 
   ngAfterViewInit() {
