@@ -5,6 +5,7 @@ import cors from "cors";
 import router from "./src/router.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swaggerConfig.js";
+import mongo from "./utils/mongo.js";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Pour toutes les routes nous renvoyons au router
 app.use("/", router);
+
+await mongo();
 
 // Création du serveur HTTP
 app.listen(port, () => {
