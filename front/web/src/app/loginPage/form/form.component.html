@@ -1,0 +1,21 @@
+<div class="form" *ngIf="!isSignUp">
+    <div  style="display: flex; flex-direction: column; align-items: center">
+        <label for="username">Username</label>
+        <input id="username" type="text" pInputText [(ngModel)]="signupObj.username" />
+        <label for="email">E-mail</label>
+        <input id="email" type="text" pInputText [(ngModel)]="signupObj.email" />
+        <label for="password">Password</label>
+        <input id="password" type="text" pInputText [(ngModel)]="signupObj.password" />
+        <button (click)="onSignUp()">Sign Up</button>
+    </div>
+</div>
+
+<div class="form" *ngIf="isSignUp">
+    <div  style="display: flex; flex-direction: column; align-items: center">
+        <label for="username">Username</label>
+        <input id="usernameLogin" type="text" pInputText [(ngModel)]="loginObj.username" />
+        <label for="password">Password</label>
+        <input id="passwordLogin" type="text" pInputText [(ngModel)]="loginObj.password" />
+        <button (click)="onLogin()">Login</button>
+    </div>
+</div>

@@ -1,14 +1,19 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginPageComponent } from "./loginPage/loginPage.component";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from '@angular/forms';
+import { FormComponent } from './loginPage/form/form.component';
+import {ImageModule} from "primeng/image";
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
-  imports: [BrowserModule, AppRoutingModule, CommonModule],
+  declarations: [AppComponent, LoginPageComponent, FormComponent],
+  imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
