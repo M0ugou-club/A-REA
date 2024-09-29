@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Nexa Light';
+  src: url('../public/font/Nexa-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'Nexa Heavy';
+  src: url('../public/font/Nexa-Heavy.ttf');
+}
+
 body {
+  font-family: 'Nexa Heavy';
   margin: 0;
 }

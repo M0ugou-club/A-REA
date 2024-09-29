@@ -62,4 +62,8 @@ export class FormComponent implements OnInit{
       alert("Wrong username or password");
     }
   }
+
+  goToLogin(): void {
+    this.isSignUp = true;
+  }
 }
