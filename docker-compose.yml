@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  front:
+    build:
+      context: ./
+      dockerfile: Dockerfile.web
+    ports:
+      - "4200:80"
+    depends_on:
+      - back
+
+  back:
+    build:
+      context: ./
+      dockerfile: Dockerfile.back
+    ports:
+      - "3000:3000"
