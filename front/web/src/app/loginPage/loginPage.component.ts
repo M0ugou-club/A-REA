@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrl: "./login.component.scss",
+  selector: "app-loginPage",
+  templateUrl: "./loginPage.component.html",
+  styleUrl: "./loginPage.component.scss",
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+
+export class LoginPageComponent implements OnInit, AfterViewInit {
+
   constructor() {}
 
   ngOnInit() {
