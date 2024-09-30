@@ -1,45 +1,51 @@
-import jwt from 'jsonwebtoken';
-import connectDB from './db.js';
-import fs from 'fs';
-import path from 'path';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import User from "../models/Users/index.js";
 
-const tokensTemplatePath = path.resolve('./src/utils/tokensTemplate.json');
-const tokensTemplate = JSON.parse(fs.readFileSync(tokensTemplatePath, 'utf8'));
-
-export const loginUser = async (req, res) => {
+export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const db = await connectDB();
-    const user = await db.collection('users').findOne({ email, password });
-
-    if (user) {
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      return res.json({ token });
-    } else {
-      return res.status(401).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
+    const user = await User.findOne({
+      email,
+    }).select("+password");
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
     }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({
+        message: "Invalid password",
+      });
+    }
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+    return res.status(200).json({
+      token: token,
+    });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Erreur serveur' });
+    return next(error);
   }
 };
 
-export const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+export const registerUser = async (req, res, next) => {
+  const { body } = req;
+  let values = body;
 
   try {
-    const db = await connectDB();
-    const user = await db.collection('users').findOne({ email });
+    const hashPassword = bcrypt.hashSync(values.password, 10);
+    const newUser = new User(values);
 
-    if (user) { 
-      return res.status(409).json({ message: 'Utilisateur déjà existant' });
-    }
-    await db.collection('users').insertOne({ email, password, tokens: tokensTemplate });
-    return res.status(201).json({ message: 'Utilisateur créé' });
+    newUser.password = hashPassword;
+    await newUser.save();
+    return res.status(201).json(newUser);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Erreur serveur' });
+    return next(error);
   }
 };
 
@@ -48,12 +54,12 @@ export const isUserAuth = () => {
     const token = req.headers.authorization;
 
     if (!token) {
-      return res.status(401).json({ message: 'Token manquant' });
+      return res.status(401).json({ message: "Token manquant" });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
-        return res.status(498).json({ message: 'Token invalide' });
+        return res.status(498).json({ message: "Token invalide" });
       } else {
         req.decoded = decodedToken;
         return next();
