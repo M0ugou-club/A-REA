@@ -1,0 +1,17 @@
+{
+  "google": {
+    "access_token": "",
+    "refresh_token": "",
+    "expires_at": ""
+  },
+  "twitter": {
+    "access_token": "",
+    "refresh_token": "",
+    "expires_at": ""
+  },
+  "youtube": {
+    "access_token": "",
+    "refresh_token": "",
+    "expires_at": ""
+  }
+}

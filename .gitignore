@@ -130,3 +130,8 @@ dist
 .pnp.*
 
 .idea/
+
+k
+# packages locks
+.package-lock.json
+
