@@ -1,8 +1,8 @@
-FROM node
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY /back .
+COPY . .
 
 RUN npm install
 

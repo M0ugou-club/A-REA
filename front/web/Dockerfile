@@ -2,10 +2,10 @@ FROM node
 
 WORKDIR /app
 
-COPY /front/web .
+COPY . .
 
 RUN npm install
 
 EXPOSE 4200
 
-CMD ["ng", "serve"]
+CMD ["npm", "run", "prod"]
