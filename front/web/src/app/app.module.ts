@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { FormComponent } from './loginPage/form/form.component';
 import {ImageModule} from "primeng/image";
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { AREAPageComponent } from './a-rea-page/a-rea-page.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, FormComponent],
+  declarations: [AppComponent, LoginPageComponent, FormComponent, AREAPageComponent],
   imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
