@@ -6,20 +6,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  ngOnInit(): void {
-    this.setScreenSize();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.setScreenSize();
-  }
-
-  setScreenSize(): void {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-
-    document.documentElement.style.setProperty('--screen-width', `${screenWidth}px`);
-    document.documentElement.style.setProperty('--screen-height', `${screenHeight}px`);
+  handleUserIconButton(): void {
+    console.log("User icon button clicked");
   }
 }

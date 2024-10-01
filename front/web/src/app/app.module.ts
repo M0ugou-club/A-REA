@@ -10,10 +10,11 @@ import { FormComponent } from './loginPage/form/form.component';
 import {ImageModule} from "primeng/image";
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { HeaderComponent } from './header/header.component';
+import { LoginServicsePopupComponent } from './header/login-servicse-popup/login-servicse-popup.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, FormComponent, HeaderComponent],
+  declarations: [AppComponent, LoginPageComponent, FormComponent, HeaderComponent, LoginServicsePopupComponent],
   imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
