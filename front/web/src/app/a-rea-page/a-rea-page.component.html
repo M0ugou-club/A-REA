@@ -1,8 +1,8 @@
 <div class="add-area-button-container">
     <button class="add-area" (click)="addButton()">+</button>
 </div>
-<div *ngIf="!showAddArea" class="areas-container">
-    <div *ngFor="let area of areas" class="app-a-rea">
+<div class="areas-container">
+    <div *ngFor="let area of areas">
       <app-a-rea 
           [actionLogo]="area.actionLogo"
           [reactionLogo]="area.reactionLogo"
