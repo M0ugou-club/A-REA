@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./a-rea.component.scss']
 })
 export class AReaComponent {
-  @Input() spotifyLogo: string = '';
-  @Input() discordLogo: string = '';
-  @Input() leftText: string = '';
-  @Input() rightText: string = '';
+  @Input() actionLogo: string = '';
+  @Input() reactionLogo: string = '';
+  @Input() actionText: string = '';
+  @Input() reactionText: string = '';
 }
