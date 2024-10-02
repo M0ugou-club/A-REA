@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { loginUser, registerUser } from '../services/authService.js';
-import { isUserAuth } from "../services/authService.js";
+import { loginUser, registerUser } from './authService.js';
 
 const authRoutes = Router();
 

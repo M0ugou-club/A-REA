@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import User from "../models/Users/index.js";
+import User from "../../models/Users/index.js";
 
 export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
@@ -56,8 +56,8 @@ export const isUserAuth = () => {
     if (!token) {
       return res.status(401).json({ message: "Token manquant" });
     }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+    const newtoken = token.replace("Bearer ", "");
+    jwt.verify(newtoken, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         return res.status(498).json({ message: "Token invalide" });
       } else {
