@@ -28,7 +28,7 @@ paths:
       summary: Get Actions Enums
       description: Fetches a list of action enums from the database.
       responses:
-        '200':x²
+        '200':
           description: Successfully fetched actions enums.
           content:
             application/json:
