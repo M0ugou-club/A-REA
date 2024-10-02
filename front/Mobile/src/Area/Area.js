@@ -1,12 +1,12 @@
 import { Text, View, TouchableOpacity} from 'react-native';
-import styles from './HomeStyle';
+import styles from './AreaStyle';
 import NavigationBar from '../NavigationBar/NavigationBar'
 
 export default function Home() {
     return (
         <View style={styles.globalContainer}>
             <View style={styles.pageContentContainer}>
-                <Text>Home Page</Text>
+                <Text>A-Rea Page</Text>
             </View>
             <NavigationBar></NavigationBar>
         </View>
