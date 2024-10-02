@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
     email: email(),
     image: {type: String, required: false},
     tokens: [{type: 'ObjectId', ref: 'Token'}],
+    a_rea: [{type: 'ObjectId', ref: 'Area'}],
     created_at: {type: Date, required: false, default: Date.now},
     deleted: {type: Boolean, required: false, default: false}
 });

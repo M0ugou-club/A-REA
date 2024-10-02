@@ -1,14 +1,16 @@
 import { Router } from 'express';
 const router = Router();
 
-import homeRoutes from './routes/homeRoute.js';
-import tokensRoutes from './routes/authRoute.js';
-import userRoutes from './routes/tokensRoute.js'
+import authRoutes from './routes/authentification/authRoute.js';
+import userRoutes from './routes/users/index.js';
+import enumsRoutes from './routes/enums/index.js';
+import tokenUserRoutes from './routes/tokens/index.js';
 
 router.use([
-  homeRoutes,
   userRoutes,
-  tokensRoutes
+  authRoutes,
+  enumsRoutes,
+  tokenUserRoutes
 ]);
 
 export default router;
