@@ -1,34 +1,32 @@
 .a-rea-bar {
-    background-color: rgba(0, 0, 0, 0.383);
+    background-color: rgba(0, 0, 255, 0.323);
     width: 70%;
     margin: auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;  /* Space between the left, center, and right sections */
     align-items: center;
-    padding: 2rem;
+    padding: 20px;
     border-radius: 8vw;
-    border: 1px solid black;
 }
 
 .left-section,
 .right-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 
 .center-section {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2em;
 }
 
 .logo {
-    width: 8vw;
-    height: auto;
+    width: 100px;
+    height: 100px;
 }
 
 .arrow {
-    font-size: 5rem;
-    padding: auto;
+    font-size: 2.5rem;
     color: black;
 }
