@@ -1,0 +1,31 @@
+.a-rea-bar {
+    background-color: rgba(0, 0, 255, 0.323);
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;  /* Space between the left, center, and right sections */
+    align-items: center;             /* Vertically center the content */
+    padding: 20px;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between the logo and text */
+}
+
+.center-section {
+    text-align: center;
+    font-size: 2em; /* Size of the arrow */
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.arrow {
+    font-size: 2.5rem;
+    color: black; /* You can change the color of the arrow */
+}
