@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginPageComponent } from "./loginPage/loginPage.component";
 import { HeaderComponent } from "./header/header.component";
 import { HomePageComponent } from "./home-page/home-page.component";
+import { AReaComponent } from "./a-rea-page/a-rea/a-rea.component";
+import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
 
 const routes: Routes = [
   {
@@ -22,6 +24,10 @@ const routes: Routes = [
     path: "header",
     component: HeaderComponent,
   },
+  {
+    path: "a-rea",
+    component: AREAPageComponent
+  }
 ];
 
 @NgModule({
