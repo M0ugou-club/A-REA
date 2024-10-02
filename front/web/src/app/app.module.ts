@@ -10,10 +10,11 @@ import { FormComponent } from './loginPage/form/form.component';
 import {ImageModule} from "primeng/image";
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { AREAPageComponent } from './a-rea-page/a-rea-page.component';
+import { AddAreaComponent } from './a-rea-page/add-area/add-area.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, FormComponent, AREAPageComponent],
+  declarations: [AppComponent, LoginPageComponent, FormComponent, AREAPageComponent, AddAreaComponent],
   imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
