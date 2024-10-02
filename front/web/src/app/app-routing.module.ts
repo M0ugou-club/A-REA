@@ -3,8 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginPageComponent } from "./loginPage/loginPage.component";
 import { HeaderComponent } from "./header/header.component";
 import { HomePageComponent } from "./home-page/home-page.component";
-import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
 import { AddAreaComponent } from "./add-area/add-area.component";
+import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
 
 const routes: Routes = [
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
     component: AREAPageComponent,
   },
   {
-    path: "add-area",
+    path: "add-a-rea",
     component: AddAreaComponent,
   },
 ];
