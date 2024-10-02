@@ -11,10 +11,11 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { HeaderComponent } from './header/header.component';
 import { LoginServicsePopupComponent } from './header/login-servicse-popup/login-servicse-popup.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, FormComponent, HomePageComponent, HeaderComponent, LoginServicsePopupComponent],
-  imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, CommonModule, BrowserAnimationsModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
