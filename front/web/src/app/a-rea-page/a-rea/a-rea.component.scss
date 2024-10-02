@@ -4,7 +4,7 @@
     margin: auto;
     display: flex;
     justify-content: space-between;  /* Space between the left, center, and right sections */
-    align-items: center;             /* Vertically center the content */
+    align-items: center;
     padding: 20px;
 }
 
@@ -12,12 +12,12 @@
 .right-section {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adds space between the logo and text */
+    gap: 10px;
 }
 
 .center-section {
     text-align: center;
-    font-size: 2em; /* Size of the arrow */
+    font-size: 2em;
 }
 
 .logo {
@@ -27,5 +27,5 @@
 
 .arrow {
     font-size: 2.5rem;
-    color: black; /* You can change the color of the arrow */
+    color: black;
 }
