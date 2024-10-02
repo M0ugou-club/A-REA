@@ -136,3 +136,4 @@ k
 # packages locks
 .package-lock.json
 
+.vscode/
