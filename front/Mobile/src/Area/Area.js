@@ -6,7 +6,8 @@ export default function Home() {
     return (
         <View style={styles.globalContainer}>
             <View style={styles.pageContentContainer}>
-                <Text>A-Rea Page</Text>
+                <View>
+                </View>
             </View>
             <NavigationBar></NavigationBar>
         </View>
