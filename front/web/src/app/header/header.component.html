@@ -5,10 +5,10 @@
             <h1 class="title-text">Inox QCB</h1>
         </div>
         <div class="navigation-button-container">
-            <button class="navigation-button">
+            <button class="navigation-button" (click)="handleHomeButtonClick()">
                 <p class="text-navigation-button">Home</p>
             </button>
-            <button class="navigation-button">
+            <button class="navigation-button" (click)="handleAreaButtonClick()">
                 <p class="text-navigation-button">A-Rea</p>
             </button>
         </div>
@@ -17,6 +17,6 @@
                 <img class="user-icon" src="template-user.png" alt="user">
             </button>
         </div>
-        <app-login-servicse-popup></app-login-servicse-popup>
+        <app-login-servicse-popup *ngIf="showLoginPopup"></app-login-servicse-popup>
     </div>
 </div>

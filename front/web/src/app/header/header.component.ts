@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -6,7 +8,20 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  constructor(private router: Router) {}
+
+  showLoginPopup = false;
+
   handleUserIconButton(): void {
-    console.log("User icon button clicked");
+    this.showLoginPopup = !this.showLoginPopup;
+  }
+
+  handleHomeButtonClick() {
+    this.router.navigate(['/home']);
+  }
+
+  handleAreaButtonClick() {
+    this.router.navigate(['/area']);
   }
 }
