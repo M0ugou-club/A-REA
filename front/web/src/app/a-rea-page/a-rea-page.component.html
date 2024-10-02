@@ -1,15 +1,16 @@
-<div class="add-area-button-container">
-    <button class="add-area" (click)="addButton()">+</button>
-</div>
-<div class="areas-container">
-    <div *ngFor="let area of areas">
-      <app-a-rea 
-          [actionLogo]="area.actionLogo"
-          [reactionLogo]="area.reactionLogo"
-          [actionText]="area.actionText"
-          [reactionText]="area.reactionText">
-      </app-a-rea>
+<div style="height: 100vh; width: 100vw">
+    <div class="add-area-button-container">
+        <button class="add-area-button" (click)="addButton()">+</button>
+    </div>
+
+    <div class="areas-container">
+        <div *ngFor="let area of areas">
+            <app-a-rea
+                [actionLogo]="area.actionLogo"
+                [reactionLogo]="area.reactionLogo"
+                [actionText]="area.actionText"
+                [reactionText]="area.reactionText">
+            </app-a-rea>
+        </div>
     </div>
 </div>
-
-<app-add-area *ngIf="showAddArea"></app-add-area>
