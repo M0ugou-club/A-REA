@@ -45,7 +45,7 @@ export class CallbackPageComponent implements OnInit {
         const refreshToken = response.refresh_token;
         console.log('Access token:', accessToken);
         console.log('Refresh token:', refreshToken);
-        fetch('http://localhost:8000/tokens/user/', {
+        fetch('http://localhost:8000/tokens', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
