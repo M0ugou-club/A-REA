@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup} from "@angular/forms";
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -50,6 +51,7 @@ export class FormComponent implements OnInit{
   onRegister() {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
+    console.log(this.RegisterObj);
     if (!this.RegisterObj.email || !this.RegisterObj.username || !this.RegisterObj.password) {
       alert('Veuillez remplir tous les champs : email, nom d\'utilisateur et mot de passe.');
       return;
@@ -130,7 +132,11 @@ export class FormComponent implements OnInit{
   }
 
 
-    goToLogin(): void {
+  goToLogin(): void {
     this.isRegister = true;
+  }
+
+  goToRegister(): void {
+    this.isRegister = false;
   }
 }
