@@ -64,8 +64,6 @@ export class HomePageComponent implements OnInit{
   }
 
   spotifyloggin(): void {
-    console.log('zizi de pierre');
-
     const clientId = environment.spotifyClientId;
     const redirectUri = encodeURIComponent(environment.redirectUri);
     const scope = encodeURIComponent('user-read-private user-read-email');
