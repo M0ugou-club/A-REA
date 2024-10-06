@@ -7,6 +7,18 @@ export default function Home() {
         <View style={styles.globalContainer}>
             <View style={styles.pageContentContainer}>
                 <View>
+                    <View>
+                        
+                    </View>
+                </View>
+                <View>
+
+                </View>
+                <View>
+
+                </View>
+                <View>
+
                 </View>
             </View>
             <NavigationBar></NavigationBar>
