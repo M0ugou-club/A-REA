@@ -1,34 +1,67 @@
-<div class="form" *ngIf="!isRegister">
-    <div class="input-container">
-        <div class="input">
-            <label for="username">Username</label>
-            <input id="username" type="text" pInputText [(ngModel)]="RegisterObj.username" />
+<main class="form" *ngIf="!isRegister">
+    <header class="login-header">
+        <div class="title-container">
+            <h1 class="bienvenue-small-title">Bienvenue !</h1>
+            <h1 class="login-title">Se connecter</h1>
         </div>
-        <div class="input">
-            <label for="email">E-mail</label>
-            <input id="email" type="text" pInputText [(ngModel)]="RegisterObj.email" />
+        <div class="switch-container">
+            <h1 class="switch-title">Pas de compte ?</h1>
+            <a class="switch-button" (click)="goToLogin()">S'enregistrer</a>
         </div>
-        <div class="input">
-            <label for="password">Password</label>
-            <input id="password" type="text" pInputText [(ngModel)]="RegisterObj.password" />
-        </div>
+    </header>
+    <div class="login-service-container">
+        <button class="google-login-btn">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bcee48515e10ea749eb9fb771b15004478231c31b804a367d5d4435b0a8f70c5?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="Google logo" class="google-icon" />
+            <span>Se connecter avec Google</span>
+        </button>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/90b240bbe5ac45ef18b6d7c465d1b9e243dbbd0286c13da1c72de92ca6eebbd1?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="" class="decorative-icon" />
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bdf79c0affd3afcdc2200125ed9b91b31b6a281db8ccdc866b74b6db00d6d202?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="" class="decorative-icon" />
     </div>
-    <div class="link">
-        <button (click)="onRegister()">Sign Up</button>
-        <a (click)="goToLogin()">Already an account ?</a>
-    </div>
-</div>
+    <form class="login-form" (ngSubmit)="onLogin()">
+        <div class="form-group">
+            <label for="email" class="form-label">Rentrez votre adresse email juste ici</label>
+            <input type="email" id="email" class="form-input" placeholder="Adresse email" pInputText [(ngModel)]="loginObj.email" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Rentrez votre mot de passe</label>
+            <input type="password" id="password" class="form-input" placeholder="Mot de passe" pInputText [(ngModel)]="loginObj.password" name="password" />
+            <a href="#" class="forgot-password">Mot de passe oublié</a>
+        </div>
+        <button type="submit" class="submit-btn">Se connecter</button>
+    </form>
+</main>
 
 <div class="form" *ngIf="isRegister">
-    <div class="input-container">
-        <div class="input">
-            <label for="username">Email</label>
-            <input id="emailLogin" type="text" pInputText [(ngModel)]="loginObj.email" />
+    <header class="login-header">
+        <div class="title-container">
+            <h1 class="bienvenue-small-title">Bienvenue !</h1>
+            <h1 class="login-title">S'identifier</h1>
         </div>
-        <div class="input">
-            <label for="password">Password</label>
-            <input id="passwordLogin" type="text" pInputText [(ngModel)]="loginObj.password" />
+        <div class="switch-container">
+            <h1 class="switch-title">Vous avez un compte ?</h1>
+            <a class="switch-button" (click)="goToRegister()">Se connecter</a>
         </div>
-        <button (click)="onLogin()">Login</button>
-    </div>
+    </header>
+    <form class="login-form" (ngSubmit)="onRegister()">
+        <div class="form-group" style="margin-top: 20%;">
+            <label for="email" class="form-label">Rentrez votre adresse email juste ici</label>
+            <input type="text" id="email" class="form-input" placeholder="Adresse email" pInputText [(ngModel)]="RegisterObj.email" name="email" />
+        </div>
+        <div class="form-group-container">
+            <div class="form-group-name">
+                <label for="username" class="form-label">Prenom</label>
+                <input type="text" id="username" class="form-small-input" placeholder="Prenom" pInputText [(ngModel)]="RegisterObj.username" name="username" />
+            </div>
+            <div class="form-group-name">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" id="pseudo" class="form-small-input" placeholder="Pseudo" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Rentrez votre mot de passe</label>
+            <input type="password" id="password" class="form-input" placeholder="Mot de passe" pInputText [(ngModel)]="RegisterObj.password" name="password" />
+            <a href="#" class="forgot-password">Mot de passe oublié</a>
+        </div>
+        <button type="submit" class="submit-btn">s’identifier</button>
+    </form>
 </div>

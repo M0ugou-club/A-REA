@@ -1,12 +1,14 @@
-.page {
+.login-background {
   height: 100vh;
   width: 100vw;
-  background-image: url("../../../public/Kaizen_Inoxtag.jpg");
+  background-image: url("../../../public/loginImages/loginBackground.png");
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
 .form-container {
-  margin-right: 25vh;
+  margin-right: 7%;
 }

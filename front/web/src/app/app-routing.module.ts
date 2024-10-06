@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginPageComponent } from "./loginPage/loginPage.component";
 import { HeaderComponent } from "./header/header.component";
 import { HomePageComponent } from "./home-page/home-page.component";
+import { CallbackPageComponent } from "./callbackPage/callback.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: "header",
     component: HeaderComponent,
   },
+  {
+    path: "callback",
+    component: CallbackPageComponent,
+  }
 ];
 
 @NgModule({

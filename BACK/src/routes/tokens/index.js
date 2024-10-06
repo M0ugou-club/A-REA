@@ -77,6 +77,57 @@ const getToken = async (req, res, next) => {
     }
 }
 
+const getTokenState = async (req, res, next) => {
+    let response = {};
+    let SpotifyState = false;
+    let DiscordState = false;
+    let TwitterState = false;
+    try {
+        const header = req.headers.authorization;
+        const token = header.replace("Bearer ", "");
+
+        if (!token) {
+            return res.status(401).json({ message: "Token manquant" });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            }).populate('tokens');
+            if (!user) {
+                return res.status(405).json({
+                    message: 'User not found',
+                });
+            }
+            const token = user.tokens.find((token) => token.platform === "Spotify");
+            if (token) {
+                SpotifyState = true;
+            }
+            const token1 = user.tokens.find((token) => token.platform === "Discord");
+            if (token1) {
+                DiscordState = true;
+            }
+            const token2 = user.tokens.find((token) => token.platform === "Twitter");
+            if (token2) {
+                TwitterState = true;
+            }
+            response = {
+                Spotify: SpotifyState,
+                Discord: DiscordState,
+                Twitter: TwitterState
+            }
+            res.status(200).json(response);
+        }
+        );
+    } catch (error) {
+        return next(error);
+    }
+}
+
 const checkTokenExistence = (user, platform) => {
     return user.tokens.find((token) => token.platform === platform);
 }
@@ -166,9 +217,54 @@ const patchToken = async (req, res, next) => {
     }
 }
 
+const delToken = async (req, res, next) => {
+    console.log("delete token");
+    const { platform } = req.params;
+    
+    try {
+        const header = req.headers.authorization;
+        const tokena = header.replace("Bearer ", "");
+    
+        if (!tokena) {
+            return res.status(401).json({ message: "Token manquant" });
+        }
+    
+        jwt.verify(tokena, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            }).populate('tokens');
+            if (!user) {
+                return res.status(405).json({
+                    message: 'User not found',
+                });
+            }
+            const tokenIndex = user.tokens.findIndex((token) => token.platform === platform);
+            if (tokenIndex === -1) {
+                return res.status(406).json({
+                    message: 'Token not found for platform ' + platform,
+                });
+            }
+            const tokenId = user.tokens[tokenIndex]._id;
+            user.tokens.splice(tokenIndex, 1); // Remove the token from the array
+            await user.save(); // Save the updated user
+            await Token.findByIdAndDelete(tokenId); // Delete the token document from the collection
+            res.status(200).json({ message: 'Token deleted successfully' });
+        });
+    }
+    catch (error) {
+        return next(error);
+    }
+}
+
 routeTokens.get('/tokens', getTokens);
 routeTokens.get('/tokens/platform/:platform', getToken);
+routeTokens.get('/tokens/state', getTokenState);
 routeTokens.post('/tokens', postToken);
 routeTokens.patch('/tokens/platform/:platform', patchToken);
+routeTokens.delete('/tokens/platform/:platform', delToken);
 
 export default routeTokens;

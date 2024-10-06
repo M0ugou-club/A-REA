@@ -9,7 +9,24 @@
   src: url('../public/font/Nexa-Heavy.ttf');
 }
 
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('../public/font/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('../public/font/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Fontspring-heavy';
+  src: url('../public/font/Fontspring-heavy.otf');
+}
+
 body {
   font-family: 'Nexa Heavy';
   margin: 0;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
