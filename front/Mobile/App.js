@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login/Login';
 import Home from './src/Home/Home';
-import Area from './src/Area/Area'
+import Area from './src/Area/AreaPage';
 import * as Font from 'expo-font';
 
 const Stack = createStackNavigator();

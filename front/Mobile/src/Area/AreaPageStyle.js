@@ -12,6 +12,7 @@ export default StyleSheet.create({
         flex: 1,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: height * 0.1,
+        gap: height * 0.02,
     },
 });
