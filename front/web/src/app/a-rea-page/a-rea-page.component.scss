@@ -17,19 +17,19 @@
 
 .areas-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive 3-column layout */
-  gap: 20px; /* Gap between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
   padding: 20px;
 }
 
 @media (max-width: 768px) {
   .areas-container {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Smaller screens: adjust size */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 480px) {
   .areas-container {
-    grid-template-columns: 1fr; /* Mobile screens: display items one per row */
+    grid-template-columns: 1fr;
   }
 }

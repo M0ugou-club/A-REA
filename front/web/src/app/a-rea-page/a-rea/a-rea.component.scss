@@ -2,11 +2,11 @@
     background-color: rgba(0, 0, 255, 0.323);
     margin: auto;
     display: flex;
-    justify-content: space-between;  /* Space between the left, center, and right sections */
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
     border-radius: 2vw;
-    position: relative; /* Ensure absolute positioning inside the container works correctly */
+    position: relative;
 }
 
 .left-section,
@@ -18,11 +18,11 @@
 }
 
 .center-section {
-    position: absolute; /* Center this element in the parent container */
+    position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Translate it by 50% to truly center */
-    font-size: 2.5rem; /* Increased size for better visibility */
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
     color: black;
 }
 
