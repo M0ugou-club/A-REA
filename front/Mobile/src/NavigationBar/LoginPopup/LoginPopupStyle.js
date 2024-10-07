@@ -7,7 +7,7 @@ export default StyleSheet.create({
         position: 'absolute',
         bottom: height * 0.08,
         left: width * 0.38,
-        zIndex: 1,
+        zIndex: 2,
         padding: width * 0.05,
         backgroundColor: 'white',
         width: width * 0.6,
