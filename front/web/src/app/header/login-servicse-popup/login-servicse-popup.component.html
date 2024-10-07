@@ -1,0 +1,47 @@
+<div class="popup-container">
+    <div class="user-info-container">
+        <p class="text-username">{{ userName }}</p>
+        <p class="text-email">{{ userEmail }}</p>
+    </div>
+    <div class="separator"></div>
+    <div class="button-utils-container">
+        <button class="button-utils">
+            <div class="button-utils-content-container">
+                <img src="user.png">
+                <p class="text-button-style">Mon Profile</p>
+                <img src="chevron-right.png">
+            </div>
+        </button>
+        <button class="button-utils">
+            <div class="button-utils-content-container">
+                <img src="setting.png">
+                <p class="text-button-style">Paramètres</p>
+                <img src="chevron-right.png">
+            </div>
+        </button>
+        <button class="button-utils" (click)="logoutButton()">
+            <div class="button-utils-content-container">
+                <img src="log-out.png">
+                <p class="text-button-style">Log out</p>
+            </div>
+        </button>
+        <button class="button-utils" (click)="buttonSpotify()">
+            <div class="button-utils-content-container-api">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png" class="logo-api">
+                <p class="text-button-style-api">{{ spotifyLogin ? 'Se déconnecter' : 'Se connecter' }}</p>
+            </div>
+        </button>
+        <button class="button-utils" (click)="buttonDiscord()">
+            <div class="button-utils-content-container-api">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-discord-logo-icon-download-in-svg-png-gif-file-formats--social-media-pack-logos-icons-3073764.png?f=webp&w=128" class="logo-api">
+                <p class="text-button-style-api">{{ discordLogin ? 'Se déconnecter' : 'Se connecter' }}</p>
+            </div>
+        </button>
+        <button class="button-utils" (click)="buttonTwitter()">
+            <div class="button-utils-content-container-api">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-twitter-logo-icon-download-in-svg-png-gif-file-formats--social-media-logos-pack-icons-189787.png?f=webp&w=512" class="logo-api">
+                <p class="text-button-style-api">{{ twitterLogin ? 'Se déconnecter' : 'Se connecter' }}</p>
+            </div>
+        </button>
+    </div>
+</div>

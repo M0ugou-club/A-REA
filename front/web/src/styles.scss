@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Nexa Light';
+  src: url('../public/font/Nexa-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'Nexa Heavy';
+  src: url('../public/font/Nexa-Heavy.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('../public/font/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('../public/font/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Fontspring-heavy';
+  src: url('../public/font/Fontspring-heavy.otf');
+}
+
+body {
+  font-family: 'Nexa Heavy';
+  margin: 0;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

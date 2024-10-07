@@ -1,0 +1,72 @@
+paths:
+  /enums/platforms:
+    get:
+      summary: Get Platforms Enums
+      description: Fetches a list of platform enums from the database.
+      responses:
+        '200':
+          description: Successfully fetched platforms enums.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error fetching platforms enums.
+
+  /enums/actions:
+    get:
+      summary: Get Actions Enums
+      description: Fetches a list of action enums from the database.
+      responses:
+        '200':
+          description: Successfully fetched actions enums.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error fetching actions enums.
+
+  /enums/reactions:
+    get:
+      summary: Get Reactions Enums
+      description: Fetches a list of reaction enums from the database.
+      responses:
+        '200':
+          description: Successfully fetched reactions enums.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error fetching reactions enums.

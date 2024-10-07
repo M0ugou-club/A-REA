@@ -1,0 +1,37 @@
+.a-rea-bar {
+    background-color: rgba(0, 0, 255, 0.323);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 2vw;
+    position: relative;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.center-section {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: black;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.arrow {
+    font-size: 2.5rem;
+    color: black;
+}
