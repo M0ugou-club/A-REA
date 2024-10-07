@@ -139,5 +139,7 @@ export class AddAreaComponent implements OnInit {
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
+
+    this.router.navigate(["/a-rea"]);
   }
 }

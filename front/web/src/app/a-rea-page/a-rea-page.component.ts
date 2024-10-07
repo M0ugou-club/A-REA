@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 @Component({
@@ -6,12 +6,18 @@ import { Router } from "@angular/router";
   templateUrl: "./a-rea-page.component.html",
   styleUrls: ["./a-rea-page.component.scss"],
 })
-export class AREAPageComponent {
+export class AREAPageComponent implements OnInit {
   constructor(private router: Router) {}
 
   private apiUrl = "http://localhost:8000/areas";
-  
-  areas: { actionLogo: string; reactionLogo: string; actionText: string; reactionText: string }[] = [];
+
+  areas: {
+    actionLogo: string;
+    reactionLogo: string;
+    actionText: string;
+    reactionText: string;
+    title: string;
+  }[] = [];
 
   addButton() {
     this.router.navigateByUrl("add-a-rea");
@@ -49,19 +55,23 @@ export class AREAPageComponent {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-    
+
         data.forEach((area: any) => {
-          const reactionPlatform = area.reactions && area.reactions.length > 0 ? area.reactions[0].platform : 'No reaction';
+          const reactionPlatform =
+            area.reactions && area.reactions.length > 0
+              ? area.reactions[0].platform
+              : "No reaction";
           this.areas.push({
-            actionLogo: 'https://cdn.worldvectorlogo.com/logos/discord-6.svg',
-            reactionLogo: 'https://cdn.worldvectorlogo.com/logos/discord-6.svg',
+            actionLogo: "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
+            reactionLogo: "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
             actionText: area.action.platform,
             reactionText: reactionPlatform,
+            title: area.title,
           });
         });
       })
       .catch((error) => {
         console.error("Error fetching areas:", error);
       });
-    }
+  }
 }
