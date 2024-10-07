@@ -1,0 +1,274 @@
+openapi: 3.0.0
+info:
+  title: Token API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /tokens:
+    get:
+      tags:
+        - Tokens
+      summary: Get all tokens for the authenticated user
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response with user's tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - Tokens
+      summary: Create a new token for the user
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token'
+      responses:
+        '200':
+          description: Token created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Token already exists for the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /tokens/platform/{platform}:
+    get:
+      tags:
+        - Tokens
+      summary: Get a token for a specific platform
+      parameters:
+        - in: path
+          name: platform
+          schema:
+            type: string
+          required: true
+          description: Platform name (e.g., Spotify, Discord)
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response with the token for the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '406':
+          description: Token not found for the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+        - Tokens
+      summary: Update token for a specific platform
+      parameters:
+        - in: path
+          name: platform
+          schema:
+            type: string
+          required: true
+          description: Platform name (e.g., Spotify, Discord)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token'
+      responses:
+        '200':
+          description: Token updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '406':
+          description: Token not found for the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Tokens
+      summary: Delete token for a specific platform
+      parameters:
+        - in: path
+          name: platform
+          schema:
+            type: string
+          required: true
+          description: Platform name (e.g., Spotify, Discord)
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Token deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '406':
+          description: Token not found for the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /tokens/state:
+    get:
+      tags:
+        - Tokens
+      summary: Get the state of tokens for specific platforms (Spotify, Discord, Twitter)
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response with token states for Spotify, Discord, and Twitter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenState'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Token'
+    Token:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        platform:
+          type: string
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: integer
+      required:
+        - platform
+        - accessToken
+        - refreshToken
+        - expiresIn
+    TokenState:
+      type: object
+      properties:
+        Spotify:
+          type: boolean
+        Discord:
+          type: boolean
+        Twitter:
+          type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeleteResponse:
+      type: object
+      properties:
+        message:
+          type: string
