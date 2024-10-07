@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
   templateUrl: "./a-rea-page.component.html",
   styleUrl: "./a-rea-page.component.scss",
 })
+
 export class AREAPageComponent {
   constructor(private router: Router) {}
 
@@ -28,22 +29,6 @@ export class AREAPageComponent {
         "https://img.icons8.com/?size=100&id=118640&format=png&color=000000",
       actionText: "First icon action!",
       reactionText: "First icon reaction!",
-    },
-    {
-      actionLogo:
-        "https://cdn.iconscout.com/icon/free/png-256/twitter-6-1175160.png",
-      reactionLogo:
-        "https://cdn.iconscout.com/icon/free/png-256/facebook-3-1175156.png",
-      actionText: "Twitter is fun!",
-      reactionText: "Facebook connects us!",
-    },
-    {
-      actionLogo:
-        "https://cdn.iconscout.com/icon/free/png-256/youtube-3521665-2945200.png",
-      reactionLogo:
-        "https://cdn.iconscout.com/icon/free/png-256/instagram-3-1175111.png",
-      actionText: "YouTube videos!",
-      reactionText: "Instagram posts!",
     },
   ];
 }
