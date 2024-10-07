@@ -7,11 +7,4 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end'
     },
-
-    pageContentContainer: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
 });

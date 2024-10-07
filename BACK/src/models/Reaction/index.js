@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import uniqueValidator from "mongoose-unique-validator";
-import platforms from '../schemas/platforms';
+import platforms from '../schemas/platforms.js';
 
 
 const ReactionSchema = new mongoose.Schema({
@@ -13,5 +13,5 @@ const ReactionSchema = new mongoose.Schema({
 
 ReactionSchema.plugin(uniqueValidator);
 
-export default mongoose.model('Reaction', AreaSchema);
+export default mongoose.model('Reaction', ReactionSchema);
 

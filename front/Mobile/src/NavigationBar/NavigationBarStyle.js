@@ -7,7 +7,7 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        gap: width * 0.15,
+        gap: width * 0.04,
         alignItems: 'center',
         width: width,
         height: height * 0.07,
@@ -20,7 +20,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#3D85C6',
-        width: width * 0.3,
+        width: width * 0.35,
         height: height * 0.05,
         borderRadius: width * 0.03,
         shadowColor: 'black',
@@ -31,5 +31,17 @@ export default StyleSheet.create({
         color: 'white',
         fontFamily: 'Nexa',
         fontSize: width * 0.05,
+    },
+
+    userButtonImage: {
+        width: width * 0.1,
+        height: width * 0.1,
+        borderRadius: width,
+        borderColor: 'white',
+        borderWidth: width * 0.004
+    },
+    
+    userButton:{
+        borderRadius: width,
     },
 });

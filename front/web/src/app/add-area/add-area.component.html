@@ -4,11 +4,11 @@
             <p> Choisie Ton Action</p>
         </div>
         <div class="choices-container">
-            <app-choice-button *ngFor="let s of services"
-                               [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
-                                [choiceTitle]="s"
-                                (sendChoice)="setAction($event)"
-                               class="choices">
+            <app-choice-button *ngFor="let x of actions"
+                                   [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
+                                   [choiceTitle]="x.label"
+                                   (sendChoice)="setAction($event)"
+                                   class="choices">
             </app-choice-button>
         </div>
     </div>
@@ -16,13 +16,15 @@
         <div class="title-area-choose">
             <p>Voici ton A-Rea</p>
             <label for="area-name">Choisie lui un nom</label>
-            <input id="area-name" type="text" [(ngModel)]="areaObj.title"/>
+            <input id="area-name" type="text" [(ngModel)]="areaObj.area_title"/>
+            <label for="area-description">Décris ton A-REA</label>
+            <input id="area-description" type="text" [(ngModel)]="areaObj.area_description"/>
         </div>
         <div class="area-choose">
             <div class="area-choose-eventpart">
-                <app-choice-button *ngIf="areaObj.action"
+                <app-choice-button *ngIf="areaObj.action_name"
                                    [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
-                                   [choiceTitle]="areaObj.action"
+                                   [choiceTitle]="areaObj.action_name"
                                    (sendChoice)="setAction($event)"
                                     class="choices">
                 </app-choice-button>
@@ -31,9 +33,9 @@
                 <span class="arrow">→</span>
             </div>
             <div class="area-choose-eventpart">
-                <app-choice-button *ngIf="areaObj.reaction"
+                <app-choice-button *ngIf="areaObj.reaction_name"
                                    [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
-                                   [choiceTitle]="areaObj.reaction"
+                                   [choiceTitle]="areaObj.reaction_name"
                                    (sendChoice)="setReaction($event)"
                                     class="choices">
                 </app-choice-button>
@@ -41,7 +43,7 @@
         </div>
         <div class="utils-container">
             <button (click)="resetSelection()">cancel</button>
-            <button (click)="approuveSelection()">ok</button>
+            <button (click)="approveSelection()">ok</button>
         </div>
     </div>
     <div class="choose-service">
@@ -49,9 +51,9 @@
             <p> Choisie Ta Réaction</p>
         </div>
         <div class="choices-container">
-            <app-choice-button *ngFor="let s of services"
+            <app-choice-button *ngFor="let x of reactions"
                                [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
-                               [choiceTitle]="s"
+                               [choiceTitle]="x.label"
                                (sendChoice)="setReaction($event)"
                                class="choices">
             </app-choice-button>
