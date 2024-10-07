@@ -2,6 +2,7 @@ import { Router } from 'express';
 import platforms from '../../models/schemas/platforms.js';
 import actions from '../../utils/actions_types.js';
 import reactions from '../../utils/reactions_types.js';
+import platforms_icons from '../../utils/platforms_icons.js';
 
 const routeEnums = Router();
 
@@ -31,8 +32,17 @@ const getEnumsReactions = async (req, res, next) => {
     }
 }
 
+const getEnumsPlatformsIcons = async (req, res, next) => {
+    try {
+        return res.status(200).json(platforms_icons);
+    } catch (error) {
+        return next(error);
+    }
+}
+
 routeEnums.get('/enums/platforms', getEnumsPlatforms);
 routeEnums.get('/enums/actions', getEnumsActions);
 routeEnums.get('/enums/reactions', getEnumsReactions);
+routeEnums.get('/enums/platforms_icons', getEnumsPlatformsIcons);
 
 export default routeEnums;
