@@ -5,19 +5,25 @@
     justify-content: space-between;  /* Space between the left, center, and right sections */
     align-items: center;
     padding: 20px;
-    border-radius: 8vw;
+    border-radius: 2vw;
+    position: relative; /* Ensure absolute positioning inside the container works correctly */
 }
 
 .left-section,
 .right-section {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
 .center-section {
-    text-align: center;
-    font-size: 2em;
+    position: absolute; /* Center this element in the parent container */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Translate it by 50% to truly center */
+    font-size: 2.5rem; /* Increased size for better visibility */
+    color: black;
 }
 
 .logo {
