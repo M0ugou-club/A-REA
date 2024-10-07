@@ -1,12 +1,16 @@
-.a-rea-bar {
+.a-rea-component {
     background-color: rgba(0, 0, 255, 0.323);
-    margin: auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
     border-radius: 2vw;
-    position: relative;
+}
+
+.a-rea-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .left-section,
@@ -14,16 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-}
-
-.center-section {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    color: black;
+    width: 100%;
 }
 
 .logo {
