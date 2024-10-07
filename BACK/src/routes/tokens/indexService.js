@@ -31,16 +31,17 @@ export const getAccesTokensServiceByUserToken = async (platform, header) => {
 }
 
 export const getAccesTokensServiceByUserId = async (platform, userId) => {
+    console.log("userId", userId);
     try {
         const user = await User.findOne({
             _id: userId,
         }).populate('tokens');
         if (!user) {
-            throw new Error("User not found");
+            console.log("User not found");
         }
         const userToken = user.tokens.find((token) => token.platform === platform);
         if (!userToken) {
-            throw new Error("Token not found");
+            console.log("Token not found");
         }
         return userToken.accesstoken;
     } catch (error) {
