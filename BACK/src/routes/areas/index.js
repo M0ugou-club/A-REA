@@ -89,66 +89,64 @@ const getReactionsArea = async (req, res, next) => {
 
 const createArea = async (req, res, next) => {
     try {
-        const { area_title,
-                area_description,
-                action_name,
-                action_description,
-                action_type,
-                action_platform,
-                reaction_name,
-                reaction_description,
-                reaction_type,
-                reaction_platform,
-            } = req.body;
+        const {
+            area_title,
+            area_description,
+            action_name,
+            action_description,
+            action_type,
+            action_platform,
+            reaction_name,
+            reaction_description,
+            reaction_type,
+            reaction_platform,
+        } = req.body;
 
         const header = req.headers.authorization;
-        const token = header.replace("Bearer ", "");
+        const token = header ? header.replace("Bearer ", "") : null;
 
         if (!token) {
             return res.status(401).json({ message: "Token manquant" });
         }
+
         const action = new Action({
-            title : action_name,
-            description : action_description,
-            type : action_type,
-            platform : action_platform,
+            title: action_name,
+            description: action_description,
+            type: action_type,
+            platform: action_platform,
         });
 
         await action.save();
+
         const reaction = new Reaction({
-            title : reaction_name,
-            description : reaction_description,
-            type : reaction_type,
-            platform : reaction_platform,
+            title: reaction_name,
+            description: reaction_description,
+            type: reaction_type,
+            platform: reaction_platform,
         });
 
         await reaction.save();
+
         const area = new Area({
-            title : area_title,
-            description : area_description,
-            update_delay : 1800,
+            title: area_title,
+            description: area_description,
+            update_delay: 1800,
+            action: action._id,
+            reactions: reaction._id, // Non tableau
         });
 
-        area.action = action;
-        area.reactions.push(reaction);
-
         await area.save();
-
 
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token invalide" });
             }
             const { id } = decoded;
-            const user = await User.findOne({
-                _id: id,
-            });
+            const user = await User.findOne({ _id: id });
             if (!user) {
-                return res.status(405).json({
-                    message: 'User not found',
-                });
+                return res.status(405).json({ message: 'User not found' });
             }
-            user.a_rea.push(area);
+            user.a_rea.push(area._id); // Ajout de l'ID de l'area dans le tableau
             await user.save();
             res.status(200).json(user.a_rea);
         });
