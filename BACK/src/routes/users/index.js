@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import User from '../../models/Users/index.js';
 import dotenv from 'dotenv';
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -9,17 +10,29 @@ const routeUser = Router();
 
 const getUser = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        console.log(id);
-        const user = await User.findOne({
-            _id: id,
-        });
-        if (!user) {
-            return res.status(404).json({
-                message: 'User not found',
-            });
+        const header = req.headers.authorization;
+        const token = header.replace("Bearer ", "");
+
+        if (!token) {
+            return res.status(401).json({ message: "Token manquant" });
         }
-        return res.status(200).json(user);
+
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            });
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found',
+                });
+            }
+            return res.status(200).json(user);
+        }
+        );
     }
     catch (error) {
         return next(error);
@@ -38,24 +51,36 @@ const getUsers = async (req, res, next) => {
 }
 
 const patchUser = async (req, res, next) => {
-    const { id } = req.params;
     const { body } = req;
     let values = body;
-
     try {
-        const user = await User.findOne({
-            _id: id,
-        });
-        if (!user) {
-            return res.status(404).json({
-                message: 'User not found',
-            });
+        const header = req.headers.authorization;
+        const token = header.replace("Bearer ", "");
+
+        if (!token) {
+            return res.status(401).json({ message: "Token manquant" });
         }
-        Object.keys(values).forEach((key) => {
-            user[key] = values[key];
-        });
-        await user.save();
-        return res.status(200).json(user);
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            });
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found',
+                });
+            }
+            Object.keys(values).forEach((key) => {
+                user[key] = values[key];
+            }
+            );
+            await user.save();
+            return res.status(200).json(user);
+        }
+        );
     }
     catch (error) {
         return next(error);
@@ -63,14 +88,26 @@ const patchUser = async (req, res, next) => {
 }
 
 const deleteUser = async (req, res, next) => {
-    const { id } = req.params;
     try {
-        await User.findOneAndUpdate({
-            _id: id,
-        }, {
-            deleted: true,
-        });
-        return res.status(200).json();
+        const header = req.headers.authorization;
+        const token = header.replace("Bearer ", "");
+
+        if (!token) {
+            return res.status(401).json
+        }
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            await User.findOneAndUpdate({
+                _id: id,
+            }, {
+                deleted: true,
+            });
+            return res.status(200).json();
+        }
+        );
     }
     catch (error) {
         return next(error);
@@ -86,39 +123,52 @@ const checkOldPassword = async (oldPassword, user, email) => {
 }
 
 const changePwd = async (req, res, next) => {
-    const { id } = req.params;
     const { body } = req;
     let values = body;
 
     try {
-        const user = await User.findOne({
-            _id: id,
-        }).select('+password');
-        if (!user) {
-            return res.status(404).json({
-                message: 'User not found',
-            });
+        const header = req.headers.authorization;
+        const token = header.replace("Bearer ", "");
+
+        if (!token) {
+            return res.status(401).json
         }
-        if (await checkOldPassword(values.oldPassword, user, values.email)) {
-            const hashPassword = bcrypt.hashSync(values.newPassword, 10);
-            user.password = hashPassword;
-            await user.save();
-            return res.status(200).json(user);
-        } else {
-            return res.status(401).json({
-                message: 'Invalid password',
-            });
+
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            }).select('+password');
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found',
+                });
+            }
+            if (await checkOldPassword(values.oldPassword, user, values.email)) {
+                const hashPassword = bcrypt.hashSync(values.newPassword, 10);
+                user.password = hashPassword;
+                await user.save();
+                return res.status(200).json(user);
+            } else {
+                return res.status(401).json({
+                    message: 'Invalid password',
+                });
+            }
         }
+        );
     }
     catch (error) {
         return next(error);
     }
 }
 
-routeUser.get('/users', getUsers);
-routeUser.get('/users/:id', getUser);
-routeUser.patch('/users/:id', patchUser);
-routeUser.delete('/users/:id', deleteUser);
-routeUser.post('/users/:id', changePwd);
+routeUser.get('/usersAll', getUsers);
+routeUser.get('/users', getUser);
+routeUser.patch('/users', patchUser);
+routeUser.delete('/users', deleteUser);
+routeUser.post('/users', changePwd);
 
 export default routeUser;
