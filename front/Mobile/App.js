@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login/Login';
 import Home from './src/Home/Home';
-import Area from './src/Area/Area'
+import Area from './src/Area/AreaPage';
+import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
 import * as Font from 'expo-font';
 
 const Stack = createStackNavigator();
@@ -37,6 +38,11 @@ export default function App() {
         <Stack.Screen 
           name="Area" 
           component={Area} 
+          options={{ headerShown: false, animationEnabled: false }}
+        />
+        <Stack.Screen 
+          name="CreateArea" 
+          component={CreateAreaPage} 
           options={{ headerShown: false, animationEnabled: false }}
         />
       </Stack.Navigator>
