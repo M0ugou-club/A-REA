@@ -4,6 +4,7 @@ import User from '../../models/Users/index.js';
 import Area from '../../models/Area/index.js';
 import Action from '../../models/Action/index.js';
 import Reaction from '../../models/Reaction/index.js';
+import { actionsTriggers } from "../../utils/areasTriggers.js"
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
 
@@ -171,10 +172,16 @@ const deleteArea = async (req, res, next) => {
     }
 }
 
+const testAreas = async (req, res, next) => {
+    actionsTriggers();
+    return res.status(200).json({ message: 'Test Areas' });
+}
+
 routeAreas.get('/areas', getAreasUser);
 routeAreas.get('/areas/:id/actions', getActionsArea);
 routeAreas.get('/areas/:id/reactions', getReactionsArea);
 routeAreas.post('/areas', createArea);
 routeAreas.delete('/areas/:id', deleteArea);
+routeAreas.get('/testAreas', testAreas);
 
 export default routeAreas;

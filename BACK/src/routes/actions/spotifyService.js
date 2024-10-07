@@ -1,9 +1,9 @@
-import { getAccesTokensService } from "../tokens/indexService.js";
+import { getAccesTokensServiceByUserToken } from "../tokens/indexService.js";
 
 export const spotifyActions = async (action, userToken, res) => {
   let accessToken = ""
   let deviceId = ""
-  accessToken = await getAccesTokensService("Spotify", userToken);
+  accessToken = await getAccesTokensServiceByUserToken("Spotify", userToken);
   deviceId = await getSpotifyDeviceId(accessToken);
 
   console.log('Action:', action);
