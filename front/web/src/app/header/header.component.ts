@@ -14,7 +14,8 @@ export class HeaderComponent {
   showLoginPopup = false;
 
   handleUserIconButton(): void {
-    this.showLoginPopup = !this.showLoginPopup;
+    console.log("test");
+      this.showLoginPopup = !this.showLoginPopup;
   }
 
   handleHomeButtonClick() {
