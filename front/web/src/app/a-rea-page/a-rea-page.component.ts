@@ -11,7 +11,7 @@ export class AREAPageComponent {
   constructor(private router: Router) {}
 
   addButton() {
-    this.router.navigateByUrl("add-area");
+    this.router.navigateByUrl("add-a-rea");
   }
 
   areas = [
