@@ -6,7 +6,7 @@ const AreaSchema = new mongoose.Schema({
     title: {type: String, required: true},
     description: {type: String},
     action: {type: 'ObjectId', ref: 'Action'},
-    reactions: [{type: 'ObjectId', ref: 'Reaction'}],
+    reactions: {type: 'ObjectId', ref: 'Reaction'},
     update_delay: {type: Number, required: true},
     last_update: {type: Date, required: true, default: Date.now},
     deleted: {type: Boolean, required: false, default: false}
