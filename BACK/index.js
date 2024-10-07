@@ -6,6 +6,7 @@ import router from "./src/router.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swaggerConfig.js";
 import mongo from "./utils/mongo.js";
+import cron from "node-cron";
 
 dotenv.config();
 
@@ -29,6 +30,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/", router);
 
 await mongo();
+
+cron.schedule('* * * * *', () => {
+  console.log('running a task every minute');
+});
 
 // Création du serveur HTTP
 app.listen(port, () => {
