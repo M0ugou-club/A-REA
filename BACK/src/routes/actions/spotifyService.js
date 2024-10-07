@@ -1,0 +1,116 @@
+import { getAccesTokensService } from "../tokens/indexService.js";
+
+export const spotifyActions = async (action, userToken, res) => {
+  let accessToken = ""
+  let deviceId = ""
+  accessToken = await getAccesTokensService("Spotify", userToken);
+  deviceId = await getSpotifyDeviceId(accessToken);
+
+  if (action == "Play") {
+    console.log('Playing Mili');
+    playMusic(accessToken, deviceId);
+  }
+  if (action == "Pause") {
+    console.log('Pausing music');
+    pauseMusic(accessToken, deviceId);
+  }
+  if (action == "AddQueue") {
+    addMusicToQueue(accessToken, deviceId);
+  }
+};
+
+const playMusic = async (accessToken, deviceId) => {
+  const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      uris: ["spotify:track:1B0AVsL9wiQn8PfzLzKluH"]
+    })
+  });
+
+  if (response.ok) {
+    console.log('Music started successfully!');
+  } else {
+    const errorData = await response.json();
+    console.error('Failed to start music:', response.statusText, errorData);
+  }
+}
+
+const pauseMusic = async (accessToken, deviceId) => {
+  const url = `https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`;
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if (response.ok) {
+    console.log('Music started successfully!');
+  } else {
+    const errorData = await response.json();
+    console.error('Failed to start music:', response.statusText, errorData);
+  }
+}
+
+const addMusicToQueue = async (accessToken, deviceId) => {
+  const url = `https://api.spotify.com/v1/me/player/queue?uri=spotify:track:1B0AVsL9wiQn8PfzLzKluH`;
+
+  if (deviceId) {
+    url += `&device_id=${deviceId}`;
+  }
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if (response.ok) {
+    console.log('Music added to queue successfully!');
+  }
+  else {
+    const errorData = await response.json();
+    console.error('Failed to add music to queue:', response.statusText, errorData);
+  }
+}
+
+const getSpotifyDeviceId = async (accessToken) => {
+  const url = 'https://api.spotify.com/v1/me/player/devices';
+
+  console.log(accessToken);
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  });
+
+  if (!response.ok) {
+    console.log(response);
+    throw new Error('Failed to fetch devices');
+  }
+
+  const data = await response.json();
+  console.log(data);
+  const activeDevice = data.devices.find(device => device.is_active);
+
+  if (!activeDevice) {
+    console.log('No active device found');
+    return null;
+  }
+
+  return activeDevice.id;
+}
+
+
+export default { spotifyActions };
