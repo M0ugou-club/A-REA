@@ -31,7 +31,6 @@ export const getAccesTokensServiceByUserToken = async (platform, header) => {
 }
 
 export const getAccesTokensServiceByUserId = async (platform, userId) => {
-    console.log("userId", userId);
     try {
         const user = await User.findOne({
             _id: userId,
@@ -42,6 +41,9 @@ export const getAccesTokensServiceByUserId = async (platform, userId) => {
         const userToken = user.tokens.find((token) => token.platform === platform);
         if (!userToken) {
             console.log("Token not found");
+        }
+        if (!userToken.accesstoken) {
+            return null;
         }
         return userToken.accesstoken;
     } catch (error) {
