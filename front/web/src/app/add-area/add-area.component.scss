@@ -1,0 +1,94 @@
+.choose-area-page {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.choose-service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f0f0;
+  height: 100%;
+  width: 20%;
+  border-radius: 2vh;
+}
+
+.title-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20%;
+}
+
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  height: 80%;
+  width: 100%;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.area-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 40%;
+}
+
+.title-area-choose {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 40%;
+}
+
+.area-choose {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+}
+
+.area-choose-eventpart {
+  display: flex;
+  justify-content: center;
+  width: 45%;
+}
+
+.arrow {
+  font-size: 5rem;
+  color: black;
+}
+
+.utils-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 30%;
+  button {
+    width: 20%;
+    height: 10%;
+  }
+}
