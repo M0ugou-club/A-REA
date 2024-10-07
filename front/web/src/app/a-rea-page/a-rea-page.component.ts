@@ -19,6 +19,8 @@ export class AREAPageComponent implements OnInit {
     title: string;
   }[] = [];
 
+  plaformsIcon: any = [];
+
   addButton() {
     this.router.navigateByUrl("add-a-rea");
   }
@@ -62,8 +64,8 @@ export class AREAPageComponent implements OnInit {
               ? area.reactions[0].platform
               : "No reaction";
           this.areas.push({
-            actionLogo: "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
-            reactionLogo: "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
+            actionLogo: this.chooseIcon(area.action.platform),
+            reactionLogo: this.chooseIcon(reactionPlatform),
             actionText: area.action.platform,
             reactionText: reactionPlatform,
             title: area.title,
@@ -73,5 +75,35 @@ export class AREAPageComponent implements OnInit {
       .catch((error) => {
         console.error("Error fetching areas:", error);
       });
+
+    this.loadPlatformsIcons();
+  }
+
+  loadPlatformsIcons(): void {
+    fetch("http://localhost:8000/enums/platforms_icons", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this.plaformsIcon = data;
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  chooseIcon(choice: string) {
+    for (let key in this.plaformsIcon) {
+      if (key === choice) {
+        return this.plaformsIcon[key];
+      }
+    }
+    return "";
   }
 }
