@@ -22,6 +22,9 @@ export const spotifyActions = async (action, userToken, res) => {
   if (action == "AddQueue") {
     addMusicToQueue(accessToken, deviceId);
   }
+  if (action == "Like") {
+    likeMusic(accessToken);
+  }
 };
 
 const playMusic = async (accessToken, deviceId) => {
@@ -64,6 +67,26 @@ const pauseMusic = async (accessToken, deviceId) => {
     console.error('Failed to start music:', response.statusText, errorData);
   }
 }
+
+const likeMusic = async (accessToken) => {
+  const url = `https://api.spotify.com/v1/me/tracks?ids=1B0AVsL9wiQn8PfzLzKluH`;
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers : {
+      Authorization: `Bearer ${accessToken}`
+    }
+
+  });
+
+  if (response.ok) {
+    console.log('Music liked successfully!');
+  } else {
+    const errorData = await response.json();
+    console.error('Failed to like music:', response.statusText, errorData);
+  }
+}
+
 
 const addMusicToQueue = async (accessToken, deviceId) => {
   let url = `https://api.spotify.com/v1/me/player/queue?uri=spotify:track:1B0AVsL9wiQn8PfzLzKluH`;

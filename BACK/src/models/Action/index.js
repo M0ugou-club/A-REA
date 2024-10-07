@@ -8,6 +8,7 @@ const ActionSchema = new mongoose.Schema({
     description: {type: String},
     type: {type: String, required: true},
     platform: {type: String, required: true, enum: platforms},
+    data: {type: Object},
     deleted: {type: Boolean, required: false, default: false}
 });
 
