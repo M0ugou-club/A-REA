@@ -6,7 +6,12 @@ export const spotifyActions = async (action, userToken, res) => {
   accessToken = await getAccesTokensService("Spotify", userToken);
   deviceId = await getSpotifyDeviceId(accessToken);
 
+  console.log('Action:', action);
+  if (deviceId == null) {
+    res.status(400).json({ message: 'No active device found' });
+  }
   if (action == "Play") {
+    console.log("deviceid", deviceId);
     console.log('Playing Mili');
     playMusic(accessToken, deviceId);
   }
@@ -61,7 +66,7 @@ const pauseMusic = async (accessToken, deviceId) => {
 }
 
 const addMusicToQueue = async (accessToken, deviceId) => {
-  const url = `https://api.spotify.com/v1/me/player/queue?uri=spotify:track:1B0AVsL9wiQn8PfzLzKluH`;
+  let url = `https://api.spotify.com/v1/me/player/queue?uri=spotify:track:1B0AVsL9wiQn8PfzLzKluH`;
 
   if (deviceId) {
     url += `&device_id=${deviceId}`;
@@ -97,7 +102,7 @@ const getSpotifyDeviceId = async (accessToken) => {
 
   if (!response.ok) {
     console.log(response);
-    throw new Error('Failed to fetch devices');
+    return null;
   }
 
   const data = await response.json();
