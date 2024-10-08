@@ -17,16 +17,20 @@ This is our first 3rd Year Epitech Project called A-REA
    ```bash
    git clone https://github.com/your-repo/inox-quoicoubebou.fr.git
 
-2. **Build and Start the Containers:**
+2. **Env Variables:**
+
+- To Create your Env Variables, check [Back](./BACK/README.md) Documentation
+
+3. **Build and Start the Containers:**
    ```bash
     docker-compose up --build
 
-3. **Access the Application:**
+4. **Access the Application:**
 
 - Back-End : Accessible at http://localhost:8000/
 - Front-End : Accessible at http://localhost:4200/
 
-4. **Stop the Services:**
+5. **Stop the Services:**
    ```bash
    docker-compose down
 
