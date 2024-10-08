@@ -1,0 +1,29 @@
+name: dev-build.yml
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+jobs:
+  frontend-build:
+    name: Build and Test Front-End
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies for Front-End
+        run: |
+          cd front/web
+          npm install
+
+      - name: Build Front-End
+        run: |
+          cd front/web
+          npm run build
