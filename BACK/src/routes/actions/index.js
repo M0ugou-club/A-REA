@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { actionService } from './actionService.js';
+import { actionService } from './reactionService.js';
 
 const routeActions = Router();
 

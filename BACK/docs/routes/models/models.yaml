@@ -1,0 +1,135 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        username:
+          type: string
+          description: The username of the user
+        name:
+          type: string
+          description: The first name of the user
+        surname:
+          type: string
+          description: The last name of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        image:
+          type: string
+          description: Profile image URL
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Token'
+          description: List of user's tokens
+        a_rea:
+          type: array
+          items:
+            $ref: '#/components/schemas/Area'
+          description: List of user's areas
+        created_at:
+          type: string
+          format: date-time
+          description: User creation timestamp
+        deleted:
+          type: boolean
+          description: Soft delete flag
+    Action:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          description: Title of the action
+        description:
+          type: string
+          description: Optional description of the action
+        type:
+          type: string
+          description: Type of action
+        platform:
+          type: string
+          description: Platform where the action is performed (e.g., Spotify, Discord)
+        data:
+          type: object
+          description: Additional data related to the action
+        deleted:
+          type: boolean
+          description: Soft delete flag
+    Area:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          description: Title of the area
+        description:
+          type: string
+          description: Optional description of the area
+        action:
+          $ref: '#/components/schemas/Action'
+          description: Associated action for the area
+        reactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reaction'
+          description: List of reactions associated with the area
+        update_delay:
+          type: integer
+          description: Delay in seconds for updates
+        last_update:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        deleted:
+          type: boolean
+          description: Soft delete flag
+    Reaction:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          description: Title of the reaction
+        description:
+          type: string
+          description: Optional description of the reaction
+        type:
+          type: string
+          description: Type of the reaction
+        platform:
+          type: string
+          description: Platform where the reaction is triggered (e.g., Spotify, Discord)
+        deleted:
+          type: boolean
+          description: Soft delete flag
+    Token:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        platform:
+          type: string
+          description: Platform for which the token is issued (e.g., Spotify, Discord)
+        accesstoken:
+          type: string
+          description: Access token for the platform
+        refreshtoken:
+          type: string
+          description: Refresh token for the platform
+        validity:
+          type: string
+          format: date-time
+          description: Token validity timestamp

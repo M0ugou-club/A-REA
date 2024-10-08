@@ -1,11 +1,12 @@
 paths:
   /enums/platforms:
     get:
-      summary: Get Platforms Enums
-      description: Fetches a list of platform enums from the database.
+      tags:
+        - Enums
+      summary: Get a list of platforms
       responses:
         '200':
-          description: Successfully fetched platforms enums.
+          description: Successful response with platforms
           content:
             application/json:
               schema:
@@ -13,23 +14,19 @@ paths:
                 items:
                   type: string
         '500':
-          description: Internal Server Error
+          description: Server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Error fetching platforms enums.
-
+                $ref: '#/components/schemas/ErrorResponse'
   /enums/actions:
     get:
-      summary: Get Actions Enums
-      description: Fetches a list of action enums from the database.
+      tags:
+        - Enums
+      summary: Get a list of action types
       responses:
         '200':
-          description: Successfully fetched actions enums.
+          description: Successful response with action types
           content:
             application/json:
               schema:
@@ -37,23 +34,19 @@ paths:
                 items:
                   type: string
         '500':
-          description: Internal Server Error
+          description: Server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Error fetching actions enums.
-
+                $ref: '#/components/schemas/ErrorResponse'
   /enums/reactions:
     get:
-      summary: Get Reactions Enums
-      description: Fetches a list of reaction enums from the database.
+      tags:
+        - Enums
+      summary: Get a list of reaction types
       responses:
         '200':
-          description: Successfully fetched reactions enums.
+          description: Successful response with reaction types
           content:
             application/json:
               schema:
@@ -61,12 +54,35 @@ paths:
                 items:
                   type: string
         '500':
-          description: Internal Server Error
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /enums/platforms_icons:
+    get:
+      tags:
+        - Enums
+      summary: Get a list of platform icons
+      responses:
+        '200':
+          description: Successful response with platform icons
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  message:
-                    type: string
-                    example: Error fetching reactions enums.
+                additionalProperties:
+                  type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string

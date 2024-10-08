@@ -6,6 +6,7 @@ import Home from './src/Home/Home';
 import Area from './src/Area/AreaPage';
 import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
 import * as Font from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 const Stack = createStackNavigator();
 
@@ -19,8 +20,24 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    loadFonts().then(() => setFontsLoaded(true));
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await loadFonts();
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setFontsLoaded(true);
+        await SplashScreen.hideAsync();
+      }
+    }
+
+    prepare();
   }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <NavigationContainer>

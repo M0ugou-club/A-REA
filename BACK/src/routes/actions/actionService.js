@@ -1,6 +1,6 @@
 import { spotifyActions } from "./spotifyService.js";
 
-export const actionService = async (platform, action, userToken, res) => {
+export const reactionService = async (platform, action, userToken, res) => {
   if (platform === "Spotify") {
     spotifyActions(action, userToken, res);
   }
@@ -9,4 +9,4 @@ export const actionService = async (platform, action, userToken, res) => {
   }
 };
 
-export default { actionService };
+export default { reactionService };

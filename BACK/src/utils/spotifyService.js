@@ -1,14 +1,15 @@
-import { getAccesTokensServiceByUserToken } from "../tokens/indexService.js";
+import { getAccesTokensServiceByUserId } from '../routes/tokens/indexService.js'
 
-export const spotifyReactions = async (action, userToken, res) => {
+export const spotifyReactions = async (action, userId) => {
   let accessToken = ""
   let deviceId = ""
-  accessToken = await getAccesTokensServiceByUserToken("Spotify", userToken);
+  accessToken = await getAccesTokensServiceByUserId("Spotify", userId);
   deviceId = await getSpotifyDeviceId(accessToken);
 
   console.log('Action:', action);
   if (deviceId == null) {
-    res.status(400).json({ message: 'No active device found' });
+    console.log('No active device found');
+    return;
   }
   if (action == "Play") {
     console.log("deviceid", deviceId);
@@ -141,4 +142,4 @@ const getSpotifyDeviceId = async (accessToken) => {
 }
 
 
-export default { spotifyActions };
+export default { spotifyReactions };

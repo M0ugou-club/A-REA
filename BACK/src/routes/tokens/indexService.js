@@ -4,7 +4,7 @@ import { promisify } from 'util';
 
 const verifyToken = promisify(jwt.verify);
 
-export const getAccesTokensService = async (platform, header) => {
+export const getAccesTokensServiceByUserToken = async (platform, header) => {
     const authToken = header.replace("Bearer ", "");
     if (!authToken) {
         throw new Error("Token manquant");
@@ -30,4 +30,26 @@ export const getAccesTokensService = async (platform, header) => {
     }
 }
 
-export default { getAccesTokensService };
+export const getAccesTokensServiceByUserId = async (platform, userId) => {
+    try {
+        const user = await User.findOne({
+            _id: userId,
+        }).populate('tokens');
+        if (!user) {
+            console.log("User not found");
+        }
+        const userToken = user.tokens.find((token) => token.platform === platform);
+        if (!userToken) {
+            console.log("Token not found");
+        }
+        if (!userToken.accesstoken) {
+            return null;
+        }
+        return userToken.accesstoken;
+    } catch (error) {
+        console.log("Error fetching user by ID", error);
+        return null;
+    }
+}
+
+export default { getAccesTokensServiceByUserToken, getAccesTokensServiceByUserId };

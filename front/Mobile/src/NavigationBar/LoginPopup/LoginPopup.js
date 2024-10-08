@@ -1,8 +1,22 @@
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from './LoginPopupStyle';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginPopup() {
+
+    const navigation = useNavigation();
+
+    async function onLogout() {
+        try {
+            await AsyncStorage.removeItem('accessToken');
+            console.log('Logout');
+            navigation.navigate('Login');
+        } catch (error) {
+            alert('Error:', error);
+        }
+    }
+
     return (
         <View style={styles.popupLoginContainer}>
             <View style={styles.headerPopup}>
@@ -36,7 +50,7 @@ export default function LoginPopup() {
                     <Text style={styles.textUtilsButton}>Se Connecter</Text>
                     <Image source={require('../../../assets/chevron-right.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.utilsButton}>
+                <TouchableOpacity style={styles.utilsButton} onPress={onLogout}>
                     <Image source={require('../../../assets/log-out.png')} />
                     <Text style={styles.textUtilsButton}>Se déconnecter</Text>
                 </TouchableOpacity>

@@ -1,0 +1,259 @@
+paths:
+  /areas:
+    get:
+      tags:
+        - Areas
+      summary: Get areas for the authenticated user
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response with user's areas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Area'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - Areas
+      summary: Create a new area
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAreaRequest'
+      responses:
+        '200':
+          description: Area created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Area'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /areas/{id}:
+    delete:
+      tags:
+        - Areas
+      summary: Delete an area
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Area ID
+      responses:
+        '200':
+          description: Area deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Area'
+        '405':
+          description: Area not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /areas/{id}/actions:
+    get:
+      tags:
+        - Areas
+      summary: Get the action of an area
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Area ID
+      responses:
+        '200':
+          description: Successful response with the area's action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+        '405':
+          description: Area not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /areas/{id}/reactions:
+    get:
+      tags:
+        - Areas
+      summary: Get the reactions of an area
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Area ID
+      responses:
+        '200':
+          description: Successful response with the area's reactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+        '405':
+          description: Area not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        a_rea:
+          type: array
+          items:
+            $ref: '#/components/schemas/Area'
+    Area:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        update_delay:
+          type: integer
+        action:
+          $ref: '#/components/schemas/Action'
+        reactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reaction'
+        deleted:
+          type: boolean
+      required:
+        - title
+        - description
+    Action:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        platform:
+          type: string
+      required:
+        - title
+        - description
+        - type
+        - platform
+    Reaction:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        platform:
+          type: string
+      required:
+        - title
+        - description
+        - type
+        - platform
+    CreateAreaRequest:
+      type: object
+      properties:
+        area_title:
+          type: string
+        area_description:
+          type: string
+        action_name:
+          type: string
+        action_description:
+          type: string
+        action_type:
+          type: string
+        action_platform:
+          type: string
+        reaction_name:
+          type: string
+        reaction_description:
+          type: string
+        reaction_type:
+          type: string
+        reaction_platform:
+          type: string
+      required:
+        - area_title
+        - area_description
+        - action_name
+        - action_description
+        - action_type
+        - action_platform
+        - reaction_name
+        - reaction_description
+        - reaction_type
+        - reaction_platform
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
