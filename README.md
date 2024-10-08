@@ -32,6 +32,6 @@ This is our first 3rd Year Epitech Project called A-REA
 
 # Documentation :
 
--  [Back](./BACK/README.md)
+-  [Back](./back/README.md)
 - [Front](./front/web/README.md)
 - [Mobile](./front/Mobile/README.md)

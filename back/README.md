@@ -34,8 +34,9 @@ export default Model;
 
 #### Documentation
 
-To reach this, we use `mongoose-to-swagger` to transform your Model definition into Swagger documentation. You do not need to do something else about documentation, your `swaggerSchema` will be dynamically load to the Swagger UI.
+to access the documentation swagger
 
+- Back-End : Accessible at http://localhost:8000/api-docs
 
 ##### Route
 

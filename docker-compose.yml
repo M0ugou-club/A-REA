@@ -12,7 +12,7 @@ services:
 
   back:
     build:
-      context: ./BACK
+      context: ./back
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
