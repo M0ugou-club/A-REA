@@ -7,6 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swaggerConfig.js";
 import mongo from "./utils/mongo.js";
 import cron from "node-cron";
+import { actionsTriggers } from "./src/utils/areasTriggers.js";
 
 dotenv.config();
 
@@ -31,9 +32,13 @@ app.use("/", router);
 
 await mongo();
 
-cron.schedule('* * * * *', () => {
-  console.log('running a task every minute');
-});
+async function cronJob() {
+  cron.schedule("* * * * *", async () => {
+    await actionsTriggers();
+  });
+}
+
+cronJob();
 
 // Création du serveur HTTP
 app.listen(port, () => {

@@ -3,6 +3,7 @@ import Actions from '../../src/models/Action/index.js';
 import actions from './actions_types.js'
 import { getAccesTokensServiceByUserId } from '../routes/tokens/indexService.js'
 import { reactionService } from './reactionService.js'
+import fetch from 'node-fetch';
 
 export const actionsTriggers = async () => {
     const datasObject = {};
@@ -14,7 +15,7 @@ export const actionsTriggers = async () => {
             { path: 'reactions' }
         ]
     });
-    
+
     users.forEach(async user => {
         user.a_rea.forEach(async area => {
             console.log(user.username);
@@ -22,7 +23,7 @@ export const actionsTriggers = async () => {
                 reactionService(area.reactions.platform, area.reactions.type, user.id);
             }
         });
-    }); 
+    });
 }
 
 const actionsChanges = async (platform, type, data, userId, areaId) => {
@@ -146,7 +147,7 @@ const spotifyActionsLikeTrack = async (data, accessToken, areaId) => {
             const result = await response.json();
             const track = String(result.items[0].track.name);
             console.log('Music liked successfully!');
-            
+
             console.log(track);
             console.log(areaId);
             if (track != data || data === null) {
