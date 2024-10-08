@@ -24,6 +24,8 @@ export class AddAreaComponent implements OnInit {
 
   reactions: any[] = [];
 
+  plaformsIcon: any = [];
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -41,37 +43,9 @@ export class AddAreaComponent implements OnInit {
       })
         .then((response) => {
           if (response.status === 200) {
-            fetch("http://localhost:8000/enums/actions", {
-              method: "GET",
-            })
-              .then((response) => {
-                if (!response.ok) {
-                  console.log(response);
-                }
-                return response.json();
-              })
-              .then((data) => {
-                this.actions = this.flattenActions(data);
-              })
-              .catch((error) => {
-                console.error("Erreur de requête:", error);
-              });
-            fetch("http://localhost:8000/enums/reactions", {
-              method: "GET",
-            })
-              .then((response) => {
-                if (!response.ok) {
-                  console.log(response);
-                }
-                return response.json();
-              })
-              .then((data) => {
-                console.log(data);
-                this.reactions = this.flattenActions(data);
-              })
-              .catch((error) => {
-                console.error("Erreur de requête:", error);
-              });
+            this.loadActions();
+            this.loadReactions();
+            this.loadPlatformsIcons();
           } else {
             this.router.navigate(["/login"]);
           }
@@ -82,6 +56,62 @@ export class AddAreaComponent implements OnInit {
     } else {
       this.router.navigate(["/login"]);
     }
+  }
+
+  loadActions(): void {
+    fetch("http://localhost:8000/enums/actions", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.actions = this.flattenActions(data);
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  loadReactions(): void {
+    fetch("http://localhost:8000/enums/reactions", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this.reactions = this.flattenActions(data);
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  loadPlatformsIcons(): void {
+    fetch("http://localhost:8000/enums/platforms_icons", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this.plaformsIcon = data;
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
   }
 
   flattenActions(data: any) {
@@ -141,5 +171,14 @@ export class AddAreaComponent implements OnInit {
       });
 
     this.router.navigate(["/a-rea"]);
+  }
+
+  chooseIcon(choice: string) {
+    for (let key in this.plaformsIcon) {
+      if (key === choice) {
+        return this.plaformsIcon[key];
+      }
+    }
+    return "";
   }
 }

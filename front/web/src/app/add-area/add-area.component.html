@@ -5,7 +5,7 @@
         </div>
         <div class="choices-container">
             <app-choice-button *ngFor="let x of actions"
-                                   [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
+                                   [choiceLogo]="chooseIcon(x.service)"
                                    [choiceTitle]="x.label"
                                    (sendChoice)="setAction($event)"
                                    class="choices">
@@ -23,7 +23,7 @@
         <div class="area-choose">
             <div class="area-choose-eventpart">
                 <app-choice-button *ngIf="areaObj.action_name"
-                                   [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
+                                   [choiceLogo]="chooseIcon(areaObj.action_platform)"
                                    [choiceTitle]="areaObj.action_name"
                                    (sendChoice)="setAction($event)"
                                     class="choices">
@@ -34,7 +34,7 @@
             </div>
             <div class="area-choose-eventpart">
                 <app-choice-button *ngIf="areaObj.reaction_name"
-                                   [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
+                                   [choiceLogo]="chooseIcon(areaObj.reaction_platform)"
                                    [choiceTitle]="areaObj.reaction_name"
                                    (sendChoice)="setReaction($event)"
                                     class="choices">
@@ -52,7 +52,7 @@
         </div>
         <div class="choices-container">
             <app-choice-button *ngFor="let x of reactions"
-                               [choiceLogo]="'https://cdn.worldvectorlogo.com/logos/discord-6.svg'"
+                               [choiceLogo]="chooseIcon(x.service)"
                                [choiceTitle]="x.label"
                                (sendChoice)="setReaction($event)"
                                class="choices">
