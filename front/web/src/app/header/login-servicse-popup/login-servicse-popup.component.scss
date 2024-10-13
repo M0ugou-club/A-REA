@@ -86,16 +86,6 @@
     grid-template-columns: 15% 75% 0%;
 }
 
-.logo-api {
-    width: 75%;
-}
-
-.text-button-container {
-    border: red solid 1px;
-    width: 100%;
-    height: 70%;
-}
-
 .text-button-style-api {
     display: flex;
     align-items: center;
@@ -106,4 +96,11 @@
     color: #2e2e2e;
     background-color: #CFE2F3;
     border-radius: 0.5vw;
+}
+
+.services {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    justify-content: center;
 }
