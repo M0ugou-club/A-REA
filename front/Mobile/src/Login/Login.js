@@ -4,6 +4,7 @@ import styles from './LoginStyle';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import isLogged from '../isLogged';
 
 export default function Login() {
 
@@ -13,15 +14,29 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    async function checkToken() {
-      const token = await AsyncStorage.getItem('accessToken');
-      if (token) {
-        console.log('Token:', token);
-        navigation.navigate('Home');
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        if (token === null) {
+          return;
+        }
+        const response = await fetch("http://212.195.222.157:8000/isLogged", {
+          headers: {
+            "Authorization": token,
+          },
+        });
+
+        if (response.status === 200) {
+          navigation.navigate('Home');
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    }
-    checkToken();
-  });
+    };
+
+    checkLoginStatus();
+  }, [navigation]);
+
 
   async function onLogin() {
     try {
