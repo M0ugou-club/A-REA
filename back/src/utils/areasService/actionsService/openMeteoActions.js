@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const actionsTriggersOpenMeteo = async (type, data) => {
+export const actionsTriggersOpenMeteo = async (type, data) => {
     if (type === 'on_evrest_melt') {
         if (await openMeteoActionsEvrestMelt() === true) {
             return true;
