@@ -7,7 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swaggerConfig.js";
 import mongo from "./utils/mongo.js";
 import cron from "node-cron";
-import { actionsTriggers } from "./src/utils/areasTriggers.js";
+import { actionsTriggers } from "./src/utils/areasService/areasTriggers.js";
 
 dotenv.config();
 
