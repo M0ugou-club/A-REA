@@ -1,6 +1,6 @@
 import { getAccesTokensServiceByUserId } from '../../../routes/tokens/indexService.js'
 
-const spotifyReactions = async (action, userId) => {
+export const spotifyReactions = async (action, userId) => {
     let accessToken = ""
     let deviceId = ""
 

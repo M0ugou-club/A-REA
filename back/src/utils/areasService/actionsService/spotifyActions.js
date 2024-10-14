@@ -1,7 +1,7 @@
 import Actions from '../../../models/Action/index.js';
 import fetch from 'node-fetch';
 
-const actionsTriggersSpotify = async (type, data, accessToken, areaId) => {
+export const actionsTriggersSpotify = async (type, data, accessToken, areaId) => {
     if (type === 'on_new_track_spotify') {
         if (await spotifyActionsNewTrack(data, accessToken, areaId) === true) {
             return true;
