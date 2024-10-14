@@ -11,10 +11,7 @@ const mongo = async () => {
   try {
     const mongoURI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@soulconnection.a100j.mongodb.net/?retryWrites=true&w=majority&appName=SoulConnection`;
 
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(mongoURI);
     console.log(mongoURI);
     logger.info('[DB]: Connected to MongoDB');
 

@@ -4,6 +4,7 @@ import Token from '../../models/Token/index.js';
 import User from '../../models/Users/index.js';
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
+import platforms from '../../models/schemas/platforms.js';
 
 dotenv.config();
 
@@ -78,11 +79,9 @@ const getToken = async (req, res, next) => {
 }
 
 const getTokenState = async (req, res, next) => {
-    let response = {};
-    let SpotifyState = false;
-    let DiscordState = false;
-    let TwitterState = false;
     try {
+        const response = {};
+
         const header = req.headers.authorization;
         const token = header.replace("Bearer ", "");
 
@@ -95,34 +94,17 @@ const getTokenState = async (req, res, next) => {
                 return res.status(401).json({ message: "Token invalide" });
             }
             const { id } = decoded;
-            const user = await User.findOne({
-                _id: id,
-            }).populate('tokens');
+            const user = await User.findOne({ _id: id }).populate('tokens');
             if (!user) {
-                return res.status(405).json({
-                    message: 'User not found',
-                });
+                return res.status(405).json({ message: 'User not found' });
             }
-            const token = user.tokens.find((token) => token.platform === "Spotify");
-            if (token) {
-                SpotifyState = true;
-            }
-            const token1 = user.tokens.find((token) => token.platform === "Discord");
-            if (token1) {
-                DiscordState = true;
-            }
-            const token2 = user.tokens.find((token) => token.platform === "Twitter");
-            if (token2) {
-                TwitterState = true;
-            }
-            response = {
-                Spotify: SpotifyState,
-                Discord: DiscordState,
-                Twitter: TwitterState
-            }
-            res.status(200).json(response);
-        }
-        );
+            platforms.forEach((platform) => {
+                const platformToken = user.tokens.find((token) => token.platform === platform);
+                response[platform] = !!platformToken;
+            });
+
+            return res.status(200).json(response);
+        });
     } catch (error) {
         return next(error);
     }
@@ -220,15 +202,13 @@ const patchToken = async (req, res, next) => {
 const delToken = async (req, res, next) => {
     console.log("delete token");
     const { platform } = req.params;
-    
+
     try {
         const header = req.headers.authorization;
         const tokena = header.replace("Bearer ", "");
-    
         if (!tokena) {
             return res.status(401).json({ message: "Token manquant" });
         }
-    
         jwt.verify(tokena, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token invalide" });
