@@ -1,4 +1,4 @@
-import { spotifyReactions } from "./spotifyService.js";
+import { spotifyReactions } from "./spotifyReactions.js";
 
 export const reactionService = async (platform, action, userId) => {
     if (platform === "Spotify") {
