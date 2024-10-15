@@ -51,7 +51,17 @@ export const registerUser = async (req, res, next) => {
 
 export const isUserAuth = () => {
   return (req, res, next) => {
-    const token = req.headers.authorization;
+    let token = ""
+
+    if (req.headers.authorization) {
+      token = req.headers.authorization;
+    } else if (req.query.token) {
+      token = req.query.token;
+    } else {
+      return res.status(401).json({ message: "Token manquant" });
+    }
+
+    console.log(token);
 
     if (!token) {
       return res.status(401).json({ message: "Token manquant" });

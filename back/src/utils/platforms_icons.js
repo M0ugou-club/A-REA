@@ -1,17 +1,17 @@
 const platforms_icons = {
   "Spotify": {
     "icon": "https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png",
-    "color": "#1DB954",
+    "color": "#429660",
     "connexion": true
   },
   "Discord": {
     "icon": "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
-    "color": "#7289DA",
+    "color": "#5064AC",
     "connexion": true
   },
   "OpenMeteo": {
     "icon": "https://open-meteo.com/favicon-32x32.png",
-    "color": "#FFA500",
+    "color": "#D48207",
     "connexion": false
   },
   "X-Twitter": {
@@ -26,7 +26,7 @@ const platforms_icons = {
   },
   "Youtube": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg",
-    "color": "#FF0000",
+    "color": "#9F3531",
     "connexion": true
   },
   "Instagram": {
