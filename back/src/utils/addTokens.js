@@ -1,12 +1,12 @@
-import Token from '../../models/Token/index.js';
-import User from '../../models/Users/index.js';
+import Token from '../models/Token/index.js';
+import User from '../models/Users/index.js';
 import jwt from "jsonwebtoken";
 
 const checkTokenExistence = (user, platform) => {
   return user.tokens.find((token) => token.platform === platform);
 }
 
-const postToken = async (token, platform, access_token, refresh_token, validity) => {
+export const postToken = async (token, platform, access_token, refresh_token, validity) => {
   const values = {
       platform: platform,
       accesstoken: access_token,
@@ -39,3 +39,5 @@ const postToken = async (token, platform, access_token, refresh_token, validity)
       return 500;
   }
 }
+
+export default { postToken };
