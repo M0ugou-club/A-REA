@@ -5,6 +5,7 @@ import Login from './src/Login/Login';
 import Home from './src/Home/Home';
 import Area from './src/Area/AreaPage';
 import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
+import Register from './src/Register/RegisterPage';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -46,6 +47,11 @@ export default function App() {
           name="Login" 
           component={Login} 
           options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
         />
         <Stack.Screen 
           name="Home" 
