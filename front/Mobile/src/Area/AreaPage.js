@@ -3,29 +3,58 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './AreaPageStyle';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import AreaComponent from './AreaComponent/AreaComponent';
+import isLogged from '../isLogged';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
 
     const navigation = useNavigation();
+    const [areas, setAreas] = useState([]);
+
+    useEffect(() => {
+        isLogged(navigation);
+        const fetchAreas = async () => {
+            try {
+                const token = await AsyncStorage.getItem('accessToken');
+                const response = await fetch('http://212.195.222.157:8000/areas', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                });
+                if (response.status === 200) {
+                    const data = await response.json();
+                    setAreas(data);
+                } else if (response.status === 401) {
+                    console.log('GET - /areas - Unauthorized');
+                }
+            } catch (error) {
+                console.error('Error fetching areas:', error);
+            }
+        };
+        fetchAreas();
+    }, [navigation]);
+
+    function handleAddAreaButton() {
+        navigation.navigate('CreateArea');
+    }
 
     return (
         <View style={styles.globalContainer}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.pageContentContainer}>
                     <View style={styles.areaComponentContainer}>
-                        <AreaComponent />
-                        <AreaComponent />
-                        <AreaComponent />
-                        <AreaComponent />
-                        <AreaComponent />
-                        <AreaComponent />
-                        <AreaComponent />
+                        {areas.map(area => (
+                            <AreaComponent key={area._id} data={area} />
+                        ))}
                     </View>
                 </View>
             </ScrollView>
             <TouchableOpacity
+                onPress={handleAddAreaButton}
                 style={styles.addAreaButtonContainer}
-                onPress={() => navigation.navigate('CreateArea')}
             >
                 <Image style={styles.addAreaButton} source={require('../../assets/add.png')} />
             </TouchableOpacity>
