@@ -2,20 +2,17 @@ import { Text, View, TouchableOpacity} from 'react-native';
 import styles from './HomeStyle';
 import NavigationBar from '../NavigationBar/NavigationBar'
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import '../isLogged';
+import isLogged from '../isLogged';
 
 export default function Home() {
 
     const [token, setToken] = useState('');
+    const navigation = useNavigation();
 
     useEffect(() => {
-        async function checkToken() {
-            const token = await AsyncStorage.getItem('accessToken');
-            if (token) {
-                setToken(token);
-            }
-        }
-        checkToken();
+        isLogged(navigation);
     });
 
     return (

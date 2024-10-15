@@ -5,7 +5,6 @@ import { HeaderComponent } from "./header/header.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { AddAreaComponent } from "./add-area/add-area.component";
 import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
-import { CallbackPageComponent } from "./callbackPage/callback.component";
 
 const routes: Routes = [
   {
@@ -32,10 +31,6 @@ const routes: Routes = [
   {
     path: "add-a-rea",
     component: AddAreaComponent,
-  },
-  {    
-    path: "callback",
-    component: CallbackPageComponent,
   }
 ];
 

@@ -4,7 +4,7 @@ import User from '../../models/Users/index.js';
 import Area from '../../models/Area/index.js';
 import Action from '../../models/Action/index.js';
 import Reaction from '../../models/Reaction/index.js';
-import { actionsTriggers } from "../../utils/areasTriggers.js"
+import { actionsTriggers } from "../../utils/areasService/areasTriggers.js"
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
 
@@ -132,7 +132,7 @@ const createArea = async (req, res, next) => {
             description: area_description,
             update_delay: 1800,
             action: action._id,
-            reactions: reaction._id, // Non tableau
+            reactions: reaction._id,
         });
 
         await area.save();
@@ -146,7 +146,7 @@ const createArea = async (req, res, next) => {
             if (!user) {
                 return res.status(405).json({ message: 'User not found' });
             }
-            user.a_rea.push(area._id); // Ajout de l'ID de l'area dans le tableau
+            user.a_rea.push(area._id);
             await user.save();
             res.status(200).json(user.a_rea);
         });

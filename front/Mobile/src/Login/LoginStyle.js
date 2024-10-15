@@ -47,6 +47,20 @@ const styles = StyleSheet.create({
     fontSize: width * 0.05,
   },
 
+  registerButton: {
+    backgroundColor: '#0089ED',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  textRegisterButton: {
+    color: '#0089ED',
+    textDecorationLine: 'underline',
+    fontSize: width * 0.04,
+    marginTop: height * 0.02,
+  },
+
 });
 
 export default styles;
