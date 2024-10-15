@@ -1,10 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Text, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './LoginStyle';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import isLogged from '../isLogged';
 
 export default function Login() {
 
@@ -81,6 +79,11 @@ export default function Login() {
           onPress={() => onLogin()}
         >
           <Text style={styles.textLoginButton}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Register')}
+        >
+          <Text style={styles.textRegisterButton}>Register</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
