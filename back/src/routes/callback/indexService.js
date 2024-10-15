@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { postToken } from '../../utils/addTokens.js';
 
 export const spotifyCallbackService = async (req, res) => {
     const code = req.query.code;
+    const state = req.query.state;
 
     if (!code) {
         return res.status(400).send({ message: "Authorization code not provided" });
@@ -20,9 +22,9 @@ export const spotifyCallbackService = async (req, res) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         });
-        const { access_token, refresh_token } = response.data;
-
-
+        const { access_token, refresh_token, expires_in} = response.data;
+        const fakeDate = new Date('2030-01-01T00:00:00Z');
+        postToken(state, "Spotify", access_token, refresh_token, fakeDate);
 
         return res.status(200).send("Access token retrieved");
     } catch (error) {
