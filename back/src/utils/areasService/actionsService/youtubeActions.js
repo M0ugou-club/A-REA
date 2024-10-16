@@ -94,15 +94,12 @@ const youtubeActionsLive = async (data, accessToken, areaId) => {
 }
 
 const youtubeActionsTenMillions = async (data, accessToken, areaId) => {
-    console.log("ten millions-------------------");
     const oauth2Client = new google.auth.OAuth2();
     oauth2Client.setCredentials({ access_token: accessToken });
     const youtube = google.youtube({
         version: 'v3',
         auth: oauth2Client
     });
-    
-    console.log("ten millions-------------------");
     try {
         const response = await youtube.channels.list({
             part: 'statistics',
@@ -111,7 +108,6 @@ const youtubeActionsTenMillions = async (data, accessToken, areaId) => {
 
         const channel = response.data.items[0];
         const subscriberCount = channel.statistics.subscriberCount;
-        console.log("sub d'inox", subscriberCount);
         if (subscriberCount >= 10000000) {
             return true;
         }
