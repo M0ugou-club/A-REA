@@ -65,7 +65,7 @@ export class AREAPageComponent implements OnInit {
               : "No reaction";
           this.areas.push({
             actionLogo: this.chooseIcon(area.action.platform),
-            reactionLogo: this.chooseIcon(reactionPlatform),
+            reactionLogo: this.chooseIcon(area.reactions.platform),
             actionText: area.action.platform,
             reactionText: reactionPlatform,
             title: area.title,
@@ -100,8 +100,11 @@ export class AREAPageComponent implements OnInit {
 
   chooseIcon(choice: string) {
     for (let key in this.plaformsIcon) {
-      if (key === choice) {
-        return this.plaformsIcon[key];
+      console.log("KEY :" +  key);
+      console.log("CHOICE :" + choice);
+      if (key == choice) {
+        console.log("RETURN" + this.plaformsIcon[key]);
+        return this.plaformsIcon[key].icon ;
       }
     }
     return "";

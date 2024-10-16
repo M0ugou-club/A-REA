@@ -22,6 +22,16 @@
   padding: 20px;
 }
 
+.home-background-image {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../../public/homeImages/background.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  background-size: cover;
+}
+
 @media (max-width: 768px) {
   .areas-container {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
