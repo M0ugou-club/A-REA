@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from './LoginPopupStyle';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as WebBrowser from 'expo-web-browser';
 
 export default function LoginPopup() {
 
@@ -16,6 +17,14 @@ export default function LoginPopup() {
             alert('Error:', error);
         }
     }
+
+    const handleSpotifyLogin = async () => {
+        const authToken = await AsyncStorage.getItem('accessToken');
+        const authUrl = 'http://212.195.222.157:8000/oauth/Spotify?token=' + authToken;
+        console.log(authUrl);
+
+        let result = await WebBrowser.openBrowserAsync(authUrl);
+    };
 
     return (
         <View style={styles.popupLoginContainer}>
@@ -35,7 +44,7 @@ export default function LoginPopup() {
                     <Text style={styles.textUtilsButton}>Paramètres</Text>
                     <Image source={require('../../../assets/chevron-right.png')} />
                     </TouchableOpacity>
-                <TouchableOpacity style={styles.utilsButton}>
+                <TouchableOpacity style={styles.utilsButton} onPress={handleSpotifyLogin}>
                     <Image source={{ uri: 'https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png' }} style={styles.apiLogo} />
                     <Text style={styles.textUtilsButton}>Se Connecter</Text>
                     <Image source={require('../../../assets/chevron-right.png')} />
