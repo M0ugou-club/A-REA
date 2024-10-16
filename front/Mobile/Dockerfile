@@ -1,13 +1,28 @@
-FROM node
+FROM thyrlian/android-sdk
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install -g eas-cli
+ARG EXPO_TOKEN
 
-RUN eas build --platform android --local
+RUN mv .git ./front/Mobile
 
-EXPOSE 4200
+WORKDIR ./front/Mobile
 
-CMD ["npx", "expo", "start"]
+RUN ls -la
+
+RUN apt-get update \
+    && apt-get install nodejs npm git -y --no-install-recommends \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/share/doc/* \
+    && npm install eas-cli
+
+RUN npm ci
+
+RUN npm install expo
+
+#RUN npx expo prebuild
+
+RUN npx eas build -p android  --profile production --local --non-interactive
