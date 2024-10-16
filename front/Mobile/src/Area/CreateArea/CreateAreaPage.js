@@ -22,7 +22,7 @@ export default function CreateAreaPage() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': "Bearer " + token,
                     },
                 });
                 if (response.status === 200) {
@@ -43,7 +43,7 @@ export default function CreateAreaPage() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': "Bearer " + token,
                     },
                 });
                 if (response.status === 200) {
