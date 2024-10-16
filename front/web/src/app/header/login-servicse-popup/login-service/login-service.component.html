@@ -1,6 +1,6 @@
-<button class="login-service-button" (click)="connectionServiceGestion()" [ngStyle]="{ 'background-color': serviceColor }">
+<button class="login-service-button" (click)="connectionService()" [ngStyle]="{ 'background-color': serviceColor }">
     <div class="login-service-container">
-        <img [src]="serviceIcon" class="logo-service" alt="serviceIcon">
-        <p> {{ serviceConnectionStatus ? 'Se déconnecter' : 'Se connecter' }}</p>
+        <img [src]="serviceIcon" class="logo-service" alt="{{serviceName}}">
+        <p> {{ isConnected ? 'Se déconnecter' : 'Se connecter' }}</p>
     </div>
 </button>

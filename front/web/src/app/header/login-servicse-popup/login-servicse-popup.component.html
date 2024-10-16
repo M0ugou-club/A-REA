@@ -26,7 +26,11 @@
             </div>
         </button>
         <div class="services">
-            <app-login-service></app-login-service>
+            <app-login-service
+                    (connectToService)="connectionSpotify()"
+                    [serviceName]="'Spotify'"
+                    [serviceColor]="'green'"
+                    [(ngModel)]="isConnected"></app-login-service>
         </div>
     </div>
 </div>
