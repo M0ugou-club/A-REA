@@ -1,5 +1,7 @@
+import { google } from 'googleapis';
+
 export const spotifyService = (token) => {
-    if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_REDIRECT_URI) {
+    if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_REDIRECT_URI || !process.env.SPOTIFY_CLIENT_SECRET) {
         return "";
     }
     const client_id = encodeURIComponent(process.env.SPOTIFY_CLIENT_ID);
@@ -10,4 +12,19 @@ export const spotifyService = (token) => {
     return authUrl;
 };
 
-export default { spotifyService };
+export const youtubeService = (token) => {
+    if (!process.env.YOUTUBE_CLIENT_ID || !process.env.YOUTUBE_REDIRECT_URI || !process.env.YOUTUBE_CLIENT_SECRET) {
+        return "";
+    }
+    const authClient = new google.auth.OAuth2(process.env.YOUTUBE_CLIENT_ID, process.env.YOUTUBE_CLIENT_SECRET, process.env.YOUTUBE_REDIRECT_URI);
+    const scopes = ['https://www.googleapis.com/auth/youtube.readonly'];
+    const authUrl = authClient.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes,
+        state: token,
+    });
+ 
+    return authUrl;
+}
+
+export default { spotifyService, youtubeService };

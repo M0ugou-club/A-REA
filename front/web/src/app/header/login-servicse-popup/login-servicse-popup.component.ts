@@ -17,6 +17,7 @@ export class LoginServicsePopupComponent {
   spotifyLogin: boolean = false;
   discordLogin: boolean = false;
   twitterLogin: boolean = false;
+  youtubeLogin: boolean = false;
 
   ngOnInit(): void {
     fetch('http://localhost:8000/users', {
@@ -81,6 +82,33 @@ export class LoginServicsePopupComponent {
 
   buttonTwitter(): void {
     //connect to twitter service api
+  }
+
+  buttonYoutube(): void {
+    if (this.youtubeLogin) {
+      this.youtubeLogin = false;
+      fetch('http://localhost:8000/tokens/platform/Youtube', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + localStorage.getItem('authToken')
+        },
+        body: JSON.stringify({
+            "platform": "Youtube"
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+            this.spotifyLogin = false;
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+    } else {
+          window.location.href = 'http://localhost:8000/oauth/Youtube?token=' + localStorage.getItem('authToken');
+    }
   }
 
   logoutButton(): void {

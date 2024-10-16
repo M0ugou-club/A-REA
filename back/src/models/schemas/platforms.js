@@ -1,3 +1,3 @@
-const platforms = ['Spotify', 'OpenMeteo']
+const platforms = ['Spotify', 'OpenMeteo', 'Youtube']
 
 export default platforms
