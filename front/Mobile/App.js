@@ -6,6 +6,7 @@ import Home from './src/Home/Home';
 import Area from './src/Area/AreaPage';
 import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
 import Register from './src/Register/RegisterPage';
+import ChooseAreaName from './src/Area/CreateArea/ChooseAreaName/ChooseAreaName';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -66,6 +67,11 @@ export default function App() {
         <Stack.Screen 
           name="CreateArea" 
           component={CreateAreaPage} 
+          options={{ headerShown: false, animationEnabled: false }}
+        />
+        <Stack.Screen 
+          name="ChooseAreaName" 
+          component={ChooseAreaName} 
           options={{ headerShown: false, animationEnabled: false }}
         />
       </Stack.Navigator>
