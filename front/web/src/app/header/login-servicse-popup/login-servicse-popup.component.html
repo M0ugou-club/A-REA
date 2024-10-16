@@ -1,9 +1,12 @@
 <div class="popup-container">
+
+
     <div class="user-info-container">
         <p class="text-username">{{ userName }}</p>
         <p class="text-email">{{ userEmail }}</p>
     </div>
-    <div class="separator"></div>
+
+
     <div class="button-utils-container">
         <button class="button-utils">
             <div class="button-utils-content-container">
@@ -25,12 +28,17 @@
                 <p class="text-button-style">Log out</p>
             </div>
         </button>
-        <div class="services">
+    </div>
+
+    <div class="services" >
+        <div *ngFor="let service of getServiceEntries(services)" class="service">
             <app-login-service
-                    (connectToService)="connectionSpotify()"
-                    [serviceName]="'Spotify'"
-                    [serviceColor]="'green'"
-                    [(ngModel)]="isConnected"></app-login-service>
+                    *ngIf="service[1].connexion"
+                    (connectToService)="chooseConnection(service[0])"
+                    [serviceName]="service[0]"
+                    [serviceColor]="service[1].color"
+                    [serviceIcon]="service[1].icon"
+                    [isConnected]="isConnected"></app-login-service>
         </div>
     </div>
 </div>

@@ -1,3 +1,8 @@
+type ConnectionFunction = {
+  key: string;
+  func: () => void;
+};
+
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "../../../../environment/environment";
@@ -13,9 +18,18 @@ export class LoginServicsePopupComponent implements OnInit {
   userName: string = "";
   userEmail: string = "";
   isConnected: boolean = false;
+  services: { [key: string]: any } = {};
+  connectionFunctions: ConnectionFunction[] = [
+    {
+      key: "Spotify",
+      func: this.connectionSpotify,
+    },
+  ];
 
   ngOnInit(): void {
     this.getUserInfo();
+    this.getServiceInfo();
+    this.getServiceState();
   }
 
   getUserInfo() {
@@ -35,6 +49,30 @@ export class LoginServicsePopupComponent implements OnInit {
         console.error("Error:", error);
       });
   }
+
+  getServiceInfo() {
+    fetch("http://localhost:8000/enums/platforms_icons", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.services = data;
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  getServiceEntries(services: { [key: string]: any }): [string, any][] {
+    return Object.entries(services);
+  }
+
+  getServiceState() {}
 
   connectionSpotify(): void {
     if (this.isConnected) {
@@ -66,6 +104,18 @@ export class LoginServicsePopupComponent implements OnInit {
       const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
       window.location.href = authUrl;
       this.isConnected = false;
+    }
+  }
+
+  chooseConnection(service: string) {
+    const connection = this.connectionFunctions.find(
+      (item) => item.key === service
+    );
+
+    if (connection) {
+      connection.func();
+    } else {
+      console.log("No connection function found");
     }
   }
 

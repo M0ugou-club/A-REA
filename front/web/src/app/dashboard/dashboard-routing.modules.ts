@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CallbackPageComponent } from "../callbackPage/callback.component";
 import { AddAreaComponent } from "../add-area/add-area.component";
 import { HomePageComponent } from "../home-page/home-page.component";
 import { AREAPageComponent } from "../a-rea-page/a-rea-page.component";
@@ -22,10 +21,6 @@ const routes: Routes = [
       {
         path: "add-a-rea",
         component: AddAreaComponent,
-      },
-      {
-        path: "callback",
-        component: CallbackPageComponent,
       },
     ],
   },
