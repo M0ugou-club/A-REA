@@ -43,9 +43,11 @@ export class LoginServicsePopupComponent {
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Success:', data);
         this.spotifyLogin = data.Spotify;
         this.discordLogin = data.Discord;
         this.twitterLogin = data.Twitter;
+        this.youtubeLogin = data.Youtube;
     })
   }
 
@@ -100,7 +102,7 @@ export class LoginServicsePopupComponent {
       .then(response => response.json())
       .then(data => {
           if (data.status === 'success') {
-            this.spotifyLogin = false;
+            this.youtubeLogin = false;
           }
       })
       .catch((error) => {

@@ -1,20 +1,22 @@
 import fetch from 'node-fetch';
+import { google } from 'googleapis';
+import Actions from '../../../models/Action/index.js';
 
-export const actionsTriggersYoutube = async (type, data) => {
+export const actionsTriggersYoutube = async (type, data, accessToken, areaId) => {
     if (type === 'on_new_video') {
-        if (await openMeteoActionsEvrestMelt() === true) {
+        if (await youtubeActionsNewVideo(data, accessToken, areaId) === true) {
             return true;
         }
         return false;
     }
     if (type === 'on_live') {
-        if (await openMeteoActionsEvrestAlmostMelting() === true) {
+        if (await youtubeActionsLive(data, accessToken, areaId) === true) {
             return true;
         }
         return false;
     }
     if (type === 'on_ten_millions') {
-        if (await openMeteoActionsEvrestAlmostMelting() === true) {
+        if (await youtubeActionsTenMillions(data, accessToken, areaId) === true) {
             return true;
         }
         return false;
@@ -22,51 +24,102 @@ export const actionsTriggersYoutube = async (type, data) => {
     return false;
 }
 
+const youtubeActionsNewVideo = async (data, accessToken, areaId) => {
+    const oauth2Client = new google.auth.OAuth2();
+    oauth2Client.setCredentials({ access_token: accessToken });
 
-const openMeteoActionsEvrestMelt = async () => {
+    const youtube = google.youtube({
+        version: 'v3',
+        auth: oauth2Client
+    });
+
     try {
-        const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=27.9881&longitude=86.9250&current_weather=true", {
-            method: 'GET',
+        const response = await youtube.search.list({
+            channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+            order: 'date',
+            part: "snippet",
+            type: 'video',
+            maxResults: 1
         });
-        if (response.ok) {
-            const result = await response.json();
-            const temperature = result.current_weather.temperature;
-            if (temperature > 0) {
-                console.log("Evrest is melting");
+
+        const video = response.data.items[0];
+        const title = video.snippet.title;
+        if (title) {
+            if (title != data || data === null) {
+                await Actions.findOneAndUpdate(
+                    { _id: areaId },
+                    { data: title }
+                )
                 return true;
             }
-            return false;
-        } else {
-            console.log("Error :", response.status + " " + response.statusText);
         }
+        return false;
     } catch (error) {
-        console.log(error.status);
+        console.error('Error:', error);
         return false;
     }
-    return false;
 }
 
-const openMeteoActionsEvrestAlmostMelting = async () => {
+const youtubeActionsLive = async (data, accessToken, areaId) => {
+    const oauth2Client = new google.auth.OAuth2();
+    oauth2Client.setCredentials({ access_token: accessToken });
+
+    const youtube = google.youtube({
+        version: 'v3',
+        auth: oauth2Client
+    });
     try {
-        const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=27.9881&longitude=86.9250&current_weather=true", {
-            method: 'GET',
+        const response = await youtube.search.list({
+            channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+            eventType: 'live',
+            part: "snippet",
+            type: 'video',
+            maxResults: 1
         });
-        if (response.ok) {
-            const result = await response.json();
-            const temperature = result.current_weather.temperature;
-            if (temperature > -10) {
-                console.log("Evrest is almost melting");
+        const live = response.data.items[0];
+        if (live) {
+            if (live != data || data === null) {
+                await Actions.findOneAndUpdate(
+                    { _id: areaId },
+                    { data: title }
+                )
                 return true;
             }
-            return false;
-        } else {
-            console.log("Error :", response.status + " " + response.statusText);
         }
+        return false;
     } catch (error) {
-        console.log(error.status);
+        console.error('Error:', error);
         return false;
     }
-    return false;
+}
+
+const youtubeActionsTenMillions = async (data, accessToken, areaId) => {
+    console.log("ten millions-------------------");
+    const oauth2Client = new google.auth.OAuth2();
+    oauth2Client.setCredentials({ access_token: accessToken });
+    const youtube = google.youtube({
+        version: 'v3',
+        auth: oauth2Client
+    });
+    
+    console.log("ten millions-------------------");
+    try {
+        const response = await youtube.channels.list({
+            part: 'statistics',
+            id: process.env.YOUTUBE_INOX_CHANNEL_ID
+        });
+
+        const channel = response.data.items[0];
+        const subscriberCount = channel.statistics.subscriberCount;
+        console.log("sub d'inox", subscriberCount);
+        if (subscriberCount >= 10000000) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
 }
 
 export default { actionsTriggersYoutube };

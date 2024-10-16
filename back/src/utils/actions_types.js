@@ -1,5 +1,3 @@
-import { youtube } from "googleapis/build/src/apis/youtube"
-
 const actions = {
   Spotify: {
     "on_new_track_spotify": "On new track",
@@ -10,7 +8,7 @@ const actions = {
     "on_evrest_melt": "When evrest temperature is higher than 0°C",
     "on_evrest_almost_melting": "When evrest temperature is higher than -10°C"
   },
-  youtube: {
+  Youtube: {
     "on_new_video": "On new video",
     "on_live": "On inoxtag's live",
     "on_ten_millions": "On inox's channel reach 10M subscribers"
