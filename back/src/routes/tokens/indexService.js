@@ -47,7 +47,6 @@ export const getAccesTokensServiceByUserId = async (platform, userId) => {
         }
         return userToken.accesstoken;
     } catch (error) {
-        console.log("Error fetching user by ID", error);
         return null;
     }
 }
