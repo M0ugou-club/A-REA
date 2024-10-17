@@ -72,4 +72,45 @@ export const youtubeCallbackService = async (req, res) => {
     }
 };
 
+export const instagramCallbackService = async (req, res) => {
+    const code = req.query.code;
+    const state = req.query.state;
+
+    if (!code) {
+        return res.status(400).send({ message: "Authorization code not provided" });
+    }
+
+    const dataSent = querystring.stringify({
+        client_id: process.env.INSTAGRAM_CLIENT_ID,
+        client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+        grant_type: 'authorization_code',
+        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI,
+        code: code
+    });
+
+    try {
+        const response = await axios.post('https://api.instagram.com/oauth/access_token', dataSent, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+
+        const { access_token} = response.data;
+        const longLivedTokenResponse = await axios.get(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${process.env.INSTAGRAM_CLIENT_SECRET}&access_token=${access_token}`);
+        const longLivedAccessToken = longLivedTokenResponse.data.access_token;
+        const expires_in = longLivedTokenResponse.data.expires_in;
+        const refresh_token = "";
+
+        const fakeDate = new Date('2030-01-01T00:00:00Z');
+        postToken(state, "Instagram", access_token, access_token, fakeDate);
+
+        return res.status(200).send({ access_token: longLivedAccessToken, user_id: user_id });
+    } catch (error) {
+        console.error('Error fetching access token:', error.response ? error.response.data : error.message);
+        if (!res.headersSent) {
+            return res.status(500).send({ message: "Failed to retrieve access token" });
+        }
+    }
+}
+
 export default { spotifyCallbackService };
