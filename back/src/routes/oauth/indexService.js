@@ -27,4 +27,17 @@ export const youtubeService = (token) => {
     return authUrl;
 }
 
-export default { spotifyService, youtubeService };
+export const instagramService = (token) => {
+    if (!process.env.INSTAGRAM_CLIENT_ID || !process.env.INSTAGRAM_REDIRECT_URI || !process.env.INSTAGRAM_CLIENT_SECRET) {
+        return "";
+    }
+
+    const client_id = encodeURIComponent(process.env.INSTAGRAM_CLIENT_ID);
+    const redirect_uri = encodeURIComponent(process.env.INSTAGRAM_REDIRECT_URI);
+    const scope = encodeURIComponent('user_profile,user_media');
+    const state = encodeURIComponent(token);
+    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
+    return authUrl;
+}
+
+export default { spotifyService, youtubeService, instagramService };
