@@ -5,6 +5,7 @@ import { HeaderComponent } from "./header/header.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { AddAreaComponent } from "./add-area/add-area.component";
 import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
+import { RegisterPageComponent } from "./registerPage/registerPage.component"
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginPageComponent,
+  },
+  {
+    path: "register",
+    component: RegisterPageComponent,
   },
   {
     path: "header",
