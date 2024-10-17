@@ -12,6 +12,11 @@ const actions = {
     "on_new_video": "On new video",
     "on_live": "On inoxtag's live",
     "on_ten_millions": "On inox's channel reach 10M subscribers"
+  },
+  Instagram: {
+    "on_new_post": "On new post",
+    "on_new_story": "On new story",
+    "on_six_millions": "On inox's account reach 6M followers"
   }
 }
 

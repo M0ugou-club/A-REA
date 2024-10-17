@@ -55,7 +55,6 @@ const youtubeActionsNewVideo = async (data, accessToken, areaId) => {
         }
         return false;
     } catch (error) {
-        console.error('Error:', error);
         return false;
     }
 }
@@ -88,7 +87,6 @@ const youtubeActionsLive = async (data, accessToken, areaId) => {
         }
         return false;
     } catch (error) {
-        console.error('Error:', error);
         return false;
     }
 }
@@ -113,7 +111,6 @@ const youtubeActionsTenMillions = async (data, accessToken, areaId) => {
         }
         return false;
     } catch (error) {
-        console.error('Error:', error);
         return false;
     }
 }
