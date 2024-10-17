@@ -61,8 +61,6 @@ export const isUserAuth = () => {
       return res.status(401).json({ message: "Token manquant" });
     }
 
-    console.log(token);
-
     if (!token) {
       return res.status(401).json({ message: "Token manquant" });
     }

@@ -7,6 +7,16 @@ const actions = {
   OpenMeteo: {
     "on_evrest_melt": "When evrest temperature is higher than 0°C",
     "on_evrest_almost_melting": "When evrest temperature is higher than -10°C"
+  },
+  Youtube: {
+    "on_new_video": "On new video",
+    "on_live": "On inoxtag's live",
+    "on_ten_millions": "On inox's channel reach 10M subscribers"
+  },
+  Instagram: {
+    "on_new_post": "On new post",
+    "on_new_story": "On new story",
+    "on_six_millions": "On inox's account reach 6M followers"
   }
 }
 

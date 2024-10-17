@@ -99,6 +99,9 @@ const getTokenState = async (req, res, next) => {
                 return res.status(405).json({ message: 'User not found' });
             }
             platforms.forEach((platform) => {
+                if (platform === 'OpenMeteo') {
+                    return;
+                }
                 const platformToken = user.tokens.find((token) => token.platform === platform);
                 response[platform] = !!platformToken;
             });

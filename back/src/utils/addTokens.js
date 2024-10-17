@@ -7,6 +7,8 @@ const checkTokenExistence = (user, platform) => {
 }
 
 export const postToken = async (token, platform, access_token, refresh_token, validity) => {
+  console.log("platform", platform);
+  console.log("access_token", token);
   const values = {
       platform: platform,
       accesstoken: access_token,
@@ -16,6 +18,7 @@ export const postToken = async (token, platform, access_token, refresh_token, va
   try {
       jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
           if (err) {
+              console.log("errrrrror");
               return 401;
           }
           const { id } = decoded;
@@ -23,11 +26,14 @@ export const postToken = async (token, platform, access_token, refresh_token, va
               _id: id,
           });
           if (!user) {
+              console.log("no user");
               return 405;
           }
           if (checkTokenExistence(user, platform)) {
+              console.log("token already exists");
               return 409;
           } else {
+            console.log("token created");
               const Newtoken = new Token(values);
               await Newtoken.save();
               user.tokens.push(Newtoken);

@@ -17,9 +17,11 @@ export class LoginServicsePopupComponent {
   spotifyLogin: boolean = false;
   discordLogin: boolean = false;
   twitterLogin: boolean = false;
+  youtubeLogin: boolean = false;
+  instagramLogin: boolean = false;
 
   ngOnInit(): void {
-    fetch('http://localhost:8000/users', {
+    fetch('https://localhost:8000/users', {
         method: 'GET',
         headers: {
             'authorization': 'Bearer ' + localStorage.getItem('authToken')
@@ -34,7 +36,7 @@ export class LoginServicsePopupComponent {
     .catch((error) => {
         console.error('Error:', error);
     });
-    fetch('http://localhost:8000/tokens/state', {
+    fetch('https://localhost:8000/tokens/state', {
         method: 'GET',
         headers: {
             'authorization': 'Bearer ' + localStorage.getItem('authToken')
@@ -42,16 +44,19 @@ export class LoginServicsePopupComponent {
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Success:', data);
         this.spotifyLogin = data.Spotify;
         this.discordLogin = data.Discord;
         this.twitterLogin = data.Twitter;
+        this.youtubeLogin = data.Youtube;
+        this.instagramLogin = data.Instagram;
     })
   }
 
   buttonSpotify(): void {
     if (this.spotifyLogin) {
       this.spotifyLogin = false;
-      fetch('http://localhost:8000/tokens/platform/Spotify', {
+      fetch('https://localhost:8000/tokens/platform/Spotify', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -71,7 +76,7 @@ export class LoginServicsePopupComponent {
           console.error('Error:', error);
       });
     } else {
-        window.location.href = 'http://localhost:8000/oauth/Spotify?token=' + localStorage.getItem('authToken');
+        window.location.href = 'https://localhost:8000/oauth/Spotify?token=' + localStorage.getItem('authToken');
     }
   }
 
@@ -81,6 +86,60 @@ export class LoginServicsePopupComponent {
 
   buttonTwitter(): void {
     //connect to twitter service api
+  }
+
+  buttonYoutube(): void {
+    if (this.youtubeLogin) {
+      this.youtubeLogin = false;
+      fetch('https://localhost:8000/tokens/platform/Youtube', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + localStorage.getItem('authToken')
+        },
+        body: JSON.stringify({
+            "platform": "Youtube"
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+            this.youtubeLogin = false;
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+    } else {
+          window.location.href = 'https://localhost:8000/oauth/Youtube?token=' + localStorage.getItem('authToken');
+    }
+  }
+
+  buttonInstagram(): void {
+    if (this.instagramLogin) {
+      this.instagramLogin = false;
+      fetch('https://localhost:8000/tokens/platform/Instagram', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + localStorage.getItem('authToken')
+        },
+        body: JSON.stringify({
+            "platform": "Instagram"
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+            this.instagramLogin = false;
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+    } else {
+          window.location.href = 'https://localhost:8000/oauth/Instagram?token=' + localStorage.getItem('authToken');
+    }
   }
 
   logoutButton(): void {
