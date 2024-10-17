@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-loginPage",
@@ -8,7 +9,12 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 
 export class LoginPageComponent implements OnInit, AfterViewInit {
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  loginObj: any = {
+    email: "",
+    password: "",
+  };
 
   ngOnInit() {
     console.log("Before");
@@ -16,5 +22,60 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log("After");
+  }
+  
+  goToLogin(): void {
+    this.router.navigate(['/register']);
+
+  }
+
+  onLogin() {
+    console.log("cccccczaezazzzzzzazeazeazeazeazeazeaze")
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailRegex.test(this.loginObj.email)) {
+      alert("Veuillez entrer une adresse email valide.");
+      return;
+    }
+
+    if (!this.loginObj.email || !this.loginObj.password) {
+      alert(
+        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
+      );
+      return;
+    }
+
+    console.log("LoginObj:", this.loginObj);
+
+    fetch("https://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.loginObj),
+    })
+      .then((response) => {
+        console.log("Response:", response);
+        if (response.status === 404) {
+          alert("Username invalid");
+          return null;
+        } else if (response.status === 401) {
+          alert("Password invalid");
+          return null;
+        } else if (response.status === 200) {
+          return response.json().then((data) => {
+            console.log("Login réussie:");
+
+            const token = data.token;
+
+            localStorage.setItem("authToken", token);
+            this.router.navigate(["/"]);
+          });
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.error("Erreur de réseau:", error);
+      });
   }
 }
