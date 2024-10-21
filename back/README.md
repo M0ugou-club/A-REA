@@ -36,7 +36,7 @@ export default Model;
 
 to access the documentation swagger
 
-- Back-End : Accessible at http://localhost:8000/api-docs
+- Back-End : Accessible at https://localhost:8000/api-docs
 
 ##### Route
 

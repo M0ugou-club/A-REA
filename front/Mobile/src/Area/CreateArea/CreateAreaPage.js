@@ -11,6 +11,18 @@ export default function CreateAreaPage() {
     const [selectedReaction, setSelectedReaction] = useState('');
     const [actionList, setActionList] = useState({});
     const [reactionList, setReactionList] = useState([]);
+    const [area, setArea] = useState({
+        area_title: "",
+        area_description: "",
+        action_name: "",
+        action_description: "",
+        action_type: "",
+        action_platform: "",
+        reaction_name: "",
+        reaction_description: "",
+        reaction_type: "",
+        reaction_platform: "",
+    });
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -22,12 +34,11 @@ export default function CreateAreaPage() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': "Bearer " + token,
                     },
                 });
                 if (response.status === 200) {
                     const data = await response.json();
-                    console.log(data);
                     setActionList(data);
                 } else {
                     console.error('Error fetching actions:', response.status);
@@ -43,31 +54,48 @@ export default function CreateAreaPage() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': "Bearer " + token,
                     },
                 });
                 if (response.status === 200) {
                     const data = await response.json();
-                    console.log(data);
                     setReactionList(data);
                 } else {
-                    console.error('Error fetching actions:', response.status);
+                    console.error('Error fetching reactions:', response.status);
                 }
             } catch (error) {
-                console.error('Error fetching actions:', error);
+                console.error('Error fetching reactions:', error);
             }
         }
         fetchActions();
         fetchReactions();
     }, [navigation]);
 
-    const handleActionPress = (action) => {
+    const handleActionPress = (action, platform, actionKey) => {
         setSelectedAction(action);
+        setArea(prevArea => ({
+            ...prevArea,
+            action_name: action,
+            action_type: actionKey,
+            action_platform: platform,
+        }));
+        console.log(area);
     };
 
-    const handleReactionPress = (reaction) => {
+    const handleReactionPress = (reaction, platform, reactionKey) => {
         setSelectedReaction(reaction);
+        setArea(prevArea => ({
+            ...prevArea,
+            reaction_name: reaction,
+            reaction_type: reactionKey,
+            reaction_platform: platform,
+        }));
+        console.log(area);
     };
+
+    function handleCreateArea() {
+        navigation.navigate('ChooseAreaName', { area });
+    }
 
     return (
         <View style={styles.globalContainer}>
@@ -76,7 +104,7 @@ export default function CreateAreaPage() {
                     <ScrollView contentContainerStyle={styles.actionContainer} horizontal={true} showsHorizontalScrollIndicator={false}>
                         {Object.keys(actionList).map((platform) => (
                             Object.keys(actionList[platform]).map((actionKey, index) => (
-                                <TouchableOpacity key={`${platform}-${index}`} style={styles.actionButton} onPress={() => handleActionPress(actionList[platform][actionKey])}>
+                                <TouchableOpacity key={`${platform}-${index}`} style={styles.actionButton} onPress={() => handleActionPress(actionList[platform][actionKey], platform, actionKey)}>
                                     <Text style={styles.textButton}>{actionList[platform][actionKey]}</Text>
                                 </TouchableOpacity>
                             ))
@@ -97,7 +125,7 @@ export default function CreateAreaPage() {
                             </TouchableOpacity>
                         )}
                     </View>
-                    <TouchableOpacity style={styles.createArea}>
+                    <TouchableOpacity style={styles.createArea} onPress={handleCreateArea}>
                         <Text style={styles.textButton}>Create A-Rea</Text>
                     </TouchableOpacity>
                 </View>
@@ -105,7 +133,7 @@ export default function CreateAreaPage() {
                     <ScrollView contentContainerStyle={styles.reactionContainer} horizontal={true} showsHorizontalScrollIndicator={false}>
                         {Object.keys(reactionList).map((platform) => (
                             Object.keys(reactionList[platform]).map((reactionKey, index) => (
-                                <TouchableOpacity key={`${platform}-${index}`} style={styles.actionButton} onPress={() => handleReactionPress(reactionList[platform][reactionKey])}>
+                                <TouchableOpacity key={`${platform}-${index}`} style={styles.actionButton} onPress={() => handleReactionPress(reactionList[platform][reactionKey], platform, reactionKey)}>
                                     <Text style={styles.textButton}>{reactionList[platform][reactionKey]}</Text>
                                 </TouchableOpacity>
                             ))

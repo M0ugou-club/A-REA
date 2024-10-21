@@ -21,7 +21,7 @@ export default function Home() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': "Bearer " + token,
                     },
                 });
                 if (response.status === 200) {

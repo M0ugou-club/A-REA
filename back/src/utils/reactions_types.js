@@ -4,6 +4,11 @@ const reactions = {
     "Pause": "Pause music",
     "AddQueue": "Add Mili mili to queue",
     "Like": "Like Mili Mili music"
+  },
+  Youtube: {
+    "Like": "Like video",
+    "Dislike": "Dislike video",
+    "AddWL": "Add video to playlist"
   }
 }
 
