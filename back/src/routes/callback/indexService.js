@@ -113,4 +113,119 @@ export const instagramCallbackService = async (req, res) => {
     }
 }
 
+export const xCallbackService = async (req, res) => {
+    const code = req.query.code;
+    const state = req.query.state;
+
+    if (!code) {
+        return res.status(400).send({ message: "Authorization code not provided" });
+    }
+
+    const dataSent = querystring.stringify({
+        code: code,
+        grant_type: 'authorization_code',
+        client_id: process.env.X_CLIENT_ID,
+        redirect_uri: process.env.X_REDIRECT_URI,
+        code_verifier: 'challenge',
+    });
+
+    try {
+        const response = await axios.post('https://api.x.com/2/oauth2/token', dataSent, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${Buffer.from(`${process.env.X_CLIENT_ID}:${process.env.X_CLIENT_SECRET}`).toString('base64')}`
+            },
+        });
+
+        const { access_token } = response.data;
+        const fakeDate = new Date('2030-01-01T00:00:00Z');
+        postToken(state, "X", access_token, access_token, fakeDate);
+
+        return res.status(200).send({ access_token: access_token, user_id: user_id });
+    } catch (error) {
+        console.error('Error fetching access token:', error.response ? error.response.data : error.message);
+        if (!res.headersSent) {
+            return res.status(500).send({ message: "Failed to retrieve access token" });
+        }
+    }
+}
+
+export const redditCallbackService = async (req, res) => {
+    const code = req.query.code;
+    const state = req.query.state;
+
+    if (!code) {
+        return res.status(400).send({ message: "Authorization code not provided" });
+    }
+
+    const dataSent = querystring.stringify({
+        code: code,
+        grant_type: 'authorization_code',
+        redirect_uri: process.env.REDDIT_REDIRECT_URI,
+    });
+
+    try {
+        const response = await axios.post('https://www.reddit.com/api/v1/access_token', dataSent, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${Buffer.from(`${process.env.REDDIT_CLIENT_ID}:${process.env.REDDIT_CLIENT_SECRET}`).toString('base64')}`
+            },
+        });
+
+        const { access_token, refresh_token } = response.data;
+        const fakeDate = new Date('2030-01-01T00:00:00Z');
+        postToken(state, "Reddit", access_token, refresh_token, fakeDate);
+
+        return res.status(200).send({ access_token: access_token, user_id: user_id });
+    } catch (error) {
+        console.error('Error fetching access token:', error.response ? error.response.data : error.message);
+        if (!res.headersSent) {
+            return res.status(500).send({ message: "Failed to retrieve access token" });
+        }
+    }
+}
+
+export const tiktokCallbackService = async (req, res) => {
+    const code = req.query.code;
+    const state = req.query.state;
+
+    console.log("----------------")
+    if (!code) {
+        return res.status(400).send({ message: "Authorization code not provided" });
+    }
+
+    console.log("client id", process.env.TIKTOK_CLIENT_ID);
+    console.log("client secret", process.env.TIKTOK_CLIENT_SECRET);
+    const dataSent = querystring.stringify({
+        code: code,
+        grant_type: 'authorization_code',
+        client_key: process.env.TIKTOK_CLIENT_ID,
+        redirect_uri: process.env.TIKTOK_REDIRECT_URI,
+        code_verifier: 'challenge',
+    });
+
+    try {
+        const response = await axios.post('https://open.tiktokapis.com/v2/oauth/token', dataSent, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${Buffer.from(`${process.env.TIKTOK_CLIENT_ID}:${process.env.TIKTOK_CLIENT_SECRET}`).toString('base64')}`
+            },
+        });
+
+        const { access_token, refresh_token } = response.data;
+        const fakeDate = new Date('2030-01-01T00:00:00Z');
+        console.log("access_token tiktok ", access_token);
+        console.log("refresh_token tiktok ", refresh_token);
+
+        postToken(state, "TikTok", access_token, refresh_token, fakeDate);
+
+        return res.status(200).send({ access_token: access_token, user_id: user_id });
+    } catch (error) {
+        console.error('Error fetching access token:', error.response ? error.response.data : error.message);
+        if (!res.headersSent) {
+            return res.status(500).send({ message: "Failed to retrieve access token" });
+        }
+    }
+}
+
 export default { spotifyCallbackService };
