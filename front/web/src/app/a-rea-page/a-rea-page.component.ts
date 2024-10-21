@@ -17,6 +17,8 @@ export class AREAPageComponent implements OnInit {
     actionText: string;
     reactionText: string;
     title: string;
+    startColor: string;
+    endColor: string;
   }[] = [];
 
   plaformsIcon: any = [];
@@ -48,12 +50,15 @@ export class AREAPageComponent implements OnInit {
       this.router.navigate(["/login"]);
     }
 
-    fetch(this.apiUrl, {
-      method: "GET",
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("authToken"),
-      },
-    })
+    this.loadPlatformsIcons()
+      .then(() => {
+        return fetch(this.apiUrl, {
+          method: "GET",
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        });
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
@@ -63,24 +68,25 @@ export class AREAPageComponent implements OnInit {
             area.reactions && area.reactions.length > 0
               ? area.reactions[0].platform
               : "No reaction";
+
           this.areas.push({
             actionLogo: this.chooseIcon(area.action.platform),
-            reactionLogo: this.chooseIcon(area.reactions.platform),
+            reactionLogo: this.chooseIcon(reactionPlatform),
             actionText: area.action.platform,
             reactionText: reactionPlatform,
             title: area.title,
+            startColor: this.chooseColor(area.action.platform),
+            endColor: this.chooseColor(reactionPlatform),
           });
         });
       })
       .catch((error) => {
         console.error("Error fetching areas:", error);
       });
-
-    this.loadPlatformsIcons();
   }
 
-  loadPlatformsIcons(): void {
-    fetch("http://localhost:8000/enums/platforms_icons", {
+  loadPlatformsIcons(): Promise<void> {
+    return fetch("http://localhost:8000/enums/platforms_icons", {
       method: "GET",
     })
       .then((response) => {
@@ -94,19 +100,24 @@ export class AREAPageComponent implements OnInit {
         this.plaformsIcon = data;
       })
       .catch((error) => {
-        console.error("Erreur de requête:", error);
+        console.error("Error fetching platform icons:", error);
       });
   }
 
   chooseIcon(choice: string) {
-    for (let key in this.plaformsIcon) {
-      console.log("KEY :" +  key);
-      console.log("CHOICE :" + choice);
-      if (key == choice) {
-        console.log("RETURN" + this.plaformsIcon[key]);
-        return this.plaformsIcon[key].icon ;
-      }
+    if (!this.plaformsIcon || !choice) return '';
+    if (this.plaformsIcon[choice]) {
+      console.log(this.plaformsIcon[choice].icon);
+      return this.plaformsIcon[choice].icon;
     }
-    return "";
+    return '';
+  }
+
+  chooseColor(choice: string) {
+    if (!this.plaformsIcon || !choice) return '';
+    if (this.plaformsIcon[choice]) {
+      return this.plaformsIcon[choice].color;
+    }
+    return '#429660';
   }
 }

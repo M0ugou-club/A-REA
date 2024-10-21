@@ -1,32 +1,34 @@
 .a-rea-component {
-    background-color: rgba(0, 0, 255, 0.323);
+    background: linear-gradient(to right, var(--startColor), var(--endColor));
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 2vw;
-}
-
-.a-rea-bar {
+    width: 100%;
+  }
+  
+  .a-rea-bar {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-}
-
-.left-section,
-.right-section {
+  }
+  
+  .left-section,
+  .right-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-}
-
-.logo {
+  }
+  
+  .logo {
     width: 100px;
     height: 100px;
-}
-
-.arrow {
+  }
+  
+  .arrow {
     font-size: 2.5rem;
     color: black;
-}
+  }
+  

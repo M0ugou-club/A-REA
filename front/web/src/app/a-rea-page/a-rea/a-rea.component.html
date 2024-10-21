@@ -1,20 +1,21 @@
-<div class="a-rea-component">
+<div class="a-rea-component" [ngStyle]="{'--startColor': startColor, '--endColor': endColor}">
     <div>
-        <h2>{{ title }}</h2>
+      <h2>{{ title }}</h2>
     </div>
     <div class="a-rea-bar">
-        <div class="left-section">
-            <img [src]="actionLogo" alt="Spotify Logo" class="logo">
-            <p>{{ actionText }}</p>
-        </div>
-
-        <div>
-            <span class="arrow">→</span>
-        </div>
-
-        <div class="right-section">
-            <img [src]="reactionLogo" alt="Discord Logo" class="logo">
-            <p>{{ reactionText }}</p>
-        </div>
+      <div class="left-section">
+        <img [src]="actionLogo" alt="Spotify Logo" class="logo">
+        <p>{{ actionText }}</p>
+      </div>
+  
+      <div>
+        <span class="arrow">→</span>
+      </div>
+  
+      <div class="right-section">
+        <img [src]="reactionLogo" alt="Discord Logo" class="logo">
+        <p>{{ reactionText }}</p>
+      </div>
     </div>
-</div>
+  </div>
+  

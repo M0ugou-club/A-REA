@@ -11,4 +11,6 @@ export class AReaComponent {
   @Input() actionText: string = "";
   @Input() reactionText: string = "";
   @Input() title: string = "";
+  @Input() startColor: string = "";
+  @Input() endColor: string = "";
 }
