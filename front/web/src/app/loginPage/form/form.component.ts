@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
       })
         .then((response) => {
           if (response.status === 200) {
-            this.router.navigate(["/"]);
+            this.router.navigate(["/dashboard/"]);
           }
         })
         .catch((error) => {
@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
       !this.RegisterObj.password
     ) {
       alert(
-        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
+        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe."
       );
       return;
     }
@@ -98,7 +98,7 @@ export class FormComponent implements OnInit {
 
     if (!this.loginObj.email || !this.loginObj.password) {
       alert(
-        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
+        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe."
       );
       return;
     }
@@ -126,7 +126,7 @@ export class FormComponent implements OnInit {
             const token = data.token;
 
             localStorage.setItem("authToken", token);
-            this.router.navigate(["/"]);
+            this.router.navigate(["/dashboard/"]);
           });
         }
         return null;

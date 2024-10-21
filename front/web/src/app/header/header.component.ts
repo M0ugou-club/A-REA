@@ -17,10 +17,10 @@ export class HeaderComponent {
   }
 
   handleHomeButtonClick() {
-    this.router.navigate(["/home"]);
+    this.router.navigate(["dashboard/"]);
   }
 
   handleAreaButtonClick() {
-    this.router.navigate(["/a-rea"]);
+    this.router.navigate(["dashboard/a-rea"]);
   }
 }
