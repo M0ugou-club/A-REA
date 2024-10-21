@@ -1,0 +1,38 @@
+<div class="login-background">
+    <div class="form-container">
+        <div class="form">
+            <header class="login-header">
+                <div class="title-container">
+                    <h1 class="bienvenue-small-title">Bienvenue !</h1>
+                    <h1 class="login-title">S'identifier</h1>
+                </div>
+                <div class="switch-container">
+                    <h1 class="switch-title">Vous avez un compte ?</h1>
+                    <a class="switch-button" (click)="goToRegister()">Se connecter</a>
+                </div>
+            </header>
+            <form class="login-form" (ngSubmit)="onRegister()">
+                <div class="form-group" style="margin-top: 20%;">
+                    <label for="email" class="form-label">Rentrez votre adresse email juste ici</label>
+                    <input type="text" id="email" class="form-input" placeholder="Adresse email" pInputText [(ngModel)]="RegisterObj.email" name="email" />
+                </div>
+                <div class="form-group-container">
+                    <div class="form-group-name">
+                        <label for="username" class="form-label">Prenom</label>
+                        <input type="text" id="username" class="form-small-input" placeholder="Prenom" pInputText [(ngModel)]="RegisterObj.username" name="username" />
+                    </div>
+                    <div class="form-group-name">
+                        <label for="pseudo" class="form-label">Pseudo</label>
+                        <input type="text" id="pseudo" class="form-small-input" placeholder="Pseudo" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Rentrez votre mot de passe</label>
+                    <input type="password" id="password" class="form-input" placeholder="Mot de passe" pInputText [(ngModel)]="RegisterObj.password" name="password" />
+                    <a href="#" class="forgot-password">Mot de passe oublié</a>
+                </div>
+                <button type="submit" class="submit-btn">s’identifier</button>
+            </form>
+        </div>
+    </div>
+</div>

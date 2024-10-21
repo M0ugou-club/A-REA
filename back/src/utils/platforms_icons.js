@@ -4,8 +4,8 @@ const platforms_icons = {
     "color": "#429660",
     "connexion": true
   },
-  "Discord": {
-    "icon": "https://cdn.worldvectorlogo.com/logos/discord-6.svg",
+  "TikTok": {
+    "icon": "https://static.vecteezy.com/system/resources/previews/023/986/939/non_2x/tiktok-logo-tiktok-logo-transparent-tiktok-icon-transparent-free-free-png.png",
     "color": "#5064AC",
     "connexion": true
   },
@@ -14,9 +14,9 @@ const platforms_icons = {
     "color": "#D48207",
     "connexion": false
   },
-  "X-Twitter": {
+  "X": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/1/19/X_logo_twitter_new_brand_icon.svg",
-    "color": "#1DA1F2",
+    "color": "#1DA1F2", 
     "connexion": true
   },
   "Reddit": {
