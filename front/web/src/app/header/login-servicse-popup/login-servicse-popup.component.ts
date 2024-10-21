@@ -41,7 +41,7 @@ export class LoginServicsePopupComponent implements OnInit {
       func: this.connectionReddit,
     },
     {
-      key: "Tiktok",
+      key: "TikTok",
       func: this.connectionTiktok,
     },
   ];
@@ -232,7 +232,7 @@ export class LoginServicsePopupComponent implements OnInit {
   connectionTiktok(): void {
     
     if (this.isConnected) {
-      fetch('https://localhost:8000/tokens/platform/X', {
+      fetch('https://localhost:8000/tokens/platform/TikTok', {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
@@ -252,7 +252,8 @@ export class LoginServicsePopupComponent implements OnInit {
           console.error("Error:", error);
         });
     } else {
-      window.location.href = 'https://localhost:8000/oauth/Tiktok?token=' + localStorage.getItem('authToken');
+      console.log("test iktok");
+      window.location.href = 'https://localhost:8000/oauth/TikTok?token=' + localStorage.getItem('authToken');
     }
   } 
 
