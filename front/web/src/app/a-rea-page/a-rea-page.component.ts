@@ -22,7 +22,7 @@ export class AREAPageComponent implements OnInit {
   plaformsIcon: any = [];
 
   addButton() {
-    this.router.navigateByUrl("add-a-rea");
+    this.router.navigate(["/dashboard/add-a-rea"]);
   }
 
   ngOnInit(): void {

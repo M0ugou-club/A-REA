@@ -69,7 +69,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
             const token = data.token;
 
             localStorage.setItem("authToken", token);
-            this.router.navigate(["/"]);
+            this.router.navigate(["/dashboard"]);
           });
         }
         return null;

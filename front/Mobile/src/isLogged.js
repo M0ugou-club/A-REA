@@ -5,7 +5,7 @@ export default async function isLogged(navigation) {
     fetch("http://212.195.222.157:8000/isLogged", {
         'method': 'GET',
         headers: {
-            "Authorization": token,
+            "Authorization": "Bearer " + token,
         },
     })
     .then(response => {

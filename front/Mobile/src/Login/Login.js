@@ -5,9 +5,7 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
-
   const navigation = useNavigation();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,7 +18,7 @@ export default function Login() {
         }
         const response = await fetch("http://212.195.222.157:8000/isLogged", {
           headers: {
-            "Authorization": token,
+            "Authorization": "Bearer" + token,
           },
         });
 
@@ -34,7 +32,6 @@ export default function Login() {
 
     checkLoginStatus();
   }, [navigation]);
-
 
   async function onLogin() {
     try {
@@ -50,7 +47,7 @@ export default function Login() {
       });
       if (response.status === 200) {
         const data = await response.json();
-        await AsyncStorage.setItem('accessToken', "Bearer " + data.token);
+        await AsyncStorage.setItem('accessToken', data.token);
         navigation.navigate('Home');
       } else {
         alert('Login failed');
