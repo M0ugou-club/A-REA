@@ -16,7 +16,7 @@ const platforms_icons = {
   },
   "X-Twitter": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/1/19/X_logo_twitter_new_brand_icon.svg",
-    "color": "#1DA1F2",
+    "color": "#1DA1F2", 
     "connexion": true
   },
   "Reddit": {

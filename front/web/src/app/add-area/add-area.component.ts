@@ -34,7 +34,7 @@ export class AddAreaComponent implements OnInit {
     console.log(localData);
 
     if (localData != null) {
-      fetch("http://localhost:8000/isLogged", {
+      fetch("https://localhost:8000/isLogged", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export class AddAreaComponent implements OnInit {
   }
 
   loadActions(): void {
-    fetch("http://localhost:8000/enums/actions", {
+    fetch("https://localhost:8000/enums/actions", {
       method: "GET",
     })
       .then((response) => {
@@ -77,7 +77,7 @@ export class AddAreaComponent implements OnInit {
   }
 
   loadReactions(): void {
-    fetch("http://localhost:8000/enums/reactions", {
+    fetch("https://localhost:8000/enums/reactions", {
       method: "GET",
     })
       .then((response) => {
@@ -96,7 +96,7 @@ export class AddAreaComponent implements OnInit {
   }
 
   loadPlatformsIcons(): void {
-    fetch("http://localhost:8000/enums/platforms_icons", {
+    fetch("https://localhost:8000/enums/platforms_icons", {
       method: "GET",
     })
       .then((response) => {
@@ -155,7 +155,7 @@ export class AddAreaComponent implements OnInit {
   approveSelection() {
     const localData = "Bearer " + localStorage.getItem("authToken");
 
-    fetch("http://localhost:8000/areas", {
+    fetch("https://localhost:8000/areas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
