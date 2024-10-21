@@ -37,8 +37,6 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN node -v
 
-RUN npm i
-
-#RUN npx expo prebuild
+RUN npm ci
 
 RUN npx eas build -p android  --profile production --local --non-interactive
