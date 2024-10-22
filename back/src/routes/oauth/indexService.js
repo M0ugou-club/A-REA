@@ -18,13 +18,13 @@ export const youtubeService = (token) => {
         return "";
     }
     const authClient = new google.auth.OAuth2(process.env.YOUTUBE_CLIENT_ID, process.env.YOUTUBE_CLIENT_SECRET, process.env.YOUTUBE_REDIRECT_URI);
-    const scopes = ['https://www.googleapis.com/auth/youtube.readonly'];
+    const scopes = ['https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl'];
     const authUrl = authClient.generateAuthUrl({
         access_type: 'offline',
         scope: scopes,
         state: token,
     });
- 
+
     return authUrl;
 }
 
