@@ -113,7 +113,7 @@ const getTokenState = async (req, res, next) => {
     }
 }
 
-const checkTokenExistence = (user, platform) => {
+export const checkTokenExistence = (user, platform) => {
     return user.tokens.find((token) => token.platform === platform);
 }
 

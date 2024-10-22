@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit{
     const localData = localStorage.getItem('authToken');
 
     if (localData != null) {
-      fetch("https://localhost:8000/isLogged", {
+      fetch("http://localhost:8000/isLogged", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

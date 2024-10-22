@@ -4,8 +4,8 @@ const platforms_icons = {
     "color": "#429660",
     "connexion": true
   },
-  "TikTok": {
-    "icon": "https://static.vecteezy.com/system/resources/previews/023/986/939/non_2x/tiktok-logo-tiktok-logo-transparent-tiktok-icon-transparent-free-free-png.png",
+  "Deezer": {
+    "icon": "https://agreeable.fr/uploads/thumbnails/novo-logo-deezer-sem-fundo-66eaf4a6e0019274130722.png",
     "color": "#5064AC",
     "connexion": true
   },
@@ -29,8 +29,8 @@ const platforms_icons = {
     "color": "#9F3531",
     "connexion": true
   },
-  "Instagram": {
-    "icon": "https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg",
+  "Discord": {
+    "icon": "https://img.icons8.com/color/512/discord-logo.png",
     "color": "#E1306C",
     "connexion": true
   },

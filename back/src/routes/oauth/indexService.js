@@ -28,19 +28,6 @@ export const youtubeService = (token) => {
     return authUrl;
 }
 
-export const instagramService = (token) => {
-    if (!process.env.INSTAGRAM_CLIENT_ID || !process.env.INSTAGRAM_REDIRECT_URI || !process.env.INSTAGRAM_CLIENT_SECRET) {
-        return "";
-    }
-
-    const client_id = encodeURIComponent(process.env.INSTAGRAM_CLIENT_ID);
-    const redirect_uri = encodeURIComponent(process.env.INSTAGRAM_REDIRECT_URI);
-    const scope = encodeURIComponent('user_profile,user_media');
-    const state = encodeURIComponent(token);
-    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
-    return authUrl;
-}
-
 export const xService = (token) => {
     if (!process.env.X_CLIENT_ID || !process.env.X_REDIRECT_URI || !process.env.X_CLIENT_SECRET) {
         return "";
@@ -69,35 +56,30 @@ export const redditService = (token) => {
     return authUrl;
 }
 
-const generateCodeVerifier = () => {
-    return crypto.randomBytes(32).toString('hex');
-};
-
-const generateCodeChallenge = (codeVerifier) => {
-    return crypto.createHash('sha256')
-                 .update(codeVerifier)
-                 .digest('base64url');
-};
-
-export const tikTokService = (token) => {
-    if (!process.env.TIKTOK_CLIENT_ID || !process.env.TIKTOK_REDIRECT_URI || !process.env.TIKTOK_CLIENT_SECRET) {
+export const discordService = (token) => {
+    if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_REDIRECT_URI || !process.env.DISCORD_CLIENT_SECRET) {
         return "";
     }
 
-    const client_id = encodeURIComponent(process.env.TIKTOK_CLIENT_ID);
-    const redirect_uri = encodeURIComponent(process.env.TIKTOK_REDIRECT_URI);
-    console.log("redirect uri", redirect_uri);
-    console.log("redirect uri env", process.env.TIKTOK_REDIRECT_URI);
-    const scope = encodeURIComponent('user.info.basic user.info.avatar user.info.phone user.info.email');
+    const client_id = encodeURIComponent(process.env.DISCORD_CLIENT_ID);
+    const redirect_uri = encodeURIComponent(process.env.DISCORD_REDIRECT_URI);
+    const scope = encodeURIComponent('identify');
     const state = encodeURIComponent(token);
-    
-    const code_verifier = generateCodeVerifier();
-    const code_challenge = generateCodeChallenge(code_verifier);
-    const code_challenge_method = 'S256';
-
-    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=${code_challenge_method}`;
-    
+    const authUrl = `https://discord.com/oauth2/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
     return authUrl;
-};
+}
 
-export default { spotifyService, youtubeService, instagramService, xService };
+export const deezerService = (token) => {
+    if (!process.env.INSTAGRAM_CLIENT_ID || !process.env.INSTAGRAM_REDIRECT_URI || !process.env.INSTAGRAM_CLIENT_SECRET) {
+        return "";
+    }
+
+    const client_id = encodeURIComponent(process.env.INSTAGRAM_CLIENT_ID);
+    const redirect_uri = encodeURIComponent(process.env.INSTAGRAM_REDIRECT_URI);
+    const scope = encodeURIComponent('user_profile,user_media,user_birthday');
+    const state = encodeURIComponent(token);
+    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
+    return authUrl;
+}
+
+export default { spotifyService, youtubeService, deezerService, xService, discordService, redditService};
