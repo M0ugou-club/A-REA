@@ -39,4 +39,4 @@ RUN node -v
 
 RUN npm ci
 
-RUN npx eas build -p android  --profile production --local --non-interactive
+RUN npx eas build -p android  --profile production --local --non-interactive --clear-cache
