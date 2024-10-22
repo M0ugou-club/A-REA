@@ -14,9 +14,13 @@ const actions = {
     "on_ten_millions": "On inox's channel reach 10M subscribers"
   },
   Instagram: {
-    "on_new_post": "On new post",
-    "on_new_story": "On new story",
-    "on_six_millions": "On inox's account reach 6M followers"
+    "on_new_post": "On new instagram post",
+    "on_new_story": "On new instagram story",
+    "on_six_millions": "On inox's account reach 6M followers on instagram"
+  },
+  X: {
+    "on_new_tweet": "Quand tu post un nouveau tweet",
+    "on_four_millions": "Quand Inox atteint les 4M de followers sur X"
   }
 }
 

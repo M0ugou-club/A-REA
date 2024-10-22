@@ -9,6 +9,9 @@ const reactions = {
     "Like": "Like video",
     "Dislike": "Dislike video",
     "AddWL": "Add video to playlist"
+  },
+  X: {
+    "post_new_tweet": "post un nouveau tweet",
   }
 }
 
