@@ -38,7 +38,8 @@
                     [serviceName]="service[0]"
                     [serviceColor]="service[1].color"
                     [serviceIcon]="service[1].icon"
-                    [isConnected]="isConnected"></app-login-service>
+                    [isConnected]="isConnectedToService(service[0])">
+            </app-login-service>
         </div>
     </div>
 </div>
