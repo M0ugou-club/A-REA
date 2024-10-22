@@ -1,24 +1,25 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Login from './src/Login/Login';
-import Home from './src/Home/Home';
-import Area from './src/Area/AreaPage';
-import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
-import Register from './src/Register/RegisterPage';
-import ChooseAreaName from './src/Area/CreateArea/ChooseAreaName/ChooseAreaName';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Login from "./src/Login/Login";
+import Home from "./src/Home/Home";
+import Area from "./src/Area/AreaPage";
+import CreateAreaPage from "./src/Area/CreateArea/CreateAreaPage";
+import Register from "./src/Register/RegisterPage";
+import ChooseAreaName from "./src/Area/CreateArea/ChooseAreaName/ChooseAreaName";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { registerRootComponent } from "expo";
 
 const Stack = createStackNavigator();
 
 const loadFonts = async () => {
   await Font.loadAsync({
-    'Nexa': require('./assets/fonts/Nexa-Heavy.ttf'),
+    Nexa: require("./assets/fonts/Nexa-Heavy.ttf"),
   });
 };
 
-export default function App() {
+const App = () => {
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
   React.useEffect(() => {
@@ -44,37 +45,39 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen 
-          name="Login" 
-          component={Login} 
-          options={{ headerShown: false }} 
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Register"
           component={Register}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-          name="Area" 
-          component={Area} 
+        <Stack.Screen
+          name="Area"
+          component={Area}
           options={{ headerShown: false, animationEnabled: false }}
         />
-        <Stack.Screen 
-          name="CreateArea" 
-          component={CreateAreaPage} 
+        <Stack.Screen
+          name="CreateArea"
+          component={CreateAreaPage}
           options={{ headerShown: false, animationEnabled: false }}
         />
-        <Stack.Screen 
-          name="ChooseAreaName" 
-          component={ChooseAreaName} 
+        <Stack.Screen
+          name="ChooseAreaName"
+          component={ChooseAreaName}
           options={{ headerShown: false, animationEnabled: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+registerRootComponent(App);
