@@ -1,15 +1,10 @@
 import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexService.js";
 import { google } from "googleapis";
 
-export const youtubeReactions = async (action, userId) => {
-  let access_token = getAccesTokensServiceByUserId("Youtube", userId);
-  const Oauth2 = google.auth.OAuth2;
-
-  const oauth2Client = new Oauth2(
-    process.env.YOUTUBE_CLIENT_ID,
-    process.env.YOUTUBE_CLIENT_SECRET,
-    process.env.YOUTUBE_REDIRECT_URI
-  );
+const youtubeReactions = async (action, userId) => {
+  console.log("Youtube reaction:", action);
+  let access_token = await getAccesTokensServiceByUserId("Youtube", userId);
+  const oauth2Client = new google.auth.OAuth2();
 
   oauth2Client.setCredentials({
     access_token: access_token,
@@ -20,38 +15,45 @@ export const youtubeReactions = async (action, userId) => {
     auth: oauth2Client,
   });
 
+  console.log("Youtube reaction:", action);
+
   if (action == "Like") {
     const videoId = await getLastVideo(youtube);
-    likeVideo(youtube, videoId);
+    await likeVideo(youtube, videoId);
   }
 
   if (action == "Dislike") {
     const videoId = await getLastVideo(youtube);
-    dislikeVideo(youtube, videoId);
+    await dislikeVideo(youtube, videoId);
   }
 
-  if (action == "AddWL") {
+  if (action == "CommentVideo") {
     const videoId = await getLastVideo(youtube);
-    addVideoToPlaylistWL(youtube, videoId);
+    await commentTheVideo(youtube, videoId);
   }
 };
 
 const getLastVideo = async (youtube) => {
-  const response = await youtube.search.list({
-    channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
-    order: "date",
-    part: "snippet",
-    type: "video",
-    maxResults: 1,
-  });
+  try {
+    const response = await youtube.search.list({
+      channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+      order: "date",
+      part: "snippet",
+      type: "video",
+      maxResults: 1,
+    });
 
-  const video = response.data.items;
-  if (video.length == 0) {
-    console.log("No video found");
-    return;
-  } else {
-    const videoId = video[0].id.videoId;
-    return videoId;
+    const video = response.data.items;
+    if (video.length == 0) {
+      console.log("No video found");
+      return;
+    } else {
+      const videoId = video[0].id.videoId;
+      console.log("Last video id:", videoId);
+      return videoId;
+    }
+  } catch (error) {
+    console.error("Failed to get last video:", error);
   }
 };
 
@@ -83,15 +85,17 @@ const dislikeVideo = async (youtube, videoId) => {
   return;
 };
 
-const addVideoToPlaylistWL = async (youtube, videoId) => {
-  const response = await youtube.playlistItems.insert({
+const commentTheVideo = async (youtube, videoId) => {
+  const response = await youtube.commentThreads.insert({
     part: "snippet",
     requestBody: {
       snippet: {
-        playlistId: "WL",
-        resourceId: {
-          kind: "youtube#video",
-          videoId: videoId,
+        channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+        videoId: videoId,
+        topLevelComment: {
+          snippet: {
+            textOriginal: "LA VIDEO EST TROP BIEN !",
+          },
         },
       },
     },
@@ -107,3 +111,4 @@ const addVideoToPlaylistWL = async (youtube, videoId) => {
   }
 };
 
+export default youtubeReactions
