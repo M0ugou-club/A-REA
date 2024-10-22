@@ -1,3 +1,4 @@
+import { checkTokenExistence } from '../routes/tokens/index.js';
 import Token from '../models/Token/index.js';
 import User from '../models/Users/index.js';
 import jwt from "jsonwebtoken";
