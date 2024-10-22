@@ -8,8 +8,6 @@ import swaggerSpec from "./docs/swaggerConfig.js";
 import mongo from "./utils/mongo.js";
 import cron from "node-cron";
 import { actionsTriggers } from "./src/utils/areasService/areasTriggers.js";
-import https from "https";
-import fs from "fs";
 
 dotenv.config();
 
@@ -42,13 +40,7 @@ async function cronJob() {
 
 cronJob();
 
-// Lire les fichiers de certificat
-const privateKey = fs.readFileSync('key.pem', 'utf8');
-const certificate = fs.readFileSync('cert.pem', 'utf8');
-
-const credentials = { key: privateKey, cert: certificate };
-
-// Création du serveur HTTPS
-https.createServer(credentials, app).listen(port, () => {
-  console.log(`BACKEND lancé sur le port ${port} en HTTPS`);
+// Création du serveur HTTP
+app.listen(port, () => {
+  console.log(`BACKEND lancé sur le port ${port}`);
 });

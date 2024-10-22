@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { spotifyCallbackService, youtubeCallbackService, instagramCallbackService, xCallbackService, redditCallbackService, tiktokCallbackService } from './indexService.js';
+import { spotifyCallbackService, youtubeCallbackService, instagramCallbackService, xCallbackService, redditCallbackService } from './indexService.js';
 
 const callbackRoutes = Router();
 
@@ -22,9 +22,6 @@ callbackRoutes.get('/callback/:service', async (req, res) => {
             return res.redirect('http://localhost:4200/dashboard');
         case 'Reddit':
             redditCallbackService(req, res);
-            return res.redirect('http://localhost:4200/dashboard');
-        case 'TikTok':
-            tiktokCallbackService(req, res);
             return res.redirect('http://localhost:4200/dashboard');
         default:
             return res.status(404).send({ message: "Service not found" });

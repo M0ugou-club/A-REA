@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 export class AREAPageComponent implements OnInit {
   constructor(private router: Router) {}
 
-  private apiUrl = "https://localhost:8000/areas";
+  private apiUrl = "http://localhost:8000/areas";
 
   areas: {
     actionLogo: string;
@@ -29,7 +29,7 @@ export class AREAPageComponent implements OnInit {
     const localData = localStorage.getItem("authToken");
 
     if (localData != null) {
-      fetch("https://localhost:8000/isLogged", {
+      fetch("http://localhost:8000/isLogged", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export class AREAPageComponent implements OnInit {
   }
 
   loadPlatformsIcons(): void {
-    fetch("https://localhost:8000/enums/platforms_icons", {
+    fetch("http://localhost:8000/enums/platforms_icons", {
       method: "GET",
     })
       .then((response) => {

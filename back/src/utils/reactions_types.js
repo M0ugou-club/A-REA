@@ -9,6 +9,9 @@ const reactions = {
     "Like": "Like video",
     "Dislike": "Dislike video",
     "CommentVideo": "Comment InoxTag Last video"
+  },
+  X: {
+    "post_new_tweet": "post un nouveau tweet",
   }
 }
 
