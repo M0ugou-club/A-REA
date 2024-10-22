@@ -8,7 +8,10 @@ const reactions = {
   Youtube: {
     "Like": "Like video",
     "Dislike": "Dislike video",
-    "AddWL": "Add video to playlist"
+    "CommentVideo": "Comment InoxTag Last video"
+  },
+  X: {
+    "post_new_tweet": "post un nouveau tweet",
   }
 }
 

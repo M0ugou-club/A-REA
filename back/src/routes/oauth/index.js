@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { isUserAuth } from '../authentification/authService.js';
-import { spotifyService, youtubeService, instagramService, xService, redditService, tikTokService } from './indexService.js';
+import { spotifyService, youtubeService, deezerService, xService, redditService, discordService } from './indexService.js';
 
 const oauthRoutes = Router();
 
@@ -13,8 +13,8 @@ oauthRoutes.get('/oauth/:service', isUserAuth(), async (req, res) => {
         case 'Youtube':
             authUrl = youtubeService(req.query.token);
             return res.redirect(authUrl);
-        case 'Instagram':
-            authUrl = instagramService(req.query.token);
+        case 'Deezer':
+            authUrl = deezerService(req.query.token);
             return res.redirect(authUrl);
         case 'X':
             authUrl = xService(req.query.token);
@@ -22,8 +22,8 @@ oauthRoutes.get('/oauth/:service', isUserAuth(), async (req, res) => {
         case 'Reddit':
             authUrl = redditService(req.query.token);
             return res.redirect(authUrl);
-        case 'TikTok':
-            authUrl = tikTokService(req.query.token);
+        case 'Discord':
+            authUrl = discordService(req.query.token);
             return res.redirect(authUrl);
         default:
             return res.status(404).send({ message: "Service not found" });
