@@ -27,7 +27,7 @@ This is our first 3rd Year Epitech Project called A-REA
 
 4. **Access the Application:**
 
-- Back-End : Accessible at https://localhost:8000/
+- Back-End : Accessible at http://localhost:8000/
 - Front-End : Accessible at http://localhost:4200/
 
 5. **Stop the Services:**
