@@ -29,8 +29,8 @@ export class LoginServicsePopupComponent implements OnInit {
       func: () => this.connectionYoutube(),
     },
     {
-      key: "Instagram",
-      func: () => this.connectionInstagram(),
+      key: "Discord",
+      func: () => this.connectionDiscord(),
     },
     {
       key: "X",
@@ -53,7 +53,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getUserInfo() {
-    fetch("https://localhost:8000/users", {
+    fetch("http://localhost:8000/users", {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -71,7 +71,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getServiceInfo() {
-    fetch("https://localhost:8000/enums/platforms_icons", {
+    fetch("http://localhost:8000/enums/platforms_icons", {
       method: "GET",
     })
       .then((response) => {
@@ -93,7 +93,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getServiceState() {
-    fetch("https://localhost:8000/tokens/state", {
+    fetch("http://localhost:8000/tokens/state", {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -115,7 +115,7 @@ export class LoginServicsePopupComponent implements OnInit {
 
   connectionSpotify(): void {
     if (this.isConnectedToService("Spotify") == true) {
-      fetch("https://localhost:8000/tokens/platform/Spotify", {
+      fetch("http://localhost:8000/tokens/platform/Spotify", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +127,7 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "https://localhost:8000/oauth/Spotify?token=" +
+        "http://localhost:8000/oauth/Spotify?token=" +
         localStorage.getItem("authToken");
     }
   }
@@ -143,36 +143,40 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
+      }).catch((error) => {
+        console.error("Error:", error);
       });
     } else {
       window.location.href =
-        "https://localhost:8000/oauth/Youtube?token=" +
+        "http://localhost:8000/oauth/Youtube?token=" +
         localStorage.getItem("authToken");
     }
   }
 
-  connectionInstagram(): void {
-    if (this.isConnectedToService("Instagram") == true) {
-      fetch("https://localhost:8000/tokens/platform/Instagram", {
+  connectionDiscord(): void {
+    if (this.isConnectedToService("Discord") == true) {
+      fetch("http://localhost:8000/tokens/platform/Discord", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          platform: "Spotify",
+          platform: "Discord",
         }),
+      }).catch((error) => {
+        console.error("Error:", error);
       });
     } else {
       window.location.href =
-        "https://localhost:8000/oauth/Instagram?token=" +
+        "http://localhost:8000/oauth/Discord?token=" +
         localStorage.getItem("authToken");
     }
   }
 
   connectionX(): void {
     if (this.isConnectedToService("X") == true) {
-      fetch("https://localhost:8000/tokens/platform/X", {
+      fetch("http://localhost:8000/tokens/platform/X", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -181,17 +185,19 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
+      }).catch((error) => {
+        console.error("Error:", error);
       });
     } else {
       window.location.href =
-        "https://localhost:8000/oauth/X?token=" +
+        "http://localhost:8000/oauth/X?token=" +
         localStorage.getItem("authToken");
     }
   }
 
   connectionReddit(): void {
     if (this.isConnectedToService("Reddit") == true) {
-      fetch("https://localhost:8000/tokens/platform/X", {
+      fetch("http://localhost:8000/tokens/platform/X", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -205,14 +211,14 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "https://localhost:8000/oauth/Reddit?token=" +
+        "http://localhost:8000/oauth/Reddit?token=" +
         localStorage.getItem("authToken");
     }
   }
 
   connectionTiktok(): void {
     if (this.isConnectedToService("TikTok") == true) {
-      fetch("https://localhost:8000/tokens/platform/TikTok", {
+      fetch("http://localhost:8000/tokens/platform/TikTok", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -225,9 +231,8 @@ export class LoginServicsePopupComponent implements OnInit {
         console.error("Error:", error);
       });
     } else {
-      console.log("test iktok");
       window.location.href =
-        "https://localhost:8000/oauth/TikTok?token=" +
+        "http://localhost:8000/oauth/TikTok?token=" +
         localStorage.getItem("authToken");
     }
   }
