@@ -16,7 +16,7 @@ export default function Login() {
         if (token === null) {
           return;
         }
-        const response = await fetch("http://212.195.222.157:8000/isLogged", {
+        const response = await fetch("http://inox-qcb.fr:8000/isLogged", {
           headers: {
             "Authorization": "Bearer" + token,
           },
@@ -35,7 +35,7 @@ export default function Login() {
 
   async function onLogin() {
     try {
-      const response = await fetch("http://212.195.222.157:8000/login", {
+      const response = await fetch("http://inox-qcb.fr:8000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
