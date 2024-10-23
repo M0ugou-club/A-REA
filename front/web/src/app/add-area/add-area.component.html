@@ -65,16 +65,17 @@
     <div class="actions">
         <div class="title">
             <div>
-                <p>Actions</p>
-                <p>Choisis ton action</p>
+                <p class="title-actions">Actions</p>
+                <p class="subtitle-actions">Choisis ton action</p>
             </div>
-            <button> . . . </button>
+            <lucide-icon name="ellipsis"></lucide-icon>
         </div>
         <div class="separator"></div>
         <div class="choices-container">
             <app-choice-button *ngFor="let x of actions"
-                               [choiceLogo]="chooseIcon(x.service)"
+                               [choiceService]="x.service"
                                [choiceTitle]="x.label"
+                               [serviceColor]="chooseColor(x.service)"
                                (sendChoice)="setAction($event)"
                                class="choices">
             </app-choice-button>
@@ -83,5 +84,23 @@
     <div class="title-choice"> </div>
     <div class="display"> </div>
     <div class="tuto"> </div>
-    <div class="reactions"> </div>
+    <div class="reactions">
+        <div class="title">
+            <div>
+                <p class="title-réactions">Réactions</p>
+                <p class="subtitle-réactions">Choisis ta réaction</p>
+            </div>
+            <lucide-icon name="ellipsis"></lucide-icon>
+        </div>
+        <div class="separator"></div>
+        <div class="choices-container">
+            <app-choice-button *ngFor="let x of reactions"
+                               [choiceService]="x.service"
+                               [choiceTitle]="x.label"
+                               [serviceColor]="chooseColor(x.service)"
+                               (sendChoice)="setReaction($event)"
+                               class="choices">
+            </app-choice-button>
+        </div>
+    </div>
 </div>

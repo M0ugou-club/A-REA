@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { reduce } from "rxjs";
 
 @Component({
   selector: "app-add-area",
@@ -24,7 +25,7 @@ export class AddAreaComponent implements OnInit {
 
   reactions: any[] = [];
 
-  plaformsIcon: any = [];
+  servicesIcon: any = [];
 
   constructor(private router: Router) {}
 
@@ -45,7 +46,7 @@ export class AddAreaComponent implements OnInit {
           if (response.status === 200) {
             this.loadActions();
             this.loadReactions();
-            this.loadPlatformsIcons();
+            this.loadServicesIcons();
           } else {
             this.router.navigate(["/login"]);
           }
@@ -69,7 +70,7 @@ export class AddAreaComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
-        this.actions = this.flattenActions(data);
+        this.actions = this.flatten(data);
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
@@ -87,15 +88,14 @@ export class AddAreaComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        this.reactions = this.flattenActions(data);
+        this.reactions = this.flatten(data);
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
   }
 
-  loadPlatformsIcons(): void {
+  loadServicesIcons(): void {
     fetch("http://localhost:8000/enums/platforms_icons", {
       method: "GET",
     })
@@ -106,15 +106,14 @@ export class AddAreaComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        this.plaformsIcon = data;
+        this.servicesIcon = data;
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
   }
 
-  flattenActions(data: any) {
+  flatten(data: any) {
     let actionsArray: any = [];
 
     Object.keys(data).forEach((service) => {
@@ -174,11 +173,22 @@ export class AddAreaComponent implements OnInit {
   }
 
   chooseIcon(choice: string) {
-    for (let key in this.plaformsIcon) {
+    for (let key in this.servicesIcon) {
       if (key === choice) {
-        return this.plaformsIcon[key];
+        return this.servicesIcon[key].icon;
       }
     }
     return "";
   }
+
+  chooseColor(choice: string) {
+    for (let key in this.servicesIcon) {
+      if (key === choice) {
+        return this.servicesIcon[key].color;
+      }
+    }
+    return "";
+  }
+
+  protected readonly reduce = reduce;
 }
