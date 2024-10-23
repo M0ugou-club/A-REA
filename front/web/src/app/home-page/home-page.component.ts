@@ -12,6 +12,8 @@ export class HomePageComponent implements OnInit{
 
   constructor(private router: Router) {}
 
+  users: any = [];
+
   ngOnInit(): void {
     const localData = localStorage.getItem('authToken');
 
@@ -34,5 +36,26 @@ export class HomePageComponent implements OnInit{
     } else {
       this.router.navigate(['/login']);
     }
+
+    this.GetUsers();
+  }
+
+  GetUsers(): void {
+    fetch("http://localhost:8000/usersAlls", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this.users = data;
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
   }
 }
