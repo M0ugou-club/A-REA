@@ -17,7 +17,7 @@ export default function Home() {
         const fetchAreas = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://212.195.222.157:8000/areas', {
+                const response = await fetch('http://inox-qcb.fr:8000/areas', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
