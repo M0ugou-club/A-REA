@@ -13,7 +13,7 @@ export default function Register() {
 
     async function handleRegister() {
         try {
-            const response = await fetch("http://inox-qcb.fr:8000/register", {
+            const response = await fetch("http://212.195.222.157:8000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

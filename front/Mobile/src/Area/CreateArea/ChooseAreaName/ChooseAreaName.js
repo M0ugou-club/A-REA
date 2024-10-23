@@ -21,7 +21,7 @@ export default function ChooseAreaName() {
     async function handleFinish() {
         const token = await AsyncStorage.getItem('accessToken');
         try {
-            const response = await fetch('http://inox-qcb.fr:8000/areas', {
+            const response = await fetch('http://212.195.222.157:8000/areas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

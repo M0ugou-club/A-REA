@@ -30,7 +30,7 @@ export default function CreateAreaPage() {
         const fetchActions = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://inox-qcb.fr:8000/enums/actions', {
+                const response = await fetch('http://212.195.222.157:8000/enums/actions', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export default function CreateAreaPage() {
         const fetchReactions = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://inox-qcb.fr:8000/enums/reactions', {
+                const response = await fetch('http://212.195.222.157:8000/enums/reactions', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
