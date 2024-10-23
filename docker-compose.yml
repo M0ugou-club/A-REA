@@ -17,10 +17,10 @@ services:
     depends_on:
       - back
 
-  mobile:
-    build:
-      context: .
-      dockerfile: ./front/Mobile/Dockerfile
-      args:
-        EXPO_TOKEN: ${EXPO_TOKEN}
-        JDK_VERSION: 17.0.12
+  #mobile:
+  #  build:
+  #    context: .
+  #    dockerfile: ./front/Mobile/Dockerfile
+  #    args:
+  #      EXPO_TOKEN: ${EXPO_TOKEN}
+  #      JDK_VERSION: 17.0.12
