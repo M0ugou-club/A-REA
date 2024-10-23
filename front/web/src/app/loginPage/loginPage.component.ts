@@ -47,7 +47,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
 
     console.log("LoginObj:", this.loginObj);
 
-    fetch("https://localhost:8000/login", {
+    fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
