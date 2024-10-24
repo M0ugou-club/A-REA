@@ -199,6 +199,16 @@ const testAreas = async (req, res, next) => {
     return res.status(200).json({ message: 'Test Areas' });
 }
 
+const getAllAreas = async (req, res, next) => {
+    try {
+        const areas = await Area.find();
+        return res.status(200).json(areas);
+    } catch (error) {
+        return next(error);
+    }
+}
+
+routeAreas.get('/areasAll', getAllAreas);
 routeAreas.get('/areas', getAreasUser);
 routeAreas.get('/areas/:id/actions', getActionsArea);
 routeAreas.get('/areas/:id/reactions', getReactionsArea);

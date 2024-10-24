@@ -12,7 +12,12 @@ const reactions = {
   },
   X: {
     "post_new_tweet": "post un nouveau tweet",
-  }
+  },
+  Reddit: {
+    "Like": "Like Reddit post",
+    "Dislike": "Dislike Reddit post",
+    "Comment": "Comment Reddit post"
+  },
 }
 
 export default reactions
