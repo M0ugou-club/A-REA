@@ -40,4 +40,28 @@ export const postToken = async (token, platform, access_token, refresh_token, va
   }
 }
 
+export const postAccesToken = async (userID, platform, newAccessToken) => {
+    try {
+        const user = await User.findOne({
+            _id: userID,
+        }).populate('tokens');
+        if (!user) {
+            console.log("User not found");
+            return 404;
+        }
+        const userToken = user.tokens.find((token) => token.platform === platform);
+        if (!userToken) {
+            console.log("Token not found");
+            return 404;
+        }
+        userToken.accesstoken = newAccessToken;
+        console.log("Access token updated successfully");
+        await userToken.save();
+        return 200;
+    } catch (error) {
+        console.log("Error when update acces token : ", error);
+        return 500;
+    }
+}
+
 export default { postToken };
