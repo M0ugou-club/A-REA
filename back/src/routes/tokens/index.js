@@ -82,8 +82,8 @@ const getTokenState = async (req, res, next) => {
     try {
         const response = {};
 
-        const header = req.headers.authorization;
-        const token = header?.replace("Bearer ", "");
+    const header = req.headers.authorization;
+    const token = header?.replace("Bearer ", "");
 
         if (!token) {
             return res.status(401).json({ message: "Token manquant" });
