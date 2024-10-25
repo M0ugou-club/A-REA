@@ -68,7 +68,7 @@
                 <p class="title-actions">Actions</p>
                 <p class="subtitle-actions">Choisis ton action</p>
             </div>
-            <lucide-icon name="ellipsis"></lucide-icon>
+            <lucide-icon [size]="32" name="ellipsis"></lucide-icon>
         </div>
         <div class="separator"></div>
         <div class="choices-container">
@@ -81,16 +81,37 @@
             </app-choice-button>
         </div>
     </div>
-    <div class="title-choice"> </div>
+    <div class="title-a-rea">
+        <div class="title-a-rea-container">
+            <textarea id="area-name" [(ngModel)]="areaObj.area_title" class="title-a-rea-input" placeholder="Titre de ton A-REA"></textarea>
+            <div class="refresh-title-container" (click)="resetSelection()">
+                <lucide-icon name="refresh-ccw" [size]="40" class="refresh-title" [strokeWidth]="2"></lucide-icon>
+            </div>
+        </div>
+        <div class="description-a-rea">
+            <textarea id="area-description" [(ngModel)]="areaObj.area_description" class="description-a-rea-input" placeholder="Description de votre A-REA"></textarea>
+        </div>
+    </div>
     <div class="display"> </div>
-    <div class="tuto"> </div>
+    <div class="tuto">
+        <div>
+            <p>caca</p>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="reactions">
         <div class="title">
             <div>
                 <p class="title-réactions">Réactions</p>
                 <p class="subtitle-réactions">Choisis ta réaction</p>
             </div>
-            <lucide-icon name="ellipsis"></lucide-icon>
+            <lucide-icon name="ellipsis" [size]="32"></lucide-icon>
         </div>
         <div class="separator"></div>
         <div class="choices-container">

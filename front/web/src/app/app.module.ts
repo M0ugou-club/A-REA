@@ -22,6 +22,7 @@ import {
   Ellipsis,
   ChevronDown,
   ChevronUp,
+  RefreshCcw,
 } from "lucide-angular";
 
 @NgModule({
@@ -42,7 +43,7 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    LucideAngularModule.pick({ Ellipsis, ChevronDown, ChevronUp }),
+    LucideAngularModule.pick({ Ellipsis, ChevronDown, ChevronUp, RefreshCcw }),
   ],
   providers: [],
   bootstrap: [AppComponent],

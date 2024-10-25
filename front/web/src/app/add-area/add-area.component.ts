@@ -147,6 +147,8 @@ export class AddAreaComponent implements OnInit {
   }
 
   resetSelection() {
+    this.areaObj.area_title = "";
+    this.areaObj.area_description = "";
     this.areaObj.action_name = "";
     this.areaObj.reaction_name = "";
   }
@@ -170,15 +172,6 @@ export class AddAreaComponent implements OnInit {
       });
 
     this.router.navigate(["/a-rea"]);
-  }
-
-  chooseIcon(choice: string) {
-    for (let key in this.servicesIcon) {
-      if (key === choice) {
-        return this.servicesIcon[key].icon;
-      }
-    }
-    return "";
   }
 
   chooseColor(choice: string) {
