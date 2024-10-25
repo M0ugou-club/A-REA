@@ -2,6 +2,7 @@ import { getAccesTokensServiceByUserId } from '../../../routes/tokens/indexServi
 import { spotifyReactions } from "./spotifyReactions.js";
 import youtubeReactions from "./youtubeReactionService.js";
 import { xReactions } from "./xReactions.js";
+import redditReactions from "./redditReactions.js";
 import { twitchReactions } from "./twitchReactions.js";
 
 export const reactionService = async (platform, action, userId) => {
@@ -24,6 +25,8 @@ export const reactionService = async (platform, action, userId) => {
             accessToken = await getAccesTokensServiceByUserId('Twitch', userId);
             twitchReactions(action, accessToken, userId);
             break;
+        case 'Reddit':
+            redditReactions(action, userId);
         default:
             return;
     }

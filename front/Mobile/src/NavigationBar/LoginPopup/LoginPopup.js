@@ -19,7 +19,7 @@ export default function LoginPopup() {
 
     const handleSpotifyLogin = async () => {
         const authToken = await AsyncStorage.getItem('accessToken');
-        const authUrl = 'http://212.195.222.157:8000/oauth/Spotify?token=' + authToken;
+        const authUrl = 'http://inox-qcb.fr:8000/oauth/Spotify?token=' + authToken;
 
         let result = await WebBrowser.openBrowserAsync(authUrl);
     };

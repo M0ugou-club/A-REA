@@ -17,16 +17,16 @@ export class LoginServicsePopupComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
   userName: string = "";
   userEmail: string = "";
-  isConnected: boolean = false;
+  connections: any[] = [];
   services: { [key: string]: any } = {};
   connectionFunctions: ConnectionFunction[] = [
     {
       key: "Spotify",
-      func: this.connectionSpotify,
+      func: () => this.connectionSpotify(),
     },
     {
       key: "Youtube",
-      func: this.connectionYoutube,
+      func: () => this.connectionYoutube(),
     },
     {
       key: "Twitch",
@@ -34,11 +34,11 @@ export class LoginServicsePopupComponent implements OnInit {
     },
     {
       key: "X",
-      func: this.connectionX,
+      func: () => this.connectionX(),
     },
     {
       key: "Reddit",
-      func: this.connectionReddit,
+      func: () => this.connectionReddit(),
     },
   ];
 
@@ -88,13 +88,31 @@ export class LoginServicsePopupComponent implements OnInit {
     return Object.entries(services);
   }
 
-  getServiceState() {}
+  getServiceState() {
+    fetch("http://localhost:8000/tokens/state", {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.connections = this.getServiceEntries(data);
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
 
   connectionSpotify(): void {
-    
-    if (this.isConnected) {
-      fetch('http://localhost:8000/tokens/platform/Spotify', {
-        method: 'DELETE',
+    if (this.isConnectedToService("Spotify") == true) {
+      fetch("http://localhost:8000/tokens/platform/Spotify", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -102,26 +120,18 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            this.isConnected = true;
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      });
     } else {
-      window.location.href = 'http://localhost:8000/oauth/Spotify?token=' + localStorage.getItem('authToken');
+      window.location.href =
+        "http://localhost:8000/oauth/Spotify?token=" +
+        localStorage.getItem("authToken");
     }
   }
 
   connectionYoutube(): void {
-    
-    if (this.isConnected) {
-      fetch('http://localhost:8000/tokens/platform/Youtube', {
-        method: 'DELETE',
+    if (this.isConnectedToService("Youtube") == true) {
+      fetch("http://localhost:8000/tokens/platform/Youtube", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -129,18 +139,13 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            this.isConnected = true;
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      }).catch((error) => {
+        console.error("Error:", error);
+      });
     } else {
-      window.location.href = 'http://localhost:8000/oauth/Youtube?token=' + localStorage.getItem('authToken');
+      window.location.href =
+        "http://localhost:8000/oauth/Youtube?token=" +
+        localStorage.getItem("authToken");
     }
   }
 
@@ -156,26 +161,18 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Twitch",
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            this.isConnected = true;
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      }).catch((error) => {
+        console.error("Error:", error);
+      });
     } else {
       window.location.href = 'http://localhost:8000/oauth/Twitch?token=' + localStorage.getItem('authToken');
     }
   }
 
   connectionX(): void {
-    
-    if (this.isConnected) {
-      fetch('http://localhost:8000/tokens/platform/X', {
-        method: 'DELETE',
+    if (this.isConnectedToService("X") == true) {
+      fetch("http://localhost:8000/tokens/platform/X", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -183,26 +180,20 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            this.isConnected = true;
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      }).catch((error) => {
+        console.error("Error:", error);
+      });
     } else {
-      window.location.href = 'http://localhost:8000/oauth/X?token=' + localStorage.getItem('authToken');
+      window.location.href =
+        "http://localhost:8000/oauth/X?token=" +
+        localStorage.getItem("authToken");
     }
   }
 
   connectionReddit(): void {
-    
-    if (this.isConnected) {
-      fetch('http://localhost:8000/tokens/platform/X', {
-        method: 'DELETE',
+    if (this.isConnectedToService("Reddit") == true) {
+      fetch("http://localhost:8000/tokens/platform/X", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -210,18 +201,13 @@ export class LoginServicsePopupComponent implements OnInit {
         body: JSON.stringify({
           platform: "Spotify",
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            this.isConnected = true;
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      }).catch((error) => {
+        console.error("Error:", error);
+      });
     } else {
-      window.location.href = 'http://localhost:8000/oauth/Reddit?token=' + localStorage.getItem('authToken');
+      window.location.href =
+        "http://localhost:8000/oauth/Reddit?token=" +
+        localStorage.getItem("authToken");
     }
   } 
 
@@ -235,6 +221,15 @@ export class LoginServicsePopupComponent implements OnInit {
     } else {
       console.log("No connection function found");
     }
+  }
+
+  isConnectedToService(service: string): boolean {
+    for (const service_search of this.connections) {
+      if (service_search[0] === service) {
+        return service_search[1];
+      }
+    }
+    return false;
   }
 
   logoutButton(): void {

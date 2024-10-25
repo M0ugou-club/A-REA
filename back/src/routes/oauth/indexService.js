@@ -50,7 +50,7 @@ export const redditService = (token) => {
 
     const client_id = encodeURIComponent(process.env.REDDIT_CLIENT_ID);
     const redirect_uri = encodeURIComponent(process.env.REDDIT_REDIRECT_URI);
-    const scope = encodeURIComponent('identity read');
+    const scope = encodeURIComponent('identity read submit vote');
     const state = encodeURIComponent(token);
     const authUrl = `https://www.reddit.com/api/v1/authorize?client_id=${client_id}&response_type=code&state=${state}&redirect_uri=${redirect_uri}&duration=permanent&scope=${scope}`;
     return authUrl;
