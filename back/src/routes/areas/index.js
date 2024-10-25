@@ -190,15 +190,25 @@ const deleteArea = async (req, res, next) => {
 }
 
 const testAreas = async (req, res, next) => {
-  actionsTriggers();
-  return res.status(200).json({ message: "Test Areas" });
-};
+    actionsTriggers();
+    return res.status(200).json({ message: 'Test Areas' });
+}
 
-routeAreas.get("/areas", getAreasUser);
-routeAreas.get("/areas/:id/actions", getActionsArea);
-routeAreas.get("/areas/:id/reactions", getReactionsArea);
-routeAreas.post("/areas", createArea);
-routeAreas.delete("/areas/:id", deleteArea);
-routeAreas.get("/testAreas", testAreas);
+const getAllAreas = async (req, res, next) => {
+    try {
+        const areas = await Area.find();
+        return res.status(200).json(areas);
+    } catch (error) {
+        return next(error);
+    }
+}
+
+routeAreas.get('/areasAll', getAllAreas);
+routeAreas.get('/areas', getAreasUser);
+routeAreas.get('/areas/:id/actions', getActionsArea);
+routeAreas.get('/areas/:id/reactions', getReactionsArea);
+routeAreas.post('/areas', createArea);
+routeAreas.delete('/areas/:id', deleteArea);
+routeAreas.get('/testAreas', testAreas);
 
 export default routeAreas;

@@ -2,7 +2,6 @@ import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexServi
 import { google } from "googleapis";
 
 const youtubeReactions = async (action, userId) => {
-  console.log("Youtube reaction:", action);
   let access_token = await getAccesTokensServiceByUserId("Youtube", userId);
   const oauth2Client = new google.auth.OAuth2();
 

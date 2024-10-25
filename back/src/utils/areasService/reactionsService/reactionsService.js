@@ -1,6 +1,7 @@
 import { spotifyReactions } from "./spotifyReactions.js";
 import youtubeReactions from "./youtubeReactionService.js";
 import { xReactions } from "./xReactions.js";
+import redditReactions from "./redditReactions.js";
 
 export const reactionService = async (platform, action, userId) => {
     switch (platform) {
@@ -13,6 +14,8 @@ export const reactionService = async (platform, action, userId) => {
         case 'Youtube':
             youtubeReactions(action, userId);
             break;
+        case 'Reddit':
+            redditReactions(action, userId);
         default:
             return;
     }
