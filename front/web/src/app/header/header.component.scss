@@ -1,109 +1,97 @@
 .header-container {
     display: flex;
-    align-items: center;
     border: none;
-    width: 97.5vw;
-    height: 13vh;
+    width: 100%;
+    height: 5%;
+    background-color: #1E1E1E;
 }
 
-.center-header {
+.logo-container {
+    height: 100%;
+    width: 7.5%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.navigation-button-container {
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    height: 100%;
-    width: 73%;
-    gap: 7%;
+.logoKaizen {
+    height: 80%;
+    width: auto;
 }
 
-.navigation-button {
+.button-container {
+    height: 100%;
+    width: 10.5%;
     display: flex;
+    margin-left: auto;
+}
+
+.addArea-container {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addArea-button {
+    height: 80%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    height: 30%;
+    background: none;
+}
+
+.addArea-picture {
+    height: 70%;
     width: auto;
-    border-radius: 0.75vw;
+    border-radius: 50%;
+}
+
+
+.listArea-container {
+    height: 100%;
+    width: 30%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background-color: transparent;
 }
 
-.navigation-button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+.listArea-button {
+    height: 80%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
 }
 
-.text-navigation-button {
-    position: flex;
-    color: rgb(255, 255, 255);
-    font-family: 'Fontspring-heavy';
-    font-size: 1.5rem;
+.listArea-picture {
+    height: 70%;
     width: auto;
-    text-decoration: none;
 }
 
-.text-navigation-button::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: currentColor;
-    transition: width 0.1s ease-in-out;
-}
-
-.text-navigation-button:hover::after {
-    width: 100%;
-}
-
-.title-text {
-    font-family: 'Nexa Heavy';
-    font-size: 2vw;
-    color: rgb(255, 255, 255);
-}
-
-.logo {
-    display: flex;
-    width: 18vw;
-}
-
-.logo-title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr;
+.profile-container {
     height: 100%;
-    width: 20%;
-}
-
-.user-button-container {
+    width: 40%;
     display: flex;
-    width: 7%;
-    height: 100%;
-    align-items: center;
+    margin-left: auto;
     justify-content: center;
+    align-items: center;
 }
 
-.user-button {
-    display: flex;
-    border-radius: 100%;
-    height: 5vw;
-    width: 5vw;
-    cursor: pointer;
-    padding: 0;
-    border: white solid 0.1vw;
-    background-color: transparent;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.profile-button {
+    height: 80%;
+    width: 70%;
+    border: none;
+    background: none;
 }
 
-.user-icon {
-    width: 100%;
-    height: auto;
-    border-radius: 100%;
-    object-fit: cover;
+.profile-picture {
+    height: 100%;
+    width: auto;
+    border-radius: 50%;
 }
