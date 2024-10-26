@@ -12,10 +12,8 @@ import { FloatLabelModule } from "primeng/floatlabel";
 import { HeaderComponent } from "./header/header.component";
 import { LoginServicsePopupComponent } from "./header/login-servicse-popup/login-servicse-popup.component";
 import { HomePageComponent } from "./home-page/home-page.component";
-import { AREAPageComponent } from "./a-rea-page/a-rea-page.component";
-import { AddAreaComponent } from "./add-area/add-area.component";
-import { AReaComponent } from "./a-rea-page/a-rea/a-rea.component";
-import { ChoiceButtonComponent } from "./add-area/choice-button/choice-button.component";
+import { AreaPageComponent } from "./a-rea-page/a-rea-page.component";
+import { ChoiceButtonComponent } from "./a-rea-page/choice-button/choice-button.component";
 import { HttpClientModule } from "@angular/common/http";
 import {
   LucideAngularModule,
@@ -29,8 +27,8 @@ import {
   GitCommitVertical,
   CircleHelp,
 } from "lucide-angular";
-import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview.component";
-import { AReasComponent } from "./add-area/a-reas/a-reas.component";
+import { ChoicePreviewComponent } from "./a-rea-page/choice-preview/choice-preview.component";
+import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
 
 @NgModule({
   declarations: [
@@ -38,9 +36,7 @@ import { AReasComponent } from "./add-area/a-reas/a-reas.component";
     LoginPageComponent,
     RegisterPageComponent,
     HomePageComponent,
-    AREAPageComponent,
-    AddAreaComponent,
-    AReaComponent,
+    AreaPageComponent,
     ChoiceButtonComponent,
     ChoicePreviewComponent,
     AReasComponent,
