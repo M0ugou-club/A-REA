@@ -15,10 +15,6 @@
       "autoIncrement": true,
       "android": {
         "buildType": "apk"
-      },
-      "env": {
-        "EXPO_DEBUG": "false",
-        "NODE_ENV": "production"
       }
     }
   },
