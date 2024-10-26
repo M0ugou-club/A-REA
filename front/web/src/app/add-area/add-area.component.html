@@ -1,127 +1,96 @@
-<!--<div class="choose-area-page">
-    <div class="choose-service">
-        <div class="title-choice">
-            <p> Choisie Ton Action</p>
-        </div>
-        <div class="choices-container">
-            <app-choice-button *ngFor="let x of actions"
-                                   [choiceLogo]="chooseIcon(x.service)"
+<div class="a-rea-page">
+    <div class="display-a-rea"></div>
+    <div class="add-a-rea">
+        <div class="actions">
+            <div class="title-choice">
+                <div class="icons">
+                    <lucide-icon name="git-commit-horizontal" [size]="30" color="#3E3E3E" [strokeWidth]="2"></lucide-icon>
+                </div>
+                <div class="title-container">
+                    <p class="title-actions">Actions</p>
+                    <p class="subtitle-actions">Choisis ton action</p>
+                </div>
+                <lucide-icon [size]="32" name="ellipsis" color="white"></lucide-icon>
+            </div>
+            <div class="choices-container">
+                <app-choice-button *ngFor="let x of actions"
+                                   [choiceService]="x.service"
                                    [choiceTitle]="x.label"
+                                   [serviceColor]="'#1E1E1E'"
                                    (sendChoice)="setAction($event)"
                                    class="choices">
-            </app-choice-button>
-        </div>
-    </div>
-    <div class="area-preview">
-        <div class="title-area-choose">
-            <p>Voici ton A-Rea</p>
-            <label for="area-name">Choisie lui un nom</label>
-            <input id="area-name" type="text" [(ngModel)]="areaObj.area_title"/>
-            <label for="area-description">Décris ton A-REA</label>
-            <input id="area-description" type="text" [(ngModel)]="areaObj.area_description"/>
-        </div>
-        <div class="area-choose">
-            <div class="area-choose-eventpart">
-                <app-choice-button *ngIf="areaObj.action_name"
-                                   [choiceLogo]="chooseIcon(areaObj.action_platform)"
-                                   [choiceTitle]="areaObj.action_name"
-                                   (sendChoice)="setAction($event)"
-                                    class="choices">
                 </app-choice-button>
             </div>
-            <div>
-                <span class="arrow">→</span>
+        </div>
+        <div class="display">
+            <div class="title-preview">
+                <div class="icons">
+                    <lucide-icon name="git-fork" [size]="30" color="#3E3E3E" [strokeWidth]="2"></lucide-icon>
+                </div>
+                <div class="title-container">
+                    <p class="title-actions">Ton A-REA</p>
+                    <p class="subtitle-actions">Configure ton A-REA</p>
+                </div>
             </div>
-            <div class="area-choose-eventpart">
-                <app-choice-button *ngIf="areaObj.reaction_name"
-                                   [choiceLogo]="chooseIcon(areaObj.reaction_platform)"
-                                   [choiceTitle]="areaObj.reaction_name"
+            <div class="confing-a-rea">
+                <div class="title-a-rea-container">
+                    <p>Titre de ton A-REA</p>
+                    <div class="separator"></div>
+                    <textarea id="area-name" [(ngModel)]="areaObj.area_title" class="title-a-rea-input" placeholder="Choisi un Titre"></textarea>
+                </div>
+                <div class="description-a-rea-container">
+                    <p>Description de ton A-REA</p>
+                    <div class="separator"></div>
+                    <textarea id="area-description" [(ngModel)]="areaObj.area_description" class="description-a-rea-input" placeholder="Description de votre A-REA"></textarea>
+                </div>
+                <div class="area-preview">
+                    <div class="action-preview">
+                        <p>Ton Action</p>
+                        <div class="separator"></div>
+                        <div *ngIf="areaObj.action_name" class="choices-preview">
+                            <app-choice-preview [choiceService]="areaObj.action_platform"
+                                                [choiceTitle]="areaObj.action_name"
+                                                [serviceColor]="'#1E1E1E'"
+                            ></app-choice-preview>
+                        </div>
+                    </div>
+                    <lucide-icon name="git-commit-vertical" [size]="48" color="#0089ED" [strokeWidth]="1.5" style="position: absolute"></lucide-icon>
+                    <div class="reaction-preview">
+                        <p>Ta Réaction</p>
+                        <div class="separator"></div>
+                        <div *ngIf="areaObj.reaction_name" class="choices-preview">
+                            <app-choice-preview [choiceService]="areaObj.reaction_platform"
+                                                [choiceTitle]="areaObj.reaction_name"
+                                                [serviceColor]="'#1E1E1E'"
+                            ></app-choice-preview>
+                        </div>
+                    </div>
+                </div>
+                <div class="approve-selection" (click)="approveSelection()">
+                    <p> Crée Ton A-REA</p>
+                </div>
+            </div>
+        </div>
+        <div class="reactions">
+            <div class="title-choice">
+                <div class="icons">
+                    <lucide-icon name="git-compare-arrows" [size]="30" color="#3E3E3E" [strokeWidth]="2"></lucide-icon>
+                </div>
+                <div class="title-container">
+                    <p class="title-réactions">Réactions</p>
+                    <p class="subtitle-réactions">Choisis ta réaction</p>
+                </div>
+                <lucide-icon [size]="32" name="ellipsis" color="white"></lucide-icon>
+            </div>
+            <div class="choices-container">
+                <app-choice-button *ngFor="let x of reactions"
+                                   [choiceService]="x.service"
+                                   [choiceTitle]="x.label"
+                                   [serviceColor]="'#1E1E1E'"
                                    (sendChoice)="setReaction($event)"
-                                    class="choices">
+                                   class="choices">
                 </app-choice-button>
             </div>
-        </div>
-        <div class="utils-container">
-            <button (click)="resetSelection()">cancel</button>
-            <button (click)="approveSelection()">ok</button>
-        </div>
-    </div>
-    <div class="choose-service">
-        <div class="title-choice">
-            <p> Choisie Ta Réaction</p>
-        </div>
-        <div class="choices-container">
-            <app-choice-button *ngFor="let x of reactions"
-                               [choiceLogo]="chooseIcon(x.service)"
-                               [choiceTitle]="x.label"
-                               (sendChoice)="setReaction($event)"
-                               class="choices">
-            </app-choice-button>
-        </div>
-    </div>
-</div>-->
-
-<div class="parent">
-    <div class="actions">
-        <div class="title">
-            <div>
-                <p class="title-actions">Actions</p>
-                <p class="subtitle-actions">Choisis ton action</p>
-            </div>
-            <lucide-icon [size]="32" name="ellipsis"></lucide-icon>
-        </div>
-        <div class="separator"></div>
-        <div class="choices-container">
-            <app-choice-button *ngFor="let x of actions"
-                               [choiceService]="x.service"
-                               [choiceTitle]="x.label"
-                               [serviceColor]="chooseColor(x.service)"
-                               (sendChoice)="setAction($event)"
-                               class="choices">
-            </app-choice-button>
-        </div>
-    </div>
-    <div class="title-a-rea">
-        <div class="title-a-rea-container">
-            <textarea id="area-name" [(ngModel)]="areaObj.area_title" class="title-a-rea-input" placeholder="Titre de ton A-REA"></textarea>
-            <div class="refresh-title-container" (click)="resetSelection()">
-                <lucide-icon name="refresh-ccw" [size]="40" class="refresh-title" [strokeWidth]="2"></lucide-icon>
-            </div>
-        </div>
-        <div class="description-a-rea">
-            <textarea id="area-description" [(ngModel)]="areaObj.area_description" class="description-a-rea-input" placeholder="Description de votre A-REA"></textarea>
-        </div>
-    </div>
-    <div class="display"> </div>
-    <div class="tuto">
-        <div>
-            <p>caca</p>
-        </div>
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <div class="reactions">
-        <div class="title">
-            <div>
-                <p class="title-réactions">Réactions</p>
-                <p class="subtitle-réactions">Choisis ta réaction</p>
-            </div>
-            <lucide-icon name="ellipsis" [size]="32"></lucide-icon>
-        </div>
-        <div class="separator"></div>
-        <div class="choices-container">
-            <app-choice-button *ngFor="let x of reactions"
-                               [choiceService]="x.service"
-                               [choiceTitle]="x.label"
-                               [serviceColor]="chooseColor(x.service)"
-                               (sendChoice)="setReaction($event)"
-                               class="choices">
-            </app-choice-button>
         </div>
     </div>
 </div>

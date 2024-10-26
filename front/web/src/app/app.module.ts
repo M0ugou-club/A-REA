@@ -23,7 +23,12 @@ import {
   ChevronDown,
   ChevronUp,
   RefreshCcw,
+  GitCommitHorizontal,
+  GitFork,
+  GitCompareArrows,
+  GitCommitVertical,
 } from "lucide-angular";
+import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +40,7 @@ import {
     AddAreaComponent,
     AReaComponent,
     ChoiceButtonComponent,
+    ChoicePreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,16 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    LucideAngularModule.pick({ Ellipsis, ChevronDown, ChevronUp, RefreshCcw }),
+    LucideAngularModule.pick({
+      Ellipsis,
+      ChevronDown,
+      ChevronUp,
+      RefreshCcw,
+      GitCommitHorizontal,
+      GitFork,
+      GitCompareArrows,
+      GitCommitVertical,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

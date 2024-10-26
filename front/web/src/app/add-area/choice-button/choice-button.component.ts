@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 })
 export class ChoiceButtonComponent {
   @Input() choiceService: string = "";
-  @Input() choiceLogo: string = "";
   @Input() choiceTitle: string = "";
   @Input() serviceColor: string = "";
 
