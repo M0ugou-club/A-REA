@@ -22,6 +22,7 @@ export class AreaPageComponent implements OnInit {
   };
 
   areas: {
+    areaId: number;
     actionService: string;
     reactionService: string;
     actionText: string;
@@ -86,10 +87,11 @@ export class AreaPageComponent implements OnInit {
 
         data.forEach((area: any) => {
           this.areas.push({
+            areaId: area._id,
             actionService: area.action.platform,
             reactionService: area.reactions.platform,
             actionText: area.action.title,
-            reactionText: area.action.title,
+            reactionText: area.reactions.title,
             title: area.title,
           });
           console.log(this.areas);
@@ -206,13 +208,15 @@ export class AreaPageComponent implements OnInit {
       body: JSON.stringify(this.areaObj),
     })
       .then((response) => {
-        console.log(response);
+        if (!response.ok) {
+          alert("Vous n'avez pas rempli tous les champs");
+          return;
+        }
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
-
-    this.router.navigate(["/a-rea"]);
   }
 
   chooseColor(choice: string) {

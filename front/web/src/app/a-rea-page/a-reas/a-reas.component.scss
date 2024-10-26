@@ -4,11 +4,29 @@
   border-radius: 6px;
   width: 100%;
   height: 100%;
+
   .hover-icon {
+    color: #2A2A2A;
+    cursor: pointer;
+    position: relative;
     opacity: 0;
     transition: opacity 0.5s;
-    color: #2A2A2A; cursor: pointer
   }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: auto;
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: #1E1E1E;
+    position: absolute;
+    z-index: 3;
+    border-radius: 6px;
+    filter: drop-shadow(-3px 0px 10px rgba(0, 0, 0, 0.5));
+  }
+
   &:hover {
     .hover-icon {
       opacity: 1;
@@ -41,4 +59,41 @@
   width: 26px;
   height: 26px;
   padding-left: 2%;
+}
+
+.separator {
+  width: 95%;
+  margin-left: 3%;
+  border-top: 1px solid rgba(204, 204, 204, 0.2);
+}
+
+.action, .reaction, .delete {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 5%;
+  p {
+    color: white;
+    padding-left: 5%;
+    font-family: "Poppins-Medium";
+  }
+}
+
+.delete {
+  cursor: pointer;
+  p {
+    color: red;
+    font-weight: bold;
+    font-family: "Poppins-Medium";
+  }
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.delete:hover {
+  background-color: #151515;
+}
+
+.delete:active {
+  background-color: #1E1E1E;
 }

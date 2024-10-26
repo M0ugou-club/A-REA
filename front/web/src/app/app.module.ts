@@ -26,6 +26,7 @@ import {
   GitCompareArrows,
   GitCommitVertical,
   CircleHelp,
+  Trash2,
 } from "lucide-angular";
 import { ChoicePreviewComponent } from "./a-rea-page/choice-preview/choice-preview.component";
 import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
@@ -58,6 +59,7 @@ import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
       GitCompareArrows,
       GitCommitVertical,
       CircleHelp,
+      Trash2,
     }),
   ],
   providers: [],
