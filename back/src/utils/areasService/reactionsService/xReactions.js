@@ -1,18 +1,9 @@
 import { getAccesTokensServiceByUserId } from '../../../routes/tokens/indexService.js'
 
-export const xReactions = async (action, userId) => {
-    let accessToken = ""
-    let deviceId = ""
-
-    accessToken = await getAccesTokensServiceByUserId("Spotify", userId);
-    deviceId = await getSpotifyDeviceId(accessToken);
-    if (deviceId == null) {
-        console.log('No active device found');
-        return;
-    }
+export const xReactions = async (action, accessToken, userId) => {
     switch (action) {
         case 'post_new_tweet':
-            postNewTweet(accessToken, deviceId);
+            postNewTweet(accessToken);
             break;
         default:
             return;
@@ -20,10 +11,10 @@ export const xReactions = async (action, userId) => {
     return;
 };
 
-const postNewTweet = async (accessToken, deviceId) => {
+const postNewTweet = async (accessToken) => {
     try {
         const body = JSON.stringify({
-            text: "Incroyable la nouvelle vidéo de Inoxtag !"
+            text: "Inoxtag je t'aime"
         });
 
         const response = await fetch(`https://api.twitter.com/2/tweets`, {

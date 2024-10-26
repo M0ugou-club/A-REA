@@ -4,9 +4,9 @@ const platforms_icons = {
     "color": "#429660",
     "connexion": true
   },
-  "Deezer": {
-    "icon": "https://agreeable.fr/uploads/thumbnails/novo-logo-deezer-sem-fundo-66eaf4a6e0019274130722.png",
-    "color": "#5064AC",
+  "Twitch": {
+    "icon": "https://static.vecteezy.com/system/resources/previews/018/930/502/non_2x/twitch-logo-twitch-icon-transparent-free-png.png",
+    "color": "#18181b",
     "connexion": true
   },
   "OpenMeteo": {
@@ -16,7 +16,7 @@ const platforms_icons = {
   },
   "X": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/1/19/X_logo_twitter_new_brand_icon.svg",
-    "color": "#1DA1F2", 
+    "color": "#000000",
     "connexion": true
   },
   "Reddit": {
@@ -27,11 +27,6 @@ const platforms_icons = {
   "Youtube": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg",
     "color": "#9F3531",
-    "connexion": true
-  },
-  "Discord": {
-    "icon": "https://img.icons8.com/color/512/discord-logo.png",
-    "color": "#E1306C",
     "connexion": true
   },
 };

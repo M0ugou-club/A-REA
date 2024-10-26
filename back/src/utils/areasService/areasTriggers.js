@@ -15,7 +15,7 @@ export const actionsTriggers = async () => {
 
     users.forEach(async user => {
         user.a_rea.forEach(async area => {
-            if (await actionsChanges(area.action?.platform, area.action?.type, area.action?.data, user._id, area.action._id) === true) {
+            if (await actionsChanges(area.action.platform, area.action.type, area.action.data, user._id, area.action._id) === true) {
                 reactionService(area.reactions.platform, area.reactions.type, user.id);
             }
         });

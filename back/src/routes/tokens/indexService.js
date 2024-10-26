@@ -30,6 +30,27 @@ export const getAccesTokensServiceByUserToken = async (platform, header) => {
     }
 }
 
+export const getRefreshTokensServiceByUserId = async (platform, userId) => {
+    try {
+        const user = await User.findOne({
+            _id: userId,
+        }).populate('tokens');
+        if (!user) {
+            console.log("User not found");
+        }
+        const userToken = user.tokens.find((token) => token.platform === platform);
+        if (!userToken) {
+            console.log("Token not found");
+        }
+        if (!userToken.refreshtoken) {
+            return null;
+        }
+        return userToken.refreshtoken;
+    } catch (error) {
+        return null;
+    }
+}  
+
 export const getAccesTokensServiceByUserId = async (platform, userId) => {
     try {
         const user = await User.findOne({
