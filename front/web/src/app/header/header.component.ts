@@ -9,10 +9,9 @@ import { Router } from "@angular/router";
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  showLoginPopup = false;
+  showLoginPopup = true;
 
   handleUserIconButton(): void {
-    console.log("test");
     this.showLoginPopup = !this.showLoginPopup;
   }
 
