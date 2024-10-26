@@ -1,5 +1,21 @@
 <div class="a-rea-page">
-    <div class="display-a-rea"></div>
+    <div class="display-a-rea">
+        <div class="a-reas-container">
+            <app-a-reas
+                        [areaMainService]="'icons/List.svg'"
+                        [areaTitle]="'Liste des A-REAS'"
+                        [serviceColor]="'#1E1E1E'"
+                        class="a-rea">
+            </app-a-reas>
+            <app-a-reas *ngFor="let x of areas"
+                               [areaMainService]="x.actionService"
+                               [areaSubService]="x.reactionService"
+                               [areaTitle]="x.title"
+                               [serviceColor]="'#1E1E1E'"
+                               class="a-rea">
+            </app-a-reas>
+        </div>
+    </div>
     <div class="add-a-rea">
         <div class="actions">
             <div class="title-choice">

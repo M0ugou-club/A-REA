@@ -1,4 +1,4 @@
-.choice-button {
+.a-rea {
   display: flex;
   align-items: center;
   border-radius: 6px;
@@ -7,8 +7,7 @@
   .hover-icon {
     opacity: 0;
     transition: opacity 0.5s;
-    color: #2A2A2A;
-    cursor: pointer
+    color: #2A2A2A; cursor: pointer
   }
   &:hover {
     .hover-icon {
@@ -17,17 +16,13 @@
   }
 }
 
-.choice-button-container {
+.a-rea-container {
   align-items: center;
   display: flex;
   width: 100%;
 }
 
-.choice-button-container:hover {
-  cursor: pointer;
-}
-
-.choice-button-content {
+.a-rea-title {
   display: flex;
   align-items: center;
   text-align: center;
@@ -39,11 +34,11 @@
     font-weight: bold;
     font-size: small;
   }
+  padding-left: 2%;
 }
 
 .logo {
   width: 26px;
   height: 26px;
   padding-left: 2%;
-  padding-right: 2%;
 }

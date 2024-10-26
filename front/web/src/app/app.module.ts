@@ -27,8 +27,10 @@ import {
   GitFork,
   GitCompareArrows,
   GitCommitVertical,
+  CircleHelp,
 } from "lucide-angular";
 import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview.component";
+import { AReasComponent } from "./add-area/a-reas/a-reas.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview
     AReaComponent,
     ChoiceButtonComponent,
     ChoicePreviewComponent,
+    AReasComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview
       GitFork,
       GitCompareArrows,
       GitCommitVertical,
+      CircleHelp,
     }),
   ],
   providers: [],

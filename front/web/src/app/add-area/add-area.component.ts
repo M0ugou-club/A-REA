@@ -21,6 +21,14 @@ export class AddAreaComponent implements OnInit {
     reaction_platform: "",
   };
 
+  areas: {
+    actionService: string;
+    reactionService: string;
+    actionText: string;
+    reactionText: string;
+    title: string;
+  }[] = [];
+
   actions: any[] = [];
 
   reactions: any[] = [];
@@ -44,6 +52,7 @@ export class AddAreaComponent implements OnInit {
       })
         .then((response) => {
           if (response.status === 200) {
+            this.loadAReas();
             this.loadActions();
             this.loadReactions();
             this.loadServicesIcons();
@@ -57,6 +66,38 @@ export class AddAreaComponent implements OnInit {
     } else {
       this.router.navigate(["/login"]);
     }
+  }
+
+  loadAReas(): void {
+    fetch("http://localhost:8000/areas", {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+
+        data.forEach((area: any) => {
+          this.areas.push({
+            actionService: area.action.platform,
+            reactionService: area.reactions.platform,
+            actionText: area.action.title,
+            reactionText: area.action.title,
+            title: area.title,
+          });
+          console.log(this.areas);
+        });
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
   }
 
   loadActions(): void {
