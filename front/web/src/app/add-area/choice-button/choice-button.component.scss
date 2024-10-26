@@ -6,6 +6,16 @@
   height: 100%;
 }
 
+.choice-button-container {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.choice-button-container:hover {
+  cursor: pointer;
+}
+
 .choice-button-content {
   display: flex;
   align-items: center;

@@ -11,7 +11,6 @@
   border-right: 2px solid #000;
 }
 
-
 .add-a-rea {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -213,6 +212,7 @@
 .title-a-rea-input::placeholder,.description-a-rea-input::placeholder {
   color: white;
   font-family: "Poppins-Medium";
+  font-style: italic;
 }
 
 //.refresh-title-container {
