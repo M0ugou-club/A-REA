@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginPageComponent } from "./loginPage/loginPage.component";
-import { RegisterPageComponent } from "./registerPage/registerPage.component"
+import { RegisterPageComponent } from "./registerPage/registerPage.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ImageModule } from "primeng/image";
@@ -17,6 +17,18 @@ import { AddAreaComponent } from "./add-area/add-area.component";
 import { AReaComponent } from "./a-rea-page/a-rea/a-rea.component";
 import { ChoiceButtonComponent } from "./add-area/choice-button/choice-button.component";
 import { HttpClientModule } from "@angular/common/http";
+import {
+  LucideAngularModule,
+  Ellipsis,
+  ChevronDown,
+  ChevronUp,
+  RefreshCcw,
+  GitCommitHorizontal,
+  GitFork,
+  GitCompareArrows,
+  GitCommitVertical,
+} from "lucide-angular";
+import { ChoicePreviewComponent } from "./add-area/choice-preview/choice-preview.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +40,7 @@ import { HttpClientModule } from "@angular/common/http";
     AddAreaComponent,
     AReaComponent,
     ChoiceButtonComponent,
+    ChoicePreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +49,16 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    LucideAngularModule.pick({
+      Ellipsis,
+      ChevronDown,
+      ChevronUp,
+      RefreshCcw,
+      GitCommitHorizontal,
+      GitFork,
+      GitCompareArrows,
+      GitCommitVertical,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

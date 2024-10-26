@@ -1,8 +1,9 @@
-<div class="choice-button" (click)="choose()">
-    <div class="choice-button-content">
-        <img [src]="choiceLogo" alt=" " class="logo">
+<div class="choice-button" [ngStyle]="{ 'background-color': serviceColor}">
+    <div class="choice-button-container" (click)="choose()">
+        <img src="/icons/{{choiceService}}.png" alt=" " class="logo" />
+        <div class="choice-button-content">
+            <p>{{ choiceTitle }}</p>
+        </div>
     </div>
-    <div class="choice-button-content">
-        <p>{{ choiceTitle }}</p>
-    </div>
+    <lucide-icon (click)="openChoice()" name="{{ isOpen ? 'chevron-up' : 'chevron-down'}}" style="color: white; cursor: pointer"></lucide-icon>
 </div>
