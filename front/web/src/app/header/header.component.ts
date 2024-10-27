@@ -15,11 +15,12 @@ export class HeaderComponent {
     this.showLoginPopup = !this.showLoginPopup;
   }
 
-  handleHomeButtonClick() {
-    this.router.navigate(["dashboard/"]);
+  goToAreas() {
+    console.log("cacadou");
+    this.router.navigate(["dashboard/a-rea"]);
   }
 
-  handleAreaButtonClick() {
-    this.router.navigate(["dashboard/a-rea"]);
+  goToDashboard = () => {
+    this.router.navigate(["dashboard/"]);
   }
 }

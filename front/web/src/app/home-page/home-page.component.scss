@@ -28,7 +28,98 @@
     display: flex;
     height: 40%;
     width: 100%;
-    background-color: blue;
+}
+
+.profile-container {
+    display: flex;
+    height: 100%;
+    width: 35%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.profile-square {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    border-radius: 20px;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+.profile-icon-container {
+    display: flex;
+    height: 60%;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profile-icon {
+    display: flex;
+    height: 60%;
+    width: auto;
+    border-radius: 60px;
+    margin-left: 8%;
+}
+
+.profile-text-container {
+    display: flex;
+    width: 100%;
+    height: 40%;
+    flex-direction: column;
+}
+
+.profile-name {
+    display: flex;
+    font-size: 200%;
+    color: #FFFFFF;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+}
+
+.profile-email {
+    display: flex;
+    color: #C4C4C4;
+    font-size: 100%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+
+}
+
+.profile-grade {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 120%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+    margin-top: 7%;
+}
+
+.areas-container {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.areas-square {
+    display: flex;
+    height: 95%;
+    width: 98%;
+    border-radius: 20px;
+    background-image: url('/home/areas-bg.svg'); 
+    background-size: cover;
+    background-position: center;
 }
 
 // second row with servies and documentaire sections
@@ -38,7 +129,43 @@
     height: 40%;
     width: 100%;
     justify-content: center;
-    background-color: green;
+    margin-top: 2%;
+}
+
+.service-container {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.service-square {
+    display: flex;
+    height: 95%;
+    width: 98%;
+    border-radius: 20px;
+    background-image: url('/home/areas-bg.svg'); 
+    background-size: cover;
+    background-position: center;
+}
+
+.docu-container {
+    display: flex;
+    height: 100%;
+    width: 35%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.docu-square {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    border-radius: 20px;
+    background-color: #1E1E1E;
 }
 
 
