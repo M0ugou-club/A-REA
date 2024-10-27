@@ -12,7 +12,16 @@ const reactions = {
   },
   X: {
     "post_new_tweet": "post un nouveau tweet",
-  }
+  },
+  Twitch: {
+    "comment_inox_live": "Commente le live de InoxTag",
+    "comment_michou_live": "Commente le live de Michou",
+  },
+  Reddit: {
+    "Like": "Like Reddit post",
+    "Dislike": "Dislike Reddit post",
+    "Comment": "Comment Reddit post"
+  },
 }
 
 export default reactions

@@ -1,114 +1,148 @@
 import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexService.js";
 import { google } from "googleapis";
+import { postAccesToken } from '../../addTokens.js';
+import { getRefreshTokensServiceByUserId } from '../../../routes/tokens/indexService.js'
 
-const youtubeReactions = async (action, userId) => {
-  console.log("Youtube reaction:", action);
-  let access_token = await getAccesTokensServiceByUserId("Youtube", userId);
-  const oauth2Client = new google.auth.OAuth2();
+const refreshYoutubeAccessToken = async (refreshToken) => {
+    const response = await fetch("https://oauth2.googleapis.com/token", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            client_id: process.env.YOUTUBE_CLIENT_ID,
+            client_secret: process.env.YOUTUBE_CLIENT_SECRET,
+            refresh_token: refreshToken,
+            grant_type: 'refresh_token'
+        })
+    });
 
-  oauth2Client.setCredentials({
-    access_token: access_token,
-  });
-
-  const youtube = google.youtube({
-    version: "v3",
-    auth: oauth2Client,
-  });
-
-  console.log("Youtube reaction:", action);
-
-  if (action == "Like") {
-    const videoId = await getLastVideo(youtube);
-    await likeVideo(youtube, videoId);
-  }
-
-  if (action == "Dislike") {
-    const videoId = await getLastVideo(youtube);
-    await dislikeVideo(youtube, videoId);
-  }
-
-  if (action == "CommentVideo") {
-    const videoId = await getLastVideo(youtube);
-    await commentTheVideo(youtube, videoId);
-  }
+    if (response.ok) {
+        const data = await response.json();
+        return data.access_token;
+    } else {
+        throw new Error('Failed to refresh Youtube access token');
+    }
 };
 
 const getLastVideo = async (youtube) => {
-  try {
     const response = await youtube.search.list({
-      channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
-      order: "date",
-      part: "snippet",
-      type: "video",
-      maxResults: 1,
+        channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+        order: "date",
+        part: "snippet",
+        type: "video",
+        maxResults: 1,
     });
 
-    const video = response.data.items;
-    if (video.length == 0) {
-      console.log("No video found");
-      return;
+    if (response.status == 200) {
+        const video = response.data.items;
+        if (video.length == 0) {
+            console.log("No video found");
+            return;
+        } else {
+            const videoId = video[0].id.videoId;
+            console.log("Last video id:", videoId);
+            return videoId;
+        }
+        return;
     } else {
-      const videoId = video[0].id.videoId;
-      console.log("Last video id:", videoId);
-      return videoId;
+        console.log("Error :", response.status + " " + response.statusText);
+        throw new Error(`Youtube API error: ${response.status} ${response.statusText}`);
     }
-  } catch (error) {
-    console.error("Failed to get last video:", error);
-  }
+    return;
+};
+
+const youtubeReactions = async (action, accessToken, userId) => {
+    const oauth2Client = new google.auth.OAuth2();
+
+    oauth2Client.setCredentials({
+      access_token: accessToken,
+    });
+
+    const youtube = google.youtube({
+      version: "v3",
+      auth: oauth2Client,
+    });
+
+    try {
+        const videoId = await getLastVideo(youtube);
+        switch (action) {
+            case 'Like':
+                await likeVideo(youtube, videoId);
+                return;
+            case 'Dislike':
+                await dislikeVideo(youtube, videoId);
+                return;
+            case 'CommentVideo':
+                await commentTheVideo(youtube, videoId);
+                return;
+            default:
+                return;
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            const refreshToken = await getRefreshTokensServiceByUserId('Youtube', userId);
+            const newAccessToken = await refreshYoutubeAccessToken(refreshToken);
+            await postAccesToken(userId, "Youtube", newAccessToken);
+            return await youtubeReactions(action, newAccessToken, userId);
+        }
+        console.log(error);
+    }
 };
 
 const likeVideo = async (youtube, videoId) => {
-  const response = await youtube.videos.rate({
-    id: videoId,
-    rating: "like",
-  });
+    const response = await youtube.videos.rate({
+        id: videoId,
+        rating: "like",
+    });
 
-  if (response.status == 204) {
-    console.log("Video liked successfully!");
-  } else {
-    console.error("Failed to like video:", response.statusText);
-  }
+    if (response.status == 200) {
+        console.log("Video liked successfully!");
+    } else {
+        console.log("Error :", response.status + " " + response.statusText);
+        throw new Error(`Youtube API error: ${response.status} ${response.statusText}`);
+    }
   return;
 };
 
 const dislikeVideo = async (youtube, videoId) => {
-  const response = await youtube.videos.rate({
-    id: videoId,
-    rating: "dislike",
-  });
+    const response = await youtube.videos.rate({
+        id: videoId,
+        rating: "dislike",
+    });
 
-  if (response.status == 204) {
-    console.log("Video disliked successfully!");
-  } else {
-    console.error("Failed to dislike video:", response.statusText);
-  }
+    if (response.status == 200) {
+        console.log("Video disliked successfully!");
+    } else {
+        console.log("Error :", response.status + " " + response.statusText);
+        throw new Error(`Youtube API error: ${response.status} ${response.statusText}`);
+    }
   return;
 };
 
 const commentTheVideo = async (youtube, videoId) => {
-  const response = await youtube.commentThreads.insert({
-    part: "snippet",
-    requestBody: {
-      snippet: {
-        channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
-        videoId: videoId,
-        topLevelComment: {
-          snippet: {
-            textOriginal: "LA VIDEO EST TROP BIEN !",
-          },
+    const response = await youtube.commentThreads.insert({
+        part: "snippet",
+        requestBody: {
+            snippet: {
+                channelId: process.env.YOUTUBE_INOX_CHANNEL_ID,
+                videoId: videoId,
+                topLevelComment: {
+                    snippet: {
+                        textOriginal: "Merci Inox pour tes videos",
+                    },
+                },
+            },
         },
-      },
-    },
-  });
+    });
 
-  if (response.status == 200) {
-    console.log("Video added to Watch Later playlist successfully!");
-  } else {
-    console.error(
-      "Failed to add video to Watch Later playlist:",
-      response.statusText
-    );
-  }
+    if (response.status == 200) {
+        console.log("Video commented!");  
+    } else {
+        console.log("Error :", response.status + " " + response.statusText);
+        throw new Error(`Youtube API error: ${response.status} ${response.statusText}`);
+    }
+    return;
 };
 
 export default youtubeReactions

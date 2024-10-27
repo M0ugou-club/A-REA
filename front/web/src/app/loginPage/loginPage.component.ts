@@ -30,7 +30,6 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   }
 
   onLogin() {
-    console.log("cccccczaezazzzzzzazeazeazeazeazeazeaze")
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailRegex.test(this.loginObj.email)) {
@@ -45,8 +44,6 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    console.log("LoginObj:", this.loginObj);
-
     fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
@@ -55,7 +52,6 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       body: JSON.stringify(this.loginObj),
     })
       .then((response) => {
-        console.log("Response:", response);
         if (response.status === 404) {
           alert("Username invalid");
           return null;
@@ -64,8 +60,6 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
           return null;
         } else if (response.status === 200) {
           return response.json().then((data) => {
-            console.log("Login réussie:");
-
             const token = data.token;
 
             localStorage.setItem("authToken", token);

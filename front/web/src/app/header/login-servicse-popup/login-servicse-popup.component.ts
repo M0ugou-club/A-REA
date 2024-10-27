@@ -29,8 +29,8 @@ export class LoginServicsePopupComponent implements OnInit {
       func: () => this.connectionYoutube(),
     },
     {
-      key: "Discord",
-      func: () => this.connectionDiscord(),
+      key: "Twitch",
+      func: this.connectionTwhitch,
     },
     {
       key: "X",
@@ -39,10 +39,6 @@ export class LoginServicsePopupComponent implements OnInit {
     {
       key: "Reddit",
       func: () => this.connectionReddit(),
-    },
-    {
-      key: "TikTok",
-      func: () => this.connectionTiktok(),
     },
   ];
 
@@ -153,24 +149,23 @@ export class LoginServicsePopupComponent implements OnInit {
     }
   }
 
-  connectionDiscord(): void {
-    if (this.isConnectedToService("Discord") == true) {
-      fetch("http://localhost:8000/tokens/platform/Discord", {
-        method: "DELETE",
+  connectionTwhitch(): void {
+    
+    if (this.isConnected) {
+      fetch('http://localhost:8000/tokens/platform/Twitch', {
+        method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          platform: "Discord",
+          platform: "Twitch",
         }),
       }).catch((error) => {
         console.error("Error:", error);
       });
     } else {
-      window.location.href =
-        "http://localhost:8000/oauth/Discord?token=" +
-        localStorage.getItem("authToken");
+      window.location.href = 'http://localhost:8000/oauth/Twitch?token=' + localStorage.getItem('authToken');
     }
   }
 
@@ -214,28 +209,7 @@ export class LoginServicsePopupComponent implements OnInit {
         "http://localhost:8000/oauth/Reddit?token=" +
         localStorage.getItem("authToken");
     }
-  }
-
-  connectionTiktok(): void {
-    if (this.isConnectedToService("TikTok") == true) {
-      fetch("http://localhost:8000/tokens/platform/TikTok", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("authToken"),
-        },
-        body: JSON.stringify({
-          platform: "Spotify",
-        }),
-      }).catch((error) => {
-        console.error("Error:", error);
-      });
-    } else {
-      window.location.href =
-        "http://localhost:8000/oauth/TikTok?token=" +
-        localStorage.getItem("authToken");
-    }
-  }
+  } 
 
   chooseConnection(service: string) {
     const connection = this.connectionFunctions.find(

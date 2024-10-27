@@ -11,7 +11,6 @@ export default function LoginPopup() {
     async function onLogout() {
         try {
             await AsyncStorage.removeItem('accessToken');
-            console.log('Logout');
             navigation.navigate('Login');
         } catch (error) {
             alert('Error:', error);
@@ -21,7 +20,6 @@ export default function LoginPopup() {
     const handleSpotifyLogin = async () => {
         const authToken = await AsyncStorage.getItem('accessToken');
         const authUrl = 'http://inox-qcb.fr:8000/oauth/Spotify?token=' + authToken;
-        console.log(authUrl);
 
         let result = await WebBrowser.openBrowserAsync(authUrl);
     };

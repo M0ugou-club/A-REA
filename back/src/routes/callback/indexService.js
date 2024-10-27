@@ -72,7 +72,7 @@ export const youtubeCallbackService = async (req, res) => {
     }
 };
 
-export const instagramCallbackService = async (req, res) => {
+export const twitchCallbackService = async (req, res) => {
     const code = req.query.code;
     const state = req.query.state;
 
@@ -81,28 +81,24 @@ export const instagramCallbackService = async (req, res) => {
     }
 
     const dataSent = querystring.stringify({
-        client_id: process.env.INSTAGRAM_CLIENT_ID,
-        client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+        client_id: process.env.TWITCH_CLIENT_ID,
+        client_secret: process.env.TWITCH_CLIENT_SECRET,
         grant_type: 'authorization_code',
-        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI,
+        redirect_uri: process.env.TWITCH_REDIRECT_URI,
         code: code
     });
 
     try {
-        const response = await axios.post('https://api.instagram.com/oauth/access_token', dataSent, {
+        const response = await axios.post('https://id.twitch.tv/oauth2/token', dataSent, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         });
 
-        const { access_token} = response.data;
-        const longLivedTokenResponse = await axios.get(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${process.env.INSTAGRAM_CLIENT_SECRET}&access_token=${access_token}`);
-        const longLivedAccessToken = longLivedTokenResponse.data.access_token;
-        const expires_in = longLivedTokenResponse.data.expires_in;
-        const refresh_token = "";
-
+        const { access_token, refresh_token } = response.data;
         const fakeDate = new Date('2030-01-01T00:00:00Z');
-        postToken(state, "Instagram", access_token, access_token, fakeDate);
+
+        postToken(state, "Twitch", access_token, refresh_token, fakeDate);
 
         return res.status(200).send({ access_token: longLivedAccessToken, user_id: user_id });
     } catch (error) {
