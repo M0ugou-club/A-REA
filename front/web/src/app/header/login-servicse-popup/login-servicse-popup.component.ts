@@ -29,8 +29,8 @@ export class LoginServicsePopupComponent implements OnInit {
       func: () => this.connectionYoutube(),
     },
     {
-      key: "Discord",
-      func: () => this.connectionDiscord(),
+      key: "Twitch",
+      func: () => this.connectionTwitch(),
     },
     {
       key: "X",
@@ -153,23 +153,23 @@ export class LoginServicsePopupComponent implements OnInit {
     }
   }
 
-  connectionDiscord(): void {
-    if (this.isConnectedToService("Discord") == true) {
-      fetch("http://localhost:8000/tokens/platform/Discord", {
+  connectionTwitch(): void {
+    if (this.isConnectedToService("Twitch") == true) {
+      fetch("http://localhost:8000/tokens/platform/Twitch", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),
         },
         body: JSON.stringify({
-          platform: "Discord",
+          platform: "Twitch",
         }),
       }).catch((error) => {
         console.error("Error:", error);
       });
     } else {
       window.location.href =
-        "http://localhost:8000/oauth/Discord?token=" +
+        "http://localhost:8000/oauth/Twitch?token=" +
         localStorage.getItem("authToken");
     }
   }
