@@ -13,18 +13,23 @@ export default function Login() {
     const checkLoginStatus = async () => {
       try {
         const token = await AsyncStorage.getItem('accessToken');
+        console.log(token);
         if (token === null) {
+          console.log('Zob2');
           return;
         }
         const response = await fetch("http://inox-qcb.fr:8000/isLogged", {
+          method: "GET",
           headers: {
             "Authorization": "Bearer" + token,
           },
         });
-
         if (response.status === 200) {
+          console.log('Zob3');
           navigation.navigate('Home');
-        }
+        } else (
+          console.log(response.status + ' : Zob4')
+        );
       } catch (error) {
         console.error('Error:', error);
       }

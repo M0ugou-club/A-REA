@@ -60,16 +60,16 @@ export default function NavigationBar() {
                         Areas
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNavigation}>
+                <TouchableOpacity style={styles.buttonNavigation} onPress={() => navigation.navigate('Connection')}>
                     <Icon name="user"
                         style={[
                             styles.icon,
-                            route.name === '' && styles.iconChoosen
+                            route.name === 'Connection' && styles.iconChoosen
                     ]} />
                     <Text
                         style={[
                             styles.textButton,
-                            route.name === '' && styles.textButtonChoosen
+                            route.name === 'Connection' && styles.textButtonChoosen
                     ]}>
                         Paramètres
                     </Text>

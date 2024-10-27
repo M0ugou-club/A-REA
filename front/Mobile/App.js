@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login/Login';
 import Home from './src/Home/Home';
 import Area from './src/Area/AreaPage';
+import Connection from './src/Connection/Connection';
 import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
 import Register from './src/Register/RegisterPage';
 import ChooseAreaName from './src/Area/CreateArea/ChooseAreaName/ChooseAreaName';
@@ -58,6 +59,11 @@ export default function App() {
           name="Home" 
           component={Home} 
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Connection"
+          component={Connection}
+          options={{ headerShown: false, animationEnabled: false }}
         />
         <Stack.Screen 
           name="Area" 
