@@ -6,12 +6,19 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   styleUrl: "./choice-button.component.scss",
 })
 export class ChoiceButtonComponent {
-  @Input() choiceLogo: string = "";
+  @Input() choiceService: string = "";
   @Input() choiceTitle: string = "";
+  @Input() serviceColor: string = "";
 
   @Output() sendChoice: EventEmitter<string> = new EventEmitter();
 
+  isOpen: boolean = false;
+
   choose(): void {
     this.sendChoice.emit(this.choiceTitle);
+  }
+
+  openChoice(): void {
+    this.isOpen = !this.isOpen;
   }
 }
