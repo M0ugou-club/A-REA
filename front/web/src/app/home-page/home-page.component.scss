@@ -1,87 +1,110 @@
-.parent {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-gap: 3rem;
-    padding: 3rem;
-    box-sizing: border-box;
-    height: calc(100vh - 13vh);
-}
-
-.div1, .div2, .div3, .div4 {
-    background-color: white;
+.home-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 1rem;
-    text-align: center;
-    padding: 1rem;
-}
-
-.div1 { grid-area: 1 / 5 / 6 / 7; }
-.div2 { grid-area: 1 / 3 / 4 / 5; }
-.div3 { grid-area: 1 / 1 / 4 / 3; }
-.div4 { grid-area: 4 / 1 / 6 / 5; }
-
-.div3 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 1rem;
-    gap: 1rem;
-}
-
-.div4 {
-    background-image: url(../../../public/kaizen-preview.jpg);
-    background-size: cover;
-    background-position: center;
-}
-
-.div4-button-container {
-    width: 30%;
-    padding-top: 15%;
-    padding-left: 70%;
-}
-
-.header {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-    text-align: left;
-}
-
-.line {
+    height: 95%;
     width: 100%;
-    height: 2px;
-    background-color: #0089ed;
-    margin-bottom: 1rem;
+    justify-content: center;
 }
 
-.submit-btn {
-    border-radius: 10px;
-    background-color: #0089ed;
-    box-shadow: 0 4px 19px rgba(119, 147, 65, 0.3);
-    width: 90%;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 500;
-    padding: 15px;
+.element-container {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    flex-direction: column;
+    align-items: center;
+}
+// container with area creation big seciton
+
+.createArea-container {
+    display: flex;
+    height: 15%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+// first row with profile and areas sections
+
+.firstRow-container {
+    display: flex;
+    height: 40%;
+    width: 100%;
+    background-color: blue;
+}
+
+// second row with servies and documentaire sections
+
+.secondRow-container {
+    display: flex;
+    height: 40%;
+    width: 100%;
+    justify-content: center;
+    background-color: green;
+}
+
+
+
+.create-button {
+    display: flex;
+    height: 58%;
+    width: 100%;
     border: none;
-    margin-top: auto;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #1E1E1E;
+    cursor: pointer;
 }
 
-.mobile-app-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    overflow: hidden;
-    border-radius: 1rem;
+.create-icon-container {
+    display: flex;
+    height: 100%;
+    width: 8%;
+    align-items: center;
+}
+.create-icon {
+    display: flex;
+    margin-left: 18%;
+    height: 60%;
+    width: auto;
 }
 
-.custom-heading {
-    font-weight: 500;
-    font-size: 2rem;
-    align-self: flex-start;
+.create-text-container {
+    display: flex;
+    height: 100%;
+    width: 80%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.create-title, .create-text {
+    display: flex;
+    color: #FFFFFF;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.create-title {
+    font-size: 120%;
+}
+
+.create-text {
+    margin-top: 1%;
+    color: #C4C4C4;
+    font-size: 100%;
+}
+
+.create-arrow-container {
+    display: flex;
+    height: 100%;
+    width: 12%;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-arrow {
+    display: flex;
+    height: 45%;
+    width: auto;
+    margin-left: 40%;
 }
