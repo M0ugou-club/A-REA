@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent implements OnInit, AfterViewInit {
 
   RegisterObj = {
+    name: '',
+    surname: '',
     email: '',
-    username: '',
-    password: ''
+    password: '',
+    passwordConfirm: ''
   };
 
   constructor(private router: Router) {}
@@ -25,7 +27,7 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
     console.log("After");
   }
 
-  goToRegister(): void {
+  goToLogin(): void {
     this.router.navigate(['/login']);
   }
 
@@ -33,9 +35,11 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (
+      !this.RegisterObj.name ||
+      !this.RegisterObj.surname ||
       !this.RegisterObj.email ||
-      !this.RegisterObj.username ||
-      !this.RegisterObj.password
+      !this.RegisterObj.password ||
+      !this.RegisterObj.passwordConfirm
     ) {
       alert(
         "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
@@ -45,6 +49,11 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
 
     if (!emailRegex.test(this.RegisterObj.email)) {
       alert("Veuillez entrer une adresse email valide.");
+      return;
+    }
+
+    if (this.RegisterObj.password !== this.RegisterObj.passwordConfirm) {
+      alert("Les mots de passe ne correspondent pas.");
       return;
     }
 

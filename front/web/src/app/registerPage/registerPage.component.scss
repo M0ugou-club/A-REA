@@ -1,272 +1,160 @@
-.login-background {
+.register-background {
+  display: flex;
   height: 100vh;
   width: 100vw;
-  background-image: url("../../../public/loginImages/loginBackground.png");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-.form-container {
-  margin-right: 7%;
-}
-
-.form {
-  border-radius: 40px;
-  background-color: #fff;
-  box-shadow: 0 4px 35px rgba(0, 0, 0, 0.08);
-  height: 80vh;
-  width: 35vw;
-  margin-bottom: -24px;
-}
-
-.login-content {
-  display: flex;
+  background-color: #1E1E1E;
   flex-direction: column;
 }
 
-.login-header {
+.logo-kaizen-container {
   display: flex;
-  height: 20%;
+  height: 4%;
   width: 100%;
-  flex-direction: row;
+  align-items: flex-start;
 }
 
-.title-container {
+.logo-kaizen {
+  display: flex;
   height: 100%;
-  width: 70%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.bienvenue-small-title {
-  color: #000;
-  display: flex;
-  font-size: 110%;
-  font-weight: 500;
-  margin: 0;
-  margin-left: 8%;
-  margin-top: 8%;
-  font-family: "Poppins-Regular";
-}
-
-.login-title {
-  color: #000;
-  display: flex;
-  font-size: 300%;
-  font-weight: 500;
-  margin: 0;
-  margin-left: 7%;
-  font-family: "Poppins-Medium";
-}
-
-.login-options {
-  display: flex;
-  margin-top: 50px;
-  gap: 20px;
-  font-size: 16px;
-  color: #4285f4;
-  font-weight: 400;
-}
-
-.switch-container {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.switch-title {
-  display: flex;
-  font-size: 80%;
-  color: #8D8D8D;
-  font-weight: 400;
-  margin-top: 20%;
-  margin-right: 10%;
   width: auto;
-  font-family: "Poppins-Regular";
+  margin-top: 0.5%;
+  margin-left: 0.5%;
 }
 
-.switch-button {
+.register-container {
   display: flex;
-  font-size: 80%;
-  color: #0089ED;
-  font-weight: 400;
-  cursor: pointer;
-  margin-top: -5%;
-  font-family: "Poppins-Regular";
-}
-
-.login-service-container {
+  height: 96%;
   width: 100%;
-  height: 15%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 3%;
-}
-
-.google-login-btn {
-  display: flex;
-  width: 60%;
-  height: 55%;
-  border-radius: 9px;
-  background-color: #e9f1ff;
-  gap: 12px;
-  border: none;
-  cursor: pointer;
-  align-items: center;
   justify-content: center;
 }
 
-.google-icon {
-  width: 26px;
-  height: 26px;
+.register-square {
+  display: flex;
+  height: 70%;
+  width: 42%;
+  border-radius: 20px;
+  flex-direction: column;
+  background-color: #1E1E1E;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 15px 30px;
+  margin-top: 8%;
 }
 
-.decorative-icon,
-.decorative-image {
-  width: 60px;
-  height: 55px;
+.register-logo-container {
+  display: flex;
+  height: 40%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
-.decorative-image {
-  align-self: flex-end;
-  margin-top: 132px;
+.register-logo {
+  display: flex;
+  height: 50%;
+  width: auto;
+  margin-top: 5%;
 }
 
-.login-form {
+.register-iput-container {
+  display: flex;
   height: 65%;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  flex-direction: column;
   align-items: center;
+}
+
+.register-names-input {
+  display: flex;
+  height: 35%;
+  width: 55%;
   flex-direction: column;
 }
 
-.form-group {
-  margin-bottom: 38px;
-  width: 90%;
+.register-email-input {
   display: flex;
+  height: 25%;
+  width: 55%;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 4%;
 }
 
-.form-group-container {
-  margin-bottom: 38px;
-  width: 90%;
-  height: 20%;
+.register-password-input {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10%;
-}
-
-.form-small-input {
-  display: flex;
-  border-radius: 9px;
-  background-color: #fff;
-  font-size: 14px;
-  color: #808080;
-  font-weight: 300;
-  border: 1px solid #4285f4;
-  padding: 6% 3%;
-  width: 93%;
-}
-
-.form-group-name {
-  display: flex;
+  height: 35%;
+  width: 55%;
   flex-direction: column;
-  width: 50%;
+  margin-top: 4%;
 }
 
-.form-label {
-  display: flex;
-  color: #000;
+.input-field {
+  width: 100%;
+  padding: 15px;
+  border: 1.5px solid #CAC7C7;
   font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 2%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  background-color: #232323;
+  color: white;
 }
 
-.form-input {
-  display: flex;
-  border-radius: 9px;
-  background-color: #fff;
-  font-size: 14px;
-  color: #808080;
-  font-weight: 300;
-  padding: 3% 2%;
-  border: 1px solid #4285f4;
-  width: 96%;
+.input-field.input-bottom {
+  border-radius: 0 0 10px 10px;
 }
 
-.form-input[type="password"] {
-  border-color: #adadad;
-}
-
-.forgot-password {
-  color: #4285f4;
-  font-size: 13px;
-  font-weight: 400;
-  text-align: right;
-  display: block;
-  margin-top: 15px;
-  text-decoration: none;
-}
-
-.submit-btn {
-  border-radius: 10px;
-  background-color: #0089ed;
-  box-shadow: 0 4px 19px rgba(119, 147, 65, 0.3);
-  width: 90%;
-  font-size: 16px;
-  color: #fff;
-  font-weight: 500;
-  padding: 15px 70px;
-  border: none;
-  cursor: pointer;
-  margin-top: 3%;
-}
-
-@media (max-width: 991px) {
-  .login-container {
-    margin-bottom: 10px;
-    padding: 75px 20px;
-  }
-
-  .login-title {
-    font-size: 40px;
-  }
-
-  .login-options {
-    margin-top: 40px;
-  }
-
-  .google-login-btn {
-    padding: 15px 20px;
-  }
-
-  .decorative-image {
-    margin-top: 40px;
-  }
-
-  .submit-btn {
-    margin-top: 40px;
-    padding: 15px 20px;
-  }
-}
-
-.visually-hidden {
+.input-button {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.input-with-button {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-field:focus {
+  border-color: #007aff;
+  outline: none;
+}
+
+.input-top {
+  border-radius: 10px 10px 0 0;
+}
+
+.input-all {
+  border-radius: 10px 10px 10px 10px;
+}
+
+.input-bottom {
+  border-radius: 0 0 10px 10px;
+}
+
+.register-switch-container {
+  display: flex;
+  height: 51%;
+  width: 100%;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.register-switch-button {
+  display: flex;
+  height: 15%;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #0089ED;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 3%;
 }
