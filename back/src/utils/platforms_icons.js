@@ -1,35 +1,35 @@
 const platforms_icons = {
-  "Spotify": {
-    "color": "#429660",
-    "connexion": true
+  Spotify: {
+    color: "#429660",
+    connexion: true,
   },
-  "Deezer": {
-    "color": "#5064AC",
-    "connexion": true
+  Deezer: {
+    color: "#5064AC",
+    connexion: true,
   },
-  "Twitch": {
-    "color": "#18181b",
-    "connexion": true
+  Twitch: {
+    color: "#18181b",
+    connexion: true,
   },
-  "OpenMeteo": {
-    "color": "#D48207",
-    "connexion": false
+  OpenMeteo: {
+    color: "#D48207",
+    connexion: false,
   },
-  "X": {
-    "color": "#1DA1F2",
-    "connexion": true
+  X: {
+    color: "#1DA1F2",
+    connexion: true,
   },
-  "Reddit": {
-    "color": "#FF4500",
-    "connexion": true
+  Reddit: {
+    color: "#FF4500",
+    connexion: true,
   },
-  "Youtube": {
-    "color": "#9F3531",
-    "connexion": true
+  Youtube: {
+    color: "#9F3531",
+    connexion: true,
   },
-  "Discord": {
-    "color": "#5064AC",
-    "connexion": true
+  Discord: {
+    color: "#5064AC",
+    connexion: true,
   },
 };
 

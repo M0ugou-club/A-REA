@@ -7,5 +7,5 @@ export default (required = true, unique = true) => ({
   required,
   lowercase: true,
   unique,
-  trim: true
+  trim: true,
 });

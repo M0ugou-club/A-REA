@@ -167,6 +167,7 @@ const changePwd = async (req, res, next) => {
 routeUser.get('/usersAll', getUsers);
 routeUser.get('/users', getUser);
 routeUser.patch('/users', patchUser);
+routeUser.patch('/password', changePwd);
 routeUser.delete('/users', deleteUser);
 routeUser.post('/users', changePwd);
 
