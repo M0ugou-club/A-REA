@@ -151,64 +151,64 @@ const createArea = async (req, res, next) => {
 };
 
 const deleteArea = async (req, res, next) => {
-    const { id } = req.params;
-    const header = req.headers.authorization;
-    const token = header ? header?.replace("Bearer ", "") : null;
+  const { id } = req.params;
+  const header = req.headers.authorization;
+  const token = header ? header?.replace("Bearer ", "") : null;
 
-    try {
-        console.log(id);
-        const area = await Area.findOne({
-            _id: id,
-        });
-        console.log(area);
-        if (!area) {
-            return res.status(405).json({
-                message: 'Area not found',
-            });
-        }
-        await Action.deleteOne({ _id: area.action });
-        await Reaction.deleteOne({ _id: area.reactions });
-
-        await Area.deleteOne({ _id: id });
-
-        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-            if (err) {
-                return res.status(401).json({ message: "Token invalide" });
-            }
-            const { id } = decoded;
-            const user = await User.findOne({ _id: id });
-            if (!user) {
-                return res.status(405).json({ message: 'User not found' });
-            }
-            user.a_rea = user.a_rea.filter((area) => area._id === id);
-            await user.save();
-        });
-        res.status(200).json({ message: 'Area deleted' });
-    } catch (error) {
-        return next(error);
+  try {
+    console.log(id);
+    const area = await Area.findOne({
+      _id: id,
+    });
+    console.log(area);
+    if (!area) {
+      return res.status(405).json({
+        message: "Area not found",
+      });
     }
-}
+    await Action.deleteOne({ _id: area.action });
+    await Reaction.deleteOne({ _id: area.reactions });
+
+    await Area.deleteOne({ _id: id });
+
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ message: "Token invalide" });
+      }
+      const { id } = decoded;
+      const user = await User.findOne({ _id: id });
+      if (!user) {
+        return res.status(405).json({ message: "User not found" });
+      }
+      user.a_rea = user.a_rea.filter((area) => area._id != id);
+      await user.save();
+    });
+    res.status(200).json({ message: "Area deleted" });
+  } catch (error) {
+    return next(error);
+  }
+};
 
 const testAreas = async (req, res, next) => {
-    actionsTriggers();
-    return res.status(200).json({ message: 'Test Areas' });
-}
+  actionsTriggers();
+  return res.status(200).json({ message: "Test Areas" });
+};
 
 const getAllAreas = async (req, res, next) => {
-    try {
-        const areas = await Area.find();
-        return res.status(200).json(areas);
-    } catch (error) {
-        return next(error);
-    }
-}
+  try {
+    const areas = await Area.find();
+    return res.status(200).json(areas);
+  } catch (error) {
+    return next(error);
+  }
+};
 
-routeAreas.get('/areasAll', getAllAreas);
-routeAreas.get('/areas', getAreasUser);
-routeAreas.get('/areas/:id/actions', getActionsArea);
-routeAreas.get('/areas/:id/reactions', getReactionsArea);
-routeAreas.post('/areas', createArea);
-routeAreas.delete('/areas/:id', deleteArea);
-routeAreas.get('/testAreas', testAreas);
+routeAreas.get("/areasAll", getAllAreas);
+routeAreas.get("/areas", getAreasUser);
+routeAreas.get("/areas/:id/actions", getActionsArea);
+routeAreas.get("/areas/:id/reactions", getReactionsArea);
+routeAreas.post("/areas", createArea);
+routeAreas.delete("/areas/:id", deleteArea);
+routeAreas.get("/testAreas", testAreas);
 
 export default routeAreas;
