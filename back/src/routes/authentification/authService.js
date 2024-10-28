@@ -51,7 +51,7 @@ export const registerUser = async (req, res, next) => {
 
 export const isUserAuth = () => {
   return (req, res, next) => {
-    let token = ""
+    let token = "";
 
     if (req.headers.authorization) {
       token = req.headers.authorization;

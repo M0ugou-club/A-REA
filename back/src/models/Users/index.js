@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
-import email from '../schemas/email.js';
-
+import email from "../schemas/email.js";
 
 const UserSchema = new mongoose.Schema({
     password: {type: String, required: false, select: false},
@@ -17,5 +16,4 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator);
 
-export default mongoose.model('User', UserSchema);
-
+export default mongoose.model("User", UserSchema);

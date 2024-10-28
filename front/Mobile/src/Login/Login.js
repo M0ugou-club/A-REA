@@ -17,11 +17,11 @@ export default function Login() {
           return;
         }
         const response = await fetch("http://inox-qcb.fr:8000/isLogged", {
+          method: "GET",
           headers: {
             "Authorization": "Bearer" + token,
           },
         });
-
         if (response.status === 200) {
           navigation.navigate('Home');
         }
