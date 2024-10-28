@@ -3,10 +3,6 @@ const platforms_icons = {
     color: "#429660",
     connexion: true,
   },
-  Deezer: {
-    color: "#5064AC",
-    connexion: true,
-  },
   Twitch: {
     color: "#18181b",
     connexion: true,
@@ -25,10 +21,6 @@ const platforms_icons = {
   },
   Youtube: {
     color: "#9F3531",
-    connexion: true,
-  },
-  Discord: {
-    color: "#5064AC",
     connexion: true,
   },
 };

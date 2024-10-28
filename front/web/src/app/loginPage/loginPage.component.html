@@ -1,36 +1,28 @@
 <div class="login-background">
-    <div class="form-container">
-        <main class="form">
-            <header class="login-header">
-                <div class="title-container">
-                    <h1 class="bienvenue-small-title">Bienvenue !</h1>
-                    <h1 class="login-title">Se connecter</h1>
-                </div>
-                <div class="switch-container">
-                    <h1 class="switch-title">Pas de compte ?</h1>
-                    <a class="switch-button" (click)="goToLogin()">S'enregistrer</a>
-                </div>
-            </header>
-            <div class="login-service-container">
-                <button class="google-login-btn">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bcee48515e10ea749eb9fb771b15004478231c31b804a367d5d4435b0a8f70c5?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="Google logo" class="google-icon" />
-                    <span>Se connecter avec Google</span>
-                </button>
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/90b240bbe5ac45ef18b6d7c465d1b9e243dbbd0286c13da1c72de92ca6eebbd1?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="" class="decorative-icon" />
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bdf79c0affd3afcdc2200125ed9b91b31b6a281db8ccdc866b74b6db00d6d202?placeholderIfAbsent=true&apiKey=b464a3b8a0384286b04f2817d6df9333" alt="" class="decorative-icon" />
+    <div class="logo-kaizen-container">
+        <img class="logo-kaizen" src="/kaizenLogo.png" alt="logo">
+    </div>
+    <div class="login-container">
+        <div class="login-square">
+            <div class= "login-logo-container">
+                <img class="login-logo" src="/kaizenLogo.png" alt="logo">
             </div>
-            <form class="login-form" (ngSubmit)="onLogin()">
-                <div class="form-group">
-                    <label for="email" class="form-label">Rentrez votre adresse email juste ici</label>
-                    <input type="email" id="email" class="form-input" placeholder="Adresse email" pInputText [(ngModel)]="loginObj.email" name="email" />
+            <div class="login-iput-container">
+                <div class="login-input">
+                    <input type="email" placeholder="Email" class="input-field input-top" [(ngModel)]="loginObj.email" />
+                    <div class="input-with-button">
+                        <input type="password" placeholder="Mot de passe" class="input-field input-bottom" [(ngModel)]="loginObj.password" (keydown.enter)="onLogin()" /> 
+                        <button class="input-button" (click)="onLogin()">
+                            <img src="/login/connect.svg">
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password" class="form-label">Rentrez votre mot de passe</label>
-                    <input type="password" id="password" class="form-input" placeholder="Mot de passe" pInputText [(ngModel)]="loginObj.password" name="password" />
-                    <a href="#" class="forgot-password">Mot de passe oublié</a>
+                <div class="login-switch-container">
+                    <button class="login-switch-button" (click)="goToRegister()">
+                        <p class="login-switch-text">Créer un compte InoxQCB</p>
+                    </button>
                 </div>
-                <button type="submit" class="submit-btn">Se connecter</button>
-            </form>
-        </main>
+            </div>
+        </div>
     </div>
 </div>

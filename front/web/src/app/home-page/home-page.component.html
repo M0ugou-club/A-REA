@@ -1,19 +1,86 @@
-<div class="parent">
-    <!-- <div class="div1">
-        <h2 class="custom-heading">Ajouter un Area :</h2>
-        <img class="mobile-app-img" src="tuto.png" alt="user">
-    </div>
-    <div class="div2">
-        <h2 class="custom-heading">Statistiques :</h2>
-    </div>
-    <div class="div3">
-        <h2 class="custom-heading">L'application :</h2>
-        <img class="mobile-app-img" src="mobile-screen.jpg" alt="user">
-        <button class="submit-btn">Télécharge l'app !</button>
-    </div>
-    <div class="div4">
-        <div class="div4-button-container">
-            <button class="submit-btn" onclick="window.location.href='https://www.youtube.com/watch?v=wrFsapf0Enk';">Voir le documentaire</button>
+<div class="home-container">
+    <div class="element-container">
+        <div class="createArea-container">
+            <button class="create-button" (click)="goToAreas()">
+                <div class="create-icon-container">
+                    <img class="create-icon" src="/home/areas.svg">
+                </div>
+                <div class="create-text-container">
+                    <p class="create-title">Créez votre aréa ideale avec le site InoxQCB</p>
+                    <p class="create-text">Une area est la combinaison d’une action et d’une réaction, la reaction cacaboudin prout</p>
+                </div>
+                <div class="create-arrow-container">
+                    <img class="create-arrow" src="/home/arrow-right.svg">
+                </div>
+            </button>
         </div>
-    </div> -->
+        <div class="firstRow-container">
+            <div class="profile-container">
+                <div class="profile-square">
+                    <div class="profile-icon-container">
+                        <img class="profile-icon" src="/header/template-user.png">
+                    </div>
+                    <div class="profile-text-container">
+                        <p class="profile-name">{{ userName }}</p>
+                        <p class="profile-email">{{ userEmail }}</p>
+                        <p class="profile-grade">Moderateur</p>
+                    </div>
+                </div>
+            </div>
+            <div class="areas-container">
+                <div class="areas-square">
+                    <div class="areas-hearder-square">
+                        <div class="areas-icon-container">
+                            <img class="areas-icon" src="/home/areasList.svg">
+                        </div>
+                        <div class="areas-text-container">
+                            <p class="areas-title">Areas</p>
+                            <p class="areas-text">La liste de tes areas</p>
+                        </div>
+                        <div class="areas-add-container">
+                            <button class="area-add-button" (click)="goToAreas()">
+                                <img class="areas-arrow" src="/home/add-area.svg">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secondRow-container">
+            <div class="service-container">
+                <div class="service-square">
+                    <div class="areas-hearder-square">
+                        <div class="areas-icon-container">
+                            <img class="areas-icon" src="/home/services.svg">
+                        </div>
+                        <div class="areas-text-container">
+                            <p class="areas-title">Services</p>
+                            <p class="areas-text">La liste des services disponibles</p>
+                        </div>
+                        <div class="areas-add-container">
+                            <button class="area-add-button">
+                                <img class="areas-arrow" src="/home/aide.svg">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="docu-container">
+                <div class="docu-square">
+                    <div class="docu-hearder-square">
+                        <div class="docu-icon-container">
+                            <img class="docu-icon" src="/home/docuIcon.svg">
+                        </div>
+                        <div class="docu-text-container">
+                            <h1 class="docu-title">Kaizen</h1>
+                            <p class="docu-text">Le documentaire kaizen</p>
+                        </div>
+                    </div>
+                    <button class="docu-button" (click)="openDocuYoutube()">
+                        
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

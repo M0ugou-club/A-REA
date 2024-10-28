@@ -11,8 +11,11 @@ import { environment } from '../../../environment/environment';
 export class HomePageComponent implements OnInit{
 
   constructor(private router: Router) {}
+  userName: string = "";
+  userEmail: string = "";
 
   ngOnInit(): void {
+    this.getUserInfo();
     const localData = localStorage.getItem('authToken');
 
     if (localData != null) {
@@ -34,5 +37,32 @@ export class HomePageComponent implements OnInit{
     } else {
       this.router.navigate(['/login']);
     }
+  }
+  
+  getUserInfo() {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        this.userName = data.name;
+        this.userEmail = data.email;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  goToAreas() {
+    this.router.navigate(['/dashboard/a-rea']);
+  }
+
+  openDocuYoutube() {
+    const youtubeUrl = 'https://www.youtube.com/watch?v=wrFsapf0Enk&t=162s';
+    window.open(youtubeUrl, '_blank');
   }
 }

@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
     console.log("After");
   }
   
-  goToLogin(): void {
+  goToRegister(): void {
     this.router.navigate(['/register']);
 
   }

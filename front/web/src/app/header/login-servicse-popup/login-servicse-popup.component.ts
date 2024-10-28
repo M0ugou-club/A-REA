@@ -16,6 +16,7 @@ import { HttpClient } from "@angular/common/http";
 export class LoginServicsePopupComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
   userName: string = "";
+  userSurname: string = "";
   userEmail: string = "";
   connections: any[] = [];
   services: { [key: string]: any } = {};
@@ -30,7 +31,7 @@ export class LoginServicsePopupComponent implements OnInit {
     },
     {
       key: "Twitch",
-      func: this.connectionTwhitch,
+      func: () => this.connectionTwitch(),
     },
     {
       key: "X",
@@ -58,7 +59,8 @@ export class LoginServicsePopupComponent implements OnInit {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        this.userName = data.username;
+        this.userName = data.name;
+        this.userSurname = data.surname;
         this.userEmail = data.email;
       })
       .catch((error) => {
@@ -149,11 +151,10 @@ export class LoginServicsePopupComponent implements OnInit {
     }
   }
 
-  connectionTwhitch(): void {
-    
-    if (this.isConnected) {
-      fetch('http://localhost:8000/tokens/platform/Twitch', {
-        method: 'DELETE',
+  connectionTwitch(): void {
+    if (this.isConnectedToService("Twitch") == true) {
+      fetch("http://localhost:8000/tokens/platform/Twitch", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("authToken"),

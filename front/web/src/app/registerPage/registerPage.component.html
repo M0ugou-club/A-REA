@@ -1,38 +1,35 @@
-<div class="login-background">
-    <div class="form-container">
-        <div class="form">
-            <header class="login-header">
-                <div class="title-container">
-                    <h1 class="bienvenue-small-title">Bienvenue !</h1>
-                    <h1 class="login-title">S'identifier</h1>
+<div class="register-background">
+    <div class="logo-kaizen-container">
+        <img class="logo-kaizen" src="/kaizenLogo.png" alt="logo">
+    </div>
+    <div class="register-container">
+        <div class="register-square">
+            <div class= "register-logo-container">
+                <img class="register-logo" src="/kaizenLogo.png" alt="logo">
+            </div>
+            <div class="register-iput-container">
+                <div class="register-names-input">
+                    <input type="name" placeholder="Nom" class="input-field input-top" [(ngModel)]="RegisterObj.name" />
+                    <input type="surname" placeholder="Prenom" class="input-field input-bottom" [(ngModel)]="RegisterObj.surname" /> 
                 </div>
-                <div class="switch-container">
-                    <h1 class="switch-title">Vous avez un compte ?</h1>
-                    <a class="switch-button" (click)="goToRegister()">Se connecter</a>
+                <div class="register-email-input">
+                    <input type="email" placeholder="Email" class="input-field input-all" [(ngModel)]="RegisterObj.email" />
                 </div>
-            </header>
-            <form class="login-form" (ngSubmit)="onRegister()">
-                <div class="form-group" style="margin-top: 20%;">
-                    <label for="email" class="form-label">Rentrez votre adresse email juste ici</label>
-                    <input type="text" id="email" class="form-input" placeholder="Adresse email" pInputText [(ngModel)]="RegisterObj.email" name="email" />
-                </div>
-                <div class="form-group-container">
-                    <div class="form-group-name">
-                        <label for="username" class="form-label">Prenom</label>
-                        <input type="text" id="username" class="form-small-input" placeholder="Prenom" pInputText [(ngModel)]="RegisterObj.username" name="username" />
-                    </div>
-                    <div class="form-group-name">
-                        <label for="pseudo" class="form-label">Pseudo</label>
-                        <input type="text" id="pseudo" class="form-small-input" placeholder="Pseudo" required />
+                <div class="register-password-input">
+                    <input type="password" placeholder="Mot de passe" class="input-field input-top" [(ngModel)]="RegisterObj.password" />
+                    <div class="input-with-button">
+                        <input type="password" placeholder="Confirmer le mot de passe" class="input-field input-bottom" [(ngModel)]="RegisterObj.passwordConfirm" (keydown.enter)="onRegister()" />
+                        <button class="input-button" (click)="onRegister()">
+                            <img src="/login/connect.svg">
+                        </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="password" class="form-label">Rentrez votre mot de passe</label>
-                    <input type="password" id="password" class="form-input" placeholder="Mot de passe" pInputText [(ngModel)]="RegisterObj.password" name="password" />
-                    <a href="#" class="forgot-password">Mot de passe oublié</a>
+                <div class="register-switch-container">
+                    <button class="register-switch-button" (click)="goToLogin()">
+                        <p class="register-switch-text">Se connecter avec un compte InoxQCB</p>
+                    </button>
                 </div>
-                <button type="submit" class="submit-btn">s’identifier</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
