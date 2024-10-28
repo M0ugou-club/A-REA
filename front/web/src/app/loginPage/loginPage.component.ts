@@ -24,13 +24,12 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
     console.log("After");
   }
   
-  goToLogin(): void {
+  goToRegister(): void {
     this.router.navigate(['/register']);
 
   }
 
   onLogin() {
-    console.log("cccccczaezazzzzzzazeazeazeazeazeazeaze")
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailRegex.test(this.loginObj.email)) {
