@@ -120,6 +120,73 @@
     background-image: url('/home/areas-bg.svg'); 
     background-size: cover;
     background-position: center;
+    flex-direction: column;
+}
+
+.areas-hearder-square {
+    display: flex;
+    width: 100%;
+    height: 27%;
+    background-color: #1E1E1E;
+    border-radius: 20px 20px 0 0;
+}
+
+.areas-icon-container {
+    display: flex;
+    height: 100%;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+}
+
+.areas-icon {
+    display: flex;
+    height: 60%;
+    width: auto;
+}
+
+.areas-text-container {
+    display: flex;
+    height: 100%;
+    width: 75%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.areas-title {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 140%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.areas-text {
+    display: flex;
+    color: #C4C4C4;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.areas-add-container {
+    display: flex;
+    height: 100%;
+    width: 10%;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.area-add-button {
+    display: flex;
+    height: 40%;
+    width: auto;
+    background: none;
+    border: none;
+    margin-top: 30%;
+    margin-right: 25%;
 }
 
 // second row with servies and documentaire sections
@@ -166,9 +233,69 @@
     width: 95%;
     border-radius: 20px;
     background-color: #1E1E1E;
+    flex-direction: column;
 }
 
+.docu-hearder-square {
+    display: flex;
+    width: 100%;
+    height: 27%;
+    background-color: #1E1E1E;
+    border-radius: 20px 20px 0 0;
+    flex-direction: row;
+}
 
+.docu-button {
+    display: flex;
+    height: 73%;
+    width: 100%;
+    border: none;
+    background-image: url('/home/docu.svg'); 
+    background-size: 110%;
+    background-position: center;
+    border-radius: 0 0 20px 20px;
+    cursor: pointer;
+}
+
+.docu-icon-container {
+    display: flex;
+    height: 100%;
+    width: 27%;
+    align-items: center;
+    justify-content: center;
+}
+
+.docu-icon {
+    display: flex;
+    height: 59%;
+    width: auto;
+}
+
+.docu-text-container {
+    display: flex;
+    height: 100%;
+    width: 73%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.docu-title {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 140%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.docu-text {
+    display: flex;
+    color: #C4C4C4;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
 
 .create-button {
     display: flex;

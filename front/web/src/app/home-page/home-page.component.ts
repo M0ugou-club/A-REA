@@ -49,11 +49,20 @@ export class HomePageComponent implements OnInit{
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        this.userName = data.username;
+        this.userName = data.name;
         this.userEmail = data.email;
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+  }
+
+  goToAreas() {
+    this.router.navigate(['/dashboard/a-rea']);
+  }
+
+  openDocuYoutube() {
+    const youtubeUrl = 'https://www.youtube.com/watch?v=wrFsapf0Enk&t=162s';
+    window.open(youtubeUrl, '_blank');
   }
 }

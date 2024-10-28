@@ -16,6 +16,7 @@ import { HttpClient } from "@angular/common/http";
 export class LoginServicsePopupComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
   userName: string = "";
+  userSurname: string = "";
   userEmail: string = "";
   connections: any[] = [];
   services: { [key: string]: any } = {};
@@ -62,7 +63,8 @@ export class LoginServicsePopupComponent implements OnInit {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        this.userName = data.username;
+        this.userName = data.name;
+        this.userSurname = data.surname;
         this.userEmail = data.email;
       })
       .catch((error) => {

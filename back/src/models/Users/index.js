@@ -5,9 +5,8 @@ import email from '../schemas/email.js';
 
 const UserSchema = new mongoose.Schema({
     password: {type: String, required: false, select: false},
-    username: {type: String, required: true},
-    name: {type: String},
-    surname: {type: String},
+    name: {type: String, required: true},
+    surname: {type: String, required: true},
     email: email(),
     image: {type: String, required: false},
     tokens: [{type: 'ObjectId', ref: 'Token'}],
