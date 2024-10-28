@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   popup: {
     width: width * 0.9,
     height: height * 0.7,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(0,0,0,0.65)',
     borderRadius: 20,
     margin: 'auto',
     alignItems: 'center',
@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#CAC7C7',
     borderRadius: 10,
+    placeholderTextColor: '#CAC7C7',
   },
 
   loginButton: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   textLoginButton : {
-    color: 'white',
+    color: '#CAC7C7',
     fontSize: width * 0.05,
   },
 

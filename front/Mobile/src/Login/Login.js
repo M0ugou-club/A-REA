@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from './LoginStyle';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
@@ -60,27 +60,30 @@ export default function Login() {
   return (
     <ImageBackground source={require('./../../assets/background.png')} style={styles.background}>
       <View style={styles.popup}>
-        <Text style={styles.title}>Inox QCB</Text>
+        <Image style={styles.title} source={require('./../../assets/kaizenLogo.png')} />
         <TextInput
           style={styles.formInput}
           placeholder='Email'
+          placeholderTextColor={'#CAC7C7'}
           onChangeText={setEmail}
+          
         />
         <TextInput
           style={styles.formInput}
-          placeholder='Password'
+          placeholder='Mot de passe'
+          placeholderTextColor={'#CAC7C7'}
           secureTextEntry={true}
           onChangeText={setPassword}
         />
         <TouchableOpacity style={styles.loginButton}
           onPress={() => onLogin()}
         >
-          <Text style={styles.textLoginButton}>Login</Text>
+          <Text style={styles.textLoginButton}>Se connecter</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('Register')}
         >
-          <Text style={styles.textRegisterButton}>Register</Text>
+          <Text style={styles.textRegisterButton}>S'enregistrer</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
