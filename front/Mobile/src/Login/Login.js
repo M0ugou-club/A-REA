@@ -13,7 +13,6 @@ export default function Login() {
     const checkLoginStatus = async () => {
       try {
         const token = await AsyncStorage.getItem('accessToken');
-        console.log(token);
         if (token === null) {
           return;
         }
@@ -25,9 +24,7 @@ export default function Login() {
         });
         if (response.status === 200) {
           navigation.navigate('Home');
-        } else (
-          console.log(response.status)
-        );
+        }
       } catch (error) {
         console.error('Error:', error);
       }

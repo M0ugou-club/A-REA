@@ -10,7 +10,6 @@ export default async function isLogged(navigation) {
     })
     .then(response => {
         if (response.status != 200) {
-            console.log('OK');
             navigation.navigate('Login');
         }
     })
