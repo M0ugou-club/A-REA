@@ -25,6 +25,7 @@
     "@builder.io/dev-tools": "^1.1.12",
     "@builder.io/sdk-angular": "^0.2.15",
     "concurrently": "^9.0.1",
+    "lucide-angular": "^0.453.0",
     "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
