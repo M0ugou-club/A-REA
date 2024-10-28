@@ -56,30 +56,17 @@ export const redditService = (token) => {
     return authUrl;
 }
 
-export const discordService = (token) => {
-    if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_REDIRECT_URI || !process.env.DISCORD_CLIENT_SECRET) {
+export const twitchService = (token) => {
+    if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_REDIRECT_URI || !process.env.TWITCH_CLIENT_SECRET) {
         return "";
     }
 
-    const client_id = encodeURIComponent(process.env.DISCORD_CLIENT_ID);
-    const redirect_uri = encodeURIComponent(process.env.DISCORD_REDIRECT_URI);
-    const scope = encodeURIComponent('user_profile,user_media,user_birthday');
+    const client_id = encodeURIComponent(process.env.TWITCH_CLIENT_ID);
+    const redirect_uri = encodeURIComponent(process.env.TWITCH_REDIRECT_URI);
+    const scope = encodeURIComponent('user:read:follows channel:read:subscriptions chat:edit channel:bot channel:moderate whispers:read whispers:edit');
     const state = encodeURIComponent(token);
-    const authUrl = `https://discord.com/oauth2/authorize?client_id=${client_id}&permissions=8&response_type=code&redirect_uri=${redirect_uri}&integration_type=0&scope=identify+connections+applications.commands.permissions.update+sdk.social_layer+dm_channels.messages.write+openid+presences.read+dm_channels.read+relationships.write+activities.write+applications.entitlements+applications.commands+applications.builds.upload+rpc.screenshare.write+webhook.incoming+rpc.video.write+rpc.voice.write+rpc.notifications.read+bot+guilds.channels.read+guilds.join+payment_sources.country_code+gateway.connect+dm_channels.messages.read+presences.write+role_connections.write+voice+relationships.read+activities.read+applications.store.update+applications.builds.read+messages.read+rpc.activities.write+rpc.screenshare.read+rpc.video.read+rpc.voice.read+rpc+email+guilds+guilds.members.read+gdm.join&state=${state}`;
+    const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
     return authUrl;
 }
 
-export const deezerService = (token) => {
-    if (!process.env.INSTAGRAM_CLIENT_ID || !process.env.INSTAGRAM_REDIRECT_URI || !process.env.INSTAGRAM_CLIENT_SECRET) {
-        return "";
-    }
-
-    const client_id = encodeURIComponent(process.env.INSTAGRAM_CLIENT_ID);
-    const redirect_uri = encodeURIComponent(process.env.INSTAGRAM_REDIRECT_URI);
-    const scope = encodeURIComponent('user_profile,user_media,user_birthday');
-    const state = encodeURIComponent(token);
-    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&state=${state}`;
-    return authUrl;
-}
-
-export default { spotifyService, youtubeService, deezerService, xService, discordService, redditService};
+export default { spotifyService, youtubeService, xService, twitchService, redditService};

@@ -7,6 +7,10 @@ const platforms_icons = {
     "color": "#5064AC",
     "connexion": true
   },
+  "Twitch": {
+    "color": "#18181b",
+    "connexion": true
+  },
   "OpenMeteo": {
     "color": "#D48207",
     "connexion": false
