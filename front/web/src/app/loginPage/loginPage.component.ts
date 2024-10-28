@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import { environment } from "../../../environment/environment";
 
 @Component({
   selector: "app-loginPage",
   templateUrl: "./loginPage.component.html",
   styleUrl: "./loginPage.component.scss",
 })
-
 export class LoginPageComponent implements OnInit, AfterViewInit {
-
   constructor(private router: Router) {}
 
   loginObj: any = {
@@ -23,10 +22,9 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log("After");
   }
-  
-  goToRegister(): void {
-    this.router.navigate(['/register']);
 
+  goToRegister(): void {
+    this.router.navigate(["/register"]);
   }
 
   onLogin() {
@@ -39,12 +37,12 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
 
     if (!this.loginObj.email || !this.loginObj.password) {
       alert(
-        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
+        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe."
       );
       return;
     }
 
-    fetch("http://localhost:8000/login", {
+    fetch(`${environment.apiUrl}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
