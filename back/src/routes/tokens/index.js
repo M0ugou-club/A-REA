@@ -232,9 +232,9 @@ const delToken = async (req, res, next) => {
                 });
             }
             const tokenId = user.tokens[tokenIndex]._id;
-            user.tokens.splice(tokenIndex, 1); // Remove the token from the array
-            await user.save(); // Save the updated user
-            await Token.findByIdAndDelete(tokenId); // Delete the token document from the collection
+            user.tokens.splice(tokenIndex, 1);
+            await user.save();
+            await Token.findByIdAndDelete(tokenId);
             res.status(200).json({ message: 'Token deleted successfully' });
         });
     }

@@ -2,17 +2,11 @@ import { getAccesTokensServiceByUserId } from '../../../routes/tokens/indexServi
 
 export const xReactions = async (action, userId) => {
     let accessToken = ""
-    let deviceId = ""
 
-    accessToken = await getAccesTokensServiceByUserId("Spotify", userId);
-    deviceId = await getSpotifyDeviceId(accessToken);
-    if (deviceId == null) {
-        console.log('No active device found');
-        return;
-    }
     switch (action) {
         case 'post_new_tweet':
-            postNewTweet(accessToken, deviceId);
+            console.log('post_new_tweet');
+            postNewTweet(accessToken);
             break;
         default:
             return;
@@ -20,7 +14,7 @@ export const xReactions = async (action, userId) => {
     return;
 };
 
-const postNewTweet = async (accessToken, deviceId) => {
+const postNewTweet = async (accessToken) => {
     try {
         const body = JSON.stringify({
             text: "Incroyable la nouvelle vidéo de Inoxtag !"
@@ -36,6 +30,7 @@ const postNewTweet = async (accessToken, deviceId) => {
         });
 
         if (!response.ok) {
+            console.log(response);
             throw new Error(`Erreur lors de la création du tweet: ${response.statusText}`);
         } else {
             console.log('Tweet posted successfully!');

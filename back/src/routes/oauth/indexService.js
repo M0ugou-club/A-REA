@@ -35,7 +35,7 @@ export const xService = (token) => {
 
     const client_id = encodeURIComponent(process.env.X_CLIENT_ID);
     const redirect_uri = encodeURIComponent(process.env.X_REDIRECT_URI);
-    const scope = encodeURIComponent('tweet.read users.read follows.read follows.write');
+    const scope = encodeURIComponent('tweet.read tweet.write users.read users.read follows.read follows.write');
     const state = encodeURIComponent(token);
     const code_challenge = 'challenge';
     const code_challenge_method = 'plain';
