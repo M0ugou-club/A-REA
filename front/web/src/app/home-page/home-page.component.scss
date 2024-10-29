@@ -189,6 +189,46 @@
     margin-right: 25%;
 }
 
+.areas-list-empty-container {
+    display: flex;
+    height: 60%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.areas-list-empty-text {
+    display: flex;
+    color: #C4C4C4;
+    font-family: 'KaizenRegular';
+}
+
+.areas-list-container {
+    display: flex;
+    height: 60%;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.areas-list-icon-container {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    flex-direction: row;
+}
+
+.areas-list-icon-button {
+    display: flex;
+    height: 100%;
+    width: 10%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
 // second row with servies and documentaire sections
 
 .secondRow-container {
@@ -216,6 +256,91 @@
     background-image: url('/home/areas-bg.svg'); 
     background-size: cover;
     background-position: center;
+    flex-direction: column;
+}
+
+.service-list-container {
+    display: flex;
+    height: 73%;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.service-prev-container {
+    display: flex;
+    height: 100%;
+    width: 8%;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-next-container {
+    display: flex;
+    height: 100%;
+    width: 8%;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-icons-container {
+    display: flex;
+    height: 100%;
+    width: 84%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.service-item {
+    display: flex;
+    height: 100%;
+    width: 25%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icons {
+    display: flex;
+    height: 40%;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-name {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 120%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-top: 10%;
+}
+
+.service-chevron-button {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+  
+.service-icons {
+    display: flex;
+    overflow: hidden;
+}
+  
+.service-icons img {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
 }
 
 .docu-container {

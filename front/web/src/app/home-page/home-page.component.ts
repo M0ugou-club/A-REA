@@ -3,18 +3,33 @@ import { Router } from "@angular/router";
 import { environment } from "../../../environment/environment";
 
 @Component({
-  selector: "app-home-page",
-  templateUrl: "./home-page.component.html",
-  styleUrl: "./home-page.component.scss",
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss']
 })
+
 export class HomePageComponent implements OnInit {
   constructor(private router: Router) {}
   userName: string = "";
   userEmail: string = "";
+  services: string[] = [];
+  currentIndex: number = 0;
+
+  areas: {
+    areaId: number;
+    actionService: string;
+    reactionService: string;
+    actionText: string;
+    reactionText: string;
+    title: string;
+  }[] = [];
 
   ngOnInit(): void {
     this.getUserInfo();
-    const localData = localStorage.getItem("authToken");
+    this.getServices();
+    this.loadAReas();
+    console.log("areas", this.areas);
+    const localData = localStorage.getItem('authToken');
 
     if (localData != null) {
       fetch(`${environment.apiUrl}/isLogged`, {
@@ -55,6 +70,55 @@ export class HomePageComponent implements OnInit {
       });
   }
 
+  getServices() {
+    fetch("http://localhost:8000/tokens/state", {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.services = Object.keys(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  loadAReas(): void {
+    fetch("http://localhost:8000/areas", {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+
+        data.forEach((area: any) => {
+          this.areas.push({
+            areaId: area._id,
+            actionService: area.action.platform,
+            reactionService: area.reactions.platform,
+            actionText: area.action.title,
+            reactionText: area.reactions.title,
+            title: area.title,
+          });
+          console.log(this.areas);
+        });
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
   goToAreas() {
     this.router.navigate(["/dashboard/a-rea"]);
   }
@@ -62,5 +126,17 @@ export class HomePageComponent implements OnInit {
   openDocuYoutube() {
     const youtubeUrl = "https://www.youtube.com/watch?v=wrFsapf0Enk&t=162s";
     window.open(youtubeUrl, "_blank");
+  }
+
+  nextIcon() {
+    if (this.currentIndex < this.services.length - 4) {
+      this.currentIndex++;
+    }
+  }
+
+  prevIcon() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
   }
 }

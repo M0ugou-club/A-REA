@@ -53,17 +53,15 @@ export const xService = (token) => {
     return "";
   }
 
-  const client_id = encodeURIComponent(process.env.X_CLIENT_ID);
-  const redirect_uri = encodeURIComponent(process.env.X_REDIRECT_URI);
-  const scope = encodeURIComponent(
-    "tweet.read users.read follows.read follows.write"
-  );
-  const state = encodeURIComponent(token);
-  const code_challenge = "challenge";
-  const code_challenge_method = "plain";
-  const authUrl = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&code_challenge=${code_challenge}&code_challenge_method=${code_challenge_method}`;
-  return authUrl;
-};
+    const client_id = encodeURIComponent(process.env.X_CLIENT_ID);
+    const redirect_uri = encodeURIComponent(process.env.X_REDIRECT_URI);
+    const scope = encodeURIComponent('tweet.read tweet.write users.read users.read follows.read follows.write');
+    const state = encodeURIComponent(token);
+    const code_challenge = 'challenge';
+    const code_challenge_method = 'plain';
+    const authUrl = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&code_challenge=${code_challenge}&code_challenge_method=${code_challenge_method}`;
+    return authUrl;
+}
 
 export const redditService = (token) => {
   if (
