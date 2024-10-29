@@ -5,12 +5,14 @@ import NavigationBar from '../../NavigationBar/NavigationBar';
 import isLogged from '../../isLogged';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getFetchUrl } from '../../getFetchUrl';
 
 export default function CreateAreaPage() {
     const [selectedAction, setSelectedAction] = useState('');
     const [selectedReaction, setSelectedReaction] = useState('');
     const [actionList, setActionList] = useState({});
     const [reactionList, setReactionList] = useState([]);
+    const [fetchUrl, setFetchUrl] = useState('');
     const [area, setArea] = useState({
         area_title: "",
         area_description: "",
@@ -26,11 +28,23 @@ export default function CreateAreaPage() {
     const navigation = useNavigation();
 
     useEffect(() => {
+        const initializeFetchUrl = async () => {
+            const url = await getFetchUrl();
+            setFetchUrl(url);
+        };
+    
+        initializeFetchUrl();
+    }, []);
+
+    useEffect(() => {
+        if (!fetchUrl) return;
+
         isLogged(navigation);
+
         const fetchActions = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://inox-qcb.fr:8000/enums/actions', {
+                const response = await fetch(fetchUrl + '/enums/actions', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -46,11 +60,12 @@ export default function CreateAreaPage() {
             } catch (error) {
                 console.error('Error fetching actions:', error);
             }
-        }
+        };
+
         const fetchReactions = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://inox-qcb.fr:8000/enums/reactions', {
+                const response = await fetch(fetchUrl + '/enums/reactions', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -66,10 +81,11 @@ export default function CreateAreaPage() {
             } catch (error) {
                 console.error('Error fetching reactions:', error);
             }
-        }
+        };
+
         fetchActions();
         fetchReactions();
-    }, [navigation]);
+    }, [fetchUrl, navigation]);
 
     const handleActionPress = (action, platform, actionKey) => {
         setSelectedAction(action);

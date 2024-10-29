@@ -50,7 +50,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getUserInfo() {
-    fetch("http://localhost:8000/users", {
+    fetch(`${environment.apiUrl}/users`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -69,7 +69,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getServiceInfo() {
-    fetch("http://localhost:8000/enums/platforms_icons", {
+    fetch(`${environment.apiUrl}/enums/platforms_icons`, {
       method: "GET",
     })
       .then((response) => {
@@ -91,7 +91,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   getServiceState() {
-    fetch("http://localhost:8000/tokens/state", {
+    fetch(`${environment.apiUrl}/tokens/state`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -113,7 +113,7 @@ export class LoginServicsePopupComponent implements OnInit {
 
   connectionSpotify(): void {
     if (this.isConnectedToService("Spotify") == true) {
-      fetch("http://localhost:8000/tokens/platform/Spotify", {
+      fetch(`${environment.apiUrl}/tokens/platform/Spotify`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -125,14 +125,14 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "http://localhost:8000/oauth/Spotify?token=" +
+        `${environment.apiUrl}/oauth/Spotify?token=` +
         localStorage.getItem("authToken");
     }
   }
 
   connectionYoutube(): void {
     if (this.isConnectedToService("Youtube") == true) {
-      fetch("http://localhost:8000/tokens/platform/Youtube", {
+      fetch(`${environment.apiUrl}/tokens/platform/Youtube`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -146,14 +146,14 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "http://localhost:8000/oauth/Youtube?token=" +
+        `${environment.apiUrl}/oauth/Youtube?token=` +
         localStorage.getItem("authToken");
     }
   }
 
   connectionTwitch(): void {
     if (this.isConnectedToService("Twitch") == true) {
-      fetch("http://localhost:8000/tokens/platform/Twitch", {
+      fetch(`${environment.apiUrl}/tokens/platform/Twitch`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -166,13 +166,15 @@ export class LoginServicsePopupComponent implements OnInit {
         console.error("Error:", error);
       });
     } else {
-      window.location.href = 'http://localhost:8000/oauth/Twitch?token=' + localStorage.getItem('authToken');
+      window.location.href =
+        `${environment.apiUrl}/oauth/Twitch?token=` +
+        localStorage.getItem("authToken");
     }
   }
 
   connectionX(): void {
     if (this.isConnectedToService("X") == true) {
-      fetch("http://localhost:8000/tokens/platform/X", {
+      fetch(`${environment.apiUrl}/tokens/platform/X`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -186,14 +188,14 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "http://localhost:8000/oauth/X?token=" +
+        `${environment.apiUrl}/oauth/X?token=` +
         localStorage.getItem("authToken");
     }
   }
 
   connectionReddit(): void {
     if (this.isConnectedToService("Reddit") == true) {
-      fetch("http://localhost:8000/tokens/platform/X", {
+      fetch(`${environment.apiUrl}/tokens/platform/X`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -207,10 +209,10 @@ export class LoginServicsePopupComponent implements OnInit {
       });
     } else {
       window.location.href =
-        "http://localhost:8000/oauth/Reddit?token=" +
+        `${environment.apiUrl}/oauth/Reddit?token=` +
         localStorage.getItem("authToken");
     }
-  } 
+  }
 
   chooseConnection(service: string) {
     const connection = this.connectionFunctions.find(

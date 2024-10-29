@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { environment } from "../../../../environment/environment";
 
 @Component({
   selector: "app-a-reas",
@@ -22,7 +23,7 @@ export class AReasComponent {
   }
 
   deleteArea() {
-    fetch("http://localhost:8000/areas/" + this.areaId.toString(), {
+    fetch(`${environment.apiUrl}areas/` + this.areaId.toString(), {
       method: "DELETE",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
