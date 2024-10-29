@@ -186,18 +186,23 @@ export class AreaPageComponent implements OnInit {
 
   setAction(action: string) {
     const actionObj: any = this.actions.find((x) => x.label === action);
-    this.areaObj.action_name = actionObj.label;
-    this.areaObj.action_type = actionObj.actionKey;
-    this.areaObj.action_platform = actionObj.service;
-    console.log(this.areaObj);
+    this.areaObj.action_name = "";
+    setTimeout(() => {
+      this.areaObj.action_name = actionObj.label;
+      this.areaObj.action_type = actionObj.actionKey;
+      this.areaObj.action_platform = actionObj.service;
+    }, 300);
   }
 
   setReaction(reaction: string) {
     const reactionObj: any = this.reactions.find((x) => x.label === reaction);
-    this.areaObj.reaction_name = reactionObj.label;
-    this.areaObj.reaction_type = reactionObj.actionKey;
-    this.areaObj.reaction_platform = reactionObj.service;
-    console.log(this.areaObj);
+    this.areaObj.reaction_name = "";
+    setTimeout(() => {
+      this.areaObj.reaction_name = reactionObj.label;
+      this.areaObj.reaction_type = reactionObj.actionKey;
+      this.areaObj.reaction_platform = reactionObj.service;
+      console.log(this.areaObj);
+    }, 300);
   }
 
   resetSelection() {

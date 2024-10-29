@@ -252,6 +252,16 @@
   font-style: italic;
 }
 
+.ellipsis {
+  color: white;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
+}
+
 //.refresh-title-container {
 //  display: flex;
 //  align-items: center;
