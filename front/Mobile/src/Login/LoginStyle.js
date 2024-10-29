@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     fontSize: width * 0.075,
     fontWeight: 'bold',
     margin: 20,
+    color: '#CAC7C7',
   },
 
   popup: {
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
 
   textRegisterButton: {
-    color: '#0089ED',
+    color: '#CAC7C7',
     textDecorationLine: 'underline',
     fontSize: width * 0.04,
     marginTop: height * 0.02,

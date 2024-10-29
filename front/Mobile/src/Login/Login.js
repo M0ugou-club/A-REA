@@ -61,17 +61,19 @@ export default function Login() {
     <ImageBackground source={require('./../../assets/background.png')} style={styles.background}>
       <View style={styles.popup}>
         <Image style={styles.title} source={require('./../../assets/kaizenLogo.png')} />
+        <Text style={styles.title}>Inox QCB</Text>
         <TextInput
           style={styles.formInput}
           placeholder='Email'
           placeholderTextColor={'#CAC7C7'}
+          color = {'#CAC7C7'}
           onChangeText={setEmail}
-          
         />
         <TextInput
           style={styles.formInput}
           placeholder='Mot de passe'
           placeholderTextColor={'#CAC7C7'}
+          color = {'#CAC7C7'}
           secureTextEntry={true}
           onChangeText={setPassword}
         />
