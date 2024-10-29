@@ -2,21 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from './NavigationBarStyle';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import LoginPopup from './LoginPopup/LoginPopup';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function NavigationBar() {
     const navigation = useNavigation();
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
     const route = useRoute();
-
-    const togglePopup = () => {
-        setIsPopupVisible(!isPopupVisible);
-    };
 
     return (
         <View styles={styles.screenColor}>
-            {/* <LoginPopup /> */}
             <View style={styles.navigationBarContainer}>
                 <TouchableOpacity style={styles.buttonNavigation} onPress={() => navigation.navigate('Home')}>
                     <Icon
