@@ -47,16 +47,33 @@
                         <p class="areas-list-empty-text">Aucune aréa</p>
                     </div>
                     <div *ngIf="areas.length !== 0" class="areas-list-container">
-                        <app-a-reas *ngFor="let x of areas"
-                                    [areaMainService]="x.actionService"
-                                    [areaSubService]="x.reactionService"
-                                    [areaTitle]="x.title"
-                                    [serviceColor]="'#1E1E1E'"
-                                    [actionTitle]="x.actionText"
-                                    [reactionTitle]="x.reactionText"
-                                    [areaId]="x.areaId"
-                                    class="a-rea">
-                        </app-a-reas>
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(0, 2)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
+                        <div class="separator">
+                            <hr class="separator-line">
+                        </div>
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(2, 4)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
                     </div>
                     <div class="areas-list-icon-container">
                         <button class="areas-list-icon-button">
