@@ -10,13 +10,13 @@
             *ngIf="areaSubService"
             name="CircleHelp"
             class="hover-icon"
-            (mouseenter)="showInfo = true"
-            (mouseleave)="showInfo = false">
+            (click)="showInfo = true">
     </lucide-icon>
     <div class="info"
          *ngIf="showInfo"
          (mouseenter)="showInfo = true"
-         (mouseleave)="showInfo = false">
+         (mouseleave)="showInfo = false"
+         @fadeIn>
         <div class="action">
             <lucide-icon name="git-commit-horizontal" [size]="32" color="#0089ED"></lucide-icon>
             <p> {{ actionTitle }} </p>

@@ -2,11 +2,21 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { reduce } from "rxjs";
 import { environment } from "../../../environment/environment";
+import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
   selector: "app-a-rea-page",
   templateUrl: "./a-rea-page.component.html",
   styleUrl: "./a-rea-page.component.scss",
+  animations: [
+    trigger("fadeIn", [
+      transition(":enter", [
+        style({ opacity: 0 }),
+        animate("300ms", style({ opacity: 1 })),
+      ]),
+      transition(":leave", [animate("300ms", style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class AreaPageComponent implements OnInit {
   areaObj: any = {
@@ -176,18 +186,23 @@ export class AreaPageComponent implements OnInit {
 
   setAction(action: string) {
     const actionObj: any = this.actions.find((x) => x.label === action);
-    this.areaObj.action_name = actionObj.label;
-    this.areaObj.action_type = actionObj.actionKey;
-    this.areaObj.action_platform = actionObj.service;
-    console.log(this.areaObj);
+    this.areaObj.action_name = "";
+    setTimeout(() => {
+      this.areaObj.action_name = actionObj.label;
+      this.areaObj.action_type = actionObj.actionKey;
+      this.areaObj.action_platform = actionObj.service;
+    }, 300);
   }
 
   setReaction(reaction: string) {
     const reactionObj: any = this.reactions.find((x) => x.label === reaction);
-    this.areaObj.reaction_name = reactionObj.label;
-    this.areaObj.reaction_type = reactionObj.actionKey;
-    this.areaObj.reaction_platform = reactionObj.service;
-    console.log(this.areaObj);
+    this.areaObj.reaction_name = "";
+    setTimeout(() => {
+      this.areaObj.reaction_name = reactionObj.label;
+      this.areaObj.reaction_type = reactionObj.actionKey;
+      this.areaObj.reaction_platform = reactionObj.service;
+      console.log(this.areaObj);
+    }, 300);
   }
 
   resetSelection() {
