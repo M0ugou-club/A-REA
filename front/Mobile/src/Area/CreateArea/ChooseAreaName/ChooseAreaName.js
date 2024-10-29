@@ -6,6 +6,7 @@ import isLogged from '../../../isLogged';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from 'react-native-gesture-handler';
+import { getFetchUrl } from '../../../getFetchUrl';
 
 export default function ChooseAreaName() {
     const navigation = useNavigation();
@@ -13,6 +14,16 @@ export default function ChooseAreaName() {
     const { area } = route.params;
     const [areaName, setAreaName] = useState('');
     const [areaDescription, setAreaDescription] = useState('');
+    const [fetchUrl, setFetchUrl] = useState('');
+
+    useEffect(() => {
+        const initializeFetchUrl = async () => {
+            const url = await getFetchUrl();
+            setFetchUrl(url);
+        };
+    
+        initializeFetchUrl();
+    }, []);
 
     useEffect(() => {
         isLogged(navigation);
@@ -21,7 +32,7 @@ export default function ChooseAreaName() {
     async function handleFinish() {
         const token = await AsyncStorage.getItem('accessToken');
         try {
-            const response = await fetch('http://inox-qcb.fr:8000/areas', {
+            const response = await fetch(fetchUrl + '/areas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

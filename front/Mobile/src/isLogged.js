@@ -1,8 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getFetchUrl } from './getFetchUrl';
 
 export default async function isLogged(navigation) {
     const token = await AsyncStorage.getItem('accessToken');
-    fetch("http://inox-qcb.fr:8000/isLogged", {
+    const fetchUrl = await getFetchUrl();
+
+    fetch(fetchUrl + "/isLogged", {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + token,
@@ -14,6 +17,6 @@ export default async function isLogged(navigation) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('isLogged Error:', error);
     });
 }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import {environment} from "../../../environment/environment";
 
 @Component({
   selector: "app-loginPage",
@@ -57,7 +58,7 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    fetch("http://localhost:8000/register", {
+    fetch(`${environment.apiUrl}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

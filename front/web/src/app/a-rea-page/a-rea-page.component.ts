@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { reduce } from "rxjs";
+import { environment } from "../../../environment/environment";
 
 @Component({
   selector: "app-a-rea-page",
@@ -44,7 +45,7 @@ export class AreaPageComponent implements OnInit {
     console.log(localData);
 
     if (localData != null) {
-      fetch("http://localhost:8000/isLogged", {
+      fetch(`${environment.apiUrl}/isLogged`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +71,7 @@ export class AreaPageComponent implements OnInit {
   }
 
   loadAReas(): void {
-    fetch("http://localhost:8000/areas", {
+    fetch(`${environment.apiUrl}/areas`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -103,7 +104,7 @@ export class AreaPageComponent implements OnInit {
   }
 
   loadActions(): void {
-    fetch("http://localhost:8000/enums/actions", {
+    fetch(`${environment.apiUrl}/enums/actions`, {
       method: "GET",
     })
       .then((response) => {
@@ -121,7 +122,7 @@ export class AreaPageComponent implements OnInit {
   }
 
   loadReactions(): void {
-    fetch("http://localhost:8000/enums/reactions", {
+    fetch(`${environment.apiUrl}/enums/reactions`, {
       method: "GET",
     })
       .then((response) => {
@@ -139,7 +140,7 @@ export class AreaPageComponent implements OnInit {
   }
 
   loadServicesIcons(): void {
-    fetch("http://localhost:8000/enums/platforms_icons", {
+    fetch(`${environment.apiUrl}/enums/platforms_icons`, {
       method: "GET",
     })
       .then((response) => {
@@ -199,7 +200,7 @@ export class AreaPageComponent implements OnInit {
   approveSelection() {
     const localData = "Bearer " + localStorage.getItem("authToken");
 
-    fetch("http://localhost:8000/areas", {
+    fetch(`${environment.apiUrl}/areas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
