@@ -5,19 +5,32 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import styles from './HomeStyle';
 import NavigationBar from '../NavigationBar/NavigationBar';
+import { getFetchUrl } from '../getFetchUrl';
 
 export default function Home() {
 
     const navigation = useNavigation();
     const [userInfo, setUserInfo] = useState(null);
+    const [fetchUrl, setFetchUrl] = useState('');
 
     useEffect(() => {
+        const initializeFetchUrl = async () => {
+            const url = await getFetchUrl();
+            setFetchUrl(url);
+        };
+    
+        initializeFetchUrl();
+    }, []);
+
+    useEffect(() => {
+        if (!fetchUrl) return;
+
         isLogged(navigation);
     
         const getUsersInfos = async () => {
             try {
                 const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch("http://inox-qcb.fr:8000/users", {
+                const response = await fetch(fetchUrl + "/users", {
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -30,7 +43,7 @@ export default function Home() {
             }
         };
         getUsersInfos();
-    }, [navigation]);
+    }, [navigation, fetchUrl]);
 
     const handleKayzen = () => {
         Linking.openURL('https://www.youtube.com/watch?v=wrFsapf0Enk');
