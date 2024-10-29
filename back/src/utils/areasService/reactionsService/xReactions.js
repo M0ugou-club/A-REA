@@ -1,4 +1,4 @@
-import { getAccesTokensServiceByUserId } from '../../../routes/tokens/indexService.js'
+import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexService.js";
 
 export const xReactions = async (action, userId) => {
     let accessToken = ""
@@ -20,14 +20,14 @@ const postNewTweet = async (accessToken) => {
             text: "Incroyable la nouvelle vidéo de Inoxtag !"
         });
 
-        const response = await fetch(`https://api.twitter.com/2/tweets`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            },
-            body: body
-        });
+    const response = await fetch(`https://api.twitter.com/2/tweets`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
 
         if (!response.ok) {
             console.log(response);

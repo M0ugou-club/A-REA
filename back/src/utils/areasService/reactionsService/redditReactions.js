@@ -2,10 +2,8 @@ import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexServi
 import fetch from "node-fetch";
 
 const redditReactions = async (action, userId) => {
-  console.log("Reddit reaction");
   const access_token = await getAccesTokensServiceByUserId("Reddit", userId);
 
-  console.log("test1");
   if (!access_token) {
     console.log("No access token found");
     return;
@@ -65,19 +63,16 @@ const likePost = async (access_token, post) => {
         "User-Agent": "Area:v0.0.1",
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
-      // Use URL-encoded form data
       body: new URLSearchParams({
         id: postId,
-        dir: 1, // 1 for upvote
+        dir: 1,
       }),
     });
     const data = await response.json();
-    console.log("Response:", data);
     if (data.error) {
       console.error("Failed to like post:", data.error);
       return;
     }
-    console.log("Post liked successfully");
   } catch (error) {
     console.error("Failed to like post:", error);
   }
@@ -104,7 +99,6 @@ const dislikePost = async (access_token, post) => {
       console.error("Failed to dislike post:", data.error);
       return;
     }
-    console.log("Post disliked successfully");
   } catch (error) {
     console.error("Failed to dislike post:", error);
   }
@@ -131,7 +125,6 @@ const commentPost = async (access_token, post) => {
       console.log("Failed to comment on post:", data.error);
       return;
     }
-    console.log("Commented on post successfully");
   } catch (error) {
     console.log("Failed to comment on post:", error);
   }
