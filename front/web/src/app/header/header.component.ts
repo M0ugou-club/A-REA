@@ -9,17 +9,18 @@ import { Router } from "@angular/router";
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  showLoginPopup = true;
+  showLoginPopup = false;
 
   handleUserIconButton(): void {
     this.showLoginPopup = !this.showLoginPopup;
   }
 
-  handleHomeButtonClick() {
-    this.router.navigate(["dashboard/"]);
+  goToAreas() {
+    console.log("cacadou");
+    this.router.navigate(["dashboard/a-rea"]);
   }
 
-  handleAreaButtonClick() {
-    this.router.navigate(["dashboard/a-rea"]);
+  goToDashboard = () => {
+    this.router.navigate(["dashboard/"]);
   }
 }

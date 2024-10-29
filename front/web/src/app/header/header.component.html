@@ -1,15 +1,15 @@
 <div class="header-container">
     <div class="logo-container">
-        <img class="logoKaizen" src="homeImages/kaizenLogo.png" alt="logo">
+        <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
     </div>
     <div class="button-container">
         <div class="addArea-container">
-            <button class="addArea-button">
+            <button class="addArea-button" (click)="goToAreas()">
                 <img class="addArea-picture" src="/header/addArea.png" alt="addArea">
             </button>
         </div>
         <div class="listArea-container">
-            <button class="listArea-button">
+            <button class="listArea-button" (click)="goToDashboard()">
                 <img class="listArea-picture" src="/header/listArea.png" alt="listArea">
             </button>
         </div>

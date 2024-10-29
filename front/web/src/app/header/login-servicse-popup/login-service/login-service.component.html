@@ -1,5 +1,4 @@
-<div class="login-service-container" (click)="connectionService()" [ngStyle]="{ 'background-color': serviceColor}">
-    <img src="/icons/{{serviceName}}.png" alt=" " class="logo" />
-    <p class="text-button-style-api"> {{ isConnected ? 'Se déconnecter' : 'Se connecter' }}</p>
-    <span class="ghost"></span>
+<div class="login-service-container" (click)="connectionService()">
+    <img src="/header/{{serviceName}}.png" alt=" " class="logo-service" />
+    <p class="text-button-style-api">{{ isConnected ? 'Se déconnecter' : 'Se connecter' }}</p>
 </div>

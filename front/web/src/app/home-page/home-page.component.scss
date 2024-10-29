@@ -1,87 +1,364 @@
-.parent {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-gap: 3rem;
-    padding: 3rem;
-    box-sizing: border-box;
-    height: calc(100vh - 13vh);
+.home-container {
+    display: flex;
+    height: 95%;
+    width: 100%;
+    justify-content: center;
 }
 
-.div1, .div2, .div3, .div4 {
-    background-color: white;
+.element-container {
     display: flex;
+    height: 100%;
+    width: 65%;
     flex-direction: column;
+    align-items: center;
+}
+// container with area creation big seciton
+
+.createArea-container {
+    display: flex;
+    height: 15%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+// first row with profile and areas sections
+
+.firstRow-container {
+    display: flex;
+    height: 40%;
+    width: 100%;
+}
+
+.profile-container {
+    display: flex;
+    height: 100%;
+    width: 35%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.profile-square {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    border-radius: 20px;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+.profile-icon-container {
+    display: flex;
+    height: 60%;
+    width: 100%;
+    align-items: center;
     justify-content: flex-start;
-    align-items: center;
-    border-radius: 1rem;
-    text-align: center;
-    padding: 1rem;
 }
 
-.div1 { grid-area: 1 / 5 / 6 / 7; }
-.div2 { grid-area: 1 / 3 / 4 / 5; }
-.div3 { grid-area: 1 / 1 / 4 / 3; }
-.div4 { grid-area: 4 / 1 / 6 / 5; }
-
-.div3 {
+.profile-icon {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 1rem;
-    gap: 1rem;
+    height: 60%;
+    width: auto;
+    border-radius: 60px;
+    margin-left: 8%;
 }
 
-.div4 {
-    background-image: url(../../../public/kaizen-preview.jpg);
+.profile-text-container {
+    display: flex;
+    width: 100%;
+    height: 40%;
+    flex-direction: column;
+}
+
+.profile-name {
+    display: flex;
+    font-size: 200%;
+    color: #FFFFFF;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+}
+
+.profile-email {
+    display: flex;
+    color: #C4C4C4;
+    font-size: 100%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+
+}
+
+.profile-grade {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 120%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+    margin-left: 8%;
+    margin-top: 7%;
+}
+
+.areas-container {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.areas-square {
+    display: flex;
+    height: 95%;
+    width: 98%;
+    border-radius: 20px;
+    background-image: url('/home/areas-bg.svg'); 
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+}
+
+.areas-hearder-square {
+    display: flex;
+    width: 100%;
+    height: 27%;
+    background-color: #1E1E1E;
+    border-radius: 20px 20px 0 0;
+}
+
+.areas-icon-container {
+    display: flex;
+    height: 100%;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+}
+
+.areas-icon {
+    display: flex;
+    height: 60%;
+    width: auto;
+}
+
+.areas-text-container {
+    display: flex;
+    height: 100%;
+    width: 75%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.areas-title {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 140%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.areas-text {
+    display: flex;
+    color: #C4C4C4;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.areas-add-container {
+    display: flex;
+    height: 100%;
+    width: 10%;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.area-add-button {
+    display: flex;
+    height: 40%;
+    width: auto;
+    background: none;
+    border: none;
+    margin-top: 30%;
+    margin-right: 25%;
+}
+
+// second row with servies and documentaire sections
+
+.secondRow-container {
+    display: flex;
+    height: 40%;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.service-container {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.service-square {
+    display: flex;
+    height: 95%;
+    width: 98%;
+    border-radius: 20px;
+    background-image: url('/home/areas-bg.svg'); 
     background-size: cover;
     background-position: center;
 }
 
-.div4-button-container {
-    width: 30%;
-    padding-top: 15%;
-    padding-left: 70%;
+.docu-container {
+    display: flex;
+    height: 100%;
+    width: 35%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
 }
 
-.header {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-    text-align: left;
+.docu-square {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    border-radius: 20px;
+    background-color: #1E1E1E;
+    flex-direction: column;
 }
 
-.line {
+.docu-hearder-square {
+    display: flex;
     width: 100%;
-    height: 2px;
-    background-color: #0089ed;
-    margin-bottom: 1rem;
+    height: 27%;
+    background-color: #1E1E1E;
+    border-radius: 20px 20px 0 0;
+    flex-direction: row;
 }
 
-.submit-btn {
-    border-radius: 10px;
-    background-color: #0089ed;
-    box-shadow: 0 4px 19px rgba(119, 147, 65, 0.3);
-    width: 90%;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 500;
-    padding: 15px;
+.docu-button {
+    display: flex;
+    height: 73%;
+    width: 100%;
     border: none;
-    margin-top: auto;
+    background-image: url('/home/docu.svg'); 
+    background-size: 110%;
+    background-position: center;
+    border-radius: 0 0 20px 20px;
+    cursor: pointer;
 }
 
-.mobile-app-img {
+.docu-icon-container {
+    display: flex;
+    height: 100%;
+    width: 27%;
+    align-items: center;
+    justify-content: center;
+}
+
+.docu-icon {
+    display: flex;
+    height: 59%;
+    width: auto;
+}
+
+.docu-text-container {
+    display: flex;
+    height: 100%;
+    width: 73%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.docu-title {
+    display: flex;
+    color: #FFFFFF;
+    font-size: 140%;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.docu-text {
+    display: flex;
+    color: #C4C4C4;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.create-button {
+    display: flex;
+    height: 58%;
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    overflow: hidden;
-    border-radius: 1rem;
+    border: none;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #1E1E1E;
+    cursor: pointer;
 }
 
-.custom-heading {
-    font-weight: 500;
-    font-size: 2rem;
-    align-self: flex-start;
+.create-icon-container {
+    display: flex;
+    height: 100%;
+    width: 8%;
+    align-items: center;
+}
+.create-icon {
+    display: flex;
+    margin-left: 18%;
+    height: 60%;
+    width: auto;
+}
+
+.create-text-container {
+    display: flex;
+    height: 100%;
+    width: 80%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.create-title, .create-text {
+    display: flex;
+    color: #FFFFFF;
+    font-family: 'KaizenRegular';
+    margin: 0;
+    padding: 0;
+}
+
+.create-title {
+    font-size: 120%;
+}
+
+.create-text {
+    margin-top: 1%;
+    color: #C4C4C4;
+    font-size: 100%;
+}
+
+.create-arrow-container {
+    display: flex;
+    height: 100%;
+    width: 12%;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-arrow {
+    display: flex;
+    height: 45%;
+    width: auto;
+    margin-left: 40%;
 }
