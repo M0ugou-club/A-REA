@@ -8,34 +8,56 @@ export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fetchUrl, setFetchUrl] = useState('');
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
+    const storeFetchUrl = async () => {
       try {
-        const token = await AsyncStorage.getItem('accessToken');
-        if (token === null) {
-          return;
-        }
-        const response = await fetch("http://inox-qcb.fr:8000/isLogged", {
-          method: "GET",
-          headers: {
-            "Authorization": "Bearer" + token,
-          },
-        });
-        if (response.status === 200) {
-          navigation.navigate('Home');
+        const url = await AsyncStorage.getItem('fetchUrl');
+        if (url === null) {
+          await AsyncStorage.setItem('fetchUrl', 'http://inox-qcb.fr:8000');
+          setFetchUrl('http://inox-qcb.fr:8000');
+        } else {
+          setFetchUrl(url);
         }
       } catch (error) {
         console.error('Error:', error);
       }
     };
 
+    storeFetchUrl();
+  }, []);
+
+  useEffect(() => {
+    if (fetchUrl === '') {
+      return;
+    }
+
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        if (token === null) {
+          return;
+        }
+        const response = await fetch(fetchUrl + "/isLogged", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token,
+          },
+        });
+        if (response.status === 200) {
+          navigation.navigate('Home');
+        }
+      } catch (error) {
+        console.error('test2Error:', error);
+      }
+    };
     checkLoginStatus();
-  }, [navigation]);
+  }, [navigation, fetchUrl]);
 
   async function onLogin() {
     try {
-      const response = await fetch("http://inox-qcb.fr:8000/login", {
+      const response = await fetch(fetchUrl + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

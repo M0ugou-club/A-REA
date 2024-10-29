@@ -204,43 +204,42 @@ const delToken = async (req, res, next) => {
   console.log("delete token");
   const { platform } = req.params;
 
-  try {
-    const header = req.headers.authorization;
-    const tokena = header.replace("Bearer ", "");
-    if (!tokena) {
-      return res.status(401).json({ message: "Token manquant" });
+    try {
+        const header = req.headers.authorization;
+        const tokena = header.replace("Bearer ", "");
+        if (!tokena) {
+            return res.status(401).json({ message: "Token manquant" });
+        }
+        jwt.verify(tokena, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Token invalide" });
+            }
+            const { id } = decoded;
+            const user = await User.findOne({
+                _id: id,
+            }).populate('tokens');
+            if (!user) {
+                return res.status(405).json({
+                    message: 'User not found',
+                });
+            }
+            const tokenIndex = user.tokens.findIndex((token) => token.platform === platform);
+            if (tokenIndex === -1) {
+                return res.status(406).json({
+                    message: 'Token not found for platform ' + platform,
+                });
+            }
+            const tokenId = user.tokens[tokenIndex]._id;
+            user.tokens.splice(tokenIndex, 1);
+            await user.save();
+            await Token.findByIdAndDelete(tokenId);
+            res.status(200).json({ message: 'Token deleted successfully' });
+        });
     }
-    jwt.verify(tokena, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ message: "Token invalide" });
-      }
-      const { id } = decoded;
-      const user = await User.findOne({
-        _id: id,
-      }).populate("tokens");
-      if (!user) {
-        return res.status(405).json({
-          message: "User not found",
-        });
-      }
-      const tokenIndex = user.tokens.findIndex(
-        (token) => token.platform === platform
-      );
-      if (tokenIndex === -1) {
-        return res.status(406).json({
-          message: "Token not found for platform " + platform,
-        });
-      }
-      const tokenId = user.tokens[tokenIndex]._id;
-      user.tokens.splice(tokenIndex, 1); // Remove the token from the array
-      await user.save(); // Save the updated user
-      await Token.findByIdAndDelete(tokenId); // Delete the token document from the collection
-      res.status(200).json({ message: "Token deleted successfully" });
-    });
-  } catch (error) {
-    return next(error);
-  }
-};
+    catch (error) {
+        return next(error);
+    }
+}
 
 routeTokens.get("/tokens", getTokens);
 routeTokens.get("/tokens/platform/:platform", getToken);

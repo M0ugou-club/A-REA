@@ -1,21 +1,24 @@
 import { getAccesTokensServiceByUserId } from "../../../routes/tokens/indexService.js";
 
-export const xReactions = async (action, accessToken, userId) => {
-  switch (action) {
-    case "post_new_tweet":
-      postNewTweet(accessToken);
-      break;
-    default:
-      return;
-  }
-  return;
+export const xReactions = async (action, userId) => {
+    let accessToken = ""
+
+    switch (action) {
+        case 'post_new_tweet':
+            console.log('post_new_tweet');
+            postNewTweet(accessToken);
+            break;
+        default:
+            return;
+    }
+    return;
 };
 
 const postNewTweet = async (accessToken) => {
-  try {
-    const body = JSON.stringify({
-      text: "Inoxtag je t'aime",
-    });
+    try {
+        const body = JSON.stringify({
+            text: "Incroyable la nouvelle vidéo de Inoxtag !"
+        });
 
     const response = await fetch(`https://api.twitter.com/2/tweets`, {
       method: "POST",
@@ -26,19 +29,18 @@ const postNewTweet = async (accessToken) => {
       body: body,
     });
 
-    if (!response.ok) {
-      throw new Error(
-        `Erreur lors de la création du tweet: ${response.statusText}`
-      );
-    } else {
-      console.log("Tweet posted successfully!");
+        if (!response.ok) {
+            console.log(response);
+            throw new Error(`Erreur lors de la création du tweet: ${response.statusText}`);
+        } else {
+            console.log('Tweet posted successfully!');
+        }
+        return;
+    } catch (error) {
+        console.log('Error when trying to post a new')
+        console.log(error);
+        return;
     }
-    return;
-  } catch (error) {
-    console.log("Error when trying to post a new");
-    console.log(error);
-    return;
-  }
-};
+}
 
 export default { xReactions };

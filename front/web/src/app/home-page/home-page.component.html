@@ -34,7 +34,7 @@
                             <img class="areas-icon" src="/home/areasList.svg">
                         </div>
                         <div class="areas-text-container">
-                            <p class="areas-title">Areas</p>
+                            <div class="areas-title">Areas</div>
                             <p class="areas-text">La liste de tes areas</p>
                         </div>
                         <div class="areas-add-container">
@@ -42,6 +42,26 @@
                                 <img class="areas-arrow" src="/home/add-area.svg">
                             </button>
                         </div>
+                    </div>
+                    <div *ngIf="areas.length === 0" class="areas-list-empty-container">
+                        <p class="areas-list-empty-text">Aucune aréa</p>
+                    </div>
+                    <div *ngIf="areas.length !== 0" class="areas-list-container">
+                        <app-a-reas *ngFor="let x of areas"
+                                    [areaMainService]="x.actionService"
+                                    [areaSubService]="x.reactionService"
+                                    [areaTitle]="x.title"
+                                    [serviceColor]="'#1E1E1E'"
+                                    [actionTitle]="x.actionText"
+                                    [reactionTitle]="x.reactionText"
+                                    [areaId]="x.areaId"
+                                    class="a-rea">
+                        </app-a-reas>
+                    </div>
+                    <div class="areas-list-icon-container">
+                        <button class="areas-list-icon-button">
+                            <img class="areas-list-icon" src="/home/list.svg">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -60,6 +80,24 @@
                         <div class="areas-add-container">
                             <button class="area-add-button">
                                 <img class="areas-arrow" src="/home/aide.svg">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="service-list-container">
+                        <div class="service-prev-container">
+                            <button class="service-chevron-button" (click)="prevIcon()" [disabled]="currentIndex === 0">
+                                <img src="/home/chevron-left.svg">
+                            </button>
+                        </div>
+                        <div class="service-icons-container">
+                            <div *ngFor="let service of services.slice(currentIndex, currentIndex + 4)" class="service-item">
+                                <img class="service-icons" [src]="'/home/' + service + '.svg'" alt="{{service}}">
+                                <div class="service-name">{{service}}</div>
+                              </div>
+                        </div>
+                        <div class="service-next-container">
+                            <button class="service-chevron-button" (click)="nextIcon()" [disabled]="currentIndex >= services.length - 4">
+                                <img src="/home/chevron-right.svg">
                             </button>
                         </div>
                     </div>
