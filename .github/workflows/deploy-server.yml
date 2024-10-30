@@ -1,0 +1,36 @@
+name: deploy-server.yml
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  update-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy Back-end to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOME_SERVER_IP }}
+          username: ${{ secrets.HOME_SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "./back/"
+          target: "/home/server/back"
+
+      - name: Install dependencies and Start Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOME_SERVER_IP }}
+          username: ${{ secrets.HOME_SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/server/back
+            npm install
+            npm start
