@@ -25,15 +25,16 @@ jobs:
         run: npm run build -- --configuration production
         working-directory: ./front/web
 
-      - name: Deploy to Server
-        uses: appleboy/scp-action@master
+      - name: Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.HOME_SERVER_IP }}
           username: ${{ secrets.HOME_SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          server: ${{ secrets.HOME_SERVER_IP }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "${{ github.workspace }}/front/web/dist/web/browser/*"
-          target: "/home/server/Area"
+          local_path: "./front/web/dist/web/browser/*"
+          remote_path: "./home/server/Area"
+          sftpArgs: "-o ConnectTimeout=5"
 
       - name: Restart Apache
         uses: appleboy/ssh-action@master
