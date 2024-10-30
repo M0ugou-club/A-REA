@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.HOME_SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "./front/web/dist/web/browser/*"
+          source: "${{ github.workspace }}/front/web/dist/web/browser/*"
           target: "/home/server/Area"
 
       - name: Restart Apache
