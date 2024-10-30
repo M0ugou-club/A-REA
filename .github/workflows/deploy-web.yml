@@ -43,4 +43,4 @@ jobs:
           username: ${{ secrets.HOME_SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: systemctl restart apache2
+          script: sudo systemctl restart apache2
