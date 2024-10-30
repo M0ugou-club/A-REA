@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  update-server:
+  frontend-build:
     runs-on: ubuntu-latest
 
     steps:
