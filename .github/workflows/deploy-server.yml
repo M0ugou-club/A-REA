@@ -3,7 +3,7 @@ name: deploy-server.yml
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   update-server:
