@@ -28,7 +28,7 @@ export class AReasComponent {
   showInfo: boolean = false;
 
   getAreaMainServiceImageUrl(url: string): string {
-    return url.startsWith("icons/") ? url : `/icons/${url}.png`;
+    return url.startsWith("icons/") ? url : `/icons/${url}.svg`;
   }
 
   deleteArea() {
