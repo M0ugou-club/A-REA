@@ -3,7 +3,7 @@ name: deploy-web.yml
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   frontend-build:
