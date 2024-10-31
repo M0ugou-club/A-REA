@@ -55,18 +55,19 @@
   height: 100%;
   width: 75%;
   p {
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";
     color: white;
     font-weight: bold;
     font-size: small;
+    margin-left: 5%;
   }
-  padding-left: 2%;
+  margin-left: 2%;
 }
 
 .logo {
-  width: 26px;
-  height: 26px;
-  padding-left: 2%;
+  width: 12%;
+  height: auto;
+  margin-left: 3%;
 }
 
 .separator {
@@ -83,7 +84,7 @@
   p {
     color: white;
     padding-left: 5%;
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
   }
 }
 
@@ -92,7 +93,7 @@
   p {
     color: red;
     font-weight: bold;
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
   }
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;

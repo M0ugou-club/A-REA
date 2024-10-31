@@ -105,7 +105,7 @@
     margin-left: 5%;
     color: white;
     font-size: larger;
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
   }
 }
 
@@ -163,7 +163,7 @@
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   .title-actions, .title-réactions {
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
     color: white;
     font-size: x-large;
   }
@@ -227,7 +227,7 @@
 .title-a-rea-input, .description-a-rea-input {
   text-align: left;
   all: unset;
-  font-family: "Poppins-Medium";
+  font-family: "KaizenRegular";;
   resize: none;
   line-height: 1;
   overflow-wrap: break-word;
@@ -248,7 +248,7 @@
 
 .title-a-rea-input::placeholder,.description-a-rea-input::placeholder {
   color: white;
-  font-family: "Poppins-Medium";
+  font-family: "KaizenRegular";;
   font-style: italic;
 }
 

@@ -238,4 +238,8 @@ export class LoginServicsePopupComponent implements OnInit {
     localStorage.removeItem("authToken");
     this.router.navigate(["/login"]);
   }
+
+  goToProfile(): void {
+    this.router.navigate(["dashboard/profile"]);
+  }
 }
