@@ -48,7 +48,7 @@
                     </div>
                     <div *ngIf="areas.length !== 0" class="areas-list-container">
                         <div class="column">
-                            <app-a-reas *ngFor="let x of areas.slice(0, 2)"
+                            <app-a-reas *ngFor="let x of areas.slice(0, 3)"
                                         [areaMainService]="x.actionService"
                                         [areaSubService]="x.reactionService"
                                         [areaTitle]="x.title"
@@ -63,7 +63,7 @@
                             <hr class="separator-line">
                         </div>
                         <div class="column">
-                            <app-a-reas *ngFor="let x of areas.slice(2, 4)"
+                            <app-a-reas *ngFor="let x of areas.slice(3, 6)"
                                         [areaMainService]="x.actionService"
                                         [areaSubService]="x.reactionService"
                                         [areaTitle]="x.title"

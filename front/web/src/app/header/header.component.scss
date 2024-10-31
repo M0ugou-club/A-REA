@@ -8,14 +8,25 @@
 
 .logo-container {
     height: 100%;
-    width: 7.5%;
+    width: 6.5%;
     display: flex;
+    flex-direction: flex-start;
+}
+
+.logo-button {
+    display: flex;
+    height: 100%;
+    width: 90%;
+    background: none;
+    border: none;
     align-items: center;
     justify-content: center;
+    margin-left: 3%;
+    cursor: pointer;
 }
 
 .logoKaizen {
-    height: 80%;
+    height: 75%;
     width: auto;
 }
 
@@ -24,6 +35,23 @@
     width: 10.5%;
     display: flex;
     margin-left: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-type-container {
+    display: flex;
+    height: 100;
+    width: 10%;
+    align-items: center;
+}
+
+.header-text {
+    display: flex;
+    font-size: 130%;
+    font-family: 'KaizenRegular';
+    color: #0089ED;
+    margin-left: -4%;
 }
 
 .addArea-container {

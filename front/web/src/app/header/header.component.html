@@ -1,6 +1,11 @@
 <div class="header-container">
     <div class="logo-container">
-        <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
+        <button class="logo-button" (click)="goToDashboard()">
+            <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
+        </button>
+    </div>
+    <div class="header-type-container">
+        <p class="header-text">{{ pageTitle }}</p>
     </div>
     <div class="button-container">
         <div class="addArea-container">

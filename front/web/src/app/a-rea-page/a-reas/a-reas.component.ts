@@ -29,7 +29,7 @@ export class AReasComponent {
 
   getAreaMainServiceImageUrl(url: string): string {
     console.log(url);
-    return url.startsWith("icons/") ? url : `/icons/${url}.png`;
+    return url.startsWith("icons/") ? url : `/home/${url}.svg`;
   }
 
   deleteArea() {

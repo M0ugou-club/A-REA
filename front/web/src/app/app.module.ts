@@ -30,6 +30,7 @@ import {
 } from "lucide-angular";
 import { ChoicePreviewComponent } from "./a-rea-page/choice-preview/choice-preview.component";
 import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
     ChoiceButtonComponent,
     ChoicePreviewComponent,
     AReasComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
