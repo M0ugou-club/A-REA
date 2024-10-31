@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "../../../environment/environment";
 
@@ -7,7 +7,7 @@ import { environment } from "../../../environment/environment";
   templateUrl: "./loginPage.component.html",
   styleUrl: "./loginPage.component.scss",
 })
-export class LoginPageComponent implements OnInit, AfterViewInit {
+export class LoginPageComponent implements OnInit {
   constructor(private router: Router) {}
 
   loginObj: any = {
@@ -16,11 +16,25 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit() {
-    console.log("Before");
-  }
+    const localData = localStorage.getItem("authToken");
 
-  ngAfterViewInit() {
-    console.log("After");
+    if (localData != null) {
+      fetch(`${environment.apiUrl}/isLogged`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localData,
+        },
+      })
+        .then((response) => {
+          if (response.status == 200) {
+            this.router.navigate(["/dashboard"]);
+          }
+        })
+        .catch((error) => {
+          console.error("Erreur de requête:", error);
+        });
+    }
   }
 
   goToRegister(): void {
