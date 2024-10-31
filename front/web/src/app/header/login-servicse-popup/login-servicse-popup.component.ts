@@ -58,7 +58,6 @@ export class LoginServicsePopupComponent implements OnInit {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         this.userName = data.name;
         this.userSurname = data.surname;
         this.userEmail = data.email;
@@ -74,7 +73,7 @@ export class LoginServicsePopupComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
@@ -99,7 +98,7 @@ export class LoginServicsePopupComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
@@ -222,7 +221,7 @@ export class LoginServicsePopupComponent implements OnInit {
     if (connection) {
       connection.func();
     } else {
-      console.log("No connection function found");
+      console.error("No connection function found");
     }
   }
 

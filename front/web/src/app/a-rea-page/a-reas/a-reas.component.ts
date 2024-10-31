@@ -28,23 +28,23 @@ export class AReasComponent {
   showInfo: boolean = false;
 
   getAreaMainServiceImageUrl(url: string): string {
-    console.log(url);
-    return url.startsWith("icons/") ? url : `/home/${url}.svg`;
+    return url.startsWith("icons/") ? url : `/icons/${url}.svg`;
   }
 
   deleteArea() {
-    fetch(`${environment.apiUrl}areas/` + this.areaId.toString(), {
+    fetch(`${environment.apiUrl}/areas/` + this.areaId.toString(), {
       method: "DELETE",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
       },
     })
       .then((response) => {
-        console.log(response);
+        if (response.status === 200) {
+          window.location.reload();
+        }
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
-    window.location.reload();
   }
 }
