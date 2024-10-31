@@ -16,11 +16,10 @@ export class HeaderComponent {
   }
 
   goToAreas() {
-    console.log("cacadou");
     this.router.navigate(["dashboard/a-rea"]);
   }
 
   goToDashboard = () => {
     this.router.navigate(["dashboard/"]);
-  }
+  };
 }

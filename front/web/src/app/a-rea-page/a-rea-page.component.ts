@@ -52,8 +52,6 @@ export class AreaPageComponent implements OnInit {
   ngOnInit(): void {
     const localData = localStorage.getItem("authToken");
 
-    console.log(localData);
-
     if (localData != null) {
       fetch(`${environment.apiUrl}/isLogged`, {
         method: "GET",
@@ -89,13 +87,11 @@ export class AreaPageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Success:", data);
-
         data.forEach((area: any) => {
           this.areas.push({
             areaId: area._id,
@@ -105,7 +101,6 @@ export class AreaPageComponent implements OnInit {
             reactionText: area.reactions.title,
             title: area.title,
           });
-          console.log(this.areas);
         });
       })
       .catch((error) => {
@@ -119,7 +114,7 @@ export class AreaPageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
@@ -137,7 +132,7 @@ export class AreaPageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
@@ -155,7 +150,7 @@ export class AreaPageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
@@ -179,8 +174,6 @@ export class AreaPageComponent implements OnInit {
         });
       });
     });
-
-    console.log(actionsArray);
     return actionsArray;
   }
 
@@ -201,7 +194,6 @@ export class AreaPageComponent implements OnInit {
       this.areaObj.reaction_name = reactionObj.label;
       this.areaObj.reaction_type = reactionObj.actionKey;
       this.areaObj.reaction_platform = reactionObj.service;
-      console.log(this.areaObj);
     }, 300);
   }
 
@@ -234,15 +226,4 @@ export class AreaPageComponent implements OnInit {
         console.error("Erreur de requête:", error);
       });
   }
-
-  chooseColor(choice: string) {
-    for (let key in this.servicesIcon) {
-      if (key === choice) {
-        return this.servicesIcon[key].color;
-      }
-    }
-    return "";
-  }
-
-  protected readonly reduce = reduce;
 }

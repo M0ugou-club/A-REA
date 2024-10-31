@@ -1,35 +1,47 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
-import {environment} from "../../../environment/environment";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { environment } from "../../../environment/environment";
 
 @Component({
   selector: "app-loginPage",
   templateUrl: "./registerPage.component.html",
   styleUrl: "./registerPage.component.scss",
 })
-
-export class RegisterPageComponent implements OnInit, AfterViewInit {
-
+export class RegisterPageComponent implements OnInit {
   RegisterObj = {
-    name: '',
-    surname: '',
-    email: '',
-    password: '',
-    passwordConfirm: ''
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
   };
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    console.log("Before");
-  }
+    const localData = localStorage.getItem("authToken");
 
-  ngAfterViewInit() {
-    console.log("After");
+    if (localData != null) {
+      fetch(`${environment.apiUrl}/isLogged`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localData,
+        },
+      })
+        .then((response) => {
+          if (response.status == 200) {
+            this.router.navigate(["/dashboard"]);
+          }
+        })
+        .catch((error) => {
+          console.error("Erreur de requête:", error);
+        });
+    }
   }
 
   goToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 
   onRegister() {
@@ -43,7 +55,7 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
       !this.RegisterObj.passwordConfirm
     ) {
       alert(
-        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe.",
+        "Veuillez remplir tous les champs : email, nom d'utilisateur et mot de passe."
       );
       return;
     }
@@ -70,7 +82,7 @@ export class RegisterPageComponent implements OnInit, AfterViewInit {
           alert("Email invalid");
         }
         if (response.status === 201) {
-          this.router.navigate(['/login']);
+          this.router.navigate(["/login"]);
         }
       })
       .catch((error) => {
