@@ -8,13 +8,15 @@ export default function AreaComponent({ data, colors }) {
   const drawerHeight = useRef(new Animated.Value(0)).current;
   const drawerOpacity = useRef(new Animated.Value(0)).current; // Opacity for fade effect
 
-  const platforms = {
-    Spotify:
-      "https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png",
-    Discord:
-      "https://cdn.iconscout.com/icon/free/png-256/free-discord-logo-icon-download-in-svg-png-gif-file-formats--social-media-pack-logos-icons-3073764.png?f=webp&w=128",
-    Twitter:
-      "https://cdn.iconscout.com/icon/free/png-512/free-twitter-logo-icon-download-in-svg-png-gif-file-formats--social-media-logos-pack-icons-189787.png?f=webp&w=512",
+  const platformIcons = {
+    Deezer: require("../../../assets/Icons/Deezer.png"),
+    Discord: require("../../../assets/Icons/Discord.png"),
+    OpenMeteo: require("../../../assets/Icons/OpenMeteo.png"),
+    Spotify: require("../../../assets/Icons/Spotify.png"),
+    Reddit: require("../../../assets/Icons/Reddit.png"),
+    Twitch: require("../../../assets/Icons/Twitch.png"),
+    X: require("../../../assets/Icons/X.png"),
+    Youtube: require("../../../assets/Icons/Youtube.png"),
   };
 
   const color = colors[data.action.platform]?.color || "#FFFFFF";
@@ -60,11 +62,11 @@ export default function AreaComponent({ data, colors }) {
         <View style={styles.area}>
           <Image
             style={styles.logoAction}
-            source={{ uri: platforms[data.action.platform] }}
+            source={platformIcons[data.action.platform]}
           />
           <Image
             style={styles.logoReaction}
-            source={{ uri: platforms[data.reactions.platform] }}
+            source={platformIcons[data.reactions.platform]}
           />
           <Text style={styles.areaTitle}>{areaTitle}</Text>
         </View>

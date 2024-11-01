@@ -14,6 +14,7 @@ export default StyleSheet.create({
     padding: width * 0.05,
     paddingTop: height * 0.01,
     paddingBottom: height * 0.01,
+    paddingLeft: width * 0.1,
     width: width * 0.9,
     height: height * 0.1,
     borderRadius: width * 0.05,
@@ -39,7 +40,8 @@ export default StyleSheet.create({
 
   arrowImage: {
     resizeMode: "contain",
-    width: width * 0.25,
+    width: width * 0.30,
+    paddingLeft: width * 0.05,
   },
 
   area: {
