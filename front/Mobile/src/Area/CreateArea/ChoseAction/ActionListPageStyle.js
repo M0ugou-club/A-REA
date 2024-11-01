@@ -9,7 +9,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 10,
   },
-  reactionButton: {
+  actionButton: {
     width: width * 0.9,
     paddingVertical: 20,
     paddingLeft: 15,

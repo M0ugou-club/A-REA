@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./ActionListPageStyle";
@@ -19,24 +19,11 @@ const platformIcons = {
 export default function ActionListPage() {
   const [actionList, setActionList] = useState({});
   const [colors, setColors] = useState({});
-  const [fetchUrl, setFetchUrl] = useState("");
   const navigation = useNavigation();
 
   useEffect(() => {
-    useFocusEffect(
-      useCallback(() => {
-        const initializeFetchUrl = async () => {
-          const url = await getFetchUrl();
-          setFetchUrl(url);
-        };
-
-        initializeFetchUrl();
-      }, [])
-    );
-
     const fetchActions = async () => {
-      if (!fetchUrl) return;
-
+      const fetchUrl = await getFetchUrl();
       const token = await AsyncStorage.getItem("accessToken");
       try {
         const response = await fetch(`${fetchUrl}/enums/actions`, {
@@ -58,11 +45,10 @@ export default function ActionListPage() {
     };
 
     const fetchColors = async () => {
-      if (!fetchUrl) return;
       try {
         const token = await AsyncStorage.getItem("accessToken");
         const response = await fetch(
-          `${fetchUrl}/enums/platforms_icons`,
+          "http://inox-qcb.fr:8000/enums/platforms_icons",
           {
             method: "GET",
             headers: {
