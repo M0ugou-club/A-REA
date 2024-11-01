@@ -1,7 +1,7 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './ConnectionStyle';
-import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import * as WebBrowser from 'expo-web-browser';
@@ -22,39 +22,43 @@ export default function Connection() {
         Twitch: require('../../assets/Icons/Twitch.png'),
     };
 
-    useEffect(() => {
-        const getFetchUrl = async () => {
-            try {
-                const url = await AsyncStorage.getItem('fetchUrl');
-                setFetchUrl(url);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        getFetchUrl();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            const getFetchUrl = async () => {
+                try {
+                    const url = await AsyncStorage.getItem('fetchUrl');
+                    setFetchUrl(url);
+                } catch (e) {
+                    console.log(e);
+                }
+            };
+            getFetchUrl();
+        }, [])
+    );
 
-    useEffect(() => {
-        if (!fetchUrl) return;
+    useFocusEffect(
+        useCallback(() => {
+            if (!fetchUrl) return;
 
-        const getData = async () => {
-            try {
-                const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch(fetchUrl + '/enums/platforms', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ` + token,
-                    }
-                });
-                const data = await response.json();
-                setPlatforms(data);
-            } catch (e) {
-                console.log('Error occurred:', e);
+            const getData = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + '/enums/platforms', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ` + token,
+                        }
+                    });
+                    const data = await response.json();
+                    setPlatforms(data);
+                } catch (e) {
+                    console.log('Error occurred:', e);
+                }
             }
-        }
-        getData();
-    }, [fetchUrl, reload]);
+            getData();
+        }, [fetchUrl, reload])
+    );
 
     const handleUrlChange = async (url) => {
         try {

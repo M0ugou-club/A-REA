@@ -1,7 +1,7 @@
 import isLogged from '../isLogged';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useState, useCallback } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import styles from './HomeStyle';
 import NavigationBar from '../NavigationBar/NavigationBar';
@@ -14,37 +14,41 @@ export default function Home() {
     const [userInfo, setUserInfo] = useState(null);
     const [fetchUrl, setFetchUrl] = useState('');
 
-    useEffect(() => {
-        const initializeFetchUrl = async () => {
-            const url = await getFetchUrl();
-            setFetchUrl(url);
-        };
-    
-        initializeFetchUrl();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            const initializeFetchUrl = async () => {
+                const url = await getFetchUrl();
+                setFetchUrl(url);
+            };
+        
+            initializeFetchUrl();
+        }, [])
+    );
 
-    useEffect(() => {
-        if (!fetchUrl) return;
+    useFocusEffect(
+        useCallback(() => {
+            if (!fetchUrl) return;
 
-        isLogged(navigation);
-    
-        const getUsersInfos = async () => {
-            try {
-                const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch(fetchUrl + "/users", {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                    },
-                });
-                const data = await response.json();
-                setUserInfo(data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-        getUsersInfos();
-    }, [navigation, fetchUrl]);
+            isLogged(navigation);
+        
+            const getUsersInfos = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + "/users", {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                        },
+                    });
+                    const data = await response.json();
+                    setUserInfo(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+            getUsersInfos();
+        }, [navigation, fetchUrl])
+    );
 
     const handleKayzen = () => {
         Linking.openURL('https://www.youtube.com/watch?v=wrFsapf0Enk');
