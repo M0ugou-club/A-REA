@@ -1,41 +1,16 @@
-# Inox-Quoicoubebou.fr
+# A-REA EPITECH Project 2024
 
-This is our first 3rd Year Epitech Project called A-REA
-
-#### You can access to our Organisation report 👉 [here](https://docs.google.com/document/d/1d3uiyoxxcDENnupccUd6Gpxl384DaHy0bWsyTy-uyyc/edit?usp=sharing) 👈
+## If you want to try our website click here 👉 [here](http://inox-qcb.fr) 👈
 
 ---
 
-# Build Project:
+## There is the documentation about the A-REA project
 
-## Requirements:
-- Docker
+- # User Documentation : [Here](./documentation/User_Documentation.md)
 
-## How to Build and Run:
+- # Technical Documentation : [Here](./documentation/Technical_Documentation/Technical_Documentation.md)
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-repo/inox-quoicoubebou.fr.git
+- # Project Documentation : [Here](./documentation/Project_Documentation.md)
 
-2. **Env Variables:**
 
-- To Create your Env Variables, check [Back](./BACK/README.md) Documentation
-
-3. **Build and Start the Containers:**
-   ```bash
-    docker-compose up --build
-
-4. **Access the Application:**
-
-- Back-End : Accessible at http://localhost:8000/
-- Front-End : Accessible at http://localhost:4200/
-
-5. **Stop the Services:**
-   ```bash
-   docker-compose down
-
-# Documentation :
-
--  [Back](./back/README.md)
-- [Front](./front/web/README.md)
-- [Mobile](./front/Mobile/README.md)
+## Thank you for your interest in the project.
