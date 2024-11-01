@@ -20,6 +20,13 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        transform: scale(1.02);
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 // first row with profile and areas sections
@@ -187,6 +194,13 @@
     border: none;
     margin-top: 30%;
     margin-right: 25%;
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 .areas-list-empty-container {
@@ -261,6 +275,13 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    &:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 // second row with servies and documentaire sections
@@ -384,6 +405,13 @@
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        transform: scale(1.02);
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 .docu-square {
