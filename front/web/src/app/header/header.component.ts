@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 import { filter } from "rxjs/operators";
+import { environment } from "../../../environment/environment";
 
 @Component({
   selector: "app-header",
@@ -11,12 +12,34 @@ import { filter } from "rxjs/operators";
 export class HeaderComponent {
   pageTitle: string = "";
   showLoginPopup = false;
+  userImage: string = "";
 
   constructor(private router: Router, private titleService: Title) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.updatePageTitle();
+      });
+  }
+
+  ngOnInit(): void {
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    fetch(`${environment.apiUrl}/users`, {
+      method: "GET",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        this.userImage = data.image;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }
 

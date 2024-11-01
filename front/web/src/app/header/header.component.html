@@ -20,9 +20,15 @@
         </div>
         <div class="profile-container">
             <button class="profile-button" (click)="handleUserIconButton()">
-                <img class="profile-picture" src="/header/template-user.png" alt="user">
+                <div class="profile-icon-container">
+                    <img class="profile-picture" *ngIf="userImage" [src]="userImage" alt="Profile Image">
+                </div>
             </button>
         </div>
     </div>
-    <app-login-servicse-popup *ngIf="showLoginPopup"></app-login-servicse-popup>
+    <app-login-servicse-popup 
+            *ngIf="showLoginPopup"
+            (mouseenter)="showLoginPopup = true"
+            (mouseleave)="showLoginPopup = false">
+    </app-login-servicse-popup>
 </div>
