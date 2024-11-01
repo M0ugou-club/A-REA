@@ -1,7 +1,7 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './ConnectionStyle';
-import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import * as WebBrowser from 'expo-web-browser';
@@ -22,39 +22,43 @@ export default function Connection() {
         Twitch: require('../../assets/Icons/Twitch.png'),
     };
 
-    useEffect(() => {
-        const getFetchUrl = async () => {
-            try {
-                const url = await AsyncStorage.getItem('fetchUrl');
-                setFetchUrl(url);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        getFetchUrl();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            const getFetchUrl = async () => {
+                try {
+                    const url = await AsyncStorage.getItem('fetchUrl');
+                    setFetchUrl(url);
+                } catch (e) {
+                    console.log(e);
+                }
+            };
+            getFetchUrl();
+        }, [])
+    );
 
-    useEffect(() => {
-        if (!fetchUrl) return;
+    useFocusEffect(
+        useCallback(() => {
+            if (!fetchUrl) return;
 
-        const getData = async () => {
-            try {
-                const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch(fetchUrl + '/enums/platforms', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ` + token,
-                    }
-                });
-                const data = await response.json();
-                setPlatforms(data);
-            } catch (e) {
-                console.log('Error occurred:', e);
+            const getData = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + '/enums/platforms', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ` + token,
+                        }
+                    });
+                    const data = await response.json();
+                    setPlatforms(data);
+                } catch (e) {
+                    console.log('Error occurred:', e);
+                }
             }
-        }
-        getData();
-    }, [fetchUrl, reload]);
+            getData();
+        }, [fetchUrl, reload])
+    );
 
     const handleUrlChange = async (url) => {
         try {
@@ -76,31 +80,17 @@ export default function Connection() {
     return (
         <View style={styles.globalContainer}>
             <View style={styles.pageContentContainer}>
-                <View>
-                    <View style={styles.title}>
-                        <Text style={styles.titleText}>Services' Connection</Text>
-                        <View style={styles.separator} />
-                    </View>
-                    <View style={styles.listPlatformsContainer}>
-                    {platforms.map((platform, index) => (
-                        <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
-                            <Image source={icons[platform]} style={styles.icon} />
-                            <Text style={styles.connectText}>Se Connecter</Text>
-                        </TouchableOpacity>
-                    ))}
-                    </View>
-                </View>
                 <View style={styles.title}>
-                    <Text style={styles.titleText}>Network's Location</Text>
+                    <Text style={styles.titleText}>Services' Connection</Text>
                     <View style={styles.separator} />
                 </View>
-                <View style={styles.networkLocation}>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder="Enter Network Location"
-                        defaultValue={fetchUrl}
-                        onChange={(e) => handleUrlChange(e.nativeEvent.text)}
-                    />
+                <View style={styles.listPlatformsContainer}>
+                {platforms.map((platform, index) => (
+                    <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
+                        <Image source={icons[platform]} style={styles.icon} />
+                        <Text style={styles.connectText}>Se Connecter</Text>
+                    </TouchableOpacity>
+                ))}
                 </View>
             </View>
             <NavigationBar />

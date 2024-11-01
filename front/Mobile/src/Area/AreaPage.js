@@ -1,10 +1,10 @@
 import { View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './AreaPageStyle';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import AreaComponent from './AreaComponent/AreaComponent';
 import isLogged from '../isLogged';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
@@ -12,30 +12,32 @@ export default function Home() {
     const navigation = useNavigation();
     const [areas, setAreas] = useState([]);
 
-    useEffect(() => {
-        isLogged(navigation);
-        const fetchAreas = async () => {
-            try {
-                const token = await AsyncStorage.getItem('accessToken');
-                const response = await fetch('http://inox-qcb.fr:8000/areas', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': "Bearer " + token,
-                    },
-                });
-                if (response.status === 200) {
-                    const data = await response.json();
-                    setAreas(data);
-                } else if (response.status === 401) {
-                    console.log('GET - /areas - Unauthorized');
+    useFocusEffect(
+        useCallback(() => {
+            isLogged(navigation);
+            const fetchAreas = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch('http://inox-qcb.fr:8000/areas', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': "Bearer " + token,
+                        },
+                    });
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        setAreas(data);
+                    } else if (response.status === 401) {
+                        console.log('GET - /areas - Unauthorized');
+                    }
+                } catch (error) {
+                    console.error('Error fetching areas:', error);
                 }
-            } catch (error) {
-                console.error('Error fetching areas:', error);
-            }
-        };
-        fetchAreas();
-    }, [navigation]);
+            };
+            fetchAreas();
+        }, [navigation])
+    );
 
     function handleAddAreaButton() {
         navigation.navigate('CreateArea');
