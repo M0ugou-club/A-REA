@@ -49,6 +49,7 @@ export default StyleSheet.create({
 
     areaContainer: {
         flex: 1,
+        backgroundColor: '#88b4db',
     },
 
     actionButton: {
