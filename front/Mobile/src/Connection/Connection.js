@@ -76,31 +76,17 @@ export default function Connection() {
     return (
         <View style={styles.globalContainer}>
             <View style={styles.pageContentContainer}>
-                <View>
-                    <View style={styles.title}>
-                        <Text style={styles.titleText}>Services' Connection</Text>
-                        <View style={styles.separator} />
-                    </View>
-                    <View style={styles.listPlatformsContainer}>
-                    {platforms.map((platform, index) => (
-                        <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
-                            <Image source={icons[platform]} style={styles.icon} />
-                            <Text style={styles.connectText}>Se Connecter</Text>
-                        </TouchableOpacity>
-                    ))}
-                    </View>
-                </View>
                 <View style={styles.title}>
-                    <Text style={styles.titleText}>Network's Location</Text>
+                    <Text style={styles.titleText}>Services' Connection</Text>
                     <View style={styles.separator} />
                 </View>
-                <View style={styles.networkLocation}>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder="Enter Network Location"
-                        defaultValue={fetchUrl}
-                        onChange={(e) => handleUrlChange(e.nativeEvent.text)}
-                    />
+                <View style={styles.listPlatformsContainer}>
+                {platforms.map((platform, index) => (
+                    <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
+                        <Image source={icons[platform]} style={styles.icon} />
+                        <Text style={styles.connectText}>Se Connecter</Text>
+                    </TouchableOpacity>
+                ))}
                 </View>
             </View>
             <NavigationBar />

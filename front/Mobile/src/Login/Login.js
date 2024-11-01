@@ -3,6 +3,7 @@ import styles from './LoginStyle';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetworkLocation from '../NetworkLocation/NetworkLocation';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -105,6 +106,7 @@ export default function Login() {
           <Text style={styles.textRegisterButton}>Register</Text>
         </TouchableOpacity>
       </View>
+      <NetworkLocation />
     </ImageBackground>
   );
 }

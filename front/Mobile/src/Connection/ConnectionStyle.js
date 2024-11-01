@@ -63,20 +63,4 @@ export default StyleSheet.create({
         fontSize: width * 0.04,
         fontFamily: 'Nexa',
     },
-
-    textInput : {
-        width: width * 0.9,
-        height: height * 0.075,
-        backgroundColor: '#F3F3F3',
-        paddingLeft: width * 0.03,
-        borderRadius: width * 0.03,
-        marginTop: height * 0.02,
-    },
-
-    networkLocation: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
 });
