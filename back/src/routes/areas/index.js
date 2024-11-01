@@ -156,11 +156,9 @@ const deleteArea = async (req, res, next) => {
   const token = header ? header?.replace("Bearer ", "") : null;
 
   try {
-    console.log(id);
     const area = await Area.findOne({
       _id: id,
     });
-    console.log(area);
     if (!area) {
       return res.status(405).json({
         message: "Area not found",

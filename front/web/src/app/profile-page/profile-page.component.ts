@@ -37,7 +37,6 @@ export class ProfilePageComponent {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         this.userName = data.name;
         this.userEmail = data.email;
         this.userSurname = data.surname;
@@ -114,7 +113,6 @@ export class ProfilePageComponent {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         this.toastr.success('Image de profil mise à jour avec succès');
       })
       .catch((error) => {
