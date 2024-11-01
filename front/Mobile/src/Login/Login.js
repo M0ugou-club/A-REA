@@ -1,31 +1,68 @@
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Text, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './LoginStyle';
-import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetworkLocation from '../NetworkLocation/NetworkLocation';
 
 export default function Login() {
-
   const navigation = useNavigation();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fetchUrl, setFetchUrl] = useState('');
 
-  useEffect(() => {
-    async function checkToken() {
-      const token = await AsyncStorage.getItem('accessToken');
-      if (token) {
-        console.log('Token:', token);
-        navigation.navigate('Home');
+  useFocusEffect(
+    useCallback(() => {
+      const storeFetchUrl = async () => {
+        try {
+          const url = await AsyncStorage.getItem('fetchUrl');
+          if (url === null) {
+            await AsyncStorage.setItem('fetchUrl', 'http://inox-qcb.fr:8000');
+            setFetchUrl('http://inox-qcb.fr:8000');
+          } else {
+            setFetchUrl(url);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
+      storeFetchUrl();
+    }, [])
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      if (fetchUrl === '') {
+        return;
       }
-    }
-    checkToken();
-  });
+
+      const checkLoginStatus = async () => {
+        try {
+          const token = await AsyncStorage.getItem('accessToken');
+          if (token === null) {
+            return;
+          }
+          const response = await fetch(fetchUrl + "/isLogged", {
+            method: "GET",
+            headers: {
+              "Authorization": "Bearer " + token,
+            },
+          });
+          if (response.status === 200) {
+            navigation.navigate('Home');
+          }
+        } catch (error) {
+          console.error('test2Error:', error);
+        }
+      };
+      checkLoginStatus();
+    }, [navigation, fetchUrl])
+  );
 
   async function onLogin() {
     try {
-      const response = await fetch("http://212.195.222.157:8000/login", {
+      const response = await fetch(fetchUrl + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +74,7 @@ export default function Login() {
       });
       if (response.status === 200) {
         const data = await response.json();
-        await AsyncStorage.setItem('accessToken', "Bearer " + data.token);
+        await AsyncStorage.setItem('accessToken', data.token);
         navigation.navigate('Home');
       } else {
         alert('Login failed');
@@ -67,7 +104,13 @@ export default function Login() {
         >
           <Text style={styles.textLoginButton}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Register')}
+        >
+          <Text style={styles.textRegisterButton}>Register</Text>
+        </TouchableOpacity>
       </View>
+      <NetworkLocation />
     </ImageBackground>
   );
 }

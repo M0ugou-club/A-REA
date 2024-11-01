@@ -1,0 +1,25 @@
+.login-service-container {
+  display: flex;
+  width: 85%;
+  height: 80%;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 3px 4px;
+  background-color: #1E1E1E;
+  cursor: pointer;
+}
+
+.logo-service {
+  display: flex;
+  margin-left: 4%;
+  border-radius: 4px;
+}
+
+.text-button-style-api {
+  display: flex;
+  font-family: 'KaizenRegular';
+  font-size: 80%;
+  color: #ffffff;
+  margin-left: 8%;
+}

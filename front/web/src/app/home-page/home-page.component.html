@@ -1,15 +1,143 @@
-<div class="home-background">
-    <div class="home-background-image">
-        <div class="home-background-image-blur">
-            <div class="home-container-bar">
-                <app-header></app-header>
-            </div>
-            <!-- <button class="button-spotify" (click)="spotifyloggin()">
-                <h1>Spotify</h1>
+<div class="home-container">
+    <div class="element-container">
+        <div class="createArea-container">
+            <button class="create-button" (click)="goToAreas()">
+                <div class="create-icon-container">
+                    <img class="create-icon" src="/home/areas.svg">
+                </div>
+                <div class="create-text-container">
+                    <p class="create-title">Créez votre aréa ideale avec le site InoxQCB</p>
+                    <p class="create-text">Une area est la combinaison d’une action et d’une réaction, la reaction cacaboudin prout</p>
+                </div>
+                <div class="create-arrow-container">
+                    <img class="create-arrow" src="/home/arrow-right.svg">
+                </div>
             </button>
-            <button class="button-inox" (click)="inoxbest()">
-                <h1>Inox music</h1>
-            </button> -->
+        </div>
+        <div class="firstRow-container">
+            <div class="profile-container">
+                <button class="profile-square" (click)="goToProfile()">
+                    <div class="profile-icon-container">
+                        <div class="profile-icon-circle">
+                            <img class="profile-icon" *ngIf="userImage" [src]="userImage" alt="Profile Image" />
+                        </div>
+                    </div>
+                    <div class="profile-text-container">
+                        <p class="profile-name">{{ userName }}</p>
+                        <p class="profile-email">{{ userEmail }}</p>
+                        <p class="profile-grade">Moderateur</p>
+                    </div>
+                </button>
+            </div>
+            <div class="areas-container">
+                <div class="areas-square">
+                    <div class="areas-hearder-square">
+                        <div class="areas-icon-container">
+                            <img class="areas-icon" src="/home/areasList.svg">
+                        </div>
+                        <div class="areas-text-container">
+                            <div class="areas-title">Areas</div>
+                            <p class="areas-text">La liste de tes areas</p>
+                        </div>
+                        <div class="areas-add-container">
+                            <button class="area-add-button" (click)="goToAreas()">
+                                <img class="areas-arrow" src="/home/add-area.svg">
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="areas.length === 0" class="areas-list-empty-container">
+                        <p class="areas-list-empty-text">Aucune aréa</p>
+                    </div>
+                    <div *ngIf="areas.length !== 0" class="areas-list-container">
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(0, 3)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
+                        <div class="separator">
+                            <hr class="separator-line">
+                        </div>
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(3, 6)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
+                    </div>
+                    <div class="areas-list-icon-container">
+                        <button class="areas-list-icon-button" (click)="goToAreas()">
+                            <img class="areas-list-icon" src="/home/list.svg">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secondRow-container">
+            <div class="service-container">
+                <div class="service-square">
+                    <div class="areas-hearder-square">
+                        <div class="areas-icon-container">
+                            <img class="areas-icon" src="/home/services.svg">
+                        </div>
+                        <div class="areas-text-container">
+                            <p class="areas-title">Services</p>
+                            <p class="areas-text">La liste des services disponibles</p>
+                        </div>
+                        <div class="areas-add-container">
+                            <button class="area-add-button">
+                                <img class="areas-arrow" src="/home/aide.svg">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="service-list-container">
+                        <div class="service-prev-container">
+                            <button class="service-chevron-button" (click)="prevIcon()" [disabled]="currentIndex === 0">
+                                <img src="/home/chevron-left.svg">
+                            </button>
+                        </div>
+                        <div class="service-icons-container">
+                            <div *ngFor="let service of services.slice(currentIndex, currentIndex + 4)" class="service-item">
+                                <img class="service-icons" [src]="'/icons/' + service + '.svg'" alt="{{service}}">
+                                <div class="service-name">{{service}}</div>
+                              </div>
+                        </div>
+                        <div class="service-next-container">
+                            <button class="service-chevron-button" (click)="nextIcon()" [disabled]="currentIndex >= services.length - 4">
+                                <img src="/home/chevron-right.svg">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="docu-container">
+                <div class="docu-square">
+                    <div class="docu-hearder-square">
+                        <div class="docu-icon-container">
+                            <img class="docu-icon" src="/home/docuIcon.svg">
+                        </div>
+                        <div class="docu-text-container">
+                            <h1 class="docu-title">Kaizen</h1>
+                            <p class="docu-text">Le documentaire kaizen</p>
+                        </div>
+                    </div>
+                    <button class="docu-button" (click)="openDocuYoutube()">
+                        
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,6 +1,13 @@
 version: '3.8'
 
 services:
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
   front:
     build:
       context: ./front/web
@@ -10,9 +17,10 @@ services:
     depends_on:
       - back
 
-  back:
-    build:
-      context: ./back
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+  #mobile:
+  #  build:
+  #    context: .
+  #    dockerfile: ./front/Mobile/Dockerfile
+  #    args:
+  #      EXPO_TOKEN: ${EXPO_TOKEN}
+  #      JDK_VERSION: 17.0.12

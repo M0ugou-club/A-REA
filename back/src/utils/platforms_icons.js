@@ -1,6 +1,28 @@
 const platforms_icons = {
-  "Spotify": "https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png",
-  "Discord": "https://cdn.worldvectorlogo.com/logos/discord-6.svg"
+  Spotify: {
+    color: "#429660",
+    connexion: true,
+  },
+  Twitch: {
+    color: "#18181b",
+    connexion: true,
+  },
+  OpenMeteo: {
+    color: "#D48207",
+    connexion: false,
+  },
+  X: {
+    color: "#1DA1F2",
+    connexion: true,
+  },
+  Reddit: {
+    color: "#FF4500",
+    connexion: true,
+  },
+  Youtube: {
+    color: "#9F3531",
+    connexion: true,
+  },
 };
 
 export default platforms_icons;

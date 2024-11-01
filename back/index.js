@@ -7,7 +7,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swaggerConfig.js";
 import mongo from "./utils/mongo.js";
 import cron from "node-cron";
-import { actionsTriggers } from "./src/utils/areasTriggers.js";
+import { actionsTriggers } from "./src/utils/areasService/areasTriggers.js";
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
@@ -15,10 +16,10 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-// Parsing du body en JSON
-app.use(express.json());
+// Parsing du body en JSON avec une limite de taille augmentée
+app.use(bodyParser.json({ limit: '1mb' }));
+app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
 
-app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(cors());
 

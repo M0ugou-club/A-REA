@@ -1,0 +1,35 @@
+<div class="register-background">
+    <div class="logo-kaizen-container">
+        <img class="logo-kaizen" src="/kaizenLogo.png" alt="logo">
+    </div>
+    <div class="register-container">
+        <div class="register-square">
+            <div class= "register-logo-container">
+                <img class="register-logo" src="/kaizenLogo.png" alt="logo">
+            </div>
+            <div class="register-iput-container">
+                <div class="register-names-input">
+                    <input type="name" placeholder="Prenom" class="input-field input-top" [(ngModel)]="RegisterObj.name" />
+                    <input type="surname" placeholder="Nom" class="input-field input-bottom" [(ngModel)]="RegisterObj.surname" /> 
+                </div>
+                <div class="register-email-input">
+                    <input type="email" placeholder="Email" class="input-field input-all" [(ngModel)]="RegisterObj.email" />
+                </div>
+                <div class="register-password-input">
+                    <input type="password" placeholder="Mot de passe" class="input-field input-top" [(ngModel)]="RegisterObj.password" />
+                    <div class="input-with-button">
+                        <input type="password" placeholder="Confirmer le mot de passe" class="input-field input-bottom" [(ngModel)]="RegisterObj.passwordConfirm" (keydown.enter)="onRegister()" />
+                        <button class="input-button" (click)="onRegister()">
+                            <img src="/login/connect.svg">
+                        </button>
+                    </div>
+                </div>
+                <div class="register-switch-container">
+                    <button class="register-switch-button" (click)="goToLogin()">
+                        <p class="register-switch-text">Se connecter avec un compte InoxQCB</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

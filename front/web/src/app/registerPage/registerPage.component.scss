@@ -1,0 +1,160 @@
+.register-background {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1E1E1E;
+  flex-direction: column;
+}
+
+.logo-kaizen-container {
+  display: flex;
+  height: 4%;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.logo-kaizen {
+  display: flex;
+  height: 100%;
+  width: auto;
+  margin-top: 0.5%;
+  margin-left: 0.5%;
+}
+
+.register-container {
+  display: flex;
+  height: 96%;
+  width: 100%;
+  justify-content: center;
+}
+
+.register-square {
+  display: flex;
+  height: 70%;
+  width: 42%;
+  border-radius: 20px;
+  flex-direction: column;
+  background-color: #1E1E1E;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 15px 30px;
+  margin-top: 8%;
+}
+
+.register-logo-container {
+  display: flex;
+  height: 40%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-logo {
+  display: flex;
+  height: 50%;
+  width: auto;
+  margin-top: 5%;
+}
+
+.register-iput-container {
+  display: flex;
+  height: 65%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-names-input {
+  display: flex;
+  height: 35%;
+  width: 55%;
+  flex-direction: column;
+}
+
+.register-email-input {
+  display: flex;
+  height: 25%;
+  width: 55%;
+  flex-direction: column;
+  margin-top: 4%;
+}
+
+.register-password-input {
+  display: flex;
+  height: 35%;
+  width: 55%;
+  flex-direction: column;
+  margin-top: 4%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 15px;
+  border: 1.5px solid #CAC7C7;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  background-color: #232323;
+  color: white;
+}
+
+.input-field.input-bottom {
+  border-radius: 0 0 10px 10px;
+}
+
+.input-button {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.input-with-button {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-field:focus {
+  border-color: #007aff;
+  outline: none;
+}
+
+.input-top {
+  border-radius: 10px 10px 0 0;
+}
+
+.input-all {
+  border-radius: 10px 10px 10px 10px;
+}
+
+.input-bottom {
+  border-radius: 0 0 10px 10px;
+}
+
+.register-switch-container {
+  display: flex;
+  height: 51%;
+  width: 100%;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.register-switch-button {
+  display: flex;
+  height: 15%;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #0089ED;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 3%;
+}

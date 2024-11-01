@@ -7,15 +7,10 @@ const mongo = async () => {
   if (!DB_NAME || !DB_PASSWORD || !DB_URL || !DB_USERNAME) {
     return logger.warn('[DATABASE]: Missing database settings.');
   }
-  console.log(DB_NAME, DB_PASSWORD, DB_URL, DB_USERNAME);
   try {
     const mongoURI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@soulconnection.a100j.mongodb.net/?retryWrites=true&w=majority&appName=SoulConnection`;
 
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log(mongoURI);
+    await mongoose.connect(mongoURI);
     logger.info('[DB]: Connected to MongoDB');
 
     process.on('SIGINT', async () => {

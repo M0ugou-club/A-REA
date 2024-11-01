@@ -4,7 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login/Login';
 import Home from './src/Home/Home';
 import Area from './src/Area/AreaPage';
+import Connection from './src/Connection/Connection';
 import CreateAreaPage from './src/Area/CreateArea/CreateAreaPage';
+import Register from './src/Register/RegisterPage';
+import ChooseAreaName from './src/Area/CreateArea/ChooseAreaName/ChooseAreaName';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -31,7 +34,6 @@ export default function App() {
         await SplashScreen.hideAsync();
       }
     }
-
     prepare();
   }, []);
 
@@ -47,10 +49,20 @@ export default function App() {
           component={Login} 
           options={{ headerShown: false }} 
         />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen 
           name="Home" 
           component={Home} 
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Connection"
+          component={Connection}
+          options={{ headerShown: false, animationEnabled: false }}
         />
         <Stack.Screen 
           name="Area" 
@@ -60,6 +72,11 @@ export default function App() {
         <Stack.Screen 
           name="CreateArea" 
           component={CreateAreaPage} 
+          options={{ headerShown: false, animationEnabled: false }}
+        />
+        <Stack.Screen 
+          name="ChooseAreaName" 
+          component={ChooseAreaName} 
           options={{ headerShown: false, animationEnabled: false }}
         />
       </Stack.Navigator>

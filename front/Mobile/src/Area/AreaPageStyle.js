@@ -5,7 +5,8 @@ const { width, height } = Dimensions.get('window');
 export default StyleSheet.create({
     globalContainer: {
         flex: 1,
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        backgroundColor: 'white',
     },
 
     pageContentContainer: {

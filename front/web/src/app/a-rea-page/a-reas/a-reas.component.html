@@ -1,0 +1,34 @@
+<div class="a-rea" [ngStyle]="{ 'background-color': serviceColor}">
+    <div class="a-rea-container">
+        <img [src]="getAreaMainServiceImageUrl(areaMainService)" alt=" " class="logo" />
+        <img *ngIf="areaSubService" src="/icons/{{areaSubService}}.svg" alt=" " class="logo" />
+        <div class="a-rea-title">
+            <p>{{ areaTitle }}</p>
+        </div>
+    </div>
+    <lucide-icon
+            *ngIf="areaSubService"
+            name="CircleHelp"
+            class="hover-icon"
+            (click)="showInfo = !showInfo">
+    </lucide-icon>
+    <div class="info"
+         *ngIf="showInfo"
+         (mouseenter)="showInfo = true"
+         (mouseleave)="showInfo = false"
+         @fadeIn>
+        <div class="action">
+            <lucide-icon name="git-commit-horizontal" [size]="32" color="#0089ED"></lucide-icon>
+            <p> {{ actionTitle }} </p>
+        </div>
+        <div class="reaction">
+            <lucide-icon name="git-compare-arrows" [size]="32" color="#0089ED" [strokeWidth]="2"></lucide-icon>
+            <p> {{ reactionTitle}} </p>
+        </div>
+        <div class="separator"></div>
+        <div class="delete" (click)="deleteArea()">
+            <lucide-icon name="trash2" color="red" strokeWidth="3"></lucide-icon>
+            <p> Supprimer l'A-REA </p>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import mongoose, { Schema } from 'mongoose';
-import m2s from 'mongoose-to-swagger';
+import fs from "fs";
+import path from "path";
+import mongoose, { Schema } from "mongoose";
+import m2s from "mongoose-to-swagger";
 import logger from "../../utils/logger.js";
 
 const basePath = process.pkg
@@ -10,14 +10,10 @@ const basePath = process.pkg
 
 export const rawSchemas = {};
 
-const setupSchema = (
-  object,
-  options = {},
-  indexes = []
-) => {
+const setupSchema = (object, options = {}, indexes = []) => {
   const schema = new Schema(object, {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
-    ...options
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+    ...options,
   });
 
   indexes.forEach(({ index, options: opts = {} }) => schema.index(index, opts));
@@ -30,9 +26,9 @@ const improveSwagger = (model, object) => {
   Object.entries(object).forEach(([firstLvlKey, { ref, type }]) => {
     if (ref)
       swagger.properties[firstLvlKey] = {
-        $ref: `#/components/schemas/${ref}`
+        $ref: `#/components/schemas/${ref}`,
       };
-    else if (typeof type === 'object') {
+    else if (typeof type === "object") {
       const requiredFields = [];
 
       delete type._id;
@@ -52,7 +48,7 @@ const transformField = (field) => {
   const { type } = field;
 
   if (type) {
-    if (typeof type === 'function') field.type = type.name;
+    if (typeof type === "function") field.type = type.name;
   } else {
     Object.entries(field).forEach(([key, deepField]) => {
       field[key] = transformField(deepField);
@@ -69,7 +65,7 @@ export const transformRawSchema = (rawSchema) => {
   });
   return rawSchema;
 };
-
+  
 export const initModels = async () => {
   const swaggerSchemas = {};
 
@@ -78,7 +74,7 @@ export const initModels = async () => {
       .readdirSync(basePath)
       .filter(
         (modelName) =>
-          !['index.js', 'index.js.map', 'schemas'].includes(modelName)
+          !["index.js", "index.js.map", "schemas"].includes(modelName)
       )
       .map(async (modelName) => {
         try {
@@ -87,7 +83,7 @@ export const initModels = async () => {
             options,
             pre,
             post,
-            indexes
+            indexes,
           } = await import(`./${modelName}`);
 
           const schema = setupSchema(
@@ -108,7 +104,7 @@ export const initModels = async () => {
         }
       })
   );
-  logger.info('[SERVER]: Models initialized.');
+  logger.info("[SERVER]: Models initialized.");
   return swaggerSchemas;
 };
 

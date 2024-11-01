@@ -1,21 +1,34 @@
-<div class="center-header">
-    <div class="header-container">
-        <div class="logo-title-container">
-            <img class="logo" src="homeImages/kaizenLogo.png" alt="logo">
-        </div>
-        <div class="navigation-button-container">
-            <button class="navigation-button" (click)="handleHomeButtonClick()">
-                <p class="text-navigation-button">Home</p>
-            </button>
-            <button class="navigation-button" style="margin-right: 4%;" (click)="handleAreaButtonClick()">
-                <p class="text-navigation-button">A-Rea</p>
-            </button>
-        </div>
-        <div class="user-button-container">
-            <button class="user-button" (click)="handleUserIconButton()">
-                <img class="user-icon" src="template-user.png" alt="user">
-            </button>
-        </div>
-        <app-login-servicse-popup *ngIf="showLoginPopup"></app-login-servicse-popup>
+<div class="header-container">
+    <div class="logo-container">
+        <button class="logo-button" (click)="goToDashboard()">
+            <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
+        </button>
     </div>
+    <div class="header-type-container">
+        <p class="header-text">{{ pageTitle }}</p>
+    </div>
+    <div class="button-container">
+        <div class="addArea-container">
+            <button class="addArea-button" (click)="goToAreas()">
+                <img class="addArea-picture" src="/header/addArea.png" alt="addArea">
+            </button>
+        </div>
+        <div class="listArea-container">
+            <button class="listArea-button" (click)="goToDashboard()">
+                <img class="listArea-picture" src="/header/listArea.png" alt="listArea">
+            </button>
+        </div>
+        <div class="profile-container">
+            <button class="profile-button" (click)="handleUserIconButton()">
+                <div class="profile-icon-container">
+                    <img class="profile-picture" *ngIf="userImage" [src]="userImage" alt="Profile Image">
+                </div>
+            </button>
+        </div>
+    </div>
+    <app-login-servicse-popup 
+            *ngIf="showLoginPopup"
+            (mouseenter)="showLoginPopup = true"
+            (mouseleave)="showLoginPopup = false">
+    </app-login-servicse-popup>
 </div>

@@ -1,35 +1,59 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { reduce } from "rxjs";
+import { environment } from "../../../environment/environment";
+import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
   selector: "app-a-rea-page",
   templateUrl: "./a-rea-page.component.html",
-  styleUrls: ["./a-rea-page.component.scss"],
+  styleUrl: "./a-rea-page.component.scss",
+  animations: [
+    trigger("fadeIn", [
+      transition(":enter", [
+        style({ opacity: 0 }),
+        animate("300ms", style({ opacity: 1 })),
+      ]),
+      transition(":leave", [animate("300ms", style({ opacity: 0 }))]),
+    ]),
+  ],
 })
-export class AREAPageComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  private apiUrl = "http://localhost:8000/areas";
+export class AreaPageComponent implements OnInit {
+  areaObj: any = {
+    area_title: "",
+    area_description: "",
+    action_name: "",
+    action_description: "",
+    action_type: "",
+    action_platform: "",
+    reaction_name: "",
+    reaction_description: "",
+    reaction_type: "",
+    reaction_platform: "",
+  };
 
   areas: {
-    actionLogo: string;
-    reactionLogo: string;
+    areaId: number;
+    actionService: string;
+    reactionService: string;
     actionText: string;
     reactionText: string;
     title: string;
   }[] = [];
 
-  plaformsIcon: any = [];
+  actions: any[] = [];
 
-  addButton() {
-    this.router.navigateByUrl("add-a-rea");
-  }
+  reactions: any[] = [];
+
+  servicesIcon: any = [];
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const localData = localStorage.getItem("authToken");
 
     if (localData != null) {
-      fetch("http://localhost:8000/isLogged", {
+      fetch(`${environment.apiUrl}/isLogged`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -37,73 +61,169 @@ export class AREAPageComponent implements OnInit {
         },
       })
         .then((response) => {
-          if (response.status != 200) {
+          if (response.status === 200) {
+            this.loadAReas();
+            this.loadActions();
+            this.loadReactions();
+            this.loadServicesIcons();
+          } else {
             this.router.navigate(["/login"]);
           }
         })
         .catch((error) => {
-          console.error("Request error:", error);
+          console.error("Erreur de requête:", error);
         });
     } else {
       this.router.navigate(["/login"]);
     }
+  }
 
-    fetch(this.apiUrl, {
+  loadAReas(): void {
+    fetch(`${environment.apiUrl}/areas`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-
-        data.forEach((area: any) => {
-          const reactionPlatform =
-            area.reactions && area.reactions.length > 0
-              ? area.reactions[0].platform
-              : "No reaction";
-          this.areas.push({
-            actionLogo: this.chooseIcon(area.action.platform),
-            reactionLogo: this.chooseIcon(reactionPlatform),
-            actionText: area.action.platform,
-            reactionText: reactionPlatform,
-            title: area.title,
-          });
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching areas:", error);
-      });
-
-    this.loadPlatformsIcons();
-  }
-
-  loadPlatformsIcons(): void {
-    fetch("http://localhost:8000/enums/platforms_icons", {
-      method: "GET",
-    })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        this.plaformsIcon = data;
+        data.forEach((area: any) => {
+          this.areas.push({
+            areaId: area._id,
+            actionService: area.action.platform,
+            reactionService: area.reactions.platform,
+            actionText: area.action.title,
+            reactionText: area.reactions.title,
+            title: area.title,
+          });
+        });
       })
       .catch((error) => {
         console.error("Erreur de requête:", error);
       });
   }
 
-  chooseIcon(choice: string) {
-    for (let key in this.plaformsIcon) {
-      if (key === choice) {
-        return this.plaformsIcon[key];
-      }
-    }
-    return "";
+  loadActions(): void {
+    fetch(`${environment.apiUrl}/enums/actions`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.actions = this.flatten(data);
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  loadReactions(): void {
+    fetch(`${environment.apiUrl}/enums/reactions`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.reactions = this.flatten(data);
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  loadServicesIcons(): void {
+    fetch(`${environment.apiUrl}/enums/platforms_icons`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.servicesIcon = data;
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
+  }
+
+  flatten(data: any) {
+    let actionsArray: any = [];
+
+    Object.keys(data).forEach((service) => {
+      Object.keys(data[service]).forEach((actionKey) => {
+        actionsArray.push({
+          service: service,
+          actionKey: actionKey,
+          label: data[service][actionKey],
+        });
+      });
+    });
+    return actionsArray;
+  }
+
+  setAction(action: string) {
+    const actionObj: any = this.actions.find((x) => x.label === action);
+    this.areaObj.action_name = "";
+    setTimeout(() => {
+      this.areaObj.action_name = actionObj.label;
+      this.areaObj.action_type = actionObj.actionKey;
+      this.areaObj.action_platform = actionObj.service;
+    }, 300);
+  }
+
+  setReaction(reaction: string) {
+    const reactionObj: any = this.reactions.find((x) => x.label === reaction);
+    this.areaObj.reaction_name = "";
+    setTimeout(() => {
+      this.areaObj.reaction_name = reactionObj.label;
+      this.areaObj.reaction_type = reactionObj.actionKey;
+      this.areaObj.reaction_platform = reactionObj.service;
+    }, 300);
+  }
+
+  resetSelection() {
+    this.areaObj.area_title = "";
+    this.areaObj.area_description = "";
+    this.areaObj.action_name = "";
+    this.areaObj.reaction_name = "";
+  }
+
+  approveSelection() {
+    const localData = "Bearer " + localStorage.getItem("authToken");
+
+    fetch(`${environment.apiUrl}/areas`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localData,
+      },
+      body: JSON.stringify(this.areaObj),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          alert("Vous n'avez pas rempli tous les champs");
+          return;
+        }
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Erreur de requête:", error);
+      });
   }
 }
