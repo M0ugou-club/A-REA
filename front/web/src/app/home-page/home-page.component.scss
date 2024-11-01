@@ -194,6 +194,13 @@
     border: none;
     margin-top: 30%;
     margin-right: 25%;
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 .areas-list-empty-container {
@@ -268,6 +275,13 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    &:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+    }
+    &:active {
+        transform: scale(1);
+    }
 }
 
 // second row with servies and documentaire sections
