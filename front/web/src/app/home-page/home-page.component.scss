@@ -21,12 +21,6 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease-in-out;
-    &:hover {
-        transform: scale(1.02);
-    }
-    &:active {
-        transform: scale(1);
-    }
 }
 
 // first row with profile and areas sections
@@ -53,6 +47,15 @@
     border-radius: 20px;
     flex-direction: column;
     background-color: #1E1E1E;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.profile-square:hover {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 .profile-icon-container {
@@ -63,12 +66,25 @@
     justify-content: flex-start;
 }
 
-.profile-icon {
+.profile-icon-circle {
     display: flex;
     height: 60%;
-    width: auto;
-    border-radius: 60px;
+    width: 37%;
+    cursor: pointer;
+    border-radius: 100%;
     margin-left: 8%;
+    border: none;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-icon {
+    display: flex;
+    height: 110%;
+    width: auto;
+    border-radius: 100%;
+    object-fit: cover;
 }
 
 .profile-text-container {
@@ -194,13 +210,6 @@
     border: none;
     margin-top: 30%;
     margin-right: 25%;
-    &:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-    &:active {
-        transform: scale(1);
-    }
 }
 
 .areas-list-empty-container {
@@ -275,13 +284,6 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    &:hover {
-        transform: scale(1.03);
-        cursor: pointer;
-    }
-    &:active {
-        transform: scale(1);
-    }
 }
 
 // second row with servies and documentaire sections
@@ -406,12 +408,6 @@
     align-items: flex-end;
     justify-content: center;
     transition: all 0.3s ease-in-out;
-    &:hover {
-        transform: scale(1.02);
-    }
-    &:active {
-        transform: scale(1);
-    }
 }
 
 .docu-square {
@@ -421,6 +417,13 @@
     border-radius: 20px;
     background-color: #1E1E1E;
     flex-direction: column;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.docu-square:hover {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 .docu-hearder-square {
@@ -493,6 +496,13 @@
     border-radius: 20px;
     background-color: #1E1E1E;
     cursor: pointer;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.create-button:hover {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 .create-icon-container {

@@ -16,16 +16,18 @@
         </div>
         <div class="firstRow-container">
             <div class="profile-container">
-                <div class="profile-square">
+                <button class="profile-square" (click)="goToProfile()">
                     <div class="profile-icon-container">
-                        <img class="profile-icon" src="/header/template-user.png">
+                        <div class="profile-icon-circle">
+                            <img class="profile-icon" *ngIf="userImage" [src]="userImage" alt="Profile Image" />
+                        </div>
                     </div>
                     <div class="profile-text-container">
                         <p class="profile-name">{{ userName }}</p>
                         <p class="profile-email">{{ userEmail }}</p>
                         <p class="profile-grade">Moderateur</p>
                     </div>
-                </div>
+                </button>
             </div>
             <div class="areas-container">
                 <div class="areas-square">
@@ -76,7 +78,7 @@
                         </div>
                     </div>
                     <div class="areas-list-icon-container">
-                        <button class="areas-list-icon-button">
+                        <button class="areas-list-icon-button" (click)="goToAreas()">
                             <img class="areas-list-icon" src="/home/list.svg">
                         </button>
                     </div>
