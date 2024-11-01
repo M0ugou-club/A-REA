@@ -99,7 +99,6 @@ export default function CreateAreaPage() {
             action_type: actionKey,
             action_platform: platform,
         }));
-        console.log(area);
     };
 
     const handleReactionPress = (reaction, platform, reactionKey) => {
@@ -110,7 +109,6 @@ export default function CreateAreaPage() {
             reaction_type: reactionKey,
             reaction_platform: platform,
         }));
-        console.log(area);
     };
 
     function handleCreateArea() {

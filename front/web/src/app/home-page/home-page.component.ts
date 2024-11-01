@@ -11,8 +11,10 @@ export class HomePageComponent implements OnInit {
   constructor(private router: Router) {}
   userName: string = "";
   userEmail: string = "";
+  userImage: string = "";
   services: string[] = [];
   currentIndex: number = 0;
+
 
   areas: {
     areaId: number;
@@ -61,6 +63,7 @@ export class HomePageComponent implements OnInit {
       .then((data) => {
         this.userName = data.name;
         this.userEmail = data.email;
+        this.userImage = data.image;
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -115,6 +118,10 @@ export class HomePageComponent implements OnInit {
 
   goToAreas() {
     this.router.navigate(["/dashboard/a-rea"]);
+  }
+
+  goToProfile () {
+    this.router.navigate(["/dashboard/profile"]);
   }
 
   openDocuYoutube() {

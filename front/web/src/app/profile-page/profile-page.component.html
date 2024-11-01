@@ -11,8 +11,10 @@
         <div class="profile-info-container">
             <div class="profile-square">
                 <div class="profile-icon-container">
-                    <img class="profile-icon" src="/header/template-user.png">
-                </div>
+                    <div class="profile-icon-button">
+                        <img class="profile-icon" *ngIf="userImage" [src]="userImage" alt="Profile Image" />
+                    </div>
+                  </div>
                 <div class="profile-text-container">
                     <p class="profile-name">{{ userName }}</p>
                     <p class="profile-email">{{ userEmail }}</p>
@@ -32,9 +34,9 @@
                         </div>
                     </div>
                     <div class="profile-inputs-container">
-                        <input type="oldPassword" placeholder="Ancien mot de passe" class="input-field input-all" [(ngModel)]="changeMDPObj.oldPassword" /> 
+                        <input #oldPasswordInput type="oldPassword" placeholder="Ancien mot de passe" class="input-field input-all" [(ngModel)]="changeMDPObj.oldPassword" /> 
                         <div class="input-with-button">
-                            <input type="newPassword" placeholder="Nouveaux mot de passe" class="input-field input-all" [(ngModel)]="changeMDPObj.newPassword" (keydown.enter)="changeMDP()" /> 
+                            <input #newPasswordInput type="newPassword" placeholder="Nouveaux mot de passe" class="input-field input-all" [(ngModel)]="changeMDPObj.newPassword" (keydown.enter)="changeMDP()" /> 
                             <button class="input-button" (click)="changeMDP()">
                                 <img src="/login/connect.svg">
                             </button>
@@ -56,6 +58,57 @@
                             </div>
                             <div class="profile-info-card-text-container">
                                 <p class="profile-info-card-text">{{ userName }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-info-card-square-container" style="justify-content: flex-end;">
+                        <div class="profile-info-card">
+                            <div class="profile-info-card-title-container">
+                                <div class="profile-info-card-title-text-container">
+                                    <p class="profile-info-card-title-text">Nom</p>
+                                </div>
+                                <div class="profile-info-card-title-icon-container">
+                                    <img class="profile-info-card-title-icon" src="/profile/nom.svg">
+                                </div>
+                            </div>
+                            <div class="profile-info-card-text-container">
+                                <p class="profile-info-card-text">{{ userSurname }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-info-card-row" style="margin-top: 1.5%;">
+                    <div class="profile-info-card-square-container" style="justify-content: flex-start;">
+                        <div class="profile-info-card">
+                            <div class="profile-info-card-title-container">
+                                <div class="profile-info-card-title-text-container">
+                                    <p class="profile-info-card-title-text">Email</p>
+                                </div>
+                                <div class="profile-info-card-title-icon-container">
+                                    <img class="profile-info-card-title-icon" src="/profile/email.svg">
+                                </div>
+                            </div>
+                            <div class="profile-info-card-text-container">
+                                <p class="profile-info-card-text">{{ userEmail }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-info-card-square-container" style="justify-content: flex-end;">
+                        <div class="profile-info-card">
+                            <div class="profile-info-card-title-container">
+                                <div class="profile-info-card-title-text-container">
+                                    <p class="profile-info-card-title-text">Photo</p>
+                                </div>
+                                <div class="profile-info-card-title-icon-container">
+                                    <img class="profile-info-card-title-icon" src="/profile/photo.svg">
+                                </div>
+                            </div>
+                            <div class="profile-info-card-text-container">
+                                <input type="file" accept=".png,.jpeg,.jpg,.svg" (change)="onFileSelected($event)" #fileInput hidden />
+                                <button class="profile-info-card-button" (click)="fileInput.click()">
+                                    <img class="profile-info-card-button-icon" src="/profile/upload.svg">
+                                    <p class="profile-info-photo-text" >Choisit une nouvelle photo de profile </p>
+                                </button>
                             </div>
                         </div>
                     </div>
