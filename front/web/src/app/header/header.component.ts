@@ -14,16 +14,17 @@ export class HeaderComponent {
 
   constructor(private router: Router, private titleService: Title) {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
         this.updatePageTitle();
       });
   }
 
   private updatePageTitle(): void {
-    const urlSegments = this.router.url.split('/');
-    this.pageTitle = urlSegments[urlSegments.length - 1];
-    if (this.pageTitle === "dashboard") {
+    const urlSegments = this.router.url.split("/");
+    this.pageTitle = urlSegments[urlSegments.length - 1].toUpperCase();
+
+    if (this.pageTitle === "DASHBOARD") {
       this.pageTitle = "";
     }
   }
