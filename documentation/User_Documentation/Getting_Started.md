@@ -2,11 +2,12 @@
 - ## Creating an Account :
     To create an account on our site InoxQCB is very simple, as soon as you arrive on our site you will see the page to connect just click on the blue text / link where it says “Créer un compte InoxQCB”.
 
-    (image du site avec une croix rouge pour indiquer ou il faut cliquer )
+     <img width="1455" alt="Capture d’écran 2024-11-02 à 23 25 19" src="https://github.com/user-attachments/assets/39862ac9-1e86-4b02-b93c-ee550f006119">
     
     
      After that you just have to fill in some basic information like your name and surname, then your email and your password twice to make sure you've written it right. 
-     
+
+
     (image d'exemple de register page remplie )
 
      In the event of an error, our site will notify you in detail in a small box that will appear at the top right of your screen with the error.
