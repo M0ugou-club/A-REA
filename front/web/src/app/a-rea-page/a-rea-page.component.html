@@ -29,7 +29,7 @@
                     <p class="title-actions">Actions</p>
                     <p class="subtitle-actions">Choisis ton action</p>
                 </div>
-                <lucide-icon [size]="32" name="ellipsis" color="white" style="cursor: pointer;"></lucide-icon>
+                <lucide-icon [size]="32" name="ellipsis" class="ellipsis"  style="cursor: pointer;"></lucide-icon>
             </div>
             <div class="choices-container">
                 <app-choice-button *ngFor="let x of actions"
@@ -66,18 +66,18 @@
                     <div class="action-preview">
                         <p>Ton Action</p>
                         <div class="separator"></div>
-                        <div *ngIf="areaObj.action_name" class="choices-preview">
+                        <div *ngIf="areaObj.action_name" class="choices-preview" @fadeIn>
                             <app-choice-preview [choiceService]="areaObj.action_platform"
                                                 [choiceTitle]="areaObj.action_name"
                                                 [serviceColor]="'#1E1E1E'"
                             ></app-choice-preview>
                         </div>
                     </div>
-                    <lucide-icon name="git-commit-vertical" [size]="48" color="#0089ED" [strokeWidth]="1.5" style="position: absolute"></lucide-icon>
+                    <lucide-icon name="git-commit-vertical" [size]="48" color="#0089ED" [strokeWidth]="1.5"></lucide-icon>
                     <div class="reaction-preview">
                         <p>Ta Réaction</p>
                         <div class="separator"></div>
-                        <div *ngIf="areaObj.reaction_name" class="choices-preview">
+                        <div *ngIf="areaObj.reaction_name" class="choices-preview" @fadeIn>
                             <app-choice-preview [choiceService]="areaObj.reaction_platform"
                                                 [choiceTitle]="areaObj.reaction_name"
                                                 [serviceColor]="'#1E1E1E'"
@@ -99,7 +99,7 @@
                     <p class="title-réactions">Réactions</p>
                     <p class="subtitle-réactions">Choisis ta réaction</p>
                 </div>
-                <lucide-icon [size]="32" name="ellipsis" color="white" style="cursor: pointer;"></lucide-icon>
+                <lucide-icon [size]="32" name="ellipsis" class="ellipsis" style="cursor: pointer;"></lucide-icon>
             </div>
             <div class="choices-container">
                 <app-choice-button *ngFor="let x of reactions"

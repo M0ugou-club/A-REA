@@ -3,17 +3,18 @@ import { Router } from "@angular/router";
 import { environment } from "../../../environment/environment";
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  selector: "app-home-page",
+  templateUrl: "./home-page.component.html",
+  styleUrls: ["./home-page.component.scss"],
 })
-
 export class HomePageComponent implements OnInit {
   constructor(private router: Router) {}
   userName: string = "";
   userEmail: string = "";
+  userImage: string = "";
   services: string[] = [];
   currentIndex: number = 0;
+
 
   areas: {
     areaId: number;
@@ -28,8 +29,7 @@ export class HomePageComponent implements OnInit {
     this.getUserInfo();
     this.getServices();
     this.loadAReas();
-    console.log("areas", this.areas);
-    const localData = localStorage.getItem('authToken');
+    const localData = localStorage.getItem("authToken");
 
     if (localData != null) {
       fetch(`${environment.apiUrl}/isLogged`, {
@@ -61,9 +61,9 @@ export class HomePageComponent implements OnInit {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         this.userName = data.name;
         this.userEmail = data.email;
+        this.userImage = data.image;
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -71,7 +71,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getServices() {
-    fetch("http://localhost:8000/tokens/state", {
+    fetch(`${environment.apiUrl}/tokens/state`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -87,7 +87,7 @@ export class HomePageComponent implements OnInit {
   }
 
   loadAReas(): void {
-    fetch("http://localhost:8000/areas", {
+    fetch(`${environment.apiUrl}/areas`, {
       method: "GET",
       headers: {
         authorization: "Bearer " + localStorage.getItem("authToken"),
@@ -95,13 +95,11 @@ export class HomePageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.error(response);
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Success:", data);
-
         data.forEach((area: any) => {
           this.areas.push({
             areaId: area._id,
@@ -111,7 +109,6 @@ export class HomePageComponent implements OnInit {
             reactionText: area.reactions.title,
             title: area.title,
           });
-          console.log(this.areas);
         });
       })
       .catch((error) => {
@@ -121,6 +118,10 @@ export class HomePageComponent implements OnInit {
 
   goToAreas() {
     this.router.navigate(["/dashboard/a-rea"]);
+  }
+
+  goToProfile () {
+    this.router.navigate(["/dashboard/profile"]);
   }
 
   openDocuYoutube() {

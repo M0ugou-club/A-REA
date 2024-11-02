@@ -16,16 +16,18 @@
         </div>
         <div class="firstRow-container">
             <div class="profile-container">
-                <div class="profile-square">
+                <button class="profile-square" (click)="goToProfile()">
                     <div class="profile-icon-container">
-                        <img class="profile-icon" src="/header/template-user.png">
+                        <div class="profile-icon-circle">
+                            <img class="profile-icon" *ngIf="userImage" [src]="userImage" alt="Profile Image" />
+                        </div>
                     </div>
                     <div class="profile-text-container">
                         <p class="profile-name">{{ userName }}</p>
                         <p class="profile-email">{{ userEmail }}</p>
                         <p class="profile-grade">Moderateur</p>
                     </div>
-                </div>
+                </button>
             </div>
             <div class="areas-container">
                 <div class="areas-square">
@@ -47,19 +49,36 @@
                         <p class="areas-list-empty-text">Aucune aréa</p>
                     </div>
                     <div *ngIf="areas.length !== 0" class="areas-list-container">
-                        <app-a-reas *ngFor="let x of areas"
-                                    [areaMainService]="x.actionService"
-                                    [areaSubService]="x.reactionService"
-                                    [areaTitle]="x.title"
-                                    [serviceColor]="'#1E1E1E'"
-                                    [actionTitle]="x.actionText"
-                                    [reactionTitle]="x.reactionText"
-                                    [areaId]="x.areaId"
-                                    class="a-rea">
-                        </app-a-reas>
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(0, 3)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
+                        <div class="separator">
+                            <hr class="separator-line">
+                        </div>
+                        <div class="column">
+                            <app-a-reas *ngFor="let x of areas.slice(3, 6)"
+                                        [areaMainService]="x.actionService"
+                                        [areaSubService]="x.reactionService"
+                                        [areaTitle]="x.title"
+                                        [serviceColor]="'#1E1E1E'"
+                                        [actionTitle]="x.actionText"
+                                        [reactionTitle]="x.reactionText"
+                                        [areaId]="x.areaId"
+                                        class="a-rea">
+                            </app-a-reas>
+                        </div>
                     </div>
                     <div class="areas-list-icon-container">
-                        <button class="areas-list-icon-button">
+                        <button class="areas-list-icon-button" (click)="goToAreas()">
                             <img class="areas-list-icon" src="/home/list.svg">
                         </button>
                     </div>
@@ -91,7 +110,7 @@
                         </div>
                         <div class="service-icons-container">
                             <div *ngFor="let service of services.slice(currentIndex, currentIndex + 4)" class="service-item">
-                                <img class="service-icons" [src]="'/home/' + service + '.svg'" alt="{{service}}">
+                                <img class="service-icons" [src]="'/icons/' + service + '.svg'" alt="{{service}}">
                                 <div class="service-name">{{service}}</div>
                               </div>
                         </div>

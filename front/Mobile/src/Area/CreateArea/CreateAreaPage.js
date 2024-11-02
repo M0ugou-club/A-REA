@@ -1,11 +1,11 @@
-import { Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
-import { useEffect, useState } from "react";
-import styles from "./CreateAreaPageStyle";
-import NavigationBar from "../../NavigationBar/NavigationBar";
-import isLogged from "../../isLogged";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getFetchUrl } from "../../getFetchUrl";
+import { Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { useCallback, useState } from 'react';
+import styles from './CreateAreaPageStyle';
+import NavigationBar from '../../NavigationBar/NavigationBar';
+import isLogged from '../../isLogged';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getFetchUrl } from '../../getFetchUrl';
 
 export default function CreateAreaPage() {
   const [selectedAction, setSelectedAction] = useState("");
@@ -27,89 +27,89 @@ export default function CreateAreaPage() {
   });
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const initializeFetchUrl = async () => {
-      const url = await getFetchUrl();
-      setFetchUrl(url);
+    useFocusEffect(
+        useCallback(() => {
+            const initializeFetchUrl = async () => {
+                const url = await getFetchUrl();
+                setFetchUrl(url);
+            };
+        
+            initializeFetchUrl();
+        }, [])
+    );
+
+    useFocusEffect(
+        useCallback(() => {
+            if (!fetchUrl) return;
+
+            isLogged(navigation);
+
+            const fetchActions = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + '/enums/actions', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': "Bearer " + token,
+                        },
+                    });
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        setActionList(data);
+                    } else {
+                        console.error('Error fetching actions:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error fetching actions:', error);
+                }
+            };
+
+            const fetchReactions = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + '/enums/reactions', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': "Bearer " + token,
+                        },
+                    });
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        setReactionList(data);
+                    } else {
+                        console.error('Error fetching reactions:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error fetching reactions:', error);
+                }
+            };
+
+            fetchActions();
+            fetchReactions();
+        }, [fetchUrl, navigation])
+    );
+
+    const handleActionPress = (action, platform, actionKey) => {
+        setSelectedAction(action);
+        setArea(prevArea => ({
+            ...prevArea,
+            action_name: action,
+            action_type: actionKey,
+            action_platform: platform,
+        }));
     };
 
-    initializeFetchUrl();
-  }, []);
-
-  useEffect(() => {
-    if (!fetchUrl) return;
-
-    isLogged(navigation);
-
-    const fetchActions = async () => {
-      try {
-        const token = await AsyncStorage.getItem("accessToken");
-        const response = await fetch(fetchUrl + "/enums/actions", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        });
-        if (response.status === 200) {
-          const data = await response.json();
-          console.log(data);
-          setActionList(data);
-        } else {
-          console.error("Error fetching actions:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching actions:", error);
-      }
+    const handleReactionPress = (reaction, platform, reactionKey) => {
+        setSelectedReaction(reaction);
+        setArea(prevArea => ({
+            ...prevArea,
+            reaction_name: reaction,
+            reaction_type: reactionKey,
+            reaction_platform: platform,
+        }));
     };
-
-    const fetchReactions = async () => {
-      try {
-        const token = await AsyncStorage.getItem("accessToken");
-        const response = await fetch(fetchUrl + "/enums/reactions", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        });
-        if (response.status === 200) {
-          const data = await response.json();
-          console.log(data);
-          setReactionList(data);
-        } else {
-          console.error("Error fetching reactions:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching reactions:", error);
-      }
-    };
-
-    fetchActions();
-    fetchReactions();
-  }, [fetchUrl, navigation]);
-
-  const handleActionPress = (action, platform, actionKey) => {
-    setSelectedAction(action);
-    setArea((prevArea) => ({
-      ...prevArea,
-      action_name: action,
-      action_type: actionKey,
-      action_platform: platform,
-    }));
-    console.log(area);
-  };
-
-  const handleReactionPress = (reaction, platform, reactionKey) => {
-    setSelectedReaction(reaction);
-    setArea((prevArea) => ({
-      ...prevArea,
-      reaction_name: reaction,
-      reaction_type: reactionKey,
-      reaction_platform: platform,
-    }));
-    console.log(area);
-  };
 
   function handleCreateArea() {
     navigation.navigate("ChooseAreaName", { area });

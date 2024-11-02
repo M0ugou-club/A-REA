@@ -30,6 +30,9 @@ import {
 } from "lucide-angular";
 import { ChoicePreviewComponent } from "./a-rea-page/choice-preview/choice-preview.component";
 import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
     ChoiceButtonComponent,
     ChoicePreviewComponent,
     AReasComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,11 @@ import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
       CircleHelp,
       Trash2,
     }),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

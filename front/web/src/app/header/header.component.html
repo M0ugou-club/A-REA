@@ -1,6 +1,11 @@
 <div class="header-container">
     <div class="logo-container">
-        <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
+        <button class="logo-button" (click)="goToDashboard()">
+            <img class="logoKaizen" src="/kaizenLogo.png" alt="logo">
+        </button>
+    </div>
+    <div class="header-type-container">
+        <p class="header-text">{{ pageTitle }}</p>
     </div>
     <div class="button-container">
         <div class="addArea-container">
@@ -15,9 +20,15 @@
         </div>
         <div class="profile-container">
             <button class="profile-button" (click)="handleUserIconButton()">
-                <img class="profile-picture" src="/header/template-user.png" alt="user">
+                <div class="profile-icon-container">
+                    <img class="profile-picture" *ngIf="userImage" [src]="userImage" alt="Profile Image">
+                </div>
             </button>
         </div>
     </div>
-    <app-login-servicse-popup *ngIf="showLoginPopup"></app-login-servicse-popup>
+    <app-login-servicse-popup 
+            *ngIf="showLoginPopup"
+            (mouseenter)="showLoginPopup = true"
+            (mouseleave)="showLoginPopup = false">
+    </app-login-servicse-popup>
 </div>

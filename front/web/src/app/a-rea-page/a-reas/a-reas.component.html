@@ -1,7 +1,7 @@
 <div class="a-rea" [ngStyle]="{ 'background-color': serviceColor}">
     <div class="a-rea-container">
         <img [src]="getAreaMainServiceImageUrl(areaMainService)" alt=" " class="logo" />
-        <img *ngIf="areaSubService" src="/icons/{{areaSubService}}.png" alt=" " class="logo" />
+        <img *ngIf="areaSubService" src="/icons/{{areaSubService}}.svg" alt=" " class="logo" />
         <div class="a-rea-title">
             <p>{{ areaTitle }}</p>
         </div>
@@ -10,13 +10,13 @@
             *ngIf="areaSubService"
             name="CircleHelp"
             class="hover-icon"
-            (mouseenter)="showInfo = true"
-            (mouseleave)="showInfo = false">
+            (click)="showInfo = !showInfo">
     </lucide-icon>
     <div class="info"
          *ngIf="showInfo"
          (mouseenter)="showInfo = true"
-         (mouseleave)="showInfo = false">
+         (mouseleave)="showInfo = false"
+         @fadeIn>
         <div class="action">
             <lucide-icon name="git-commit-horizontal" [size]="32" color="#0089ED"></lucide-icon>
             <p> {{ actionTitle }} </p>

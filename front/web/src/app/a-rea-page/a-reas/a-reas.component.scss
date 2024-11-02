@@ -6,11 +6,19 @@
   height: 100%;
 
   .hover-icon {
-    color: #2A2A2A;
+    color: #797979;
     cursor: pointer;
-    position: relative;
     opacity: 0;
     transition: opacity 0.5s;
+    margin-right: 5%;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
   }
 
   .info {
@@ -18,7 +26,7 @@
     flex-direction: column;
     width: 15%;
     height: auto;
-    margin-left: 15%;
+    left: 16%;
     margin-top: 5%;
     background-color: #1E1E1E;
     position: absolute;
@@ -47,18 +55,19 @@
   height: 100%;
   width: 75%;
   p {
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";
     color: white;
     font-weight: bold;
     font-size: small;
+    margin-left: 5%;
   }
-  padding-left: 2%;
+  margin-left: 2%;
 }
 
 .logo {
-  width: 26px;
-  height: 26px;
-  padding-left: 2%;
+  width: 12%;
+  height: auto;
+  margin-left: 3%;
 }
 
 .separator {
@@ -75,7 +84,7 @@
   p {
     color: white;
     padding-left: 5%;
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
   }
 }
 
@@ -84,7 +93,7 @@
   p {
     color: red;
     font-weight: bold;
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
   }
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;

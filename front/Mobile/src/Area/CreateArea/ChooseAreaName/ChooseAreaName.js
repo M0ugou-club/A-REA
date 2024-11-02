@@ -1,9 +1,9 @@
 import { Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import styles from './ChooseAreaNameStyle';
 import NavigationBar from '../../../NavigationBar/NavigationBar';
 import isLogged from '../../../isLogged';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from 'react-native-gesture-handler';
 import { getFetchUrl } from '../../../getFetchUrl';
@@ -16,18 +16,17 @@ export default function ChooseAreaName() {
     const [areaDescription, setAreaDescription] = useState('');
     const [fetchUrl, setFetchUrl] = useState('');
 
-    useEffect(() => {
-        const initializeFetchUrl = async () => {
-            const url = await getFetchUrl();
-            setFetchUrl(url);
-        };
-    
-        initializeFetchUrl();
-    }, []);
-
-    useEffect(() => {
-        isLogged(navigation);
-    }, [navigation]);
+    useFocusEffect(
+        useCallback(() => {
+            const initializeFetchUrl = async () => {
+                const url = await getFetchUrl();
+                setFetchUrl(url);
+            };
+        
+            initializeFetchUrl();
+            isLogged(navigation);
+        }, [navigation])
+    );
 
     async function handleFinish() {
         const token = await AsyncStorage.getItem('accessToken');

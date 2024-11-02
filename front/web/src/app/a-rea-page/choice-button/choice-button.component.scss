@@ -7,8 +7,15 @@
   .hover-icon {
     opacity: 0;
     transition: opacity 0.5s;
-    color: #2A2A2A;
-    cursor: pointer
+    cursor: pointer;
+    color: #797979;
+    margin-right: 3%;
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(1);
+    }
   }
   &:hover {
     .hover-icon {
@@ -34,10 +41,11 @@
   height: 100%;
   width: 75%;
   p {
-    font-family: "Poppins-Medium";
+    font-family: "KaizenRegular";;
     color: white;
     font-weight: bold;
     font-size: small;
+    margin-left: 2%;
   }
 }
 
