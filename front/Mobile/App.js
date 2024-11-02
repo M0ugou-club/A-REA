@@ -12,8 +12,20 @@ import ActionListPage from "./src/Area/CreateArea/ChoseAction/ActionListPage";
 import ReactionListPage from "./src/Area/CreateArea/ChooseReaction/ReactionListPage";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
+
+const storeFetchUrl = async () => {
+  try {
+    const url = await AsyncStorage.getItem('fetchUrl');
+    if (url === null) {
+      await AsyncStorage.setItem('fetchUrl', 'http://inox-qcb.fr:8000');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -29,6 +41,7 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await loadFonts();
+        await storeFetchUrl();
       } catch (e) {
         console.warn(e);
       } finally {
