@@ -28,7 +28,8 @@
     
     Below this form you can find 4 small squares with your personal information, the small square on the bottom right you can change your profile picture by selecting an image on your computer, attention once you have chosen the photo on your computer it will change your profile picture.
 
-    (image de la profile page avec les category entouré en rouge avec les nom)
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 51 46" src="https://github.com/user-attachments/assets/96fb1873-e7d4-4e72-8e90-98a374ec2a81">
+
 - ## Aréas Page :
     On the Area page you will find all the information about your areas. 
     
