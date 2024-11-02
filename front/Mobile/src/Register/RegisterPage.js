@@ -1,13 +1,14 @@
-import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react';
 import styles from './RegisterPageStyle';
 import { useNavigation } from '@react-navigation/native';
 import { getFetchUrl } from '../getFetchUrl';
+import NetworkLocation from '../NetworkLocation/NetworkLocation';
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [lastName, setLastName] = useState('');
     const [name, setName] = useState('');
 
     const navigation = useNavigation();
@@ -21,10 +22,12 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    name: name,
+                    surname: lastName,
                     email: email,
                     password: password,
-                    username: username,
-                    name: name,
+                    passwordConfirm: password,
+                    image: "",
                 }),
             });
             if (response.status === 201) {
@@ -41,38 +44,47 @@ export default function Register() {
 
     return (
         <ImageBackground style={styles.background} source={require('./../../assets/background.png')}>
+            <Image style={styles.kayzen} source={require('../../assets/kayzen.png')} />
             <View style={styles.popup}>
-                <Text style={styles.title}>Inox QCB</Text>
-                <TextInput
-                    style={styles.formInput}
-                    placeholder='Email'
-                    onChangeText={setEmail}
-                />
-                <View style={styles.utilsInfo}>
-                    <TextInput
-                        style={styles.formInputUtilsInfo}
-                        placeholder='Prénom'
-                        onChangeText={setName}
+                <View style={styles.titleContainer}>
+                    <Text style={styles.welcome}>Bienvenue !</Text>
+                    <Text style={styles.title}>S'enregistrer</Text>
+                </View>
+                <View>
+                    <TextInput 
+                        placeholder="Email"
+                        onChangeText={(text) => setEmail(text)}
+                        style={styles.normalTextInputs}
                     />
+                    <View style={styles.nameContainer}>
+                        <TextInput
+                            placeholder="Prénom"
+                            onChangeText={(text) => setName(text)}
+                            style={styles.middleTextInput}
+                        />
+                        <TextInput
+                            placeholder="Nom"
+                            onChangeText={(text) => setLastName(text)}
+                            style={styles.middleTextInput}
+                        />
+                    </View>
                     <TextInput
-                        style={styles.formInputUtilsInfo}
-                        placeholder='Pseudo'
-                        onChangeText={setUsername}
+                        placeholder="Mot de passe"
+                        secureTextEntry={true}
+                        onChangeText={(text) => setPassword(text)}
+                        style={styles.normalTextInputs}
                     />
                 </View>
-                <TextInput
-                    style={styles.formInput}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                    onChangeText={setPassword}
-                />
-                <TouchableOpacity 
-                    style={styles.registerButton}
-                    onPress={handleRegister}
-                >
-                    <Text style={styles.registerButtonText}>Register</Text>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={handleRegister}
+                    >
+                        <Text style={styles.textButton}>S'inscrire</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
+            <NetworkLocation></NetworkLocation>
         </ImageBackground>
     );
 }

@@ -5,8 +5,8 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     popup: {
         position: 'absolute',
+        bottom: height * 0.3,
         left: width * 0.1,
-        top: height * 0.4,
         width: width * 0.8,
         height: height * 0.4,
         backgroundColor: '#f0f0f0',
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
 
     questionCircleButton: {
         position: 'absolute',
-        top: height * 0.9,
-        left: width * 0.85,
+        bottom: height * 0.1,
+        right: width * 0.05,
     },
 
     questionCircle: {

@@ -6,7 +6,7 @@ import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import styles from './HomeStyle';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import { getFetchUrl } from '../getFetchUrl';
-import NetworkLocation from '../NetworkLocation/NetworkLocation';
+import NetworkLocationA from '../NetworkLocationA/NetworkLocationA';
 
 export default function Home() {
 
@@ -76,7 +76,7 @@ export default function Home() {
                 </View>
             </View>
             <NavigationBar></NavigationBar>
-            <NetworkLocation></NetworkLocation>
+            <NetworkLocationA />
         </View>
     );
 }
