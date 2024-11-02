@@ -5,62 +5,93 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-    },
-
-    title: {
-        fontSize: width * 0.075,
-        fontWeight: 'bold',
-        margin: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: height * 0.15,
     },
 
     popup: {
-        width: width * 0.9,
-        height: height * 0.7,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        margin: 'auto',
-        alignItems: 'center',
-        justifyContent: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: width * 0.85,
+        height: height * 0.6,
+        backgroundColor: "white",
+        borderRadius: width * 0.03,
+        gap: height * 0.06,
     },
 
-    formInput: {
-        width: '80%',
-        height: 40,
-        margin: 20,
-        padding: width * 0.02,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 10,
+    titleContainer: {
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        paddingLeft: width * 0.07,
+        paddingTop: height * 0.03,
     },
 
-    utilsInfo: {
-        flexDirection: 'row',
-        width: '80%',
-        justifyContent: 'space-between',
-    },
-
-    formInputUtilsInfo: {
-        width: '47.5%',
-        height: 40,
-        padding: width * 0.02,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 10,
-    },
-
-    registerButton: {
-        width: '80%',
-        height: 40,
-        backgroundColor: '#0089ED',
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 20,
-    },
-
-    registerButtonText: {
-        color: 'white',
+    welcome: {
         fontSize: width * 0.05,
+        fontWeight: "bold",
+        marginBottom: height * 0.02,
+        fontFamily: "Nexa",
+    },
+
+    title: {
+        fontSize: width * 0.08,
+        marginBottom: height * 0.02,
+        fontFamily: "Nexa",
+    },
+
+    normalTextInputs: {
+        width: width * 0.7,
+        height: height * 0.05,
+        borderWidth: 1,
+        borderColor: "#ADADAD",
+        borderRadius: width * 0.01,
+        paddingLeft: width * 0.02,
+        marginBottom: height * 0.02,
+        fontFamily: "Nexa",
+    },
+
+    nameContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: width * 0.7,
+    },
+
+    middleTextInput: {
+        width: width * 0.33,
+        height: height * 0.05,
+        borderWidth: 1,
+        borderColor: "#ADADAD",
+        borderRadius: width * 0.01,
+        paddingLeft: width * 0.02,
+        marginBottom: height * 0.02,
+        fontFamily: "Nexa",
+    },
+
+    button: {
+        width: width * 0.7,
+        height: height * 0.05,
+        borderRadius: width * 0.01,
+        marginBottom: height * 0.02,
+        backgroundColor: "#0089ED",
+    },
+
+    textButton: {
+        textAlign: "center",
+        lineHeight: height * 0.05,
+        fontSize: width * 0.04,
+        fontFamily: "Nexa",
+        color: "white",
+    },
+
+    kayzen: {
+        position: "absolute",
+        top: height * 0.06,
+        resizeMode: "contain",
+        width: width * 0.7,
     },
 });
 

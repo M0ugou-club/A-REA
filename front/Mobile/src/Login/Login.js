@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from './LoginStyle';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useState, useCallback } from 'react';
@@ -63,32 +63,41 @@ export default function Login() {
   }
 
   return (
-    <ImageBackground source={require('./../../assets/background.png')} style={styles.background}>
-      <View style={styles.popup}>
-        <Text style={styles.title}>Inox QCB</Text>
-        <TextInput
-          style={styles.formInput}
-          placeholder='Email'
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.formInput}
-          placeholder='Password'
-          secureTextEntry={true}
-          onChangeText={setPassword}
-        />
-        <TouchableOpacity style={styles.loginButton}
-          onPress={() => onLogin()}
-        >
-          <Text style={styles.textLoginButton}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Register')}
-        >
-          <Text style={styles.textRegisterButton}>Register</Text>
-        </TouchableOpacity>
-      </View>
-      <NetworkLocation />
+    <ImageBackground style={styles.background} source={require('./../../assets/background.png')}>
+        <Image style={styles.kayzen} source={require('../../assets/kayzen.png')} />
+        <View style={styles.popup}>
+            <View style={styles.titleContainer}>
+                <Text style={styles.welcome}>Bienvenue !</Text>
+                <Text style={styles.title}>Se connecter</Text>
+            </View>
+            <View style={styles.formContainer}>
+                <TextInput 
+                    placeholder="Email"
+                    onChangeText={(text) => setEmail(text)}
+                    style={styles.normalTextInputs}
+                />
+                <TextInput
+                    placeholder="Mot de passe"
+                    secureTextEntry={true}
+                    onChangeText={(text) => setPassword(text)}
+                    style={styles.normalTextInputs}
+                />
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Register')}
+                    style={styles.linkContainer}
+                >
+                    <Text style={styles.link}>S'enregistrer</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={onLogin}
+                >
+                    <Text style={styles.textButton}>Se connecter</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     </ImageBackground>
   );
 }
