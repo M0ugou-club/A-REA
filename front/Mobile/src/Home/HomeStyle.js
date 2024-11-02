@@ -13,7 +13,7 @@ export default StyleSheet.create({
         flex: 1,
         display: 'flex',
         alignItems: 'center',
-        gap: height * 0.1,
+        gap: height * 0.045,
         paddingTop: height * 0.05,
     },
 
@@ -75,5 +75,35 @@ export default StyleSheet.create({
     tutorielTitle: {
         fontSize: width * 0.05,
         fontFamily: 'Nexa',
+    },
+
+    headerInfo: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width * 0.25,
+        height: height * 0.075,
+        backgroundColor: '#F3F3F3',
+        borderRadius: width * 0.03,
+    },
+
+    headerInfoContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: width * 0.95,
+        gap: width * 0.05,
+    },
+
+    headerInfoTitle: {
+        fontSize: width * 0.04,
+        fontFamily: 'Nexa',
+        color: '#3D3D3D',
+    },
+
+    headerInfoInfo: {
+        fontSize: width * 0.05,
+        fontFamily: 'Nexa',
+        color: '#3D3D3D',
     },
 });
