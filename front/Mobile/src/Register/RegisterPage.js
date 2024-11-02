@@ -2,6 +2,7 @@ import { ImageBackground, Text, View, TextInput, TouchableOpacity } from 'react-
 import { useState } from 'react';
 import styles from './RegisterPageStyle';
 import { useNavigation } from '@react-navigation/native';
+import { getFetchUrl } from '../getFetchUrl';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -13,7 +14,8 @@ export default function Register() {
 
     async function handleRegister() {
         try {
-            const response = await fetch("http://inox-qcb.fr:8000/register", {
+            const fetchUrl = await getFetchUrl();
+            const response = await fetch(`${fetchUrl}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -38,7 +40,7 @@ export default function Register() {
     }
 
     return (
-        <ImageBackground style={styles.background} source={require('./../../assets/background.png')} style={styles.background}>
+        <ImageBackground style={styles.background} source={require('./../../assets/background.png')}>
             <View style={styles.popup}>
                 <Text style={styles.title}>Inox QCB</Text>
                 <TextInput

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import styles from "./ActionListPageStyle";
 import { getFetchUrl } from "../../../getFetchUrl";
 
@@ -21,55 +21,58 @@ export default function ActionListPage() {
   const [colors, setColors] = useState({});
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const fetchActions = async () => {
-      const fetchUrl = await getFetchUrl();
-      const token = await AsyncStorage.getItem("accessToken");
-      try {
-        const response = await fetch(`${fetchUrl}/enums/actions`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status === 200) {
-          const data = await response.json();
-          setActionList(data);
-        } else {
-          console.error("Error fetching actions:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching actions:", error);
-      }
-    };
-
-    const fetchColors = async () => {
-      try {
+  useFocusEffect(
+    useCallback(() => {
+      const fetchActions = async () => {
+        const fetchUrl = await getFetchUrl();
         const token = await AsyncStorage.getItem("accessToken");
-        const response = await fetch(
-          "http://inox-qcb.fr:8000/enums/platforms_icons",
-          {
+        try {
+          const response = await fetch(`${fetchUrl}/enums/actions`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
+              Authorization: `Bearer ${token}`,
             },
+          });
+          if (response.status === 200) {
+            const data = await response.json();
+            setActionList(data);
+          } else {
+            console.error("Error fetching actions:", response.status);
           }
-        );
-        if (response.status === 200) {
-          const data = await response.json();
-          setColors(data);
-        } else if (response.status === 401) {
-          console.log("GET - /colors - Unauthorized");
+        } catch (error) {
+          console.error("Error fetching actions:", error);
         }
-      } catch (error) {
-        console.error("Error fetching colors:", error);
-      }
-    };
-    fetchColors();
-    fetchActions();
-  }, []);
+      };
+
+      const fetchColors = async () => {
+        const fetchUrl = await getFetchUrl();
+        try {
+          const token = await AsyncStorage.getItem("accessToken");
+          const response = await fetch(
+            `${fetchUrl}/enums/platforms_icons`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+          if (response.status === 200) {
+            const data = await response.json();
+            setColors(data);
+          } else if (response.status === 401) {
+            console.log("GET - /colors - Unauthorized");
+          }
+        } catch (error) {
+          console.error("Error fetching colors:", error);
+        }
+      };
+      fetchColors();
+      fetchActions();
+    }, [])
+  );
 
   const handleActionSelect = (action, platform, actionKey) => {
     navigation.navigate("CreateArea", {

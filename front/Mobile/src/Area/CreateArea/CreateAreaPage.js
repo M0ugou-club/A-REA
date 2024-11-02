@@ -1,5 +1,5 @@
 import { Text, View, TouchableOpacity, Image } from "react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./CreateAreaPageStyle";
 import NavigationBar from "../../NavigationBar/NavigationBar";
 import { useNavigation, useRoute, useFocusEffect } from "@react-navigation/native";
@@ -22,28 +22,30 @@ export default function CreateAreaPage() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  useEffect(() => {
-    if (route.params?.selectedAction) {
-      const { action, platform, actionKey } = route.params.selectedAction;
-      setSelectedAction(action);
-      setArea((prevArea) => ({
-        ...prevArea,
-        action_name: action,
-        action_type: actionKey,
-        action_platform: platform,
-      }));
-    }
-    if (route.params?.selectedReaction) {
-      const { reaction, platform, reactionKey } = route.params.selectedReaction;
-      setSelectedReaction(reaction);
-      setArea((prevArea) => ({
-        ...prevArea,
-        reaction_name: reaction,
-        reaction_type: reactionKey,
-        reaction_platform: platform,
-      }));
-    }
-  }, [route.params]);
+  useFocusEffect(
+    useCallback(() => {
+      if (route.params?.selectedAction) {
+        const { action, platform, actionKey } = route.params.selectedAction;
+        setSelectedAction(action);
+        setArea((prevArea) => ({
+          ...prevArea,
+          action_name: action,
+          action_type: actionKey,
+          action_platform: platform,
+        }));
+      }
+      if (route.params?.selectedReaction) {
+        const { reaction, platform, reactionKey } = route.params.selectedReaction;
+        setSelectedReaction(reaction);
+        setArea((prevArea) => ({
+          ...prevArea,
+          reaction_name: reaction,
+          reaction_type: reactionKey,
+          reaction_platform: platform,
+        }));
+      }
+    }, [route.params])
+  );
 
   const handleCreateArea = () => {
     navigation.navigate("ChooseAreaName", { area });
