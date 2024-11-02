@@ -5,13 +5,13 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingTop: height * 0.15,
     },
 
     popup: {
         display: "flex",
+        position: "absolute",
+        top: height * 0.3,
+        left: width * 0.075,
         flexDirection: "column",
         alignItems: "center",
         width: width * 0.85,
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     kayzen: {
         position: "absolute",
         top: height * 0.06,
+        left: width * 0.15,
         resizeMode: "contain",
         width: width * 0.7,
     },

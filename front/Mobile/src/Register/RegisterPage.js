@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './RegisterPageStyle';
 import { useNavigation } from '@react-navigation/native';
 import { getFetchUrl } from '../getFetchUrl';
+import NetworkLocation from '../NetworkLocation/NetworkLocation';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -83,6 +84,7 @@ export default function Register() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <NetworkLocation></NetworkLocation>
         </ImageBackground>
     );
 }
