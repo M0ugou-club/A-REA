@@ -4,7 +4,8 @@
 
     Simply enter your current password in the "Current Password" field, and then type your desired new password in the "New Password" field.
 
-    (image de l'emplacemet du chnagement de mdp sur la profile page)
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 53 45" src="https://github.com/user-attachments/assets/01d790bf-19a4-4c6d-a3cd-d13f9e82bf8b">
+
 
 - ## Change profile picture :
 
@@ -12,4 +13,4 @@
 
     Clicking this button will open a page where you can upload a file in .png, .jpeg, .jpg, or .svg format. Once you select your image, your profile picture will automatically update.
 
-    ( image de l'emplacement du changement de photo )
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 54 54" src="https://github.com/user-attachments/assets/6eb6d428-c0d9-4e22-b590-a27c9ee5385b">
