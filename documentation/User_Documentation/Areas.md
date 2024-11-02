@@ -14,7 +14,8 @@
 
     Next, you’ll see sections for selecting an action and a reaction. Simply click on an item from the action list on the left to select it, and then choose a reaction from the list on the right.
 
-    (image avec des cases rouge pour chaque categorie explique&)
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 59 43" src="https://github.com/user-attachments/assets/8b3ad806-7622-4eeb-bd5b-9bf11f17da5d">
+
 
     Once you've set up your AREA with the desired action and reaction, just click the "Create your AREA" button at the bottom between the two lists to finalize it.
 - ## Deleting an AREA :
