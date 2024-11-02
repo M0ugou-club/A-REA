@@ -25,6 +25,3 @@ In the event of an error, our site will notify you in detail in a small box that
 - ## Forgot Password :
     If you've forgotten your password, don't panic, just contact site support by e-mail. They'll make sure you're the owner of the account and change your password to a random one that you can change on your profile page once you've logged in.
 
-    (lien vers la page de support)
-
-
