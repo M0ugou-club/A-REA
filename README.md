@@ -6,7 +6,7 @@
 
 ## There is the documentation about the A-REA project
 
-- # User Documentation : [Here](./documentation/User_Documentation.md)
+- # User Documentation : [Here](./documentation/User_Documentation/User_Documentation.md)
 
 - # Technical Documentation : [Here](./documentation/Technical_Documentation/Technical_Documentation.md)
 
