@@ -8,7 +8,7 @@
      After that you just have to fill in some basic information like your name and surname, then your email and your password twice to make sure you've written it right. 
 
 
-    (image d'exemple de register page remplie )
+<img width="1455" alt="Capture d’écran 2024-11-02 à 23 28 48" src="https://github.com/user-attachments/assets/bb31654f-859b-48e0-99e2-a23632964f58">
 
      In the event of an error, our site will notify you in detail in a small box that will appear at the top right of your screen with the error.
 
@@ -17,7 +17,7 @@
 - ## Logging In and Out :
     To connect to the InoxQCB site you simply need to have already created an account, then you just need to make sure you are on the login page, the login page only has two fields to fill in one that asks for the email and the other for the password. 
     
-    (image qui monte la login page)
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 30 41" src="https://github.com/user-attachments/assets/bb617a7d-6b93-4222-b32e-b3bacfd0093e">
     
     You just need to fill in your email and password then press the arrow or press enter. 
 
