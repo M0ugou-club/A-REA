@@ -36,6 +36,7 @@
     
     On the right-hand side of the area page you'll find a list of all your areas, and if you move your mouse over an area you'll be able to click on the interogation button to open a small menu. On this menu you'll see the description of your Action at the top, and the description of your Reaction at the bottom. 
 
-    (image du la page areas avec la un menu ouver pour suppr une area)
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 57 45" src="https://github.com/user-attachments/assets/436b5203-4b45-4906-9405-bebacf391c47">
+
     
     To the left of the list of your areas you'll find the menu for creating a new area.
