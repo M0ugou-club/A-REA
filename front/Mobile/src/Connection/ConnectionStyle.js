@@ -63,4 +63,28 @@ export default StyleSheet.create({
         fontSize: width * 0.04,
         fontFamily: 'Nexa',
     },
+
+    disconnectContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    disconnectButton: {
+        width: width * 0.5,
+        height: height * 0.05,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#b00000',
+        borderRadius: width * 0.03,
+        marginTop: height * 0.05,
+    },
+
+    disconnectText: {
+        fontSize: width * 0.04,
+        color: 'white',
+        fontFamily: 'Nexa',
+    },
 });

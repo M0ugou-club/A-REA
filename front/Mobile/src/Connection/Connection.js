@@ -5,13 +5,12 @@ import { useCallback, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import * as WebBrowser from 'expo-web-browser';
-import { TextInput } from 'react-native-gesture-handler';
 
 export default function Connection() {
 
     const [platforms, setPlatforms] = useState([]);
     const [fetchUrl, setFetchUrl] = useState('');
-    const [reload, setReload] = useState(false);
+    const navigation = useNavigation();
 
     const icons = {
         Spotify: require('../../assets/Icons/Spotify.png'),
@@ -57,24 +56,19 @@ export default function Connection() {
                 }
             }
             getData();
-        }, [fetchUrl, reload])
+        }, [fetchUrl])
     );
-
-    const handleUrlChange = async (url) => {
-        try {
-            await AsyncStorage.setItem('fetchUrl', url);
-            setFetchUrl(url);
-            setReload(prev => !prev);
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     const handlePress = async (platform) => {
         const authToken = await AsyncStorage.getItem('accessToken');
         const authUrl = fetchUrl + '/oauth/' + platform + '?token=' + authToken;
 
         let result = await WebBrowser.openBrowserAsync(authUrl);
+    }
+
+    const handleDisconnect = async () => {
+        await AsyncStorage.removeItem('accessToken');
+        navigation.navigate('Login');
     }
 
     return (
@@ -91,6 +85,14 @@ export default function Connection() {
                         <Text style={styles.connectText}>Se Connecter</Text>
                     </TouchableOpacity>
                 ))}
+                </View>
+                <View style={styles.disconnectContainer}>
+                    <TouchableOpacity
+                        style={styles.disconnectButton}
+                        onPress={() => handleDisconnect()}
+                    >
+                        <Text style={styles.disconnectText}>Déconnexion</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <NavigationBar />
