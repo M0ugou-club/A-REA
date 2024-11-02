@@ -1,14 +1,15 @@
 # Navigating the Site
 - ## Navigation Menu :
     Navigation Menu is at the top of the screen on all pages except login and register.
-    
-    (image de la navigation page)
+
+  <img width="1455" alt="Capture d’écran 2024-11-02 à 23 42 49" src="https://github.com/user-attachments/assets/526c5194-c1fa-4678-9cdf-39fae12f1a75">
 
      On this bar you'll find the kaizen logo on the top left, which is also a button that redirects you to the home page.
     
     On the far right of the page you'll find your profile picture, which is a button that opens a popup with lots of shortcuts and accesses. 
     
-    (image avec tout les bouton de la navbar en rouge )
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 44 06" src="https://github.com/user-attachments/assets/998935d2-1175-447e-bc1e-b7c88f7b9fd8">
+
 - ## Home Page :
     On the home page you'll find all the information you need.  
     
@@ -18,7 +19,8 @@
     
     To the right of the list of services you'll see a clickable box to view the Inoxtag influencer documentary.
     
-    (Image de la home page avec les endoit entouré en rouge avec des nom sur les cases )
+    <img width="1455" alt="Capture d’écran 2024-11-02 à 23 46 50" src="https://github.com/user-attachments/assets/6e399d90-188a-4872-9590-4205b865dd68">
+
 - ## User Profile Page :
     The profile page allows you to view and modify your personal information. Below the title you'll find a square that groups your profile information, just like on the home page. 
     
