@@ -1,0 +1,66 @@
+paths:
+  /about.json:
+    get:
+      tags:
+        - About
+      summary: Get client and server information
+      description: Returns client IP, current server time, and details about available services, including actions and reactions.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client:
+                    type: object
+                    properties:
+                      host:
+                        type: string
+                        description: The client's IP address.
+                        example: 192.168.1.1
+                  server:
+                    type: object
+                    properties:
+                      current_time:
+                        type: integer
+                        description: The current server time in UNIX timestamp format.
+                        example: 1701298693
+                      services:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Name of the service.
+                              example: weather
+                            actions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    description: Name of the action.
+                                    example: getTemperature
+                                  description:
+                                    type: string
+                                    description: Description of the action.
+                                    example: Get the current temperature for a given location.
+                            reactions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    description: Name of the reaction.
+                                    example: sendAlert
+                                  description:
+                                    type: string
+                                    description: Description of the reaction.
+                                    example: Send an alert if a specific condition is met.
+        "500":
+          description: Internal server error
