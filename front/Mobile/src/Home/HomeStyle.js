@@ -13,7 +13,7 @@ export default StyleSheet.create({
         flex: 1,
         display: 'flex',
         alignItems: 'center',
-        gap: height * 0.1,
+        gap: height * 0.028,
         paddingTop: height * 0.05,
     },
 
@@ -62,18 +62,77 @@ export default StyleSheet.create({
     },
 
     tutorielContainer: {
-        height: height * 0.3,
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height: height * 0.35,
         width: width * 0.95,
         backgroundColor: '#F3F3F3',
         borderRadius: width * 0.03,
-        paddingBottom: width * 0.03,
-        paddingTop: width * 0.03,
-        paddingLeft: width * 0.04,
-        paddingRight: width * 0.04,
+        paddingLeft: width * 0.05,
+        paddingRight: width * 0.05,
     },
 
     tutorielTitle: {
         fontSize: width * 0.05,
         fontFamily: 'Nexa',
+        color: 'black',
+    },
+
+    headerInfo: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width * 0.25,
+        height: height * 0.075,
+        backgroundColor: '#F3F3F3',
+        borderRadius: width * 0.03,
+    },
+
+    headerInfoContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: width * 0.95,
+        gap: width * 0.05,
+    },
+
+    headerInfoTitle: {
+        fontSize: width * 0.04,
+        fontFamily: 'Nexa',
+        color: '#3D3D3D',
+    },
+
+    headerInfoInfo: {
+        fontSize: width * 0.05,
+        fontFamily: 'Nexa',
+        color: '#3D3D3D',
+    },
+
+    tutoContent: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height: height * 0.3,
+    },
+
+    gif: {
+        resizeMode: 'contain',
+        height: height * 0.3,
+        width: width * 0.3,
+    },
+
+    tutoTextContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        gap: height * 0.01,
+        width: width * 0.5,
+    },
+
+    tutoText: {
+        fontSize: width * 0.04,
+        fontFamily: 'Nexa',
+        color: '#3D3D3D',
     },
 });

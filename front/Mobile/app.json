@@ -20,6 +20,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "androidStatusBar": {
+        "translucent": true
+      },
       "package": "com.xeroce.area"
     },
     "web": {
@@ -30,6 +33,7 @@
         "projectId": "046c332f-56d5-4f26-bd1b-5815c19e404b"
       }
     },
+    
     "owner": "m0gou"
   }
 }

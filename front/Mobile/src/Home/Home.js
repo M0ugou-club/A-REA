@@ -13,6 +13,9 @@ export default function Home() {
     const navigation = useNavigation();
     const [userInfo, setUserInfo] = useState(null);
     const [fetchUrl, setFetchUrl] = useState('');
+    const [servicesNumber, setServicesNumber] = useState(0);
+    const [actionsNumber, setActionsNumber] = useState(0);
+    const [reactionsNumber, setReactionsNumber] = useState(0);
 
     useFocusEffect(
         useCallback(() => {
@@ -46,7 +49,88 @@ export default function Home() {
                     console.error('Error:', error);
                 }
             };
+
+            const getServicesNumber = async () => {
+                try {
+                    setServicesNumber(0);
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + "/enums/platforms", {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                        },
+                    });
+                    const data = await response.json();
+                    setServicesNumber(data.length);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
+            const getActionsNumber = async () => {
+                try {
+                    setActionsNumber(0);
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + "/enums/actions", {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                        },
+                    });
+                    const data = await response.json();
+                    let total = 0;
+                    if (typeof data === 'object' && data !== null) {
+                        for (const platform in data) {
+                            if (typeof data[platform] === 'object' && data[platform] !== null) {
+                                total += Object.keys(data[platform]).length;
+                            } else {
+                                console.warn(`data[${platform}] n'est pas un objet ou est invalide :`, data[platform]);
+                            }
+                        }
+                    } else {
+                        console.error("Data n'est pas un objet valide :", data);
+                        return;
+                    }
+                    setActionsNumber(total);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            const getReactionsNumber = async () => {
+                try {
+                    setReactionsNumber(0);
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + "/enums/reactions", {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                        },
+                    });
+                    const data = await response.json();
+                    let total = 0;
+                    if (typeof data === 'object' && data !== null) {
+                        for (const platform in data) {
+                            if (typeof data[platform] === 'object' && data[platform] !== null) {
+                                total += Object.keys(data[platform]).length;
+                            } else {
+                                console.warn(`data[${platform}] n'est pas un objet ou est invalide :`, data[platform]);
+                            }
+                        }
+                    } else {
+                        console.error("Data n'est pas un objet valide :", data);
+                        return;
+                    }
+                    setReactionsNumber(total);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
             getUsersInfos();
+            getServicesNumber();
+            getActionsNumber();
+            getReactionsNumber();
         }, [navigation, fetchUrl])
     );
 
@@ -60,7 +144,7 @@ export default function Home() {
                 { userInfo &&
                     <View style={styles.userInfo}>
                         <View style={styles.userEmailContainer}>
-                            <Text style={styles.nameUserInfo}>{userInfo.name} ({userInfo.username})</Text>
+                            <Text style={styles.nameUserInfo}>{userInfo.name} {userInfo.surname}</Text>
                             <Text style={styles.emailUserInfo}>{userInfo.email}</Text>
                         </View>
                         <View>
@@ -68,11 +152,35 @@ export default function Home() {
                         </View>
                     </View>
                 }
+                <View style={styles.headerInfoContainer}>
+                    <View style={styles.headerInfo}>
+                        <Text style={styles.headerInfoTitle}>Services</Text>
+                        <Text style={styles.headerInfoInfo}>{servicesNumber}</Text>
+                    </View>
+                    <View style={styles.headerInfo}>
+                        <Text style={styles.headerInfoTitle}>Actions</Text>
+                        <Text style={styles.headerInfoInfo}>{actionsNumber}</Text>
+                    </View>
+                    <View style={styles.headerInfo}>
+                        <Text style={styles.headerInfoTitle}>Réactions</Text>
+                        <Text style={styles.headerInfoInfo}>{reactionsNumber}</Text>
+                    </View>
+                </View>
                 <TouchableOpacity onPress={handleKayzen} >
                     <Image source={require('../../assets/kayzenDocu.png')} style={styles.kayzenDocu} />
                 </TouchableOpacity>
                 <View style={styles.tutorielContainer}>
                     <Text style={styles.tutorielTitle}>Tutoriel</Text>
+                    <View style={styles.tutoContent}>
+                        <View style={styles.tutoTextContainer}>
+                            <Text style={styles.tutoText}>- Connecte toi aux services</Text>
+                            <Text style={styles.tutoText}>- Clique sur le boutton créer</Text>
+                            <Text style={styles.tutoText}>- Choisis une action et une réaction</Text>
+                            <Text style={styles.tutoText}>- Choisis un nom et une description</Text>
+                            <Text style={styles.tutoText}>- Clique sur créer</Text>
+                        </View>
+                        <Image style={styles.gif} source={require("../../assets/tuto.gif")} />
+                    </View>
                 </View>
             </View>
             <NavigationBar></NavigationBar>

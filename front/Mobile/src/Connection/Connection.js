@@ -79,12 +79,15 @@ export default function Connection() {
                     <View style={styles.separator} />
                 </View>
                 <View style={styles.listPlatformsContainer}>
-                {platforms.map((platform, index) => (
-                    <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
-                        <Image source={icons[platform]} style={styles.icon} />
-                        <Text style={styles.connectText}>Se Connecter</Text>
-                    </TouchableOpacity>
-                ))}
+                {platforms.map((platform, index) => {
+                    if (platform === 'OpenMeteo') return null;
+                    return (
+                        <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
+                            <Image source={icons[platform]} style={styles.icon} />
+                            <Text style={styles.connectText}>Se Connecter</Text>
+                        </TouchableOpacity>
+                    );
+                })}
                 </View>
                 <View style={styles.disconnectContainer}>
                     <TouchableOpacity

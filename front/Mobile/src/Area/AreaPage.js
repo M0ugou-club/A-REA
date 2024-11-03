@@ -81,15 +81,6 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        onPress={handleAddAreaButton}
-        style={styles.addAreaButtonContainer}
-      >
-        <Image
-          style={styles.addAreaButton}
-          source={require("../../assets/add.png")}
-        />
-      </TouchableOpacity>
       <NavigationBar />
     </View>
   );

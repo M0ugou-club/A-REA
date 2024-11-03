@@ -21,13 +21,4 @@ export default StyleSheet.create({
         display: 'flex',
         gap: height * 0.02,
     },
-
-    addAreaButton: {
-        position: 'absolute',
-        borderRadius: width,
-        bottom: height * 0.01,
-        left: width * 0.88,
-        width: width * 0.1,
-        height: width * 0.1,
-    },
 });
