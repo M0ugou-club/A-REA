@@ -16,8 +16,8 @@ To create new components in React Native, follow your preferred conventions. Typ
 
 For example:
 ```bash
-> Mobile/src/YourComponentName/YourComponentName.js
-> Mobile/src/YourComponentName/YourComponentNameStyle.js
+> mobile/src/YourComponentName/YourComponentName.js
+> mobile/src/YourComponentName/YourComponentNameStyle.js
 ```
 
 ## Build
