@@ -214,11 +214,8 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   downloadAPK() {
-    const apkUrl = '/public/A-Rea.apk';
-    const link = document.createElement('a');
-    link.href = apkUrl;
-    link.download = 'A-Rea.apk';
-    link.click();
+    const apkUrl = 'http://inox-qcb.fr/A-Rea.apk';
+    window.open(apkUrl, '_blank');
   }
 
 
