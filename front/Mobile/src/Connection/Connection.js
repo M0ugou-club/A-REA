@@ -9,7 +9,9 @@ import * as WebBrowser from 'expo-web-browser';
 export default function Connection() {
 
     const [platforms, setPlatforms] = useState([]);
+    const [platformsState, setPlatformsState] = useState({});
     const [fetchUrl, setFetchUrl] = useState('');
+    const [reload, setReload] = useState(false);
     const navigation = useNavigation();
 
     const icons = {
@@ -32,7 +34,7 @@ export default function Connection() {
                 }
             };
             getFetchUrl();
-        }, [])
+        }, [reload])
     );
 
     useFocusEffect(
@@ -55,15 +57,54 @@ export default function Connection() {
                     console.log('Error occurred:', e);
                 }
             }
+
+            const getTokensState = async () => {
+                try {
+                    const token = await AsyncStorage.getItem('accessToken');
+                    const response = await fetch(fetchUrl + '/tokens/state', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ` + token,
+                        }
+                    });
+                    const data = await response.json();
+                    setPlatformsState(data);
+                } catch (e) {
+                    console.log('Error occurred:', e);
+                }
+            }
+
             getData();
-        }, [fetchUrl])
+            getTokensState();
+        }, [fetchUrl, reload])
     );
 
     const handlePress = async (platform) => {
         const authToken = await AsyncStorage.getItem('accessToken');
         const authUrl = fetchUrl + '/oauth/' + platform + '?token=' + authToken;
 
-        let result = await WebBrowser.openBrowserAsync(authUrl);
+        await WebBrowser.openBrowserAsync(authUrl);
+    }
+
+    const handleDisconnectService = async (platform) => {
+        try {
+            const token = await AsyncStorage.getItem('accessToken');
+            const response = await fetch(fetchUrl + '/tokens/platform/' + platform, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ` + token,
+                }
+            });
+            await response.json();
+            if (response.status === 200) {
+                setPlatformsState({...platformsState, [platform]: false});
+                setReload(prevReload => !prevReload);
+            }
+        } catch (e) {
+            console.log('Error occurred:', e);
+        }
     }
 
     const handleDisconnect = async () => {
@@ -82,9 +123,11 @@ export default function Connection() {
                 {platforms.map((platform, index) => {
                     if (platform === 'OpenMeteo') return null;
                     return (
-                        <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => handlePress(platform)}>
+                        <TouchableOpacity key={index} style={styles.connectServiceButton} onPress={() => platformsState[platform] ? handleDisconnectService(platform) : handlePress(platform)}>
                             <Image source={icons[platform]} style={styles.icon} />
-                            <Text style={styles.connectText}>Se Connecter</Text>
+                            <Text style={styles.connectText}>
+                                {platformsState[platform] ? 'Se Déconnecter' : 'Se Connecter'}
+                            </Text>
                         </TouchableOpacity>
                     );
                 })}
