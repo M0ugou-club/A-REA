@@ -13,6 +13,7 @@ import ReactionListPage from "./src/Area/CreateArea/ChooseReaction/ReactionListP
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createStackNavigator();
 
@@ -57,54 +58,57 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Connection"
-          component={Connection}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="Area"
-          component={Area}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="CreateArea"
-          component={CreateAreaPage}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="ChooseAreaName"
-          component={ChooseAreaName}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="ChooseAction"
-          component={ActionListPage}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="ChooseReaction"
-          component={ReactionListPage}
-          options={{ headerShown: false, animationEnabled: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar translucent backgroundColor="transparent" />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+            />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+            />
+          <Stack.Screen
+            name="Connection"
+            component={Connection}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+          <Stack.Screen
+            name="Area"
+            component={Area}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+          <Stack.Screen
+            name="CreateArea"
+            component={CreateAreaPage}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+          <Stack.Screen
+            name="ChooseAreaName"
+            component={ChooseAreaName}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+          <Stack.Screen
+            name="ChooseAction"
+            component={ActionListPage}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+          <Stack.Screen
+            name="ChooseReaction"
+            component={ReactionListPage}
+            options={{ headerShown: false, animationEnabled: false }}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }

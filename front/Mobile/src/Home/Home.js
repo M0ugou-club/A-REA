@@ -144,7 +144,7 @@ export default function Home() {
                 { userInfo &&
                     <View style={styles.userInfo}>
                         <View style={styles.userEmailContainer}>
-                            <Text style={styles.nameUserInfo}>{userInfo.name} ({userInfo.username})</Text>
+                            <Text style={styles.nameUserInfo}>{userInfo.name} {userInfo.surname}</Text>
                             <Text style={styles.emailUserInfo}>{userInfo.email}</Text>
                         </View>
                         <View>
@@ -171,6 +171,16 @@ export default function Home() {
                 </TouchableOpacity>
                 <View style={styles.tutorielContainer}>
                     <Text style={styles.tutorielTitle}>Tutoriel</Text>
+                    <View style={styles.tutoContent}>
+                        <View style={styles.tutoTextContainer}>
+                            <Text style={styles.tutoText}>- Connecte toi aux services</Text>
+                            <Text style={styles.tutoText}>- Clique sur le boutton créer</Text>
+                            <Text style={styles.tutoText}>- Choisis une action et une réaction</Text>
+                            <Text style={styles.tutoText}>- Choisis un nom et une description</Text>
+                            <Text style={styles.tutoText}>- Clique sur créer</Text>
+                        </View>
+                        <Image style={styles.gif} source={require("../../assets/tuto.gif")} />
+                    </View>
                 </View>
             </View>
             <NavigationBar></NavigationBar>
