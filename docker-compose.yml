@@ -20,7 +20,7 @@ services:
   #mobile:
   #  build:
   #    context: .
-  #    dockerfile: ./front/Mobile/Dockerfile
+  #    dockerfile: ./front/mobile/Dockerfile
   #    args:
   #      EXPO_TOKEN: ${EXPO_TOKEN}
   #      JDK_VERSION: 17.0.12

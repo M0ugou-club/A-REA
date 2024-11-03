@@ -6,7 +6,7 @@ COPY . .
 
 ARG EXPO_TOKEN
 
-RUN mv .git ./front/Mobile
+RUN mv .git ./front/mobile
 
 WORKDIR ./front/Mobile
 
