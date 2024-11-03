@@ -21,7 +21,7 @@ const storeFetchUrl = async () => {
   try {
     const url = await AsyncStorage.getItem('fetchUrl');
     if (url === null) {
-      await AsyncStorage.setItem('fetchUrl', 'http://inox-qcb.fr:8000');
+      await AsyncStorage.setItem('fetchUrl', 'http://inox-qcb.fr:8080');
     }
   } catch (error) {
     console.error('Error:', error);
