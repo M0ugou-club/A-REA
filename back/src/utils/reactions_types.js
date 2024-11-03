@@ -10,13 +10,6 @@ const reactions = {
     Dislike: "Dislike la dernière vidéo d'InoxTag",
     CommentVideo: "Commente la dernière vidéo d'InoxTag",
   },
-  X: {
-    post_new_tweet: "Poste un nouveau tweet",
-  },
-  Twitch: {
-    comment_inox_live: "Commente le live de InoxTag",
-    comment_michou_live: "Commente le live de Michou",
-  },
   Reddit: {
     Like: "Like Reddit post",
     Dislike: "Dislike Reddit post",
