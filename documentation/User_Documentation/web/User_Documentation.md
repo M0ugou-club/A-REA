@@ -1,5 +1,5 @@
 # User Documentation
-- ## Introduction : [Here](./Introduction.md)
+- ## Introduction : [Here](../Introduction.md)
     -  introduction to our site
 - ## Getting Started with the Site : [Here](./Getting_Started.md)
     - Creating an Account
@@ -19,6 +19,6 @@
 - ## Edit User Profile : [Here](./User_Profile.md)
     - Change password
     - Change profile picture
-- ## Troubleshooting and Support : [Here](./Support.md)
+- ## Troubleshooting and Support : [Here](../Support.md)
     - FAQ
     - Support Contact Information
