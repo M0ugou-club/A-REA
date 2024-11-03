@@ -59,8 +59,6 @@ Certain tasks, such as creating documentation and refining mockups, were ongoing
 
 ---
 
-This timeline provides a structured view of project progression, from setup to deployment, ensuring a clear path toward the final deliverable.
-
 ## Meeting Notes:
 
 - You can access to our Organisation report :  👉 [here](https://docs.google.com/document/d/1d3uiyoxxcDENnupccUd6Gpxl384DaHy0bWsyTy-uyyc/edit?usp=sharing) 👈
