@@ -12,6 +12,8 @@ This timeline presents the key milestones and deliverables for the project over 
 
 ## Timeline
 
+![planning](https://github.com/user-attachments/assets/c769f1c9-838a-4a28-a89c-3514074de3bd)
+
 ### Week 1: Project Setup
 - **Objective:** Conduct thorough research on the technologies to be used for the project.
 - **Activities:**
