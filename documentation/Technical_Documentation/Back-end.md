@@ -122,13 +122,13 @@ export const withoutTokenRoutes = [{ route: '/', methods: ['GET'] }];
 
 A list of the variables can be found right after, **please try to keep it updated**:
 
-| Variable name       | Current value                     | Default value                     | Description                                                                            |
-| ------------------- | --------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------- |
-| **PORT**            | `8000`                            | _8000_                            | The listening port of the application                                               |
-| **API_URL**         | `['localhost:8000']`              | _['localhost:8000']_                     | The CORS origin list of url                                                            |
-| **NODE_ENV**        | `dev`                             | _dev_                             | The environment of the application                                                    |                                                               |
-| **DB_URL**          | `undefined`                       | _undefined_                       | The mongo database url                                                                 |
-| **DB_NAME**         | `undefined`                       | _undefined_                       | The mongo database name                                                                |
-| **DB_USERNAME**     | `undefined`                       | _undefined_                       | The mongo database username                                                            |
-| **DB_PASSWORD**     | `undefined`                       | _undefined_                       | The mongo database password                                                            |
-| **IS_TOKEN_ACTIVE** | `true`                            | _true_                            | Flag to active token protection, "false" value allowing to bypass all protected routes |
+| Variable name       | Current value        | Default value        | Description                                                                            |
+| ------------------- |----------------------|----------------------|----------------------------------------------------------------------------------------|
+| **PORT**            | `8080`               | _8080_               | The listening port of the application                                                  |
+| **API_URL**         | `['localhost:8080']` | _['localhost:8080']_ | The CORS origin list of url                                                            |
+| **NODE_ENV**        | `dev`                | _dev_                | The environment of the application                                                     |                                                               |
+| **DB_URL**          | `undefined`          | _undefined_          | The mongo database url                                                                 |
+| **DB_NAME**         | `undefined`          | _undefined_          | The mongo database name                                                                |
+| **DB_USERNAME**     | `undefined`          | _undefined_          | The mongo database username                                                            |
+| **DB_PASSWORD**     | `undefined`          | _undefined_          | The mongo database password                                                            |
+| **IS_TOKEN_ACTIVE** | `true`               | _true_               | Flag to active token protection, "false" value allowing to bypass all protected routes |

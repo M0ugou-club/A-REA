@@ -24,8 +24,8 @@
 
 4. **Access the Application:**
 
-- Back-End : Accessible at http://localhost:8000/ for a local host
-- Front-End : Accessible at http://localhost:4200/ for a local host
+- Back-End : Accessible at http://localhost:8080/ for a local host
+- Front-End : Accessible at http://localhost:8081/ for a local host
 
 5. **Stop the Services:**
    ```bash
@@ -33,13 +33,13 @@
    
 # API Documentation:
 
-- go [Here](http://inox-qcb.fr:8000/api-docs) to have all our API Documentation
+- go [Here](http://inox-qcb.fr:8080/api-docs) to have all our API Documentation
 
 
 # Code documentation :
 
 - For [Back-end](./Back-end.md)
 
-- For [Front-end](./Back-end.md)
+- For [Front-end](./Front-end.md)
 
-- For [Mobile](./Back-end.md)
+- For [Mobile](./Mobile.md)
