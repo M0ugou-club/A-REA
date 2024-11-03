@@ -1,0 +1,3 @@
+# Introduction
+- ## introduction to our site :
+    InoxQCB is a site for hardcore fans of influencer InoxTag. This site allows you to get up close and personal with Inox, to automate simple actions that you do as a fan on a regular basis and, above all, to be the fastest fan. For example, you can make a post on your X profile as soon as inoxTag releases a new song on Spotify, or even add this new music directly to your playlist or like it.

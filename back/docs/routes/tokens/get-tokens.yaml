@@ -1,274 +1,197 @@
 openapi: 3.0.0
 info:
-  title: Token API
+  title: Tokens Service API
   version: 1.0.0
+  description: API documentation for managing user tokens across different platforms.
 servers:
   - url: http://localhost:3000
+    description: Local server
 paths:
   /tokens:
     get:
       tags:
         - Tokens
       summary: Get all tokens for the authenticated user
-      security:
-        - BearerAuth: []
+      description: Returns all tokens associated with the authenticated user.
       responses:
-        '200':
-          description: Successful response with user's tokens
+        "200":
+          description: Successful response
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Token'
-        '401':
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "tokenId1"
+                    platform:
+                      type: string
+                      example: "GitHub"
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        "500":
+          description: Internal server error
     post:
       tags:
         - Tokens
-      summary: Create a new token for the user
-      security:
-        - BearerAuth: []
+      summary: Create a new token
+      description: Creates a new token for a specified platform.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Token'
+              type: object
+              properties:
+                platform:
+                  type: string
+                  example: "GitHub"
+                tokenValue:
+                  type: string
+                  example: "your-token-value"
       responses:
-        '200':
-          description: Token created successfully
+        "200":
+          description: Successful creation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
-        '401':
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "tokenId1"
+                  platform:
+                    type: string
+                    example: "GitHub"
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '409':
-          description: Token already exists for the platform
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Token already exists for platform
+        "500":
+          description: Internal server error
+
   /tokens/platform/{platform}:
     get:
       tags:
         - Tokens
       summary: Get a token for a specific platform
+      description: Returns the token associated with a specific platform.
       parameters:
-        - in: path
-          name: platform
+        - name: platform
+          in: path
+          required: true
+          description: Name of the platform
           schema:
             type: string
-          required: true
-          description: Platform name (e.g., Spotify, Discord)
-      security:
-        - BearerAuth: []
       responses:
-        '200':
-          description: Successful response with the token for the platform
+        "200":
+          description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
-        '401':
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "tokenId1"
+                  platform:
+                    type: string
+                    example: "GitHub"
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
+        "405":
           description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '406':
-          description: Token not found for the platform
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        "406":
+          description: Token not found for platform
+        "500":
+          description: Internal server error
     patch:
       tags:
         - Tokens
-      summary: Update token for a specific platform
-      parameters:
-        - in: path
-          name: platform
-          schema:
-            type: string
-          required: true
-          description: Platform name (e.g., Spotify, Discord)
-      security:
-        - BearerAuth: []
+      summary: Update a token for a specific platform
+      description: Updates the token associated with a specific platform.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Token'
+              type: object
+              properties:
+                tokenValue:
+                  type: string
+                  example: "new-token-value"
       responses:
-        '200':
-          description: Token updated successfully
+        "200":
+          description: Successful update
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
-        '401':
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "tokenId1"
+                  platform:
+                    type: string
+                    example: "GitHub"
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
+        "405":
           description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '406':
-          description: Token not found for the platform
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        "406":
+          description: Token not found for platform
+        "500":
+          description: Internal server error
     delete:
       tags:
         - Tokens
-      summary: Delete token for a specific platform
+      summary: Delete a token for a specific platform
+      description: Deletes the token associated with a specific platform.
       parameters:
-        - in: path
-          name: platform
+        - name: platform
+          in: path
+          required: true
+          description: Name of the platform
           schema:
             type: string
-          required: true
-          description: Platform name (e.g., Spotify, Discord)
-      security:
-        - BearerAuth: []
       responses:
-        '200':
-          description: Token deleted successfully
+        "200":
+          description: Successful deletion
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteResponse'
-        '401':
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Token deleted successfully"
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
+        "405":
           description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '406':
-          description: Token not found for the platform
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        "406":
+          description: Token not found for platform
+        "500":
+          description: Internal server error
+
   /tokens/state:
     get:
       tags:
         - Tokens
-      summary: Get the state of tokens for specific platforms (Spotify, Discord, Twitter)
-      security:
-        - BearerAuth: []
+      summary: Get the state of tokens across platforms
+      description: Returns the existence state of tokens for various platforms.
       responses:
-        '200':
-          description: Successful response with token states for Spotify, Discord, and Twitter
+        "200":
+          description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenState'
-        '401':
+                type: object
+                additionalProperties:
+                  type: boolean
+        "401":
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-  schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: uuid
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/Token'
-    Token:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: uuid
-        platform:
-          type: string
-        accessToken:
-          type: string
-        refreshToken:
-          type: string
-        expiresIn:
-          type: integer
-      required:
-        - platform
-        - accessToken
-        - refreshToken
-        - expiresIn
-    TokenState:
-      type: object
-      properties:
-        Spotify:
-          type: boolean
-        Discord:
-          type: boolean
-        Twitter:
-          type: boolean
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-    DeleteResponse:
-      type: object
-      properties:
-        message:
-          type: string
+        "500":
+          description: Internal server error

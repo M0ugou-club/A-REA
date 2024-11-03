@@ -213,6 +213,12 @@ export class LoginServicsePopupComponent implements OnInit {
     }
   }
 
+  downloadAPK() {
+    const apkUrl = `http://localhost:8081/client.apk`;
+    window.open(apkUrl, '_blank');
+  }
+
+
   chooseConnection(service: string) {
     const connection = this.connectionFunctions.find(
       (item) => item.key === service

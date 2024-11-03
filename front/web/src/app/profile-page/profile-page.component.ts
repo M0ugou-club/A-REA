@@ -62,7 +62,6 @@ export class ProfilePageComponent {
         if (response.status === 404) {
           this.setInputBorderColor('red', 'all');
           this.toastr.error('Tu n\'es pas connecté!');
-          alert("User not found");
           return null;
         } else if (response.status === 401) {
           this.setInputBorderColor('red', 'oldPassword');

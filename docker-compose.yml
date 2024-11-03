@@ -6,21 +6,21 @@ services:
       context: ./back
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8080:8080"
 
   front:
     build:
       context: ./front/web
       dockerfile: Dockerfile
     ports:
-      - "4200:4200"
+      - "8081:8081"
     depends_on:
       - back
 
   #mobile:
   #  build:
   #    context: .
-  #    dockerfile: ./front/Mobile/Dockerfile
+  #    dockerfile: ./front/mobile/Dockerfile
   #    args:
   #      EXPO_TOKEN: ${EXPO_TOKEN}
   #      JDK_VERSION: 17.0.12

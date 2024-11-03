@@ -1,14 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Areas Service API
+  version: 1.0.0
+  description: API documentation for managing areas, including actions and reactions for users.
+servers:
+  - url: http://localhost:3000
+    description: Local server
+tags:
+  - name: Areas
+    description: Endpoints related to areas management
 paths:
+  /areasAll:
+    get:
+      tags:
+        - Areas
+      summary: Get all areas
+      description: Returns a list of all areas.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Area'
+        '500':
+          description: Internal server error
+
   /areas:
     get:
       tags:
         - Areas
       summary: Get areas for the authenticated user
-      security:
-        - BearerAuth: []
+      description: Returns areas linked to the authenticated user.
       responses:
         '200':
-          description: Successful response with user's areas
+          description: Successful response
           content:
             application/json:
               schema:
@@ -17,114 +45,128 @@ paths:
                   $ref: '#/components/schemas/Area'
         '401':
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
     post:
       tags:
         - Areas
       summary: Create a new area
-      security:
-        - BearerAuth: []
+      description: Creates a new area with the specified action and reaction.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAreaRequest'
+              $ref: '#/components/schemas/AreaInput'
       responses:
         '200':
-          description: Area created successfully
+          description: Successful creation
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Area'
+                $ref: '#/components/schemas/Area'
         '401':
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '405':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+
   /areas/{id}:
-    delete:
+    get:
       tags:
         - Areas
-      summary: Delete an area
+      summary: Get specific area details
+      description: Returns details of a specific area.
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
+          description: ID of the area
           schema:
             type: string
-          required: true
-          description: Area ID
       responses:
         '200':
-          description: Area deleted successfully
+          description: Successful response
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Area'
         '405':
           description: Area not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Areas
+      summary: Delete a specific area
+      description: Deletes the specified area along with its actions and reactions.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the area
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful deletion
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Area deleted"
+        '401':
+          description: Unauthorized
+        '405':
+          description: Area not found
+        '500':
+          description: Internal server error
+
   /areas/{id}/actions:
     get:
       tags:
         - Areas
-      summary: Get the action of an area
+      summary: Get actions of a specific area
+      description: Returns the actions associated with a specific area.
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
+          description: ID of the area
           schema:
             type: string
-          required: true
-          description: Area ID
       responses:
         '200':
-          description: Successful response with the area's action
+          description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Action'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Action'
         '405':
           description: Area not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+
   /areas/{id}/reactions:
     get:
       tags:
         - Areas
-      summary: Get the reactions of an area
+      summary: Get reactions of a specific area
+      description: Returns the reactions associated with a specific area.
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
+          description: ID of the area
           schema:
             type: string
-          required: true
-          description: Area ID
       responses:
         '200':
-          description: Successful response with the area's reactions
+          description: Successful response
           content:
             application/json:
               schema:
@@ -133,127 +175,119 @@ paths:
                   $ref: '#/components/schemas/Reaction'
         '405':
           description: Area not found
+        '500':
+          description: Internal server error
+
+  /testAreas:
+    get:
+      tags:
+        - Areas
+      summary: Test the areas functionality
+      description: Tests the areas service and returns a test message.
+      responses:
+        '200':
+          description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Test Areas"
+        '500':
+          description: Internal server error
+
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: uuid
-        email:
-          type: string
-          format: email
-        a_rea:
-          type: array
-          items:
-            $ref: '#/components/schemas/Area'
     Area:
       type: object
       properties:
         _id:
           type: string
-          format: uuid
+          example: "6727727e5dfbb147ac8badd2"
         title:
           type: string
+          example: "test"
         description:
           type: string
+          example: "test"
+        action:
+          type: string
+          example: "6727727e5dfbb147ac8badcc"
+        reactions:
+          type: string
+          example: "6727727e5dfbb147ac8badcf"
         update_delay:
           type: integer
-        action:
-          $ref: '#/components/schemas/Action'
-        reactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reaction'
+          example: 1800
         deleted:
           type: boolean
-      required:
-        - title
-        - description
+          example: false
+        last_update:
+          type: string
+          format: date-time
+          example: "2024-11-03T12:54:22.375+00:00"
+        __v:
+          type: integer
+          example: 0
+
+    AreaInput:
+      type: object
+      properties:
+        area_title:
+          type: string
+          example: "New Area"
+        area_description:
+          type: string
+          example: "Description of the new area"
+        action_name:
+          type: string
+          example: "New Action"
+        action_description:
+          type: string
+          example: "Description of the new action"
+        action_type:
+          type: string
+          example: "Type of action"
+        action_platform:
+          type: string
+          example: "Platform of action"
+        reaction_name:
+          type: string
+          example: "New Reaction"
+        reaction_description:
+          type: string
+          example: "Description of the new reaction"
+        reaction_type:
+          type: string
+          example: "Type of reaction"
+        reaction_platform:
+          type: string
+          example: "Platform of reaction"
+
     Action:
       type: object
       properties:
         _id:
           type: string
-          format: uuid
+          example: "actionId1"
         title:
           type: string
+          example: "Action 1"
         description:
           type: string
-        type:
-          type: string
-        platform:
-          type: string
-      required:
-        - title
-        - description
-        - type
-        - platform
+          example: "Description of Action 1"
+
     Reaction:
       type: object
       properties:
         _id:
           type: string
-          format: uuid
+          example: "reactionId1"
         title:
           type: string
+          example: "Reaction 1"
         description:
           type: string
-        type:
-          type: string
-        platform:
-          type: string
-      required:
-        - title
-        - description
-        - type
-        - platform
-    CreateAreaRequest:
-      type: object
-      properties:
-        area_title:
-          type: string
-        area_description:
-          type: string
-        action_name:
-          type: string
-        action_description:
-          type: string
-        action_type:
-          type: string
-        action_platform:
-          type: string
-        reaction_name:
-          type: string
-        reaction_description:
-          type: string
-        reaction_type:
-          type: string
-        reaction_platform:
-          type: string
-      required:
-        - area_title
-        - area_description
-        - action_name
-        - action_description
-        - action_type
-        - action_platform
-        - reaction_name
-        - reaction_description
-        - reaction_type
-        - reaction_platform
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
+          example: "Description of Reaction 1"
