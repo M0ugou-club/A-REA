@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
     "nodemon": "^3.0.1",
+    "request-ip": "^3.3.0",
     "snoowrap": "^1.23.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",

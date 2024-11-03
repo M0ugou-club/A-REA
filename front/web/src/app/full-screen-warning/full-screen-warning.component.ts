@@ -1,4 +1,9 @@
 import { Component, HostListener, Renderer2 } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 
 @Component({
   selector: 'app-full-screen-warning',
@@ -8,7 +13,7 @@ import { Component, HostListener, Renderer2 } from '@angular/core';
 export class FullScreenWarningComponent {
   isSmallScreen: boolean = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private toastr: ToastrService, private http: HttpClient) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -33,11 +38,28 @@ export class FullScreenWarningComponent {
     }
   }
 
-  downloadAPK() {
-    const apkUrl = '/public/A-Rea.apk';
-    const link = document.createElement('a');
-    link.href = apkUrl;
-    link.download = 'A-Rea.apk';
-    link.click();
+  downloadApk() {
+    const url = './assets/A-Rea.apk'; // Remplace par le chemin de ton fichier .apk
+
+    console.log('Téléchargement du fichier APK...');
+    this.http.head(url).pipe(
+      catchError((err) => {
+        console.log(("errrror"))
+        this.toastr.error('Erreur lors de la vérification du fichier.'); // Afficher une notification
+        alert('Le fichier n\'existe pas à cette URL.'); // Avertir l'utilisateur
+        return of(null); // Retourner un observable vide
+      })
+    ).subscribe({
+      next: (response) => {
+        if (response) {
+          // Si la réponse existe, cela signifie que le fichier existe
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'YourAppName.apk'; // Nom de téléchargement
+          link.click();
+          this.toastr.success('Téléchargement du fichier APK en cours...'); // Afficher une notification
+        }
+      }
+    });
   }
 }
