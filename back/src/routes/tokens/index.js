@@ -201,7 +201,6 @@ const patchToken = async (req, res, next) => {
 };
 
 const delToken = async (req, res, next) => {
-  console.log("delete token");
   const { platform } = req.params;
 
     try {

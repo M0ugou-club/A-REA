@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { reduce } from "rxjs";
 import { environment } from "../../../environment/environment";
 import { trigger, transition, style, animate } from "@angular/animations";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: "app-a-rea-page",
@@ -47,7 +49,7 @@ export class AreaPageComponent implements OnInit {
 
   servicesIcon: any = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     const localData = localStorage.getItem("authToken");
@@ -217,7 +219,7 @@ export class AreaPageComponent implements OnInit {
     })
       .then((response) => {
         if (!response.ok) {
-          alert("Vous n'avez pas rempli tous les champs");
+          this.toastr.error('Vous n\'avez pas rempli tous les champs');
           return;
         }
         window.location.reload();
