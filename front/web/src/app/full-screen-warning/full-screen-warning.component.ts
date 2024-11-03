@@ -39,7 +39,7 @@ export class FullScreenWarningComponent {
   }
 
   downloadApk() {
-    const apkUrl = 'http://inox-qcb.fr/client.apk';
+    const apkUrl = 'http://localhost/client.apk';
     window.open(apkUrl, '_blank');
   }
 }

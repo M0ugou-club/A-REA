@@ -214,7 +214,7 @@ export class LoginServicsePopupComponent implements OnInit {
   }
 
   downloadAPK() {
-    const apkUrl = `http://inox-qcb.fr/client.apk`;
+    const apkUrl = `http://localhost:8081/client.apk`;
     window.open(apkUrl, '_blank');
   }
 
