@@ -39,7 +39,7 @@ export class FullScreenWarningComponent {
   }
 
   downloadApk() {
-    const apkUrl = 'http://inox-qcb.fr/A-Rea.apk';
+    const apkUrl = 'http://inox-qcb.fr/client.apk';
     window.open(apkUrl, '_blank');
   }
 }
