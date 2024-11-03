@@ -240,6 +240,10 @@ export class LoginServicsePopupComponent implements OnInit {
     return false;
   }
 
+  openGuide() {
+    window.open("https://github.com/M0ugou-club/A-REA/blob/main/documentation/User_Documentation/web/User_Documentation.md", "_blank");
+  }
+
   logoutButton(): void {
     localStorage.removeItem("authToken");
     this.router.navigate(["/login"]);
