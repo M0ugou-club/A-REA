@@ -8,6 +8,7 @@ import tokenUserRoutes from './routes/tokens/index.js';
 import areaRoutes from './routes/areas/index.js';
 import oauthRoutes from './routes/oauth/index.js';
 import callbackRoutes from './routes/callback/index.js';
+import aboutRoutes from './routes/about/index.js';
 
 router.use([
   userRoutes,
@@ -17,6 +18,7 @@ router.use([
   enumsRoutes,
   tokenUserRoutes,
   areaRoutes,
+  aboutRoutes,
 ]);
 
 export default router;

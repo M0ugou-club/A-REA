@@ -1,0 +1,30 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.931);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .center-button {
+    width: 35%;
+    height: 10%;
+    font-size: 1.1rem;
+    background-color: #323236;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: 'KaizenRegular';
+  }
+  
+  .blurred-background {
+    filter: blur(200%);
+    pointer-events: none;
+  }
+  

@@ -32,6 +32,7 @@ import { ChoicePreviewComponent } from "./a-rea-page/choice-preview/choice-previ
 import { AReasComponent } from "./a-rea-page/a-reas/a-reas.component";
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ToastrModule } from 'ngx-toastr';
+import { FullScreenWarningComponent } from './full-screen-warning/full-screen-warning.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     ChoicePreviewComponent,
     AReasComponent,
     ProfilePageComponent,
+    FullScreenWarningComponent,
   ],
   imports: [
     BrowserModule,
